@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='register.css') }}">
+{% endblock %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="form-area">
+    <div class="colHeader">立即加入，完全免費!</div>
+    <div class="form">
+        {{  wtf.quick_form(form) }}
+        <div class="captche">
+            <input type="text" class="get_pic_code" name="imagecode" id="imagecode" placeholder="圖形驗證碼">
+            <img src="" class="get_pic_code" onclick="generateImageCode()"><br/>
+        </div>
+    
+        <div>
+            已有帳戶了嗎?<a href="{{ url_for('auth.login') }}">登入</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#birthday').datepicker({
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        forceParse: 0,
+        showMeridian: 1,
+        format: "yyyy/mm/dd",
+        language: "zh-CN",
+        maxView:3,
+        startDay: '1960:1:1'
+        });
+    </script>
+    
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<script>
+//保存圖片驗證碼編號
+var imageCodeId = "";
+
+function generateUUID() {
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
+// uuid 全局唯一標識符
+
+function generateImageCode(){
+     // 形成圖片驗證碼的後端的地址，然後設置到頁面中，讓瀏覽器請求驗證碼圖片
+     // 1. 生成圖片驗證碼編號
+    imageCodeId = generateUUID();
+    // 設置圖片url
+    url="/api/image_codes/"+imageCodeId;
+    $(".get_pic_code").attr("src",url);
+}
+
+$(document).ready(function(){
+    generateImageCode();
+    $("#imagecode").focus(function(){
+        $("image-code-err").hide();
+    });
+})
+
+</script>
+
+
+
+
+
+</div>
+
+</div>
+
+{% endblock %}

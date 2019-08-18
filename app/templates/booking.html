@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   
+{% endblock %}
+
+{% block content %}
+<div id="booking">
+    <div id="content">
+        <h3 id="title"><b>線上訂位</b></h3>
+    <form action="" method="post" class="form" role="form" id="reservationform">
+        <div class="form-group  required"><label class="control-label" for="restaurant">選擇餐廳</label>
+            {% if data %}
+            <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="{{ data.title }}">
+            {% else %}             
+            <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="八里老漁村餐廳">
+            {% endif %}
+        </div>
+
+        
+      <div class="form-group  required"><label class="control-label" for="people">人數</label>
+              
+                <input class="form-control" id="people" name="people" required type="text" value="">             
+        </div>
+
+      <div class="form-group  required"><label class="control-label" for="booking_date">日期</label>
+              
+                <input class="form-control" id="booking_date" name="booking_date" required type="text" value="">
+              
+        </div>
+ 
+      <div class="form-group  required"><label class="control-label" for="booking_time">餐次</label>
+              
+                <select class="form-control" id="booking_time" name="booking_time" required><option value="午餐">午餐</option><option value="晚餐">晚餐</option></select>
+              
+        </div>
+
+        <input class="btn btn-default" id="submit" name="submit" type="submit" value="提交">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+       
+      </form>
+
+
+    </div>
+        <div class="mbe-contact">
+            <div id="head">聯絡資訊</div>
+            {% if data %}
+            <div id="number">客服專線 : {{ data.cellphone }} <br>
+            {% else %} 
+            <div id="number">客服專線 : (02) 2610-4882 <br>
+            {% endif %}
+            服務時間 : 周一至周日11:00-20:00</div>
+        </div>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#booking_date').datepicker({
+        "dateFormat": "yy-mm-dd",
+        language: "zh-CN",
+        minDate: 0, maxDate: "+1M +10D"
+        });
+    </script>
+    
+    <script>
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+ 
+    $.ajaxSetup({
+    
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+ 
+    </script>
+    <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+    <script>
+    $(function(){
+        $("#reservationform").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:$('#reservationform').serialize(),
+                url: "/reservation/check",
+                success:function(response){
+                    if (response.errno=1){
+                        alert("恭喜您，訂位成功。"+
+                               "您的訂單編號為:"+response.order_id)
+                        window.location.href="/reservation/result"
+                    }else{
+                        alert("系統忙碌中，請稍後再試一次")
+                    }
+                }
+            })
+        })
+    })
+    </script>
+{% endblock %}

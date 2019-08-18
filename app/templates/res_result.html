@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ super() }}
+    
+{% endblock %}
+
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="title">{{ data.title }}</div>
+<div>評價 : {{ data.rating }}
+    <span><a id="info_url" href="#">立即訂位</a></span>
+</div>
+{% if l %}
+    <div id="like">已收藏</div>
+{% else %}
+    <div id="like">收藏</div>
+{% endif %}
+<div style="display:none" id="id">{{ data.id }}</div>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div>餐廳類型 : {{ data.res_type }}</div>
+<div>地址 : {{ data.street }}</div>
+<div>評論述: {{ data.rating_count }}</div>
+
+{% for image in data.info_url %}
+<img src="{{ image }}">
+{% endfor %}
+<div>
+    <a id="comment" href="">發表評論</a>
+</div>
+
+{% for comment in data.comment %}
+<div>{{ comment }}</div>
+{% endfor %}
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<script>
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+ 
+    $.ajaxSetup({
+    
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+ 
+    </script>
+
+
+
+<script>
+    $(function(){
+        var title =$(".title").text();
+        $("#info_url").attr("href","/reservation/"+title);
+        $("#comment").attr("href","/comment/"+title);
+        
+        $("#like").click(function(e){
+            e.preventDefault();
+            var id = $("#id").text()
+            var like = $("#like").text();
+            var params={
+                "like":1,
+            }
+            if (like=="收藏"){
+                $.ajax({
+                method:"get",
+                dataType: "json",
+                data:params,
+                url: "/restaurant/like/"+id,
+                success:function(response){
+                    alert("關注成功")
+                    $("#like").text("已收藏")
+                }
+            })
+
+            }else{
+                $.ajax({
+                method:"get",
+                dataType: "json",
+                data:params,
+                url: "/restaurant/unlike/"+id,
+                success:function(response){
+                    alert("取消關注")
+                    $("#like").text("收藏")
+                }
+            })
+            }
+            
+        })
+    })
+</script>
+{% endblock %}

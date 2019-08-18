@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+<div>關注數量{{ count }}</div>
+{% for d in data %}
+<div>店家: {{ d.store.title }}</div>
+
+<div>{{ d.store.res_type }}</div>
+{% endfor %}
+
+
+
+
+{% endblock %}
+

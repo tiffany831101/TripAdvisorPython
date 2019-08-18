@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='register.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="form-area">
+    <div class="colHeader">立即實名認證</div>
+    <div class="form">
+    {% if not current_user.gender %}
+        {{ wtf.quick_form(form) }}
+    {% else %}
+        {% if current_user.gender %}<div><b>性別 : </b>{{ current_user.gender }}</div>{% endif %}
+        {% if current_user.birthday %}<div><b>生日 : </b>{{ current_user.birthday }}</div>{% endif %}
+        {% if current_user.user_id %}<div><b>身份證字號 : </b>{{ current_user.user_id }}</div>{% endif %}
+        {% if current_user.country %}<div><b>縣市區域 : </b>{{ current_user.country }}</div>{% endif %}
+        {% if current_user.address %}<div><b>常用地址 : </b>{{ current_user.address }}</div>{% endif %}
+        {% if current_user.LINE %}<div><b></b>LINE ID: </b>{{ current_user.LINE }}</div>{% endif %}
+        <input type="submit" value="修改" action="auth.information">
+        
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#birthday').datepicker({
+        showMeridian: 1,
+        "dateFormat": "yy-mm-dd",
+        language: "zh-CN",
+        maxView:3,
+        yearRange : "1960:2010",
+        changeMonth: true,
+        changeYear: true
+        });
+    </script>
+{% endblock %}
+</div>

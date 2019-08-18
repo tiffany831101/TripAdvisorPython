@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<select id="option">
+    <option value ="new">最新評論</option>
+    <option value ="high">評價最高</option>
+    <option value ="low">評價最低</option>
+</select>
+<table>
+    <thead>
+        <tr style="border: solid black">
+            <th>作者</th>
+            <th>內容</th>
+            <th>滿意度</th>
+            <th>發表時間</th>
+        </tr>
+    </thead>
+    <tbody id="comment">
+
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+        
+<script>
+    $(function(){
+        $("#option").change(function(){
+            var value = $('#option>option:selected').val();
+            var params={
+                "data":value
+            }
+        $.ajax({
+            url:"/comment/result",
+            type: "get",
+            data: params,
+            contentType: "application/json",
+            success: function(response){
+                if (response.errno=="0"){
+                    console.log(response.data.list.length)
+                    var list=[]
+                    for (var i=0; i<response.data.list.length ; i++){
+                        list.push("<tr>");
+        
+                        for(var key in response.data.list[i]){
+                            list.push('<td>');
+                            list.push(response.data.list[i][key]);
+                            list.push("</td>")
+                        };
+                        list.push("</tr>");
+    
+                    }
+                    $("#comment").html(list.join(""))
+
+                }
+            }
+        })
+        })
+    })
+
+</script>
+{% endblock %}

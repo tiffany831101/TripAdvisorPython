@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('auth.save_images') }}">
+    {{ form.hidden_tag() }}
+    {{ form.photo }}
+    <input type="submit" value="提交">
+</form>
+{% if current_user.image_url %}
+    <br/>
+    <img src="{{ url_for('static', filename=current_user.image_url) }}" alt="我的照片">
+{% endif %}
+
+{% endblock %}
+
+

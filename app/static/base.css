@@ -1,0 +1,9 @@
+body{
+    background-color: #f2f6f5;
+    font-family: Microsoft JhengHei;
+}
+
+.navbar-brand{
+    font-weight:bold;
+    font-size: 20px
+}

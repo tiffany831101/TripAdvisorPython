@@ -1,0 +1,21 @@
+.intro{
+    width:1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.box{
+    width:300px;padding:20px; margin:10px; 
+    background-color: #daf1f9;
+    display: inline-block; 
+    vertical-align: top;
+    text-align:center;
+}
+
+.title{
+    font-weight: bold;
+}
+
+@media screen and (max-width:600px){
+    .box{width:100px; text-align: center;}
+
+}

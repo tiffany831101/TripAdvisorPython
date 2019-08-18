@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock%}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static',filename='base.css') }}">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"></a>八里老漁村</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.index') }}">關於老漁村<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href=''>新鮮上菜 <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.reservation',restaurant='老漁村餐廳') }}">線上訂位<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('auth.my') }}">會員專區<span class="sr-only"></span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('auth.register') }}">會員註冊<span class="sr-only"></span></a>
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.user', username=current_user.username) }}">會員簡介<span class="sr-only"></span></a>
+            </li>
+            {% endif %}
+        </ul>
+        <span class="navbar-text">
+        堅持以新鮮品質，對待所有客人
+        </span>
+            <ul class="nav navbar-nav navbar-right">
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('auth.logout') }}">會員登出</a></li>
+            {% else %}
+            <li><a href="{{ url_for('auth.login')}}">會員登入</a></li>
+            {% endif %}
+        </ul>
+    </head>
+    </nav>
+    <body>
+{% endblock %}
+
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger" role="alert">
+    {{ message }}</div>
+    {% endfor %}
+
+    
+    {% block content %}{% endblock %} 
+    
+
+    </body>
+    </html>
+
+{% block scripts %}
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='restaurant.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div id="all">
+    <h1 id="head">大台北美食餐廳 Taipei</h1>
+    <div class="wrap">
+        <select id="filter-city">
+            <option value="0">台北市</option>
+            <option value="1">新北市</option>
+        </select>
+        
+        <select id="filter-area">
+            <option value="大安">大安區</option>
+            <option value="信義區">信義區</option>
+            <option value="萬華">萬華區</option>
+            <option value="松山">松山區</option>
+            <option value="士林">士林區</option>
+            <option value="中正區">中正區</option>
+            <option value="大同">大同區</option>   
+            <option value="中山區">中山區</option>   
+            <option value="南港">南港區</option>   
+        </select>
+        <select id="food_type">
+            <option class = "active" value ="台灣小吃/台菜">台灣小吃/台菜</option>
+            <option class = "" value ="日式料理">日式料理</option>
+            <option class = "" value ="中式料理">中式料理</option>
+            <option class = "" value = "咖啡廳">咖啡廳</option>
+            <option class = "" value = "海鮮">海鮮</option>
+        </select>
+
+        <select id="filter">
+            <option value ="評論數">評論最多</option>
+            <option value ="評分數">評分愈高</option>
+        </select>
+    </div>
+
+    <div id="search">搜索條件:
+        <span id="area"></span>
+        <span id="food"></span>
+        <span id="result"></span>
+    </div>
+    <div id="show">
+        <table>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody id="search_result">
+
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">上一頁</span>
+                </a>
+              </li>
+              <p id="page">
+              <li class="page-item"><a class="page-link active" href="javascript:void(0)" >1</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a></li>
+              </p>
+              <li class="page-item">  
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">下一頁</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+</div>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<script>
+
+
+$(function(){
+    
+    var cities = [["大安","信義區","萬華","松山","士林","中正區","大同","中山區","南港"],
+                       ["蘆洲","三重","板橋","新莊","中和","永和","新店"]]
+    $("#filter-city").change(function(){
+        var val=$("#filter-city").val();
+        $("#filter-area").empty();
+        $.each(cities,function(i,n){
+            if(val==i){
+                $.each(cities[i],function(j,m){
+                    var $option =" ";
+                        $option +="<option>"+m+"</option>"
+                    $("#filter-area").append($option)
+                    
+
+                })
+            }
+        })
+    })
+
+    $("#filter-area, #food_type, #filter, .page-item>a").on('change, click',function(){
+        $(".page-item>a").removeClass("active");
+        $(this).addClass("active");
+        
+        var area = $("#filter-area").val();
+        var food = $("#food_type").val();
+        var filter = $("#filter").val();
+        var page = $(".page-item>a.active").text();
+        console.log(page)
+        if (undefined == area ) area="";
+        if (undefined == food ) food="";
+        if (undefined ==filter) filter="";
+
+        $("#area").html(area)
+        $("#food").html(food)
+        $('#result').html(filter)
+
+        var params ={
+                "area":area,
+                "food":food,
+                "filter":filter,
+                "page":page
+            }
+
+
+        $.ajax({
+            url:"/restaurant/search",
+            type:"GET",
+            data: params,
+            contentType:"application/json",
+            success:function(response){
+                render(response)
+            }
+        })
+        
+    })
+
+    function render(response){
+        if (response.errno==0){
+            var data = response.data.restaurant
+            if (data.length>0){
+                $("#search_result").empty()
+                $.each(data,function(key,value){
+                    var $tr =" ";
+                    var title=value.title;
+                    $tr += "<tr id='data'><td id='picture'><img src="+value.info_url[0]+"></td><td><div class='content'><li><b id='title'>"+value.title+
+                            "</b><span id='type'>"+value.res_type+"</span><span id='count'>"+"("+value.rating_count+"則評論)"+"</span><span id='go'><a href='/restaurant/"+title+"' class='go'"+">"+"立即查看"+
+                            "</a></span></li><div id='address'><li>"+value.street+"</li><li>"+"電話號碼:"+value.cellphone+
+                            "</li></div><li id='comment'>"+value.comment[1]+"</li></td></div></tr>"
+                    
+                    $("#search_result").append($tr)
+                    
+                    })
+                }
+                var total_page = response.total_page
+                var page = $(".page-item>a.active").text();
+           
+        }}
+})
+
+
+
+</script>
+{% endblock %}

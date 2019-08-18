@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+{% endblock %}
+
+
+
+
+{% block title %}寫評論 {% endblock %}
+{% block content %}
+<div id="title_name">{{ data.title }}</div>
+<div>{{ data.street }}</div>
+
+
+<form action="" method="post" class="form" role="form" id="commentform">
+    <div>請將您的實際造訪感想填入下列表格。期待您的分享，謝謝。</div>
+
+    <div class="form-group  required"><label class="control-label" for="rating">您對此餐廳的整體評等</label>     
+        <select class="form-control" id="rating" name="rating" required><option value="1">1</option><option value="2">2</option>
+            <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+        </select>
+    </div>
+
+    <div class="form-group  required"><label class="control-label" for="review_title">您的評論標題</label>        
+        <input class="form-control" id="review_title" name="review_title" required type="text" value="">  
+    </div>
+
+    <div class="form-group  required"><label class="control-label" for="review_content">您的評論內容</label>        
+        <textarea class="form-control" name="review_content" id="review_content" cols="30" rows="10"></textarea>
+    </div>
+
+    <div class="form-group  required"><label class="control-label" for="type">此次隨行的同伴是</label>     
+        <select class="form-control" id="type" name="type" required><option value="1">伴侶旅行</option><option value="2">家庭式</option>
+            <option value="3">朋友</option><option value="4">商務</option><option value="5">單獨旅行</option>
+        </select>
+    </div>
+
+    <div class="form-group  required"><label class="control-label" for="booking_date">您的造訪日期是?</label>
+              
+        <input class="form-control" id="booking_date" name="booking_date" required type="text" value="">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </div>
+
+    <div>
+        <div>更多的資訊提供與評等 (選填)</div>
+        <div class="form-group"><label class="control-label" for="takeout">這間餐廳是否提供外帶？</label>     
+            <select class="form-control" id="takeout" name="takeout" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+            </select>
+        </div>
+        <div class="form-group"><label class="control-label" for="vegetable">需要不含麩質飲食的人士是否可在這間餐廳享用美味餐點？</label>     
+            <select class="form-control" id="vegetable" name="vegetable" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+            </select>
+        </div>
+
+        <div class="form-group"><label class="control-label" for="service">這間餐廳是否提供外送服務？</label>     
+            <select class="form-control" id="service" name="service" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+            </select>
+        </div>
+        <div class="form-group"><label class="control-label" for="disabled">這間餐廳是否有無障礙通行設施？</label>     
+            <select class="form-control" id="disabled" name="disabled" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <div>請給予評分</div>
+        <div class="form-group"><label class="control-label" for="star1">服務</label>     
+            <select class="form-control" id="star1" name="star1" required><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group"><label class="control-label" for="star">食物</label>     
+            <select class="form-control" id="star" name="star" required><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group"><label class="control-label" for="star2">划算度</label>     
+            <select class="form-control" id="star2" name="star2" required><option value="1">1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group"><label class="control-label" for="star3">這間餐廳價位如何</label>     
+            <select class="form-control" id="star3" name="star3" required><option value="1">便宜餐館</option><option value="2">中等價位</option>
+                <option value="3">高級餐廳</option>
+            </select>
+        </div>
+        <div class="form-group  required"><label class="control-label" for="recommend_dish">您推薦哪種或哪些菜餚</label>        
+            <input class="form-control" id="recommend_dish" name="recommend_dish" type="text" value="">  
+        </div>
+        <input class="btn btn-default" id="submit" name="submit" type="submit" value="提交">
+        <input id="id" name="" type="hidden" value="{{ data.id }}">
+    </div>
+ 
+
+</form>
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#booking_date').datepicker({
+        "dateFormat": "yy-mm-dd",
+        language: "zh-CN",
+        minDate: 0, maxDate: "+1M +10D"
+        });
+    </script>
+    <script>
+        var csrftoken = $('meta[name=csrf-token]').attr('content')
+     
+        $.ajaxSetup({
+        
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                }
+            }
+        })
+     
+    </script>
+    <script>
+    $(function(){
+        
+
+        $("#commentform").submit(function(e){
+            e.preventDefault();
+            var id = $("#id").val()
+            var title = $("#title_name").text()
+            $.ajax({
+                method:"post",
+                data:$("#commentform").serialize(),
+                dataType: "json",
+                url: "/comment/edit/"+id,
+                success:function(response){
+                    alert("評論發表成功")
+                    window.location.href ="/restaurant/"+title
+                }
+            })
+        })
+    })
+    
+    </script>
+{% endblock %}

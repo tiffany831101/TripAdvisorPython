@@ -1,0 +1,107 @@
+img{
+    height: 200px; 
+    width: 250px; 
+}
+
+.content{
+    text-decoration: none;
+    padding-left: 25px;
+    padding-top:10px;
+    font-family: "Microsoft JhengHei";
+    list-style: none;
+    width:600px;
+    line-height:20px;
+    height: 200px;
+    color: #4a4a4a;
+    background-color: white;
+}
+#all{
+    margin-left: auto;
+    margin-right:auto; 
+    width:800px;
+    background-color: #f2f2f2;
+}
+
+#title{
+    font-size: 20px;
+    color: #000a12;
+    font-weight: 700;
+    line-height: 30px;
+    padding-bottom: 12px;
+}
+
+
+#type{
+    font-size:16px;
+    padding-left: 20px;
+    
+}
+
+#count{
+    padding-left:18px;
+    font-size:16px;
+    color: #4a4a4a;
+    
+}
+
+
+#comment{
+    padding-top: 10px;
+    padding-right:5px;
+}
+
+.go{
+    background-color: #fc0;
+    color: #000;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    box-sizing: border-box;
+    width:10px;
+    text-decoration: none;
+}
+
+#address{
+    padding-top: 8px;
+}
+
+#data{
+    border:  #f2f2f2 solid 8px;
+}
+
+.suggest{
+    width:800px;
+    display:inline-block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#head{
+    color: #fff;
+    display: block;
+    font-size: 34px;
+    font-weight: bold;
+    line-height: normal;
+    position: relative;
+    text-shadow: none;
+    background-color: #078171;
+    margin-top:10px;
+    text-align: center;
+    height:50px;
+    width:800px;
+}
+
+.wrap{
+    margin-top:10px;
+    
+}
+
+.position{
+    display:inline-block
+}
+
+

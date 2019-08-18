@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "__macro.html" as macros %}
+{% block title %}愛玩客論壇{% endblock %}
+{% block content %}
+{{ wtf.quick_form(form) }}
+{% include '_posts.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.forum') }}
+</div>
+{% endif %}
+{% endblock %}

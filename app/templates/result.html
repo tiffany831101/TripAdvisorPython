@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+{{ super() }}
+
+
+<link rel="stylesheet" href="{{ url_for('static',filename='register.css') }}">
+<style>
+  .revise{
+        margin-left:400px;
+        width:100px;
+        border-color: #fc0 #e4a000 #e4a000 #fc0;
+        background-color: #fc0;
+        line-height:1.8;
+        text-align: center;
+        margin-top:10px;
+      }
+  a{
+    color:black
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-area">
+<div class="colHeader">預約紀錄
+  
+</div>
+{% if current_user %}
+  <div class="form" id="look">  
+  {% for booking in reservation %}
+      <div class=revise><a id="reservation" href="#">修改</a></div>
+      <div><a id="cancel" href="">取消</a></div>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div>預約餐廳: {{ booking.title_name }}</div>   
+      <div>預約日期 : {{ booking.booking_date }}</div>
+      <div>用餐時間 : {{ booking.booking_time }}</div>
+      <div>用餐人數 : {{ booking.people }} </div>
+      <div>訂單編號: <span id="order_id">{{ booking.order_id1 }}</span></div>
+      <div class="time">線上預約時間: {{ booking.create_time }}</div>
+    
+  {% endfor %}
+  </div>
+
+  <div class="form-area">
+    <div class="colHeader">歷史紀錄</div>
+  <div class="form" id="look">
+  
+  {% for booking in history %}
+  <div>預約餐廳: {{ booking.title_name }}</div>   
+  <div>預約日期 : {{ booking.booking_date }}</div>
+  <div>用餐時間 : {{ booking.booking_time }}</div>
+  <div>用餐人數 : {{ booking.people }} </div>
+  <div>訂單編號: <span id="order_id">{{ booking.order_id1 }}</span></div>
+  <div class="time">線上預約時間: {{ booking.create_time }}</div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="form-area">您目前尚未有任何訂單</div>8
+{% endif %}
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+
+
+<script>
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+ 
+    $.ajaxSetup({
+    
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+ 
+    </script>
+
+
+
+
+
+<script>
+    $(function(){
+      var order_id = $("#order_id").text()
+      $("#reservation").attr("href","/reservation/revise/"+order_id)
+     
+      $("#cancel").click(function(e){
+        e.preventDefault();
+        if(confirm("您確定取消該訂單?")){
+          $.ajax({
+            method:"post",
+            dataType: "json",
+            url: "/reservation/order/cancel/"+order_id,
+            success:function(response){
+              if (response.errno=1){
+                alert("該訂單已成功刪除")
+                window.location.href="/reservation/result"
+              }else{
+                alert("系統忙碌中，請稍後再試一次")
+              }
+            }
+          })
+        }
+      })
+    })
+
+</script>
+
+{% endblock %}

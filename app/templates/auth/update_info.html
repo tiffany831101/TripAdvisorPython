@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-area">
+    <div class="colHeader">修改個人資料</div>
+    <div class="form">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}

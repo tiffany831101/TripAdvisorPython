@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+   
+{% endblock %}
+
+
+{% block content %}
+<div id="booking">
+    <div id="content">
+        <h3 id="title"><b>訂單修改</b></h3>
+    <form action="" method="post" class="form" role="form" id="reviseform">
+        
+        
+        
+        <div class="form-group  required"><label class="control-label" for="restaurant">選擇餐廳</label>
+            {% if data %}
+            <input class="form-control" id="restaurant" name="restaurant" required type="text" readonly="readonly" value="{{ data.title_name }}">
+            {% else %}             
+            <input class="form-control" id="restaurant" name="restaurant" required type="text" readonly="readonly" value="八里老漁村餐廳">
+            {% endif %}
+        </div>
+        <div class="form-group  required"><label class="control-label" for="order_id">訂單編號</label>
+              
+            <input class="form-control" id="order_id" name="order_id" required type="text"  readonly="readonly" value="{{ data.order_id1 }}">             
+        </div>
+        
+      <div class="form-group  required"><label class="control-label" for="people">人數</label>
+              
+                <input class="form-control" id="people" name="people" required type="text" value="{{ data.people }}">             
+        </div>
+
+      <div class="form-group  required"><label class="control-label" for="booking_date">日期</label>
+              
+                <input class="form-control" id="booking_date" name="booking_date" required type="text" value="{{ data.booking_date }}">
+              
+        </div>
+ 
+      <div class="form-group  required"><label class="control-label" for="booking_time">餐次</label>
+              
+                <select class="form-control" id="booking_time" name="booking_time" required value="{{ data.booking_time }}"><option value="午餐">午餐</option><option value="晚餐">晚餐</option></select>
+              
+        </div>
+
+        <input class="btn btn-default" id="revise" name="submit" type="submit" value="修改訂單">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+       
+      </form>
+</div>
+{% endblock %}
+
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#booking_date').datepicker({
+        "dateFormat": "yy-mm-dd",
+        language: "zh-CN",
+        minDate: 0, maxDate: "+1M +10D"
+        });
+    </script>
+    
+    <script>
+   
+ 
+    </script>
+    <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+
+    <script>
+    $(function(){
+        $("#reviseform").submit(function(e){
+            e.preventDefault();
+            if (confirm("您確定修改訂單?")){
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    data:$('#reviseform').serialize(),
+                    url: "/reservation/cancel",
+                    success:function(response){
+                        if (response.errno=1){
+                        alert("恭喜您，訂位修改成功。")
+                        window.location.href="/reservation/result"
+                    }else{
+                        alert("系統忙碌中，請稍後再試一次")
+                    }
+                    } 
+                })
+              
+            }
+        })
+        
+    })
+    
+    
+    </script>
+{% endblock %}
