@@ -6,6 +6,15 @@
 <div>店家: {{ d.store.title }}</div>
 
 <div>{{ d.store.res_type }}</div>
+
+<div>
+    <div>發表評論</div>
+    {% for c in user.restaurant_comment %}
+        <div>{{ c.restaurant.title }} : 
+        <span>{{ c.review_content }}</span></div>
+        <div id="love">讚(空)</div>
+    {% endfor %}
+</div>
 {% endfor %}
 
 
@@ -13,3 +22,9 @@
 
 {% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<script>
+
+</script>
+{% endblock %}

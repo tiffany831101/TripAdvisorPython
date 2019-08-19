@@ -44,8 +44,10 @@ class User(UserMixin,db.Model):
     survey =db.relationship('Survey',backref='survey')
     reservation = db.relationship('Reservation',backref='user',lazy='dynamic')
     restaurant_comment = db.relationship('Comment',backref='author',lazy='dynamic')
+    comment_son = db.relationship("Child_cmt",backref="author",lazy="dynamic")
     restaurant_love = db.relationship('Love',backref='author',lazy="dynamic")
-    
+    comment_like = db.relationship('Comment_like',backref='user',lazy="dynamic")
+
     confirmed = db.Column(db.Boolean,default=False)
     
 
@@ -244,10 +246,26 @@ class Comment(BaseModel,db.Model):
     recommend_dish = db.Column(db.String(50))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    child_cmt = db.relationship("Child_cmt",backref="fcmt",lazy="dynamic")
+    user_like = db.relationship("Comment_like",backref="comment",lazy="dynamic")
 
 class Love(BaseModel,db.Model):
     _tablename__="love"
     id = db.Column(db.Integer, primary_key=True)
     focus = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    storeid = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+
+class Child_cmt(BaseModel,db.Model):
+    __tablename__="ccmt"
+    id = db.Column(db.Integer, primary_key=True)
+    review_title = db.Column(db.String(50))
+    review_content = db.Column(db.Text())
+    fcmt_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+
+class Comment_like(BaseModel,db.Model):
+    __tablename__="comment_like"
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

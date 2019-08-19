@@ -14,28 +14,17 @@ from sqlalchemy.exc import IntegrityError
 from werkzeug import secure_filename
 import json
 from sqlalchemy import and_
+
 @auth.route('/login',methods=['GET','POST'])
 def login():
     """ 用戶登入
         參數 : 用戶名、密碼, json
-    
     """
-    
-    """
-    1. 獲取參數(在有前端情況下)
-    req_dict = request.get_json()
-    mobile = req_dict.get("mobile")
-    password = req_dict("password")
-    
-    2. 校驗參數
-    3. 參數完整的校驗
-    if not all ([mobile,password]):
-        return jsonify(error="錯誤",errmsg="參數不完整")
-    
-    4. 判斷手機號的格式
-    if not re.match(r"1[34578]\d", mobile):
-        return jsonify(error="參數錯誤",errmsg="手機格式不完整")
-    """
+
+    # 4. 判斷手機號的格式
+    # if not re.match(r"1[34578]\d", mobile):
+    #     return jsonify(error="參數錯誤",errmsg="手機格式不完整")
+
     form=LoginForm()
 
     # 5. 判斷錯誤次數是否超過限制，如果超過限制，則返回
@@ -74,8 +63,6 @@ def login():
 
         
     # 8. 如果驗證相同成功，保存登入狀態，在session中
-        # session["name"] = user.username
-        # session["cellphone"] = user.cellphone
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             session["cellphone"] = user.cellphone
@@ -89,7 +76,7 @@ def login():
 # 前端獲取用戶登入狀態
 @auth.route("/session",methods=["GET"])
 def check_login():
-    # 檢查登陸狀態
+    # 檢查登入狀態
     # 嘗試從session中獲取用戶的名字
     name = session.get(username)
     # 如果session中數據name名字存在，則表示用戶已登錄，否則未登入
@@ -109,47 +96,88 @@ def logout():
     flash('成功登出')
     return redirect(url_for('main.index'))
 
-@auth.route('/register',methods=['GET','POST'])
+@auth.route('/register')
 def register():
+    return render_template('auth/registration.html')
+
+
+@auth.route('/register/check',methods=['POST'])
+def register_check():
     """註冊
     請求的參數 : 手機號、用戶名、密碼、身分證號碼、電子郵件
-    參數格式 : json 
     """
-    """
-    # 獲取請求的json數據，返回字典
-    req_dict = request.get_json()
-    mobile = req_dict.get("mobile")
-    password = req_dict.get("password")
-    password2 = req_dict.get("password2")
-    # 校驗參數
-    if not all([mobile, password]):
-        # 表示格式不對
-        return jsonify(errno="參數錯誤",errmsg="參數不完整")
+    username = request.form.get("username")
+    cellphone = request.form.get("cellphone")
+    email = request.form.get("email")
+    password = request.form.get("password")
+    password2 = request.form.get("password2")
+    image_code_id = request.form.get("image_code_id")
+    image_code = request.form.get("image_code")
+    if not all ([image_code_id,image_code]):
+        return jsonify(errno=0,errmsg="參數不完整")
+
+    try:
+        real_image_code = redis_store.get("image_code_%s"%image_code_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=0,errmsg="Redis數據庫錯誤")
+    
+    if real_image_code is None:
+        return jsonify(errno=0,errmsg="圖片驗證碼失效")
+
+    try:
+        redis_store.delete("image_code_%s" %image_code_id)
+    except Exception as e:
+        current_user.logger.error(e)
+
+    if str(real_image_code,encoding='utf-8').lower() != image_code.lower():
+        return jsonify(errno=0,errmsg="圖片驗證碼錯誤")
+
+    if not all([cellphone, password, email, username]):
+        return jsonify(errno=0,errmsg="參數不完整")
+
     if password != password2:
-        return jsonify(error="參數錯誤", errmsg="密碼不完整")
-    # 判斷手機號格式
-    if not re.match(r"1[34578]\d{9}",mobile):
-        # 表示格式不對
-        return jsonify(error="參數錯誤",errmsg="手機號格式錯誤")
-    
-    # 從redis中取出短信驗證碼
+        return jsonify(error=0, errmsg="密碼不完整")
+    if not re.match(r"[^\._-][\w\.-]+@(?:[A-Za-z0-9]+\.)+[A-Za-z]+$",email):
+        return jsonify(errno=0,errmsg="請輸入正確的Email")
+
+    if not re.match(r"^09\d{8}$",cellphone):
+        return jsonify(error=0,errmsg="請輸入正確的手機號格式")
+
+    if User.query.filter_by(email=email).first():
+        return jsonify(error=0,errmsg="該信箱已註冊過")
+
+    if User.query.filter_by(cellphone=cellphone).first():
+        return jsonify(errno=0,errmsg="該手機號已註冊過")
+
+    user = User(username=username, email=email, cellphone=cellphone, password =password)
     try:
-        redis_store.get("sms_code_%s" % mobile)
+        db.session.add(user)
+        db.session.commit()
+        return jsonify(errno=1,errmsg="數據保存成功")
+
     except Exception as e:
+        db.session.rollback()
         current_app.logger.error(e)
-        return jsonify(errno="數據庫異常"，errmsg="讀取真實短信驗證碼異常")
-    # 判斷短信驗證碼是否過期
-    if real_sms_cide is None:
-        return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
+        return jsonify(errno=0,errmsg="數據庫查詢異常")
+    # # 從redis中取出短信驗證碼
+    # try:
+    #     redis_store.get("sms_code_%s" % mobile)
+    # except Exception as e:
+    #     current_app.logger.error(e)
+    #     return jsonify(errno="數據庫異常"，errmsg="讀取真實短信驗證碼異常")
+    # # 判斷短信驗證碼是否過期
+    # if real_sms_cide is None:
+    #     return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
     
-    #刪除redis中的短信驗證法，防止重複使用校驗
-    try:
-        redis_store.delete("sms_code_%s"%mobile)
-    except Exception as e:
-        current_app.logger.error(e)
-    # 判斷用戶填寫短信驗證碼的正確性
-    if real_sms_code !=sms_code:
-        return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
+    # #刪除redis中的短信驗證法，防止重複使用校驗
+    # try:
+    #     redis_store.delete("sms_code_%s"%mobile)
+    # except Exception as e:
+    #     current_app.logger.error(e)
+    # # 判斷用戶填寫短信驗證碼的正確性
+    # if real_sms_code !=sms_code:
+    #     return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
     
 
     # 判斷用戶的手機號是否註冊過
@@ -158,35 +186,7 @@ def register():
     ## except Exception as e:
     ##     current_app.logger.error(e)
     ##     return jsonify(errno="",errmsg="數據庫異常"):
-    ## else:
-    ##     if user is not None:
-    ##         #表示手機號存在
-    ##         return jsonify(errno="",errmsg="手機號存在")
-    """
-    form = RegistrationForm()
-    # 保存用戶的註冊數據到數據庫中
-    if form.validate_on_submit():
-        user = User(username=form.username.data,
-                email=form.email.data,
-                cellphone=form.cellphone.data,
-                password = form.password.data)
-        try:
-            db.session.add(user)
-            db.session.commit()
-            flash('註冊成功')
-            return redirect(url_for('auth.login'))
-
-        except Exception as e:
-            db.session.rollback()
-            current_app.logger.error(e)
-            flash(u"查詢數據庫異常")
-    # 保存登入狀態到session中
-    session["name"] = form.username.data
-    session["cellphone"] = form.cellphone.data
-    return render_template('auth/registration.html',form=form)    
-
-    
-    
+  
 
 @auth.route('/information', methods=["POST","GET"])
 @login_required
@@ -225,10 +225,6 @@ def save_images():
     if form.validate_on_submit():
         
         try:
-            # 從from對象中保存圖片
-            # photo = request.files("photo")
-            # filename = photo.read()
-
             filename = photos.save(form.photo.data)
             filename ="images/"+ filename
             # 返回了文件的url路径，而不是文件路径
@@ -255,11 +251,6 @@ def save_images():
 
     return render_template('auth/images.html', form=form)
     
-    
-
-
-
-
 
 @auth.before_app_request
 def before_request():
@@ -278,6 +269,7 @@ def captcha_check():
     image_code_id = request.form.get("image_code_id")
     cellphone = request.form.get("cellphone")
     email = request.form.get("email")
+
     # 校驗參數
     if not all ([image_code_id,image_code]):
         return jsonify(errno=0,errmsg="參數不完整")
@@ -299,16 +291,38 @@ def captcha_check():
         current_user.logger.error(e)
 
     # 與用戶填寫的值進行對比
-    if str(real_image_code).lower() != image_code.lower():
+    if str(real_image_code,encoding='utf-8').lower() != image_code.lower():
         # 表示用戶填寫錯誤
         return jsonify(errno=0,errmsg="數據錯誤")
     else:
         u = User.query.filter(and_(User.cellphone==cellphone, User.email==email)).first()
         if u is not None:
-            return jsonify(errno=1,errmsg="數據查詢成功")
+            response = make_response(jsonify({'errno':1,'errmsg':'數據查詢成功'}))
+            response.set_cookie("email",u.email)
+            return response
         else:
             return jsonify(errno=0,errmsg="數據查詢失敗")
 
+@auth.route("/password/check",methods=["POST"])
+def password_check():
+    password = request.form.get("password")
+    password2 = request.form.get ("password2")
+    email = request.cookies.get("email")
+    if not all([password, password2, email]):
+        return jsonify(errno=0,errmsg="參數不完整")
+    user = User.query.filter_by(email=email).first()
+    from werkzeug.security import generate_password_hash
+    if user:
+        user.password=password
+    
+    try:
+        db.session.add(user)
+        db.session.commit()
+        return jsonify(errno=1,errmsg="參數保存成功")
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫錯誤")
 
 @auth.route('/my')
 def my():

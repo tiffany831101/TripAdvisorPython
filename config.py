@@ -25,11 +25,11 @@ class DevelopmentConfig(Config):
     MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:*********@localhost:3306/********'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:a828215362@localhost:3306/web_flask'
                        
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:********@localhost:3306/********'
+    SQLALCHEMY_DATABASE_URI='mysql+pymysql://root:********@localhost:3306/web_flask'
 
 config = {
     'development':DevelopmentConfig,

@@ -4,7 +4,7 @@ import json
 from . import main
 from .forms import QueryForm, EditionProfileForm, PostForm, BookingForm
 from .. import db
-from ..models import User, Role, Post, Survey, Food, TripAdvisor, Reservation, Comment, Love
+from ..models import User, Role, Post, Survey, Food, TripAdvisor, Reservation, Comment, Love, Comment_like
 from flask_login import login_required, current_user
 import logging
 from flask import current_app #全局上下文
@@ -69,7 +69,7 @@ def user(username):
     count = user.restaurant_love.count() 
     data = user.restaurant_love.all()
     
-    return render_template('user.html',data=data,count=count)
+    return render_template('user.html',data=data,count=count,user=user)
 
 @main.route('/forum',methods=['GET','POST'])
 def forum():
@@ -184,6 +184,7 @@ def reservation(restaurant):
         return render_template("booking.html")
     return render_template("booking.html",data=data)
 
+
 @main.route('/reservation/check',methods=["POST"])
 def reservation_check():
     restaurant = request.form.get("restaurant")
@@ -262,7 +263,15 @@ def order_confirm_revise():
 
 @main.route('/restaurant/list')
 def restaurant_list():
-    return render_template("restaurant.html")
+    restaurant = TripAdvisor.query.filter(TripAdvisor.rating_count>200).order_by(TripAdvisor.rating_count.desc())
+    restaurant_obj = restaurant.paginate(page=1,per_page=30,error_out= False)
+    restaurant_li =restaurant_obj.items
+    total_page = restaurant_obj.pages
+    restaurant=[]
+    for restaurants in restaurant_li:
+        restaurant.append(restaurants.to_basic_dict())  
+      
+    return render_template("restaurant.html",restaurant=restaurant,total_page=total_page)
 
 @main.route('/restaurant/search')
 def restaurant_search():
@@ -279,8 +288,7 @@ def restaurant_search():
         page = 1
     filter_params=[]
     if address:
-        filter_params.append(TripAdvisor.address==address)
-        
+        filter_params.append(TripAdvisor.address==address)  
     if res_type:
         filter_params.append(TripAdvisor.res_type == res_type)
     
@@ -303,13 +311,21 @@ def restaurant_search():
 @main.route('/restaurant/<restaurant>',methods=["POST","GET"])
 @login_required
 def search_result(restaurant):
-    data = TripAdvisor.query.filter_by(title=restaurant).first()  
-    l = Love.query.filter(and_(Love.storeid==data.id,Love.user_id==current_user.id)).first()
+    data = TripAdvisor.query.filter_by(title=restaurant).first()
+    comment = Comment.query.filter(Comment.store_id==data.id).all()
+    like = Comment_like.query.filter(Comment_like.user_id==current_user.id).all()
+    
+    love = Love.query.filter(and_(Love.store_id==data.id,Love.user_id==current_user.id)).first()
+ 
     data = data.to_basic_dict()
-    if l:
-        return render_template("res_result.html",data=data,l=l)
-    else:
-        return render_template("res_result.html",data=data)
+    # if v:
+    #     return render_template("res_result.html",data=data,v=v, comment=comment)
+    # if l:
+    #     return render_template("res_result.html",data=data,l=l, comment=comment)
+    # if v and l:
+    return render_template("res_result.html",data=data,like=like,love=love, comment=comment) 
+    # else:e
+    #     return render_template("res_result.html",data=data, comment=comment)
 
 @main.route('/comment/<restaurant>')
 def restaurant(restaurant):
@@ -369,6 +385,34 @@ def unlike(id):
     a = user.restaurant_love.filter(TripAdvisor.id==restaurant.id).first()
     try:
         db.session.delete(a)
+        db.session.commit()
+        return jsonify(errno=1,ennmsg="參數刪除成功")
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫錯誤")
+
+@main.route("/comment/like/<id>")
+def comment_like(id):
+    comment = Comment.query.get_or_404(id)
+    l = Comment_like(comment_id=comment.id,user_id=current_user.id)
+    try:
+        db.session.add(l)
+        db.session.commit()
+        return jsonify(errno=1,errmsg="參數保存成功")
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫錯誤")
+
+
+@main.route("/comment/unlike/<int:id>")
+def comment_unlike(id):
+    comment=Comment.query.get_or_404(id)
+    user = User.query.filter(User.id==current_user.id).first()
+    l = user.comment_like.filter(Comment.id==comment.id).first()
+    try:
+        db.session.delete(l)
         db.session.commit()
         return jsonify(errno=1,ennmsg="參數刪除成功")
     except Exception as e:

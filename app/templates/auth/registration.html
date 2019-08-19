@@ -2,21 +2,60 @@
 
 
 {% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static',filename='register.css') }}">
 {% endblock %}
+
+
 
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 <div class="form-area">
     <div class="colHeader">立即加入，完全免費!</div>
     <div class="form">
-        {{  wtf.quick_form(form) }}
-        <div class="captche">
-            <input type="text" class="get_pic_code" name="imagecode" id="imagecode" placeholder="圖形驗證碼">
-            <img src="" class="get_pic_code" onclick="generateImageCode()"><br/>
-        </div>
-    
+        <form action="" method="post" class="form" role="form" id="registrarionform">
+
+            <div class="form-group  required"><label class="control-label" for="username">姓名</label>    
+                    <input class="form-control" id="username" name="username" required type="text" value="">   
+            </div>
+
+            <div class="form-group  required"><label class="control-label" for="email">E-mail</label>
+                    
+                    <input class="form-control" id="email" name="email" required type="text" value="">
+            </div>
+
+            <div class="form-group  required"><label class="control-label" for="cellphone">手機</label>
+                    
+                    <input class="form-control" id="cellphone" name="cellphone" required type="text" value="">
+                    
+            </div>
+
+            <div class="form-group  required"><label class="control-label" for="password">請輸入密碼</label>
+                    
+                    <input class="form-control" id="password" name="password" required type="password" value="">
+                    
+                    <div class="alert alert-danger" style="display: none" role="alert" id="passstrength"></div>
+            </div>
+
+            <div class="form-group  required"><label class="control-label" for="password2">請確認密碼</label>
+                    
+                    <input class="form-control" id="password2" name="password2" required type="password" value="">
+                    
+            </div>
+
+            <div class="captche">
+                <input type="text" class="get_pic_code" name="imagecode" id="imagecode" placeholder="圖形驗證碼">
+                <div onclick="generateImageCode()">
+                <img src="" class="get_pic_code"><br/>
+                
+                </div>
+            </div>
+
+
+
+            <input class="btn btn-default" id="submit" name="submit" type="submit" value="註冊">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div>
             已有帳戶了嗎?<a href="{{ url_for('auth.login') }}">登入</a>
         </div>
@@ -27,26 +66,61 @@
 
 
 {% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-    $('#birthday').datepicker({
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        forceParse: 0,
-        showMeridian: 1,
-        format: "yyyy/mm/dd",
-        language: "zh-CN",
-        maxView:3,
-        startDay: '1960:1:1'
-        });
-    </script>
     
+
+
+
+
+
+<script>
+$('#password').keyup(function(e) {
+            var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+            var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+            var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+            if (false == enoughRegex.test($(this).val())) {
+            $('#passstrength').html('密碼長度不足');
+            } else if (strongRegex.test($(this).val())) {
+            $('#passstrength').className = 'ok';
+            $('#passstrength').html('非常安全!');
+            } else if (mediumRegex.test($(this).val())) {
+            $('#passstrength').className = 'alert';
+            $('#passstrength').html('一般!').css("alert alert-waring");
+            } else {
+            $('#passstrength').className = 'error';
+            $('#passstrength').html('不安全!');
+            }
+            return true;
+            });
+</script>
+
+
+
+
+
+
 <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+
+
+
+
+
+
+
+<script>
+        var csrftoken = $('meta[name=csrf-token]').attr('content')
+     
+        $.ajaxSetup({
+        
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                }
+            }
+        })
+</script>
 <script>
 //保存圖片驗證碼編號
-var imageCodeId = "";
+imageCodeId = "";
 
 function generateUUID() {
     var dt = new Date().getTime();
@@ -57,13 +131,11 @@ function generateUUID() {
     });
     return uuid;
 }
-// uuid 全局唯一標識符
 
 function generateImageCode(){
      // 形成圖片驗證碼的後端的地址，然後設置到頁面中，讓瀏覽器請求驗證碼圖片
      // 1. 生成圖片驗證碼編號
     imageCodeId = generateUUID();
-    // 設置圖片url
     url="/api/image_codes/"+imageCodeId;
     $(".get_pic_code").attr("src",url);
 }
@@ -77,12 +149,55 @@ $(document).ready(function(){
 
 </script>
 
+<script>
+$(function(){
+    $("#registrarionform").submit(function(e){
+        e.preventDefault();
+        var imageCodeid = imageCodeId
+        var username = $("#username").val()
+        var cellphone = $("#cellphone").val()
+        var email = $("#email").val()
+        var imageCode = $("#imagecode").val()
+        var password = $("#password").val()
+        var password2 = $("#password2").val()
+        if (!imageCode){
+            alert("請填寫驗證碼")
+        }
+        if (password != password2){
+            alert("您兩次輸入密碼不一致")
+        }
+        
+        params={
+            "username":username,
+            "image_code_id":imageCodeid,
+            "image_code":imageCode,
+            "cellphone":cellphone,
+            "email":email,
+            "password":password,
+            "password2":password2
+        }
+        $.ajax({
+                method:"post",
+                dataType: "json",
+                data:params,
+                url: "/auth/register/check",
+                success:function(response){
+                    if (response.errno==1){
+                        alert("註冊成功")
+                        window.location.href="/auth/my"
+                    }else{
+                        alert(response.errmsg)
+                        window.location.href="/auth/register"
+                    }
+                    
+                    
+                   
+                }
+            })
+        
+    })
+})
 
-
-
-
-</div>
-
-</div>
+</script>
 
 {% endblock %}

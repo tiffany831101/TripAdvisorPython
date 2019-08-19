@@ -14,7 +14,7 @@
 <div>評價 : {{ data.rating }}
     <span><a id="info_url" href="#">立即訂位</a></span>
 </div>
-{% if l %}
+{% if love %}
     <div id="like">已收藏</div>
 {% else %}
     <div id="like">收藏</div>
@@ -36,7 +36,25 @@
 <div>{{ comment }}</div>
 {% endfor %}
 
-
+{% for c in comment %}
+    <div>{{ c.author.username }}
+        <a href="/user/{{ c.author.username }}">查看作者首頁</a>
+        <span id="comment_id" style="display: none">{{ c.id }}</span>
+    </div>
+    <div>
+    
+    {% for lv in like %}
+        {% if lv.comment_id ==c.id %}
+            <div id="love{{ loop.index }}">讚</div>
+            
+        {% endif %}
+            <div id="love{{ loop.index }}">讚(空)</div>
+    {% endfor %} 
+    
+    
+    <div>{{ c.review_content }}</div>
+    
+{% endfor %}
 
 {% endblock %}
 {% block scripts %}
@@ -95,6 +113,36 @@
             })
             }
             
+        })
+    })
+</script>
+<script>
+    $(function(){
+        $("#love").click(function(){
+            var id = $("#comment_id").text();
+            var love = $("#love").text();
+            if (love=="讚(空)"){
+                $.ajax({
+                    method:"get",
+                    url: "/comment/like/"+id,
+                    success:function(response){
+                        alert("已按讚")
+                        $("#love").text("讚")
+                    }
+
+                })
+            }else{
+                $.ajax({
+                    method:"get",
+                    url: "/comment/unlike/"+id,
+                    success:function(response){
+                        alert("收回讚")
+                        $("#love").text("讚(空)")
+                    }
+
+                })
+            }
+
         })
     })
 </script>
