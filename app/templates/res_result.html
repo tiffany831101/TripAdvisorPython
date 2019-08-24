@@ -4,37 +4,119 @@
 {% block head %}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{ super() }}
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='restaurant_result.css') }}">
+    <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
 {% endblock %}
 
 
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-<div class="title">{{ data.title }}</div>
-<div>評價 : {{ data.rating }}
-    <span><a id="info_url" href="#">立即訂位</a></span>
-</div>
-{% if l %}
-    <div id="like">已收藏</div>
-{% else %}
-    <div id="like">收藏</div>
-{% endif %}
-<div style="display:none" id="id">{{ data.id }}</div>
-<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-<div>餐廳類型 : {{ data.res_type }}</div>
-<div>地址 : {{ data.street }}</div>
-<div>評論述: {{ data.rating_count }}</div>
+<div class="content">
+        <div class="inner">
+        
+        <h3 id="title">{{ data.title }}</h3>
+        {% if love %}
+            <div class="thumbs" style="color:#078171">
+            <i class="fas fa-thumbs-up"></i>
+            <span id="like">已收藏</span></div>
+        {% else %}
+            <div class="thumbs">
+            <i class="fas fa-thumbs-up"></i>
+            <span id="like">收藏</span></div>
+        {% endif %}
+         
+        <div>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <div class="reviewCount">{{ data.rating_count }} 則評論</div>
+            <div class="header_links">{{ data.res_type }}</div>    
+        </div>
 
-{% for image in data.info_url %}
-<img src="{{ image }}">
-{% endfor %}
-<div>
-    <a id="comment" href="">發表評論</a>
+        <div class="info">
+            <i class="fas fa-globe-americas"></i>
+            <div class="street_address">{{ data.address }}{{ data.street }}</div>
+            <i class="fas fa-phone" style="margin-left:20px "></i>
+            <div class="mobile">{{ data.cellphone }}</div>
+            <i class="fas fa-circle" style="margin-left:15px"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i>
+            <div class="block_title">評等 {{ data.rating }}</div>
+            <div style="display: inline-block">
+                <div class="reserve"><a id="info_url" href="#">立即訂位</a></div>
+            </div>   
+        </div>
+
+        {% for image in data.info_url %}
+            <img class="image" src="{{ image }}">
+        {% endfor %}
+    </div>
 </div>
 
-{% for comment in data.comment %}
-<div>{{ comment }}</div>
-{% endfor %}
+<div class="content">
+        <div class="review_content_crawl">
+            <div class="outer">評論<span style="padding-left:10px; font-size:24px">({{ data.rating_count }})</span></div>
+            <div style="display: inline-block">
+                <div class="comment_button"><a id="comment" href="">發表評論</a></div>
+            </div>
+        </div>
+        
+        {% for comment in data.comment %}
+        <div class="ui_column">
+            <i class="fas fa-comments"></i>
+            <span style="width:950px;margin-left:15px">{{ comment }}</span>
+        </div>
+        {% endfor %}
+</div>
+
+<div class="content">
+    {% for c in comment %}
+        <div class="review_content1">
+            <div class="review" style="display: inline-block">
+                <div>{{ c.author.username }}
+                    <a href="/user/{{ c.author.username }}">查看作者首頁</a>
+                    <span id="comment_id{{ loop.index }}" style="display: none">{{ c.id }}</span>
+                </div>
+                
+            <div class="love">
+            {% if like %}
+                {% with a=[]  %}
+                    {% for lv in like %}
+                        {% if lv.comment_id == c.id %}
+                            {% do a.append('已讚') %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if a[0]=="已讚" %}
+                        <div class="record">已讚</div> 
+                        <div class="love_icon" style="color:#FF0000">
+                        <i class="fas fa-heart"></i></div>
+                    {% else %}
+                            <div class="record">讚</div>
+                        <div class="love_icon">
+                        <i class="fas fa-heart"></i></div>
+                    {% endif %}
+                {% endwith %}
+            {% else %}
+                <div class="record">讚</div>
+                <div class="love_icon">
+                <i class="fas fa-heart"></i></div>
+            {% endif %}
+            </div>
+                <div class="rating" style="color:#078171">{{ c.rating }}
+                    <span class="rating_icon"></span>
+                </div>
+                
+                <div>{{ c.review_content }}</div>
+                <div>造訪時間:{{ c.booking_date }}</div>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+    
+</div>
+
+
+    <div style="display:none" id="id">{{ data.id }}</div>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
 
 
 
@@ -55,18 +137,28 @@
  
     </script>
 
+<script>
+$(".rating").each(function() {
+    var rating = $(this).text();
+    for (var i=0;i<rating;i++){
+        $tr= '<i class="fas fa-circle"></i>'
+        $(this).children(".rating_icon").append($tr)
+    }
+    
+})
+
+</script>
 
 
 <script>
     $(function(){
-        var title =$(".title").text();
+        var title =$("#title").text();
         $("#info_url").attr("href","/reservation/"+title);
         $("#comment").attr("href","/comment/"+title);
-        
         $("#like").click(function(e){
             e.preventDefault();
-            var id = $("#id").text()
-            var like = $("#like").text();
+            var id = $(this).parent().parent().children("#title").text()
+            var like = $(this).text();
             var params={
                 "like":1,
             }
@@ -78,8 +170,9 @@
                 url: "/restaurant/like/"+id,
                 success:function(response){
                     alert("關注成功")
-                    $("#like").text("已收藏")
-                }
+                    $(this).text("已收藏")
+                    $(this).parent().css("color","#078171")
+                }.bind(this)
             })
 
             }else{
@@ -90,12 +183,48 @@
                 url: "/restaurant/unlike/"+id,
                 success:function(response){
                     alert("取消關注")
-                    $("#like").text("收藏")
-                }
+                    $(this).text("收藏")
+                    $(this).parent().css("color","")
+                }.bind(this)
             })
             }
             
         })
     })
 </script>
+<script>
+    $(function(){
+        $(".love").click(function(){
+            var id = $(this).prev().children("span").text();
+            $love = $(this).text();
+            $love = $.trim($love)
+            if ($love=="讚"){
+                $.ajax({
+                    method:"get",
+                    url: "/comment/like/"+id,
+                    success:function(response){
+                        alert("已按讚")
+                        $(this).children(".love_icon").css("color","#FF0000")
+                        $(this).children(".record").text("已讚")
+                    }.bind(this)
+
+                })
+            }else{
+                $.ajax({
+                    method:"get",
+                    url: "/comment/unlike/"+id,
+                    success:function(response){
+                        alert("收回讚")
+                        $(this).children(".love_icon").css("color","")
+                        $(this).children(".record").html("讚")
+                        
+                    }.bind(this)
+
+                })
+            }
+
+        })
+    })
+</script>
+
 {% endblock %}

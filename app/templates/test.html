@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='restaurant.css') }}">
+<script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<div id="all">
+    <h1 id="head">大台北美食餐廳 Taipei</h1>
+    <div class="wrap">
+        <select id="filter-city">
+            <option value="0">台北市</option>
+            <option value="1">新北市</option>
+        </select>
+        
+        <select id="filter-area">
+            <option value="大安">大安區</option>
+            <option value="信義區">信義區</option>
+            <option value="萬華">萬華區</option>
+            <option value="松山">松山區</option>
+            <option value="士林">士林區</option>
+            <option value="中正區">中正區</option>
+            <option value="大同">大同區</option>   
+            <option value="中山區">中山區</option>   
+            <option value="南港">南港區</option>   
+        </select>
+        <select id="food_type">
+            <option class = "active" value ="台灣小吃/台菜">台灣小吃/台菜</option>
+            <option class = "" value ="日式料理">日式料理</option>
+            <option class = "" value ="中式料理">中式料理</option>
+            <option class = "" value = "咖啡廳">咖啡廳</option>
+            <option class = "" value = "海鮮">海鮮</option>
+        </select>
+
+        <select id="filter">
+            <option value ="評論數">評論最多</option>
+            <option value ="評分數">評分愈高</option>
+        </select>
+    </div>
+
+    <div id="search">搜索條件:
+        <span id="area"></span>
+        <span id="food"></span>
+        <span id="result"></span>
+    </div>
+    <div id="show">
+        <table>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody id="search_result">
+            
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <div id="box"></div>
+            
+
+    
+          
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename='jquery.pagination.js') }}"></script>
+
+<script>
+var page=1
+$(function(){
+
+    Load(page)
+    filter()
+    search()
+
+})
+
+function Load(page){
+    $.get("/restaurant/filter",page,function(response){
+        render(response)
+        love()
+        var totalPages = response.total_page
+        var totalData = totalPages*30
+        initPagination(totalData, 30)
+       
+    })                       
+}
+
+
+function render(response){
+    if (response.errno==1){
+        if (response.data.length>0){
+            $("#search_result").empty()
+            $.each(response.data,function(key,value){
+                var $tr =" ";
+                $tr +=  "<tr id='data'>"+
+                        "<td id='picture'><img src="+value.info_url+"></td>"+
+                        "<td>"+
+                            "<div class='content'>"+
+                                "<div class='outer-container'>"+
+                                    "<div><b class='title'>"+ value.title +"</b>"+    
+                                    "<span id='go'><a href='javascript:void(0)' class='go' onclick='click_restaurant(this)'>立即查看</a></span>"+
+                                    "<span class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+value.love+"</span>"+
+                                    "</div>"+
+                                "</div>"+
+                                
+                                "<div class='block'>"+
+                                    "<div>瀏覽量:"+value.count+"</div>"+
+                                    "<i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i>"+
+                                    "<span class='count' style='margin-left:3px'>"+ value.rating_count +"則評論</span>"+
+                                    
+                                "</div>"+
+                                    "<div class='address'><li><i class='fas fa-globe-americas' style='margin-right:8px'></i>"+ value.street +"</li>"+
+                                        "<li><i class='fas fa-phone' style='margin-right:8px'></i>"+ value.cellphone +"</li>"+
+                                    "</div>"+
+                                    "<li class='comment'>"+ value.comment +"</li>"+   
+                            "</div>"+  
+                        "</td>"+
+                    "</tr>"
+                $("#search_result").append($tr)
+            })
+        }
+    }
+}
+
+function initPagination(count, pagesize){
+    $('#box').pagination({
+            totalData: count,
+            showData: pagesize,
+            callback: function (api) {
+                var params = {
+                    "page":api.getCurrent()
+                }
+                $.get("/restaurant/filter",params,function(response){
+                    render(response)
+                })
+            }
+
+        });
+}              
+
+function click_restaurant(obj){
+    $(this).off("click").one("click",function(event){
+        event.stopPropagation();
+        var restaurant = $(obj).parent().parent().children(".title").text()
+        $.get("/read/count/"+restaurant,function(){
+            window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+}
+
+
+function filter(){
+    var cities = [["大安","信義區","萬華","松山","士林","中正區","大同","中山區","南港"],
+                       ["蘆洲","三重","板橋","新莊","中和","永和","新店"]]
+    $("#filter-city").change(function(){
+        var val=$("#filter-city").val();
+        $("#filter-area").empty();
+        $.each(cities,function(i,n){
+            if(val==i){
+                $.each(cities[i],function(j,m){
+                    var $option =" ";
+                        $option +="<option>"+m+"</option>"
+                    $("#filter-area").append($option)
+                    
+
+                })
+            }
+        })
+    }
+)}
+
+
+
+function search(){
+    $("#filter-area, #food_type, #filter").on('change',function(){
+        var area = $("#filter-area").val();
+        var food = $("#food_type").val();
+        var filter = $("#filter").val();
+
+        if (undefined == area) area="";
+        if (undefined == food ) food="";
+        if (undefined ==filter) filter="";
+
+        $("#area").html(area)
+        $("#food").html(food)
+        $('#result').html(filter)
+        
+        var params ={
+                "area":area,
+                "food":food,
+                "filter":filter,
+            }
+        $.get("/restaurant/search",params,function(response){
+            render(response)
+            love()
+            var totalPages = response.total_page
+            var totalData = totalPages*30
+            var params= response.params
+            searchPagination(totalData, 30, params)
+        })
+
+    })
+}   
+
+function searchPagination(count, pagesize, filter){
+    $('#box').pagination({
+            totalData: count,
+            showData: pagesize,
+            callback: function (api) {
+                filter.page = api.getCurrent()
+                $.get("/restaurant/search",filter,function(response){
+                    render(response)
+                })
+            }
+
+    });
+}          
+
+function love(){
+    var love = $(".love").text()
+    $(".love").each(function() {
+        var love = $(this).text();
+        if (love=="已收藏"){
+            $(this).css("color","#078171")
+        }
+    })
+}
+
+function like(obj){
+    $(this).off("click").on("click",function(event){
+        event.stopPropagation();
+        var like = $(obj).text()
+        var title = $(obj).parent().children(".title").text()
+        if (like=="收藏"){
+            $.get("/restaurant/like/"+title,function(){
+                alert("關注成功")
+
+                $tr = "<sapn class='love' onclick='like(this)' style='color:#078171'><i class='fas fa-thumbs-up'></i>"+"已收藏"+"</span>"
+                $(obj).html($tr)
+            }.bind(obj)
+            )
+        }else{
+            $.get("/restaurant/unlike/"+title,function(){
+                alert("取消關注")
+                $tr = "<span class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+"收藏"+"</span>"
+                $(obj).html($tr)
+            }.bind(obj)
+        ) }
+    })
+   
+}
+</script>
+
+{% endblock %}

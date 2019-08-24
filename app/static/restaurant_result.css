@@ -1,0 +1,158 @@
+
+
+.content{
+    background-color: #fff;
+    margin-left: auto;
+    margin-right:auto;
+    width: 1060px;
+    color: #2c2c2c;
+    margin-top: 50px;
+    font-family:Microsoft JhengHei;
+}
+
+.inner{
+    padding-left:30px;
+    padding-right:10px;
+}
+#title{
+    padding-right: 12px;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 700;
+    padding-top: 12px;
+    color: #000a12;
+}
+
+
+
+.reserve{
+    background-color: #fc0;
+    border: 1px solid transparent;
+    margin-left:250px;
+    width:150px;
+    
+}
+
+#info_url{
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    line-height:26px;
+    padding-left:45px;
+    height:15px;
+}
+
+.reviewCount{
+    color: #00a680;
+    font-weight: 700;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.header_links{
+    font-size: 16px;
+    font-weight: 700;
+    display: inline-block;
+    margin-left:15px;
+    vertical-align: middle;
+}
+
+.info{
+    font-size: 16px;
+}
+
+
+.street_address{
+    line-height: 26px;
+    font-size: 16px;
+    display: inline-block
+}
+
+.mobile{
+    line-height: 26px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.image{
+    object-fit: cover;
+    object-position: center;
+    width: 245px;
+    height: 220px;
+    padding-top: 10px;
+    margin-bottom:50px;
+}
+
+.outer{
+    padding-right: 12px;
+    font-size: 26px;
+    font-weight: 700;
+    padding-top: 12px;
+    color: #000a12;
+    display: inline-block;
+    
+}
+
+.comment_button{
+    border-color: #078171;
+    background-color: #078171;
+    width:150px;
+    margin-left:700px;
+    margin-bottom:10px;
+}
+
+
+#comment{
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 700;
+    line-height:26px;
+    padding-left:45px;
+    height:15px;
+    color:#fff;
+    vertical-align: middle
+    
+}
+
+
+.block_title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #000a12;
+    display: inline-block;
+}
+
+.review_content_crawl{
+    background-color:#fff;
+    margin-left:20px;
+}
+
+
+.ui_column{
+    box-sizing: border-box;
+    border-top: 1px solid #e5e5e5;
+    padding-top:2px;
+    padding-bottom:2px;
+    padding-left:20px;
+}
+
+.review_content1{
+    border:  #f2f2f2 solid 8px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:30px;
+}
+.review{
+    display: inline-block;
+}
+
+.record{
+    display: inline-block;
+}
+.fa-heart{
+    display: inline-block;
+}

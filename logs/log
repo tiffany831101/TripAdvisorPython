@@ -15994,3 +15994,2078 @@ INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 13:45:18] "POST /auth/captcha/c
 INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 13:45:51] "GET /auth/password/reset HTTP/1.1" 200 -
 INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 13:45:52] "GET /api/image_codes/6e9369ec-1b9e-4186-b2c9-223024b559e9 HTTP/1.1" 200 -
 INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 13:46:00] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:22] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:22] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:22] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:26] "GET /api/image_codes/62fbcc9e-1f21-46d5-9e66-07668a8d2bb6 HTTP/1.1" 200 -
+ERROR views.py: 58(pymysql.err.InternalError) (1049, "Unknown database 'flask_web'")
+(Background on this error at: http://sqlalche.me/e/2j85)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:37] "GET /auth/login HTTP/1.1" 200 -
+ERROR views.py: 58(pymysql.err.InternalError) (1049, "Unknown database 'flask_web'")
+(Background on this error at: http://sqlalche.me/e/2j85)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:56] "POST /auth/login HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:56] "GET /auth/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:56] "GET /auth/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:57] "GET /auth/login?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:57] "GET /auth/login?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:44:57] "GET /auth/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ERROR views.py: 58(pymysql.err.InternalError) (1049, "Unknown database 'flask_web'")
+(Background on this error at: http://sqlalche.me/e/2j85)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:45:12] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:45:12] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\config.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:16] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:16] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:34] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:39] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:44] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:46:44] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:17] "POST /auth/login HTTP/1.1" 302 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:18] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:18] "GET /static/index.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:18] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:42] "GET /resturant HTTP/1.1" 200 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:43] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:43] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:43] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:43] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:44] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:44] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:44] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:44] "GET /static/images.jpg HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:49] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:49] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:47:49] "GET /static/booking.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:04] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:14] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:24] "GET /auth/images HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:35] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:36] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:41] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:41] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:44] "GET /api/image_codes/090118b1-0a10-41be-94aa-da8c821be65b HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:50] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:51] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:51] "GET /static/restaurant.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:52] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:54] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page=1 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:48:59] "GET /restaurant/濟南鮮湯包 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:04] "GET /restaurant/unlike/96?like=1 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:13] "GET /reservation/濟南鮮湯包 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:13] "GET /static/booking.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:35] "GET /comment/濟南鮮湯包 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:53] "GET /comment/濟南鮮湯包 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:49:53] "GET /comment/濟南鮮湯包 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:50:26] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:50:26] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:50:30] "GET /reservation/result HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:51:06] "GET /reservation/revise/None HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:51:22] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:51:23] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:53:06] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:16] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:17] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:17] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:20] "GET /api/image_codes/edfa947c-c918-418c-8e7d-0e2f676bba58 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:20] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:41] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:55:41] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:58:54] "GET /auth/logout HTTP/1.1" 302 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:58:54] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:58:54] "GET /static/index.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:58:54] "GET /static/images.jpg HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:58:57] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:01] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:01] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:14] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:14] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:15] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:17] "GET /api/image_codes/f024ec22-80ba-42a5-906c-c6c7f75e87f5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 14:59:44] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:01:34] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:01:34] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:01:37] "GET /api/image_codes/ce2c10ec-3f00-435c-8767-f186ea4e69a0 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:01:47] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:03:04] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:03:24] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:03:24] "GET /static/restaurant.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:03:24] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:03:28] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page=3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:13] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:13] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:17] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:17] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:20] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:22] "GET /api/image_codes/5ccc2435-f4e3-4048-b0b2-c6530f58dd97 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:12:35] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:24:42] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:25:00] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:25:00] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:25:02] "GET /api/image_codes/2b8febc2-671e-4544-b831-9f88b7614e71 HTTP/1.1" 200 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:12] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:12] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:14] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:14] "GET /static/images.jpg HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:16] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:18] "GET /auth/my HTTP/1.1" 200 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:18] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:18] "GET /static/images.jpg HTTP/1.1" 404 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:25] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 15:27:25] "GET /static/images.jpg HTTP/1.1" 404 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\models.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\models.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:27] "GET / HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:40] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:41] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:41] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:42] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:06:46] "GET /api/image_codes/1367900a-1a35-4580-8268-153c18fe8e1a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:14] "POST /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:14] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:17] "GET /api/image_codes/5dd0ae7b-504d-484f-bbf1-b384390f8732 HTTP/1.1" 200 -
+ERROR views.py: 181(pymysql.err.DataError) (1264, "Out of range value for column 'cellphone' at row 1")
+[SQL: INSERT INTO user (username, email, cellphone, password_hash, gender, image_url, birthday, id_number, country, address, `LINE`, confirmed, name, location, about_me, member_since, last_seen) VALUES (%(username)s, %(email)s, %(cellphone)s, %(password_hash)s, %(gender)s, %(image_url)s, %(birthday)s, %(id_number)s, %(country)s, %(address)s, %(LINE)s, %(confirmed)s, %(name)s, %(location)s, %(about_me)s, %(member_since)s, %(last_seen)s)]
+[parameters: {'username': '許蔓萍', 'email': 'a123456789@gmail.com', 'cellphone': '09123456789', 'password_hash': 'pbkdf2:sha256:150000$hG9hJTbG$965d619c2497d66f4c58872f41fde133d11a0439c02b48e272fe2e77b5744075', 'gender': None, 'image_url': None, 'birthday': None, 'id_number': None, 'country': None, 'address': None, 'LINE': None, 'confirmed': 0, 'name': None, 'location': None, 'about_me': None, 'member_since': datetime.datetime(2019, 8, 18, 8, 7, 27, 503560), 'last_seen': datetime.datetime(2019, 8, 18, 8, 7, 27, 503560)}]
+(Background on this error at: http://sqlalche.me/e/9h9h)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:27] "POST /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:27] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:07:30] "GET /api/image_codes/46a4005f-e633-4e1f-bad9-8562911d7586 HTTP/1.1" 200 -
+ERROR views.py: 181(pymysql.err.DataError) (1264, "Out of range value for column 'cellphone' at row 1")
+[SQL: INSERT INTO user (username, email, cellphone, password_hash, gender, image_url, birthday, id_number, country, address, `LINE`, confirmed, name, location, about_me, member_since, last_seen) VALUES (%(username)s, %(email)s, %(cellphone)s, %(password_hash)s, %(gender)s, %(image_url)s, %(birthday)s, %(id_number)s, %(country)s, %(address)s, %(LINE)s, %(confirmed)s, %(name)s, %(location)s, %(about_me)s, %(member_since)s, %(last_seen)s)]
+[parameters: {'username': '許蔓萍', 'email': 'a123456789@gmail.com', 'cellphone': '09123456789', 'password_hash': 'pbkdf2:sha256:150000$1d31sDdD$f6a07a9540b138e4d655018d981c9cfdf1ba439e3af3dcd0e3a3e8ae1afb1b8b', 'gender': None, 'image_url': None, 'birthday': None, 'id_number': None, 'country': None, 'address': None, 'LINE': None, 'confirmed': 0, 'name': None, 'location': None, 'about_me': None, 'member_since': datetime.datetime(2019, 8, 18, 8, 8, 27, 401006), 'last_seen': datetime.datetime(2019, 8, 18, 8, 8, 27, 401006)}]
+(Background on this error at: http://sqlalche.me/e/9h9h)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:08:27] "POST /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:08:27] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 16:08:30] "GET /api/image_codes/dcb44483-7ed0-4bb1-b454-bbdaf089d354 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:13] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:14] "GET /static/restaurant.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:15] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:16] "GET /favicon.ico HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:39] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:26:59] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:00] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:28] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:28] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:32] "GET /api/image_codes/cdeaf103-0a76-4fba-9baf-86fc51bd49ba HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:42] "GET /api/image_codes/5ffef769-c60d-4984-92ea-0d3ec00cf165 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:27:50] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:28:03] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:28:07] "GET /api/image_codes/855d5da4-480f-49b4-964a-5af2a4ebcdac HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:28:17] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:30:39] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:30:42] "GET /api/image_codes/cf304b66-f888-41cb-b547-ee2c8ad68e19 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:30:59] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:31:45] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:31:45] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:31:49] "GET /api/image_codes/e759039a-3a89-4dd3-9e47-d0232141cbf2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:31:54] "GET /api/image_codes/84b5c5bf-059b-47e2-b93d-3527ea3023a3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:31:56] "GET /api/image_codes/633722f1-d6c4-4773-8424-fdf4c25435fe HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:32:06] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:33:24] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:33:24] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:33:27] "GET /api/image_codes/917691a6-bf57-4406-a92d-f9f45064dec0 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:33:49] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:36:56] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:36:56] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:36:58] "GET /api/image_codes/8f98cf74-c5bc-4dd3-bec6-bd7db2fdebae HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:37:08] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:40:09] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:40:09] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:40:10] "GET /api/image_codes/4f490b31-83d6-4a28-aecd-87c334e4fdf3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:40:18] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:43:39] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:43:39] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:43:40] "GET /api/image_codes/a312824d-0008-4fe8-bada-658f23d3aeba HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:43:54] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:44:29] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:44:29] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:44:29] "GET /api/image_codes/f69faf63-6ebd-45be-9750-dbe7d5c2f99b HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:44:49] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:44:50] "GET /api/image_codes/348b7ba3-b5a4-4dcb-ba44-c7a53d0aa2a4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:45:16] "GET /api/image_codes/b48c772a-3aef-41a8-b0b8-a5cd563f60dc HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:45:22] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:46:29] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:46:29] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:46:30] "GET /api/image_codes/4a248cfe-6e2a-4810-9798-d53941992901 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:46:38] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:47:29] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:47:29] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:47:30] "GET /api/image_codes/7a700621-c1b7-4af8-b953-ee4331320427 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:47:41] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:54:09] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:54:09] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:54:12] "GET /api/image_codes/f277d638-ca23-482d-8806-396658a6e109 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:54:28] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:55:40] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:55:40] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:55:41] "GET /api/image_codes/f7b6d4b1-cf13-461b-ab3c-99416fc8171b HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:55:51] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:56:40] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:56:40] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:56:40] "GET /api/image_codes/c5203659-c7c8-494f-a291-ad31984f6533 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:56:49] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:57:40] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:57:40] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:57:40] "GET /api/image_codes/3fe0fe55-6759-4c58-8e8a-d0c9f4686fbc HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:57:48] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:58:45] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:58:45] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:58:45] "GET /api/image_codes/ebd867ed-ad73-4732-ba66-5fb2739ba697 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:58:53] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:12] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:12] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:13] "GET /api/image_codes/d9bed3e7-0896-4c0a-82a2-6e3b44c655a5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:19] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:57] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:57] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 22:59:58] "GET /api/image_codes/6cbcf4ef-4bfa-4064-a0f7-c92903fd5f1d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:06] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:40] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:40] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:40] "GET /api/image_codes/ada47b92-bb28-4846-aad4-4bd5aae5bcd4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:45] "GET /api/image_codes/c77f1723-4f3e-428f-b496-684fdc27a516 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:00:50] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:01:24] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:01:24] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:01:25] "GET /api/image_codes/d184f864-53ec-437f-9618-44fb64d671a2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:01:34] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:30] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:30] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:30] "GET /api/image_codes/3c0141ae-fc90-4432-8103-ecfb15fcfef5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:35] "GET /api/image_codes/e8b3ec86-4857-4813-8114-1ff6c0eefe84 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:37] "GET /api/image_codes/3830e807-799b-4e43-b392-27509b6d3d6f HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:37] "GET /api/image_codes/f9fa9ed2-0e2f-4ccf-aee1-50f7af6d004f HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:38] "GET /api/image_codes/820868e0-eb1e-439d-9d80-1248ebfd43d6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:40] "GET /api/image_codes/f6b76096-4979-4878-a8b2-13e860bc89c8 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:40] "GET /api/image_codes/18762e6c-057d-4724-a68b-5f1b94079186 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:04:47] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:30] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:30] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:30] "GET /api/image_codes/30dcb3e9-fcb1-493f-a6e9-38fe61900410 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:39] "GET /api/image_codes/33684d67-29a2-4f4d-8574-5b36fa7ecc2e HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:40] "GET /api/image_codes/99ffbd69-e37c-4676-88b9-a3c0be0e3e44 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:42] "GET /api/image_codes/2bd04356-eb77-4925-be51-a200d6194321 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:05:47] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:06:30] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:06:30] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:06:30] "GET /api/image_codes/978c6475-faf4-4417-adc0-ed3e727bdfc9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:06:37] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:07:41] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:07:41] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:07:42] "GET /api/image_codes/d3a1c61b-840d-47a5-98d2-8edacdffdb32 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:07:50] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:09:10] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:09:10] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:09:10] "GET /api/image_codes/43088385-c889-40cb-890b-5c6c340851a6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:09:18] "GET /api/image_codes/d26dc426-e19a-4584-a209-3b2a812aee39 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:09:19] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:20] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:20] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:20] "GET /api/image_codes/66d39937-7741-439a-875e-a48683e7e048 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:26] "GET /api/image_codes/dc73624c-46a6-4396-a937-bbf80d565fa5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:26] "GET /api/image_codes/19252df9-bfcb-4431-9ff3-04b0aa57c034 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:27] "GET /api/image_codes/603bb1c9-c935-4bad-9cd0-d941db114631 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:10:32] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:11:27] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:11:27] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:11:27] "GET /api/image_codes/c5ce9826-4063-470f-961b-18241e5c0197 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:11:36] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:14] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:14] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:15] "GET /api/image_codes/c34d3b10-aa39-4191-88aa-d03d0a25a70d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:22] "GET /api/image_codes/1775eaa5-398d-4a71-b0f5-1364aab9904a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:27] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:52] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:53] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:54] "GET /api/image_codes/04d9f6c7-fec5-401d-8c9b-bd49202ccb93 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:20:58] "GET /api/image_codes/745baaa4-ca86-49cb-8a68-431c869c11e5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:21:05] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:22:45] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:22:45] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:22:47] "GET /api/image_codes/81200684-9cb1-4dd8-b3cb-69308d77fa94 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:23:01] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:33] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:33] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:34] "GET /api/image_codes/edcffc99-9d43-460b-b1ff-a972b5974853 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:40] "GET /api/image_codes/eda445c5-8bca-41fd-b045-5271fa5d6ff6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:40] "GET /api/image_codes/d45816b8-b9f8-4262-88cd-ad87233879bd HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:24:46] "POST /auth/captcha/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:29:19] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:29:19] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:29:20] "GET /api/image_codes/c0ccee5b-fb2f-48f8-b9af-053c05419b2b HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:29:25] "GET /api/image_codes/cfaace86-26d5-444f-8379-7b668f7c104b HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [18/Aug/2019 23:29:32] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:38:11] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:38:12] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:38:13] "GET /static/base.css HTTP/1.1" 304 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:38:18] "GET /api/image_codes/b9f04cd3-21af-41a9-a2fd-424acb9960d4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:38:44] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:46:56] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:46:56] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:46:56] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:00] "GET /api/image_codes/f3384f1e-c2cd-4513-b352-6ad2d9de92e6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:07] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:13] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:13] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:13] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:14] "GET /api/image_codes/a239ab4a-8a16-43e2-9386-b44dfe0e99c2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:25] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:36] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:44] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:47:48] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:13] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:14] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:14] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:19] "GET /api/image_codes/e9575b94-eaee-4179-a287-62bcd2bee57f HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:31] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:39] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:39] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:39] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:50:40] "GET /api/image_codes/b8a0ed08-9103-4e48-86b6-3cd5a49f6bde HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:51:24] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:51:32] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:51:35] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:06] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:07] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:07] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:08] "GET /api/image_codes/3dd073b3-74bd-433d-b647-5d0f9a9f7589 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:17] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:24] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:49] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:49] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:49] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:50] "GET /api/image_codes/db210c49-eb7b-47e6-8b40-28dacee440ea HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:52:59] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:03] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:30] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:31] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:31] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:33] "GET /api/image_codes/4a516ef1-a140-4be3-800d-26d312434536 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:43] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:53:49] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:58:42] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:58:43] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:58:43] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:58:44] "GET /api/image_codes/db4766b7-efd7-4bd9-a711-ddf17a7bdab8 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:58:54] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 08:59:05] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\models.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:28] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:29] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:29] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:31] "GET /api/image_codes/37d22612-0d69-4d06-b6c0-2faf220d3fa1 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:36] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:09:42] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:10] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:10] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:10] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:11] "GET /api/image_codes/e2e6e679-7ac8-4c3c-abdb-ee0fbdfa5b12 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:19] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:26] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:11:31] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:20] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:20] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:20] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:21] "GET /api/image_codes/aaac9188-b83b-4206-a5bb-ef4cd12759a6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:31] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:12:39] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:20] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:20] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:20] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:21] "GET /api/image_codes/8d3e1906-32dc-4e0e-8a2b-cc591eb7a6bf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:28] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:17:33] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:07] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:07] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:07] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:07] "GET /api/image_codes/624e1771-1136-40cd-bbd2-a92e6bf12fb3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:13] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:22] "POST /auth/password/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:30] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:30] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:50] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:50] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:18:50] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:15] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:16] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:16] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:16] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:21] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:21] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:21] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:30] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:30] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:30] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:33] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:34] "GET /api/image_codes/1431e61d-d6c6-4f2e-96d5-bedcc3df7b53 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:42] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:19:52] "POST /auth/password/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:20:00] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:20:02] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:20:07] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:20:56] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:20:57] "GET /api/image_codes/e24b609e-429e-4d31-99c0-8e54924ff4b7 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:09] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:09] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:10] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:10] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:11] "GET /api/image_codes/40875a70-3ffe-4eee-909e-d80d8bfd348d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:18] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:27] "POST /auth/password/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:30] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:21:30] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:01] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:01] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:01] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:10] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:10] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:22:10] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:24:46] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:24:46] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:24:46] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:02] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:02] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:02] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:06] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:09] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:10] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:10] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:21] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:21] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:55] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:55] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:25:55] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:26:07] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:26:07] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:26:07] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:28:19] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:28:19] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:28:19] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:28:24] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:32] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:32] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:32] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:39] "POST /auth/login HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:40] "GET /auth/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:42] "GET /auth/login?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:43] "GET /auth/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:44] "GET /auth/login?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:31:44] "GET /auth/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:21] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:21] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:21] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:23] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:31] "POST /auth/login HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:31] "GET /auth/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:31] "GET /auth/login?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:31] "GET /auth/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:32] "GET /auth/login?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:32:32] "GET /auth/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:33:42] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:33:42] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:33:42] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:33:43] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:33:52] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:34:34] "POST /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:35:44] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:35:44] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:35:44] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:35:45] "GET /api/image_codes/156a6a1a-15e7-4c30-a005-b03c86823307 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:35:53] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:01] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:47] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:47] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:47] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:49] "GET /api/image_codes/2cc7867c-d655-41fb-9b52-84b99cfd1242 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:36:56] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:04] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:26] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:27] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:27] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:27] "GET /api/image_codes/e4fbe371-e3c3-4e29-9d0d-48a76c3260dc HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:31] "GET /api/image_codes/49e31c06-15c4-4d78-a48e-f44ef9bca385 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:36] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:37:42] "POST /auth/password/check HTTP/1.1" 500 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:44] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:44] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:44] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:44] "GET /api/image_codes/9d048be4-aadc-481f-8f7f-5c3f5cf36729 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:50] "GET /api/image_codes/c6e3008e-d74b-4efc-8e66-34a8d3410309 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:38:57] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:39:02] "POST /auth/password/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:14] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:14] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:14] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:15] "GET /api/image_codes/96f1cd84-067e-4016-af7e-5320e8260680 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:24] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:35] "POST /auth/password/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:37] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:38] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:44] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:44] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:53] "POST /auth/login HTTP/1.1" 302 -
+ERROR views.py: 17error msg
+WARNING views.py: 18warn msg
+INFO views.py: 19info msg
+DEBUG views.py: 20debug msg
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:53] "GET /resturant HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:53] "GET /static/images.jpg HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:43:54] "GET /static/index.css HTTP/1.1" 304 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:49:38] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:49:43] "GET /restaurant/list HTTP/1.1" 200 -
+ERROR views.py: 278invalid literal for int() with base 10: ''
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:52:08] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page= HTTP/1.1" 200 -
+ERROR views.py: 278invalid literal for int() with base 10: ''
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 09:52:12] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page= HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:03:54] "GET /restaurant/list HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:01] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:06] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:06] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:18] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:20] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:04:30] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:44] "GET /restaurant/list HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:44] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:45] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:45] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:45] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:45] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:05:45] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:17] "GET /restaurant/list HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:17] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:17] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:17] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:18] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:18] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:18] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:40] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:41] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:51] "GET /restaurant/list?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:57] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:06:59] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:07:23] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page=2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:13:48] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:15:33] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:15:58] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:22:34] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:22:39] "GET /restaurant/ HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:23:33] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:25:10] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:25:14] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:25:29] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:26:02] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:26:32] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:26:33] "GET /static/restaurant.css HTTP/1.1" 304 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:26:33] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 304 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:27:19] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:27:53] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:27:57] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:28:05] "GET /restaurant/like/444?like=1 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:35:52] "GET /restaurant/list HTTP/1.1" 200 -
+ERROR views.py: 286invalid literal for int() with base 10: ''
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:36:08] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page= HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:36:43] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:36:52] "GET /restaurant/search?area=&food=台灣小吃%2F台菜&filter=評論數&page=2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:37:00] "GET /restaurant/search?area=&food=台灣小吃%2F台菜&filter=評論數&page=2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:37:02] "GET /restaurant/search?area=&food=台灣小吃%2F台菜&filter=評論數&page=2 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:38:25] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:42:25] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 286invalid literal for int() with base 10: ''
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:52:57] "GET /restaurant/search?area=大安&food=台灣小吃%2F台菜&filter=評論數&page= HTTP/1.1" 200 -
+ERROR views.py: 286invalid literal for int() with base 10: ''
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:52:59] "GET /restaurant/search?area=信義區&food=台灣小吃%2F台菜&filter=評論數&page= HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:53:11] "GET /restaurant/伽立略%20-%20信義 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:53:24] "GET /restaurant/search?area=信義區&food=台灣小吃%2F台菜&filter=評論數&page=4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:53:28] "GET /restaurant/search?area=信義區&food=台灣小吃%2F台菜&filter=評論數&page=4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:53:29] "GET /restaurant/search?area=信義區&food=台灣小吃%2F台菜&filter=評論數&page=3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 10:53:32] "GET /restaurant/search?area=信義區&food=台灣小吃%2F台菜&filter=評論數&page=2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:01:47] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:06:47] "GET /comment/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:07:22] "GET /static/booking.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:09:58] "POST /comment/edit/444 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:10:06] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:09] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:09] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:09] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:10] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:27:55] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:28:43] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:29:05] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:29:29] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:29:31] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:29:35] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:51] "GET /user/林育銘 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:52] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:52] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:52] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:53] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:53] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:34:53] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:20] "GET /user/林育銘 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:20] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:20] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:20] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:21] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:21] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:37:21] "GET /user/林育銘?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:38:22] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 11:38:49] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\models.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\models.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:26] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:30] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:31] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:32] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:43] "GET /api/image_codes/53f77bba-838e-4aad-9a57-bee2a23a893e HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:31:53] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:06] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:07] "GET /static/restaurant.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:23] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:24] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:24] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:24] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:25] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:25] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:32:25] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:33:14] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:34:16] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:34:19] "GET /comment/unlike/發表評論 HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:43] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:48] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:51] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:51] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:51] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:52] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:52] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:52] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:52] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:53] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:53] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:53] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:54] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:35:54] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:36:58] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 415name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:37:06] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:38:41] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:38:52] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 418name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:02] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:40] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:49] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:50] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:58] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:39:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:40:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:40:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:42:52] "GET /restaurant/like/444?like=1 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:42:59] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:16] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:19] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:21] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:21] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:22] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:44:56] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:45:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:45:05] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:05] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:08] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:09] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:10] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:10] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:48:57] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:49:00] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:49:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:49:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:49:02] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 419name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:49:02] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:08] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 413name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:14] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 413name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:14] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 413name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:14] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 413name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:15] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:50:24] "GET /restaurant/unlike/444?like=1 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:53:36] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:56:01] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:56:43] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:57:08] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:57:14] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:59:18] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 398'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 12:59:39] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:01:37] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 398'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:01:45] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:34] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:35] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:38] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:40] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:42] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:43] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:07:43] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:16:50] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ERROR views.py: 417name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:42:05] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 417name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:42:05] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 417name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:42:05] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 417name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:42:05] "GET /comment/unlike/5 HTTP/1.1" 200 -
+ERROR views.py: 402'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:43:11] "GET /comment/like/5 HTTP/1.1" 200 -
+ERROR views.py: 417name 'a' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:43:15] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:33] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:34] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:37] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:37] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:41] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:42] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:44:43] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:45:31] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 13:46:52] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:03] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:09] "GET /favicon.ico HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:28] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:30] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:31] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:33] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:36] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:36] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:33:36] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:11] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:11] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:12] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:12] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:12] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:31] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:31] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:31] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:31] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:32] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:32] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:34:32] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:35:31] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:38:01] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:38:10] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:38:38] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:38:40] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:38:41] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:39:55] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:43:21] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:43:44] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 404'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:43:48] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:44:10] "GET /comment/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:44:11] "GET /static/booking.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:44:39] "POST /comment/edit/444 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:44:45] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:45:48] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 404'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:45:53] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:46:22] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 406'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:46:26] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:11] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 408'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:14] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:32] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 409'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:35] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:50] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 410'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:47:53] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:48:09] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 410'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:48:14] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:48:49] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+ERROR views.py: 410'Comment' object has no attribute 'translate'
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:48:52] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:49:34] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:49:37] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:49:50] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:49:58] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:50:01] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:50:04] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:50:10] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:50:14] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\main\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:51:47] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:52:26] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:52:45] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:52:49] "GET /comment/unlike/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:52:58] "GET /comment/like/5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:57:21] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:36] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:37] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:37] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:38] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:38] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:39] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 14:58:39] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:03:31] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:04:21] "GET /reservation/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:04:33] "GET /user/林育銘 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:19] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:21] "GET /reservation/老漁村餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:21] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:21] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:26] "GET /api/image_codes/2c280cf6-0a42-4281-aa8d-e48486f65362 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:26] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:28] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:28] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:28] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:29] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:05:31] "GET /api/image_codes/b442471c-ef99-42d0-8ab0-6608fe5c10f2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:06:21] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:08:11] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:08:11] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:08:11] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:08:13] "GET /api/image_codes/fc493152-6ddb-4a47-9f31-081db849d957 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:14:46] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:14:47] "GET /static/base.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:14:47] "GET /static/register.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:14:52] "GET /api/image_codes/a868d1d0-0f1b-4546-b7ea-56e76c4e0662 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:17:50] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:17:53] "GET /api/image_codes/5a4122a9-036a-4923-a4b9-89397ed20d88 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:18:16] "POST /auth/register HTTP/1.1" 405 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:18:25] "GET /static/jquery-3.4.1.min.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:18:28] "GET /api/image_codes/93d1a80f-ebe5-491d-81f8-332c512a2597 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:19:00] "GET /api/image_codes/ad51766e-85cb-4d83-afda-5bd6605e4f25 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:19:02] "GET /api/image_codes/2c6a1a50-8296-4ccf-ba79-fd659ae0dff6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:19:04] "GET /api/image_codes/024791fd-9600-4412-9c76-009aff3369d9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:19:07] "GET /api/image_codes/c0f8c996-495c-42c6-972c-617bfec856ec HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:19:09] "GET /api/image_codes/37b7167e-1e7a-44f5-b814-e91a4e84ef43 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:06] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:08] "GET /api/image_codes/c380a660-73f3-4c21-943c-f340fcc905c1 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:12] "GET /api/image_codes/fed3b2d5-f182-487b-8407-18b12afd6616 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:14] "GET /api/image_codes/2eb9afe1-e801-461e-a9d7-b51e4fb95350 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:16] "GET /api/image_codes/38138a94-85e8-4729-93d7-f1da59698dde HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:19] "GET /api/image_codes/c8b118f7-5a1a-473f-a106-ac82f95570c9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:21] "GET /api/image_codes/3fd1c3f9-eec0-45ff-b2c1-461d7e261075 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:40] "GET /api/image_codes/ef18e9ef-5fa3-48aa-b160-98ed69857d12 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:43] "GET /api/image_codes/10e3143d-d68d-4629-b0b5-fd54e8060d2e HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:20:47] "GET /api/image_codes/eeff9be8-f7d0-41a9-83ec-09310aa230f5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:21:06] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:21:08] "GET /api/image_codes/f20cce9c-1cd4-4dd0-a5fc-eb71507fa549 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:21:26] "POST /auth/register HTTP/1.1" 405 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:22:36] "GET /api/image_codes/9ce6c306-398e-435c-bacc-e99cba9643d7 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:22:36] "POST /auth/register HTTP/1.1" 405 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:22:36] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:22:39] "GET /api/image_codes/9c77c07a-4fe0-4229-aa43-508b98178212 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:22:53] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:33:13] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:33:19] "GET /api/image_codes/5d89a600-70ea-4afd-a552-a292f204c11e HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:40:41] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:40:44] "GET /api/image_codes/3cd41484-048b-4031-afe8-15b7f6bf38c6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:40:59] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:41:06] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:41:10] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:41:37] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:41:40] "GET /api/image_codes/c050a1dc-4a98-492f-8cc9-d167d084a2b2 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:41:55] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:42:35] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:42:37] "GET /api/image_codes/2360f430-3222-4a4c-bff9-f1f58f8c6524 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:42:55] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:43:31] "GET /auth/login HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:43:32] "GET /static/login.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:43:36] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:43:39] "GET /api/image_codes/1edce429-8fe4-4b4c-b226-0eac682e5e38 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:43:46] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:44:11] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:44:14] "GET /api/image_codes/5978fcc5-14ee-404c-9fc8-ce3252a64778 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:44:30] "POST /auth/captcha/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:50:49] "GET /auth/password/reset HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:50:50] "GET /api/image_codes/20ffaaca-c5f4-45cd-8f76-16d63cd94a2e HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:50:50] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:50:51] "GET /api/image_codes/895e9545-42b0-43ec-ae31-051444dbc94d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:04] "GET /api/image_codes/1d069739-bb8d-48f1-a596-42fd7a1900f7 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:05] "GET /api/image_codes/8a978854-9208-43d5-b23a-a3a84171836e HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:06] "GET /api/image_codes/17393fb7-d22f-45cd-b760-7941bd558d3a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:06] "GET /api/image_codes/c8e48356-5d5a-4a51-92e5-3517189130e4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:25] "POST /auth//register/check HTTP/1.1" 404 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:56] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:51:58] "GET /api/image_codes/a44b523f-959f-40c3-b416-fa0dfbb4383f HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:52:21] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:54:09] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:54:24] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:54:25] "GET /api/image_codes/21564124-e6c7-451f-a079-3177b9a19f7a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:54:40] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:54:51] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:55:31] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:55:32] "GET /api/image_codes/8b9f1d08-f884-48a5-96dd-c22189dc234a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:55:52] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:56:41] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:56:42] "GET /api/image_codes/9d5640f6-9685-429a-bc21-614e222b2172 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:56:55] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:57:36] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:57:37] "GET /api/image_codes/b87fb427-7a28-400b-a7f7-69a4d557d3ac HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:57:56] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:57:57] "GET /api/image_codes/94819d33-9a26-464b-a872-086e20b664f5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:58:32] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:58:34] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:58:35] "GET /api/image_codes/be30de62-e96c-4aac-a436-3b233cced705 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:21] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:22] "GET /api/image_codes/5b9f431e-ce84-4ce2-8c1a-878ed3439119 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:41] "GET /api/image_codes/cb819815-e658-4ba4-ad0e-d64ce96442ee HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:42] "GET /api/image_codes/a7fea8f6-dbd9-4cab-bb37-5255d2fb3386 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:49] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:51] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 15:59:52] "GET /api/image_codes/63ca57fb-d547-4a69-9808-d9cba15312d6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:01:01] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:01:02] "GET /api/image_codes/2ddfd896-8099-410d-8c9d-cc81f960169d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:01:16] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:01:18] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:01:18] "GET /api/image_codes/9fcfee8a-41ef-4b9c-9a67-a4d8d89b6e22 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:03:05] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:03:11] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:03:12] "GET /api/image_codes/bed0b1e2-ad6e-4822-a3f8-abd76d81d8ff HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:11] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:12] "GET /api/image_codes/cfeccd83-37cc-4c3d-9de8-fd56e2ffba10 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:40] "GET /api/image_codes/e8d928a4-d2e9-4eb3-95fa-8cb5e46057b0 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:41] "GET /api/image_codes/b5d452bc-d04d-4f26-826f-91dbbab2f802 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:46] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:51] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:04:52] "GET /api/image_codes/1a7dc71f-48b0-4ecb-816c-be7661d57606 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:05:28] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:05:29] "GET /api/image_codes/9e402f5f-4472-4c95-8b1d-10990bb8e72d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:05:46] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:05:51] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:05:52] "GET /api/image_codes/20fb7b67-df41-4752-9b0b-8362f5159a28 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:06:57] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:07:01] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:07:02] "GET /api/image_codes/380b3835-ed55-45e8-8325-ee5664db5080 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:39] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:40] "GET /api/image_codes/3c508af3-0a96-4fd1-a702-ba9e3c48a659 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:54] "GET /api/image_codes/1fb487e9-86c6-4fdc-a6ae-169027db40ea HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:55] "GET /api/image_codes/6442507f-0047-4b03-b21c-f1764e470eaa HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:56] "GET /api/image_codes/d2ab6c30-1b5c-446a-9f35-cfd0085e3e47 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:16:57] "GET /api/image_codes/0afa0f34-f0c9-4165-a5e0-f34e9e812ed0 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:06] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:09] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:09] "GET /api/image_codes/3d5a788f-5951-409e-8b7b-c42a7f5a25a9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:35] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:39] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:39] "GET /api/image_codes/57476a2b-07a2-423d-804b-f55fe50364c3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:52] "GET /api/image_codes/d2744a68-e7a5-487f-bed5-4582c06f47d1 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:52] "GET /api/image_codes/60a79b7d-8132-4f38-b3b2-05b3fdc83e6a HTTP/1.1" 200 -
+ERROR views.py: 160name '有' is not defined
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:17:57] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:09] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:10] "GET /api/image_codes/dfa7bf1b-b449-4931-a876-90b2c4640c18 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:12] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:13] "GET /api/image_codes/1a69027e-13b9-480a-b77d-85ca398784c3 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:25] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:27] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:20:28] "GET /api/image_codes/3db82f42-d5df-4b47-82be-718ab483c2a0 HTTP/1.1" 200 -
+ERROR views.py: 159(pymysql.err.DataError) (1264, "Out of range value for column 'cellphone' at row 1")
+[SQL: INSERT INTO user (username, email, cellphone, password_hash, gender, image_url, birthday, id_number, country, address, `LINE`, confirmed, name, location, about_me, member_since, last_seen) VALUES (%(username)s, %(email)s, %(cellphone)s, %(password_hash)s, %(gender)s, %(image_url)s, %(birthday)s, %(id_number)s, %(country)s, %(address)s, %(LINE)s, %(confirmed)s, %(name)s, %(location)s, %(about_me)s, %(member_since)s, %(last_seen)s)]
+[parameters: {'username': '梁文因', 'email': 'a828215362@gmail.com', 'cellphone': '09651155523333', 'password_hash': 'pbkdf2:sha256:150000$LtWZ7tZA$c1828688fc3f0d60c7d08e215094f1aeeda060a2b2becfdfe2b00320700d4927', 'gender': None, 'image_url': None, 'birthday': None, 'id_number': None, 'country': None, 'address': None, 'LINE': None, 'confirmed': 0, 'name': None, 'location': None, 'about_me': None, 'member_since': datetime.datetime(2019, 8, 19, 8, 21, 2, 222969), 'last_seen': datetime.datetime(2019, 8, 19, 8, 21, 2, 222969)}]
+(Background on this error at: http://sqlalche.me/e/9h9h)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:21:02] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:21:09] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:21:10] "GET /api/image_codes/2cfae786-9ed9-4d4e-9d16-935546ec0bd8 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:22:36] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:22:41] "GET /api/image_codes/7ae77bb5-543e-48e1-8885-a6629a1f8388 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:22:59] "GET /api/image_codes/0829555a-c6cc-4a3a-82fa-0b5bf56c91d4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:06] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:08] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:09] "GET /api/image_codes/af51eb39-e777-498f-b8c3-86238b849573 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:24] "GET /api/image_codes/254a716b-ffb8-4c55-b145-333944fde0f4 HTTP/1.1" 200 -
+ERROR views.py: 159(pymysql.err.DataError) (1264, "Out of range value for column 'cellphone' at row 1")
+[SQL: INSERT INTO user (username, email, cellphone, password_hash, gender, image_url, birthday, id_number, country, address, `LINE`, confirmed, name, location, about_me, member_since, last_seen) VALUES (%(username)s, %(email)s, %(cellphone)s, %(password_hash)s, %(gender)s, %(image_url)s, %(birthday)s, %(id_number)s, %(country)s, %(address)s, %(LINE)s, %(confirmed)s, %(name)s, %(location)s, %(about_me)s, %(member_since)s, %(last_seen)s)]
+[parameters: {'username': '林育銘', 'email': 'a828215362@gmail.com', 'cellphone': '096511555211111', 'password_hash': 'pbkdf2:sha256:150000$zfTC4TGu$ed7f7245bba22f86fe543e97c0867cb2707a598683a178e278d284e33031d7cb', 'gender': None, 'image_url': None, 'birthday': None, 'id_number': None, 'country': None, 'address': None, 'LINE': None, 'confirmed': 0, 'name': None, 'location': None, 'about_me': None, 'member_since': datetime.datetime(2019, 8, 19, 8, 23, 29, 369502), 'last_seen': datetime.datetime(2019, 8, 19, 8, 23, 29, 369502)}]
+(Background on this error at: http://sqlalche.me/e/9h9h)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:29] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:39] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:23:40] "GET /api/image_codes/4ee33d32-1da9-4576-b006-62546cb90e31 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:28:02] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:28:07] "GET /api/image_codes/0e1bd12b-0df9-48c2-8602-857800c24b7c HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:28:47] "GET /api/image_codes/1facc741-0530-48d8-b6aa-2c8b75b190f5 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:28:53] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:29:01] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:29:01] "GET /api/image_codes/7d639a8f-4d69-4d07-a2d3-944303c88681 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:29:20] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:29:31] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:29:32] "GET /api/image_codes/fb925241-8e35-4d18-95f0-de3ed59272ce HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:32:34] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:32:35] "GET /api/image_codes/a7323a34-1923-45ce-a31d-7eb7cdb755ee HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:22] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:33] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:33] "GET /api/image_codes/940fbeb9-8a57-4de0-b409-96b4a55b8a5f HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:46] "GET /api/image_codes/13ddb8a4-4d92-4fc3-876d-2c192b93275d HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:48] "GET /api/image_codes/e24c90c0-d6de-437f-806d-7d55fdaf0307 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:33:53] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:34:03] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:34:03] "GET /api/image_codes/6c01aa00-2c70-434c-a98e-8a3823dc9073 HTTP/1.1" 200 -
+INFO _internal.py: 122 * Detected change in 'C:\\Web\\flask\\app\\auth\\views.py', reloading
+INFO _internal.py: 122 * Restarting with stat
+WARNING _internal.py: 122 * Debugger is active!
+INFO _internal.py: 122 * Debugger PIN: 243-971-992
+INFO _internal.py: 122 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:36:13] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:36:13] "GET /api/image_codes/0592a318-7557-4b24-a7fc-c59d8507c2a0 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:36:30] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:36:33] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:36:33] "GET /api/image_codes/44614ff2-8072-4dce-b024-856b164eced4 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:43:27] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:43:28] "GET /api/image_codes/4eb24880-f38c-47c2-9dbd-6c5f2ca3ffa0 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:43:57] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:44:07] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:44:08] "GET /api/image_codes/60218efe-7599-492b-8164-f2f551a9ae3a HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:45:57] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:45:58] "GET /api/image_codes/6068938d-e0c6-48fd-9654-c06b3dea5550 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:46:16] "GET /api/image_codes/7e8b20c4-021d-471f-a87a-41c2726a42a6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:46:24] "POST /auth/register/check HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:46:27] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:46:29] "GET /api/image_codes/669739d9-01a8-49b5-b674-a785656bd2b6 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:47:14] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:47:15] "GET /api/image_codes/9903eadc-db20-49f0-89f2-df5e3af2818c HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:50:18] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:50:18] "GET /api/image_codes/bacbf714-2508-4472-8520-b8b1802b87a9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:54:43] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:54:44] "GET /api/image_codes/5720320a-08a1-47b0-ab84-4cfb736ad5c9 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:55:31] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 16:55:32] "GET /api/image_codes/29a78176-462e-4722-a1bf-88deefbbe290 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:18:56] "GET /auth/my HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:18:56] "GET /auth/register HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:19:03] "GET /restaurant/list HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:19:03] "GET /static/restaurant.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:19:20] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:41:42] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:44:21] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:44:51] "GET /comment/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:44:51] "GET /static/booking.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:45:11] "POST /comment/edit/444 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:45:20] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:48:21] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:46] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 500 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:47] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:49] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:51] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:53] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:54] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:52:54] "GET /restaurant/漢來海港餐廳?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:53:06] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:54:07] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -
+INFO _internal.py: 122127.0.0.1 - - [19/Aug/2019 18:57:51] "GET /restaurant/漢來海港餐廳 HTTP/1.1" 200 -

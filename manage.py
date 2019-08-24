@@ -1,6 +1,6 @@
 import os
 from app import create_app, db
-from app.models import User, Role, Post, Follow, Food, Survey, TripAdvisor
+from app.models import User, Role, Post, Follow, Food, Survey, TripAdvisor, Hotel, Comment,Love, Child_cmt
 from flask_script import Manager, Shell
 from flask_migrate import Migrate, MigrateCommand
 

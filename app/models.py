@@ -9,7 +9,7 @@ from datetime import datetime
 import hashlib
 import random
 from app.utlis.captcha.captcha import captcha
-
+from sqlalchemy import and_,func
 class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer,primary_key = True)
@@ -44,8 +44,11 @@ class User(UserMixin,db.Model):
     survey =db.relationship('Survey',backref='survey')
     reservation = db.relationship('Reservation',backref='user',lazy='dynamic')
     restaurant_comment = db.relationship('Comment',backref='author',lazy='dynamic')
+    comment_son = db.relationship("Child_cmt",backref="author",lazy="dynamic")
     restaurant_love = db.relationship('Love',backref='author',lazy="dynamic")
-    
+    comment_like = db.relationship('Comment_like',backref='user',lazy="dynamic")
+    click_store = db.relationship('Click',backref='user',lazy="dynamic")
+
     confirmed = db.Column(db.Boolean,default=False)
     
 
@@ -90,22 +93,10 @@ class User(UserMixin,db.Model):
         s = Serializer(current_app.config["SECRET_KEY"],expiration)
         return s.dumps({'confirm':self.id})
 
-    def confirm(self,token):
-        s = Serializer(current_app.config['SECRET_KEY'])
-        try:
-            data = s.loads(token)
-        except:
-            return False
-        if data.get('confirm') != self.id:
-            return False
-        self.confirmed =True
-        db.session.add(self)
-        return True
+ 
     def ping(self):
         self.last_seen=datetime.utcnow()
         db.session.add(self)
-    
-
 
     def follow(self, user):
         if not self.is_following(user):
@@ -122,7 +113,39 @@ class User(UserMixin,db.Model):
             
     def is_followed_by(self,user):
         return self.followers.filter_by(followed_id=user.id).first() is not None
+    
 
+    def page_load(val, page=1):
+
+        if not val == 0:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                    .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(TripAdvisor.rating_count>200)\
+                    .paginate(page=int(page),per_page=30,error_out= False) 
+        else:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                    .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(TripAdvisor.rating_count>200)\
+                    .paginate(page=int(page),per_page=30,error_out= False)
+
+    def comment_search(val, params):
+        if not val == 1:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                        .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(*params)\
+                            .order_by(TripAdvisor.rating_count.desc())
+        else:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                        .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(*params)\
+                            .order_by(TripAdvisor.rating_count.desc())
+
+
+    def rating_search(val, params):
+        if not val == 1:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                        .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(*params)\
+                        .order_by(TripAdvisor.rating.desc())
+        else:
+            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
+                        .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(*params)\
+                        .order_by(TripAdvisor.rating.desc())
 
     def __repr__(self):
         return '<User %r>' %self.name
@@ -195,9 +218,11 @@ class TripAdvisor(db.Model):
     street =db.Column(db.String(20))
     rating = db.Column(db.Float())
     comment = db.Column(db.String(1024))
+    read_count = db.Column(db.Integer, server_default='0')
     reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
     user_comment = db.relationship("Comment",backref="restaurant",lazy="dynamic")
     following = db.relationship("Love",backref="store",lazy="dynamic")
+    clicked_user = db.relationship("Click",backref="store",lazy="dynamic")
     def to_basic_dict(self):
         return {
             "id":self.id,
@@ -244,10 +269,33 @@ class Comment(BaseModel,db.Model):
     recommend_dish = db.Column(db.String(50))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    child_cmt = db.relationship("Child_cmt",backref="fcmt",lazy="dynamic")
+    user_like = db.relationship("Comment_like",backref="comment",lazy="dynamic")
 
 class Love(BaseModel,db.Model):
     _tablename__="love"
     id = db.Column(db.Integer, primary_key=True)
     focus = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    storeid = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+
+class Child_cmt(BaseModel,db.Model):
+    __tablename__="ccmt"
+    id = db.Column(db.Integer, primary_key=True)
+    review_title = db.Column(db.String(50))
+    review_content = db.Column(db.Text())
+    fcmt_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+
+class Comment_like(BaseModel,db.Model):
+    __tablename__="comment_like"
+    id = db.Column(db.Integer, primary_key=True)
+    comment_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class Click(BaseModel,db.Model):
+    __tablename__="click"
+    id = db.Column(db.Integer, primary_key=True)
+    store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

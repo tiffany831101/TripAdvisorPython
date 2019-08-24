@@ -89,3 +89,11 @@
 }
 
 
+#title_name{
+    padding-right: 12px;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 700;
+    padding-top: 12px;
+    color: #000a12;
+}
