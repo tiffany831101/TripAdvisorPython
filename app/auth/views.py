@@ -67,6 +67,7 @@ def login():
             login_user(user, form.remember_me.data)
             session["cellphone"] = user.cellphone
             session["username"] = user.username
+
             flash(u"用戶登入成功")
             return redirect(request.args.get('next') or url_for('main.index'))
     return render_template('auth/login.html',form=form)    

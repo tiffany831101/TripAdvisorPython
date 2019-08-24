@@ -1,21 +1,114 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+
+<script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+{% endblock %}
+
 {% block content %}
-<div>關注數量{{ count }}</div>
-{% for d in data %}
-<div>店家: {{ d.store.title }}</div>
+<div class="all">
+    <div class="prev_read">
+    <div class="title">之前的瀏覽紀錄</div>
+        {% if read_list %}
+            {% for r in read_list %}
+                <div class="prev_border">
+                    <div><a href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}"></a></div>
+                    <div class="prev_store">{{ r["title"] }}</div>
+                    <div class="prev_store">{{ r["address"] }}</div>
+                    
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 
-<div>{{ d.store.res_type }}</div>
+    <div class="container">
 
-<div>
-    <div>發表評論</div>
-    {% for c in user.restaurant_comment %}
-        <div>{{ c.restaurant.title }} : 
-        <span>{{ c.review_content }}</span></div>
-        <div id="love">讚(空)</div>
-    {% endfor %}
+        <div class="social-sections-profile-ProfileSection__section--60aGC ui_card section">
+            <div class="social-member-MemberBlock__member_block">
+                <div class="top">
+
+                    <div class="top-outer-container">
+                        <div id="head">歡迎來到<span class="username">{{ user.username }}</span>的首頁</div>
+                        
+                        {% if not user.username==current_user.username %}
+                            {% if current_user.is_following(user) %}
+                                <div class="follow">關注中</div>
+                            {% else %}
+                                <div class="follow">追蹤</div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if user.username==current_user.username %}
+                            <div class="profile"><a href="{{ url_for('auth.information') }}" class="click">編輯個人檔案</a></div> 
+                        {% endif %}
+                        
+                    </div>    
+
+                    
+                    
+                    <div class="list">
+                        <div id="followed">追蹤中<br><span class="followed">{{ user.followed.count() }}</span></div>
+                        <div id="followers">粉絲<br><span class="followers">{{ user.followers.count() }}</span></div>
+                        <div class="love">收藏<br><span class="store_like">{% if count %} {{ count }} {% else %} {{ 0 }} {% endif %}</span></div>    
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant">
+            
+                {% for l in store_list %}
+                <div class="box">
+                    <div class="box_container">
+                        <div class="title">{{ l["title"] }}</div>
+                        <div>{{ l["street"] }}</div>
+                        <a href="/restaurant/{{ l['title'] }}">
+                        <img src="{{ l['info_url'][0] }}"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            
+        </div>
+
+        <div class="title-container">
+            <div class="title-outer-box">
+            <div class="title">點讚的評論</div>
+                {% if comment %}
+                    {% for c in comment %}
+                        <div class="title-inner-container">
+                            {% with a=[]  %}    
+                            <div id="username" class="comment-username"><a href="/user/{{ c.author.username }}">{{ c.author.username }}</a></div>
+                            {% do a.append(c.author.username) %}    
+                                {% if current_user.is_following(user) %}
+                                <div class="com_follow" id="com_fo">關注中</div>
+                                {% else %}
+                                <div class="com_follow" id="com_fo">追蹤</div>
+                                {% endif %}
+                            {% endwith %}
+                            <div>{{ c.review_content }}</div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                <div>尚無點讚的評論</div>    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="self-introduction">
+        <div class="intro-outer-container">
+            <div class="title">簡介</div>
+            <div>+新增您目前所在城市</div>
+            <div>+介紹一下您自己</div>
+            <div>發表評論</div>
+        </div>
+    </div>
 </div>
-{% endfor %}
+
+
+
 
 
 
@@ -25,6 +118,93 @@
 {% block scripts %}
 <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
 <script>
+    $(function(){
+        $(".follow").click(function(e){
+            var username = $(this).prev().children(".username").text()
+            alert(username)
+            alert($(this).text())
+            if ($(this).text()=="追蹤"){
+                $.get("/follow/"+username,function(response){
+                    if (response.errno=1){
+                        $(this).html("關注中");
+                        alert(response.errmsg);
+                    }else{
+                        alert(response.errmsg)
+                    }
+                }).bind(this)
+              
+            }else{
+                $.get("/unfollow/"+username,function(response){
+                    if (response.errno=1){
+                        alert(response.errmsg)
+                        $(this).html("追蹤")
+                    }else{
+                        alert(response.errmsg)
+                    }
+                }).bind(this)
+            }
+            
+        })
+    })
+</script>
+
+
+<script>
+    $(function(){
+        $("#followers").click(function(){
+            var username = $(this).parent().prev().children("#head").children(".username").text()
+            $.get("/followers/"+username,function(response){
+                var data = response.data.follower
+                $.each(data,function(key,value){
+                    alert(value.user)
+                })
+            })
+        })
+    })
+</script>
+<script>
+    $(function(){
+        $("#followed").click(function(){
+            var username = $(this).parent().prev().children("#head").children(".username").text()
+            $.get("/followed/"+username,function(response){
+                var data = response.data.followed
+                $.each(data,function(key,value){
+                    alert(value.user)
+                })
+            })
+        })
+    })
 
 </script>
+<script>
+    $(function(){
+        $(".com_follow").click(function(){
+            var username = $(this).prev().children().text()
+            if ($(this).text()=="追蹤"){
+                $.get("/follow/"+username,function(response){
+                    if (response.errno=1){
+                        alert(response.errmsg);
+                        $(this).text("關注中");
+                    }else{
+                        alert(response.errmsg)
+                    }
+                })
+              
+            }else{
+                $.get("/unfollow/"+username,function(response){
+                    if (response.errno=1){
+                        alert(response.errmsg)
+                        $(this).text("追蹤")
+                    }else{
+                        alert(response.errmsg)
+                    }
+                })
+            }
+        })
+    })
+</script>
+<script>
+
+</script>
+
 {% endblock %}

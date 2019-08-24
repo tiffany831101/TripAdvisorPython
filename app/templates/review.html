@@ -15,13 +15,14 @@
 
 {% block title %}寫評論 {% endblock %}
 {% block content %}
-<div id="title_name">{{ data.title }}</div>
-<div>{{ data.street }}</div>
 
+<div class="booking">
 
 <form action="" method="post" class="form" role="form" id="commentform">
+    <div id="title_name">{{ data.title }}</div>
+    <div><i class="fas fa-globe-americas"></i>{{ data.street }}</div><hr>
     <div>請將您的實際造訪感想填入下列表格。期待您的分享，謝謝。</div>
-
+    
     <div class="form-group  required"><label class="control-label" for="rating">您對此餐廳的整體評等</label>     
         <select class="form-control" id="rating" name="rating" required><option value="1">1</option><option value="2">2</option>
             <option value="3">3</option><option value="4">4</option><option value="5">5</option>
@@ -99,6 +100,7 @@
  
 
 </form>
+</div>
 {% endblock %}
 
 

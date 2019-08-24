@@ -4,14 +4,14 @@ import json
 from . import main
 from .forms import QueryForm, EditionProfileForm, PostForm, BookingForm
 from .. import db
-from ..models import User, Role, Post, Survey, Food, TripAdvisor, Reservation, Comment, Love, Comment_like
+from ..models import User, Role, Post, Survey, Food, TripAdvisor, Reservation, Comment, Love, Comment_like,Follow, Click
 from flask_login import login_required, current_user
 import logging
 from flask import current_app #全局上下文
 from app import constants
 import time
 import random
-from sqlalchemy import and_
+from sqlalchemy import and_,func
 @main.route('/resturant')
 def index():
     current_app.logger.error("error msg")
@@ -45,7 +45,6 @@ def query():
         
         if food_ids:
             foods = Food.query.filter(Food.id.in_(food_ids)).all()
-            print(foods)
             if foods:
                 s.foods = foods
                 try:
@@ -65,11 +64,31 @@ def query():
 @main.route('/user/<username>')
 @login_required
 def user(username):
-    user = User.query.filter(User.id==current_user.id).first()
-    count = user.restaurant_love.count() 
-    data = user.restaurant_love.all()
+    if username is not current_user.username:
+        user = User.query.filter_by(username=username).first()
+        restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).all()
+        count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).count()
+    else:
+        restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).all()
+        count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).count()
     
-    return render_template('user.html',data=data,count=count,user=user)
+    store_list=[]
+    for r in restaurant:
+        store_list.append(r.to_basic_dict())
+    
+    
+    # 收藏評論
+    comment = Comment.query.join(Comment_like, Comment_like.comment_id==Comment.id).join(User,and_(Comment_like.user_id==User.id,User.username==username)).all()
+    # 最近瀏覽數
+    recent_read = TripAdvisor.query.join(Click, Click.store_id== TripAdvisor.id).join(User, and_(User.id==Click.user_id,User.id==current_user.id)).distinct().limit(5)
+    read_list=[]
+    for r in recent_read:
+        title = r.title
+        picture = r.info_url.split(",")[0]
+        address = r.address
+        read_list.append({"picture":picture,"address":address,"picture":picture,"title":title})
+
+    return render_template('user.html',store_list=store_list,count=count,comment=comment,user=user, read_list=read_list)
 
 @main.route('/forum',methods=['GET','POST'])
 def forum():
@@ -98,53 +117,21 @@ def post(id):
 def follow(username):
     user=User.query.filter_by(username=username).first()
     if user is None:
-        flash(u'無效的用戶')
-        return redirect(url_for('.forum'))
+        return jsonify(errno=0,errmsg="查無該用戶")
     if current_user.is_following(user):
-        flash(u'您已關注%s'%username)
-        return redirect(url_for('.user', username=username))
+        return jsonify(errno=0,errmsg="已關注該用戶")    
     current_user.follow(user)
-    flash(u'你已成功關注%s' % username)
-    return redirect(url_for('.forum'))
+    return jsonify(errno=1,errmsg=u"您已成功關注%s"%username)
+
 
 @main.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
-        flash(u'無效的用戶')
-        return redirect(url_for('.user', username=username))
+        return jsonify(errno=0,errmsg="該用戶不存在")
     current_user.unfollow(user)
-    flash(u'您已取消關注%s' % username)
-    return redirect(url_for('.forum'))
-
-@main.route('/followers/<username>')
-def followers(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash(u'無效的用戶')
-        return redirect(url_for('.forum'))
-    page = request.args.get('page',1,type=int)
-    pagination = user.followers.paginate(
-        page,10,error_out=False)
-    follows = [{'user':item.follower, 'timestamp':item.timestamp}
-    for item in pagination.items]
-    return render_template('followers.html',user=user,title='Followers of',
-    endpoint='.followers', pagination=pagination, follows=follows)
-
-@main.route('/followed/<username>')
-def followed(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        flash(u'該用戶不存在')
-        return redirect(url_for('.forum'))
-    page = request.args.get('page',1,type=int)
-    pagination = user.followed.paginate(
-        page,10,error_out=False)
-    followed = [{'user':item.followed, 'timestamp':item.timestamp} for item in pagination.items]
-    return render_template('followed.html', user=user, title='Followed of', endpoint='.followed',
-    pagination=pagination, follows=follows)
-
+    return jsonify(errno=1,errmsg=u"您已取消追蹤%s"%username)
 
 @main.route('/comment',methods=["POST","GET"])
 def get_comment_list():
@@ -217,17 +204,15 @@ def result():
     now = time.strftime("%Y-%m-%d", time.localtime())
     reservation = Reservation.query.filter(and_(Reservation.userid==current_user.id,Reservation.booking_date>now)).order_by(Reservation.booking_date.desc()).all()
     history = Reservation.query.filter(and_(Reservation.userid==current_user.id,Reservation.booking_date<now)).order_by(Reservation.booking_date.desc()).all()
-
-    
     return render_template("result.html", reservation=reservation, history=history)
 
 @main.route('/reservation/revise/<order_id>',methods=["POST","GET"])
 def order_revise(order_id):
     data = Reservation.query.filter_by(order_id1=order_id).first()
     return render_template("revise.html", data=data)
+
 @main.route('/reservation/order/cancel/<order_id>',methods=["POST"])
 def order_cancel(order_id):
-    
     r = Reservation.query.filter_by(order_id1=order_id).first()
     if r :
         try:
@@ -259,19 +244,37 @@ def order_confirm_revise():
         return jsonify(errno=0,errmsg="數據庫錯誤")
 
 
-
-
 @main.route('/restaurant/list')
 def restaurant_list():
-    restaurant = TripAdvisor.query.filter(TripAdvisor.rating_count>200).order_by(TripAdvisor.rating_count.desc())
-    restaurant_obj = restaurant.paginate(page=1,per_page=30,error_out= False)
-    restaurant_li =restaurant_obj.items
-    total_page = restaurant_obj.pages
-    restaurant=[]
-    for restaurants in restaurant_li:
-        restaurant.append(restaurants.to_basic_dict())  
-      
-    return render_template("restaurant.html",restaurant=restaurant,total_page=total_page)
+    return render_template("test.html")
+
+@main.route("/restaurant/filter")
+def restaurant_filter():
+    page = request.args.get("page")
+    if not page:
+        page=int(1)
+    user = current_user.get_id()
+    if user is not None:
+        data = User.page_load(val=int(current_user.id),page=page)
+    else:
+        data = User.page_load(val=int(0),page=page)
+    
+    total_page = data.pages
+    data = data.items
+    data_list=[]
+    for d in data:
+        title= d[0].title
+        res_type=d[0].res_type
+        rating_count=d[0].rating_count
+        info_url=(d[0].info_url).split(",")[0]
+        cellphone=d[0].cellphone
+        street = d[0].street
+        rating = d[0].rating
+        comment= (d[0].comment).split(",")[1]
+        count = d[0].read_count
+        love = "已收藏" if current_user.get_id() is not None and d[1]==current_user.username else "收藏"
+        data_list.append({"title":title, "res_type":res_type, "rating_count":rating_count, "info_url":info_url,"cellphone":cellphone,"street":street,"rating":rating,"comment":comment,"count":count,"love":love})
+    return jsonify(errno=1,data=data_list,total_page=total_page)
 
 @main.route('/restaurant/search')
 def restaurant_search():
@@ -280,31 +283,53 @@ def restaurant_search():
     res_type = request.args.get("food") #餐廳類型
     sort_key = request.args.get("filter") #過濾類型
     page = request.args.get("page")
-
+    
     try:
         page=int(page)
     except Exception as e:
         current_app.logger.error(e)
-        page = 1
+        page = int(1)
+    params = {"area":address, "food":res_type, "filter":sort_key}
+
     filter_params=[]
+
     if address:
         filter_params.append(TripAdvisor.address==address)  
     if res_type:
         filter_params.append(TripAdvisor.res_type == res_type)
     
+    user = current_user.get_id()
+
     if sort_key =="評論數":
-        restaurant = TripAdvisor.query.filter(*filter_params).order_by(TripAdvisor.rating_count.desc())
-    elif sort_key =="評分數":    
-        restaurant = TripAdvisor.query.filter(*filter_params).order_by(TripAdvisor.rating.desc())
+        if user is not None:
+            restaurant = user.comment_search(val=int(current_user.id), params=filter_params)
+        else:
+            restaurant = User.comment_search(val= int(0), params=filter_params)
+
+    elif sort_key =="評分數":
+        if user is not None:
+            restaurant = user.rating_search(val=int(current_user.id), params=filter_params)
+        else:
+            restaurant = User.rating_search(val=int(0), params=filter_params)
 
     restaurant_obj = restaurant.paginate(page=page,per_page=30,error_out= False)
     restaurant_li =restaurant_obj.items
     total_page = restaurant_obj.pages
-    restaurant=[]
-    for restaurants in restaurant_li:
-        restaurant.append(restaurants.to_basic_dict())    
-
-    return jsonify(errno=0,data={"restaurant":restaurant},total_page=total_page)
+    
+    data_list=[]
+    for d in restaurant_li:
+        title = d[0].title
+        res_type = d[0].res_type
+        rating_count = d[0].rating_count
+        info_url=(d[0].info_url).split(",")[0]
+        cellphone=d[0].cellphone
+        street = d[0].street
+        rating = d[0].rating
+        count = d[0].read_count
+        comment= (d[0].comment).split(",")[0]
+        love = "已收藏" if current_user.get_id() is not None and d[1]==current_user.username else "收藏"
+        data_list.append({"title":title, "res_type":res_type, "rating_count":rating_count, "info_url":info_url,"cellphone":cellphone,"street":street,"rating":rating,"comment":comment,"count":count,"love":love})  
+    return jsonify(errno=1,data=data_list,total_page=total_page, params=params)
     
 
 
@@ -314,23 +339,36 @@ def search_result(restaurant):
     data = TripAdvisor.query.filter_by(title=restaurant).first()
     comment = Comment.query.filter(Comment.store_id==data.id).all()
     like = Comment_like.query.filter(Comment_like.user_id==current_user.id).all()
-    
     love = Love.query.filter(and_(Love.store_id==data.id,Love.user_id==current_user.id)).first()
- 
     data = data.to_basic_dict()
-    # if v:
-    #     return render_template("res_result.html",data=data,v=v, comment=comment)
-    # if l:
-    #     return render_template("res_result.html",data=data,l=l, comment=comment)
-    # if v and l:
     return render_template("res_result.html",data=data,like=like,love=love, comment=comment) 
-    # else:e
-    #     return render_template("res_result.html",data=data, comment=comment)
+
+@main.route('/read/count/<restaurant>')
+def read_count(restaurant):
+    store = TripAdvisor.query.filter(TripAdvisor.title==restaurant).first()
+    if current_user.is_authenticated:
+        c = Click(store_id=store.id, user_id=current_user.id)
+        try:
+            db.session.add(c)
+        except Exception as e:
+            db.session.rollback()
+            current_app.logger.error(e)
+            return jsonify(errno=0,errmsg="數據庫異常")
+    # 修改數據 (update??)
+    store.read_count = store.read_count + 1 
+    try:
+        db.session.commit()
+        return jsonify(errno=1,errmsg="數據保存成功")
+
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(e)
+        return jsonify(errno=0,errmsg="數據庫異常")
+
 
 @main.route('/comment/<restaurant>')
 def restaurant(restaurant):
     data = TripAdvisor.query.filter_by(title=restaurant).first()
-    data = data.to_basic_dict()
     return render_template("review.html",data=data)
 
 @main.route('/comment/edit/<int:id>',methods=["POST"])
@@ -364,9 +402,9 @@ def review_edit(id):
         return jsonify(errno=0,errmsg="數據庫錯誤")
 
 
-@main.route('/restaurant/like/<id>')
-def like(id):
-    restaurant =TripAdvisor.query.get_or_404(id)
+@main.route('/restaurant/like/<restaurant>')
+def like(restaurant):
+    restaurant =TripAdvisor.query.filter(TripAdvisor.title==restaurant).first()
     focus = request.args.get("like")
     l = Love(focus=focus,author=current_user._get_current_object(),store=restaurant)
     try:
@@ -378,9 +416,9 @@ def like(id):
         db.session.rollback()
         return jsonify(errno=0,errmsg="數據庫錯誤")
 
-@main.route('/restaurant/unlike/<id>')
-def unlike(id):
-    restaurant =TripAdvisor.query.get_or_404(id)
+@main.route('/restaurant/unlike/<restaurant>')
+def unlike(restaurant):
+    restaurant =TripAdvisor.query.filter(TripAdvisor.title==restaurant).first()
     user = User.query.filter(User.id==current_user.id).first()
     a = user.restaurant_love.filter(TripAdvisor.id==restaurant.id).first()
     try:
@@ -419,3 +457,26 @@ def comment_unlike(id):
         current_app.logger.error(e)
         db.session.rollback()
         return jsonify(errno=0,errmsg="數據庫錯誤")
+
+@main.route("/followers/<username>")
+@login_required
+def follow_user(username):
+    follower_list=[]
+    follower = Follow.query.join(User, User.id==Follow.followed_id).filter(User.username==username).all()    
+    for f in follower:
+        follower_list.append({"user":f.follower.username})
+    return jsonify(errno=1,data={"follower":follower_list})
+
+
+@main.route("/followed/<username>")
+@login_required
+def followed_user(username):
+    followed_list=[]
+    followed = Follow.query.join(User, User.id==Follow.follower_id).filter(User.username==username).all()
+    for f in followed:
+        followed_list.append({"user":f.followed.username})
+    return jsonify(errno=1,data={"followed":followed_list})
+
+@main.route("/followers/list")
+def followers_list():
+    return render_template("list.html")

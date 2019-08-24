@@ -78,16 +78,16 @@ $('#password').keyup(function(e) {
             var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
             var enoughRegex = new RegExp("(?=.{6,}).*", "g");
             if (false == enoughRegex.test($(this).val())) {
-            $('#passstrength').html('密碼長度不足');
+            $('#passstrength').html('密碼長度不足').show();
             } else if (strongRegex.test($(this).val())) {
             $('#passstrength').className = 'ok';
-            $('#passstrength').html('非常安全!');
+            $('#passstrength').html('非常安全!').show();
             } else if (mediumRegex.test($(this).val())) {
             $('#passstrength').className = 'alert';
-            $('#passstrength').html('一般!').css("alert alert-waring");
+            $('#passstrength').html('一般!').removeClass("alert-danger").addClass("alert-primary").show();
             } else {
             $('#passstrength').className = 'error';
-            $('#passstrength').html('不安全!');
+            $('#passstrength').html('不安全!').show();
             }
             return true;
             });
