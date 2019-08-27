@@ -28,6 +28,7 @@
             margin-left: auto;
             background-color: #fff;
             padding-left: 10px;
+            padding-bottom: 20px;
         }
         .revise{
             margin-left:450px;
@@ -92,7 +93,7 @@
             
 
             <div class="title">
-                <a href="{{ url_for('main.query') }}">用餐問卷</a>
+                <a href="{{ url_for('main.restaurant', restaurant='八里老漁村餐廳') }}">用餐問卷</a>
             </div>
 
             <div class="title">
@@ -110,7 +111,6 @@
                 <a href="{{ url_for('auth.login')}}">登入</a>
                 {% endif %}
             </div>
-     
     </div>
 </div>
 {% endblock %}

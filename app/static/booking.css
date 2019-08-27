@@ -1,3 +1,13 @@
+.all{
+    display: inline-flex;;
+    display: -webkit-flex;
+    flex-direction: row;
+    flex-wrap: nowrap
+}
+
+
+
+
 #booking{
     color:#000a12;
     font-weight: 700;
@@ -8,7 +18,17 @@
     background-color: white;
     font-family:Microsoft JhengHei;
 }
+img{
+    width:200px;
+    height:150px;
+    display: inline-block;
+}
 
+
+
+.outer-box{
+    display: inline-block;
+}
 #title{
     padding-top:25px;
     text-align:center;
@@ -95,5 +115,49 @@
     line-height: 30px;
     font-weight: 700;
     padding-top: 12px;
-    color: #000a12;
+    color: #078171;
+    text-align: center
+}
+
+
+
+
+.rating-title{
+    display:inline-block
+}
+
+.comment_block{
+    width:350px;
+    margin-right:100px;
+    background-color: #fff;
+    color:#000a12;
+    font-weight: 700;
+    margin-top:25px;
+    font-family:Microsoft JhengHei;
+}
+
+.rating{
+    display: inline-block;
+    font-size:12px
+}
+
+.title{
+    display: inline-block;
+    font-size:12px
+}
+
+.content{
+    margin-top:5px;
+    width:300px;
+}
+
+.inner-box{
+    margin-left:10px;
+}
+
+#revise{
+    width:100px;
+    background-color: #078171;
+    color:#fff;
+    text-align: center
 }

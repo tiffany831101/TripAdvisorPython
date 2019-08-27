@@ -24,13 +24,14 @@
 
 .follow{
     font-size:20px;
-    color: #000;
+    color: #fff;
     font-weight: 600;
     border-color: #078171;
     background-color: #078171;
+    padding:10px;
     width:100px;
     text-align: center;
-    height:50px;
+    vertical-align: middle;
 }
 
 #com_fo{
@@ -211,13 +212,12 @@ img{
 .title-container{
     margin-bottom: 3px;
     background-color: #fff;
-    margin-bottom:10px;
-
 }
 
 .title-inner-container{
     margin-top:3px;
     margin-left:5px;
+    margin-bottom:5px;
     border: 2px solid #e5e5e5;
     width:250px;
     display:inline-block;
@@ -254,13 +254,12 @@ img{
 }
 
 .self-introduction{
-    width:200px;
+    width:280px;
     background-color: #fff;
     margin-right:25px;
     text-align:center;
     margin-top:50px;
-    height: 300px;
-    line-height:18
+    height: 150px;
 }
 
 .intro-outer-container{

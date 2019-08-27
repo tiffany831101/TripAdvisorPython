@@ -18,6 +18,7 @@ class TripadvisorItem(scrapy.Item):
     street = scrapy.Field()
     rating= scrapy.Field()
     comment = scrapy.Field()
+    open_time = scrapy.Field()
     pass
 
 class HotelItem(scrapy.Item):

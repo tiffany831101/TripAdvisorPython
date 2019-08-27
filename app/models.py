@@ -10,6 +10,8 @@ import hashlib
 import random
 from app.utlis.captcha.captcha import captcha
 from sqlalchemy import and_,func
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer,primary_key = True)
@@ -169,11 +171,6 @@ class BaseModel(object):
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime,default=datetime.now, onupdate=datetime.now)
 
-class Food(BaseModel, db.Model):
-    """食物"""
-    __tablename__="food"
-    id = db.Column(db.Integer,primary_key=True)
-    foodname = db.Column(db.String(12))
 
 class Survey(BaseModel, db.Model):
     """顧客滿意度調查"""
@@ -185,41 +182,36 @@ class Survey(BaseModel, db.Model):
     opinion =db.Column(db.Text())
     intention = db.Column(db.String(1))
     user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
-    foods = db.relationship("Food",secondary="popular_food")
 
-
-favorite_food=db.Table(
-    "popular_food",
-    db.Column("survey_id",db.Integer, db.ForeignKey('survey.id'),primary_key=True),
-    db.Column("food_id",db.Integer, db.ForeignKey('food.id'),primary_key=True)
-)
 
 
 class Reservation(BaseModel,db.Model):
     __tablename__="reservation"
     id = db.Column(db.Integer,primary_key=True)
-    title_name = db.Column(db.String(20))
+    title_name = db.Column(db.String(32))
     people = db.Column(db.Integer())
     booking_date = db.Column(db.Date)
     booking_time = db.Column(db.String(10))
     order_id1 = db.Column(db.String(40))
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-    restaurant = db.relationship('TripAdvisor',backref='reservation',lazy='dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey("ta.id"))
+    
 
 class TripAdvisor(db.Model):
     __tablename__ = "ta"
     id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String(50))
-    res_type = db.Column(db.String(20))
+    title = db.Column(db.String(64))
+    res_type = db.Column(db.String(32))
     rating_count = db.Column(db.Integer())
-    info_url = db.Column(db.String(512))
+    info_url = db.Column(db.Text())
     cellphone = db.Column(db.String(20))
     address = db.Column(db.String(128))
-    street =db.Column(db.String(20))
+    street =db.Column(db.String(64))
     rating = db.Column(db.Float())
-    comment = db.Column(db.String(1024))
+    comment = db.Column(db.Text())
     read_count = db.Column(db.Integer, server_default='0')
-    reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
+    open_time = db.Column(db.String(64))                  
+    reservation = db.relationship('Reservation',backref='store',lazy='dynamic')
     user_comment = db.relationship("Comment",backref="restaurant",lazy="dynamic")
     following = db.relationship("Love",backref="store",lazy="dynamic")
     clicked_user = db.relationship("Click",backref="store",lazy="dynamic")

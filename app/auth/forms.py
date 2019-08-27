@@ -44,11 +44,7 @@ class PasswordResetForm(Form):
     password = PasswordField(u'請輸入密碼',validators=[DataRequired(),EqualTo('password2'),Regexp('^[A-Za-z][A-Za-z0-9_.]*$')])
     password2 = PasswordField(u'請確認密碼',validators=[DataRequired('密碼需一致')])
     submit= SubmitField('提交')
-    # def validate_email(self,email):
-    #     user = User.query.filter_by(email=field.data).first()
-    #     if not user:
-    #         raise ValidationError(
-    #             '不存在該Email')
+    
 
 class UserInfomationForm(Form):
     gender = SelectField(u"性別", choices=[("男","男"),("女","女")],validators=[DataRequired()])

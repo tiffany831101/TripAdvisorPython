@@ -1,13 +1,13 @@
 .form-area{
     margin-top:10px;
-    width:600px;
+    width:700px;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
     font-family: Microsoft JhengHei;
 }
 .form{
-    width: 500px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto;
     color: #000a12;
@@ -44,7 +44,7 @@
 }
 
 .form-control{
-    width: 500px;
+    width: 600px;
     margin-left: auto;
     margin-right: auto 
 }
@@ -63,3 +63,12 @@ image{
     width: 200px;
 }
 
+.inner-box-revise{
+    display: inline-block
+}
+
+
+.outer-box{
+    border: solid #e5e5e5 2px;
+    
+}

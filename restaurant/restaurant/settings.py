@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 
-DOWNLOAD_DELAY = random.randint(0,2)
+# DOWNLOAD_DELAY = random.randint(0,2)
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -52,16 +52,16 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'restaurant.middlewares.UserAgentDownloaderMiddleware': 543,
-#    'restaurant.middlewares.IPProxyDownloaderMiddleware':300,
+#     'restaurant.middlewares.UserAgentDownloaderMiddleware': 543,
+#     'restaurant.middlewares.IPProxyDownloaderMiddleware':300,
 # }
 
-# Enable or disable downloader middlewares
+# Enable or disable downloader middlewares11
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-  #  'restaurant.middlewares.UserAgentDownloaderMiddleware': 543,
-  'restaurant.middlewares.IPProxyDownloaderMiddleware':300,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#   'restaurant.middlewares.UserAgentDownloaderMiddleware': 543,
+#   'restaurant.middlewares.IPProxyDownloaderMiddleware':300,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -71,10 +71,10 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'restaurant.pipelines.RestaurantPipeline': 200,
+ITEM_PIPELINES = {
+   'restaurant.pipelines.RestaurantPipeline': 200,
 #   #  'restaurant.pipelines.HotelPipeline': 300,
-# }
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

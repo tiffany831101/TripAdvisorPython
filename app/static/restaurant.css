@@ -1,17 +1,16 @@
 img{
-    height: 240px; 
-    width: 280px; 
+    height: 230px; 
+    width: 300px; 
 }
 
 .content{
     text-decoration: none;
     padding-left: 25px;
-    padding-top:10px;
+    padding-top:8px;
     font-family: "Microsoft JhengHei";
     list-style: none;
-    width:650px;
-    line-height:20px;
-    height: 240px;
+    width:700px;
+    height: 230px;
     background-color: white;
     overflow: hidden;
     text-overflow : ellipsis;
@@ -19,7 +18,7 @@ img{
 #all{
     margin-left: auto;
     margin-right:auto; 
-    width:800px;
+    width:950px;
     background-color: #f2f2f2;
 }
 
@@ -28,20 +27,14 @@ img{
 }
 
 
-#title{
-    font-size: 20px;
-    color: #000a12;
-    font-weight: 700;
-    line-height: 30px;
-    padding-bottom: 12px;
-    width:200px;
-}
+
+
 .title{
     font-size: 20px;
     color: #000a12;
     font-weight: 700;
-    line-height: 30px;
-    padding-bottom: 12px;
+    line-height: 15px;
+    padding-bottom: 3px;
     display: inline-block;
 }
 
@@ -56,9 +49,6 @@ img{
     font-weight: 700;
     vertical-align: middle;
 }
-.block{
-    margin-top:5px;
-}
 
 
 .comment{
@@ -69,28 +59,34 @@ img{
     height:100px;
 }
 
-#go{
-    background-color: #fc0;
-    width:100px;
-    padding:5px;
-    background-clip: padding-box;
-    display: inline-block
+
+.outer-container{
+    display: inline-block;
+    width:500px;
 }
 
+
+#go-box{
+    background-color: #fc0;
+    width:120px;
+    background-clip: padding-box;
+    display: inline-block;
+    margin-left:50px;
+    text-align: center;
+    line-height: 3
+}
 
 
 .go{
     color: #000;
     font-size: 16px;
-    line-height: 16px;
-    text-align: center;
     text-decoration: none;
     font-family: inherit;
     border: 1px solid transparent;
     box-sizing: border-box;
-    text-decoration: none;
     font-weight: 700;
-
+    padding:15px;
+    line-height:8;
 }
 
 
@@ -117,7 +113,7 @@ img{
     margin-top:10px;
     text-align: center;
     height:50px;
-    width:800px;
+    width:950px;
 }
 
 .wrap{
@@ -135,7 +131,13 @@ img{
 }
 
 .love{
-    margin-left:400px;
+    margin-left:5px;
+    width:80px;
     display: inline-block;
 }
 
+
+.title-container{
+    width:300px;
+    display: inline-block;
+}

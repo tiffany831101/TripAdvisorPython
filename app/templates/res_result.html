@@ -8,6 +8,9 @@
     <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
 {% endblock %}
 
+{% block title %}
+{{ data.title }}
+{% endblock %}
 
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
@@ -28,7 +31,8 @@
         <div>
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             <div class="reviewCount">{{ data.rating_count }} 則評論</div>
-            <div class="header_links">{{ data.res_type }}</div>    
+            <div class="header_links">{{ data.res_type }}</div>   
+            <div>{{ data.open_time }}</div> 
         </div>
 
         <div class="info">
@@ -43,7 +47,7 @@
             </div>   
         </div>
 
-        {% for image in data.info_url %}
+        {% for image in data.info_url[:7] %}
             <img class="image" src="{{ image }}">
         {% endfor %}
     </div>

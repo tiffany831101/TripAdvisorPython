@@ -7,7 +7,7 @@ class TaSpider(scrapy.Spider):
     name = 'TA'
     allowed_domains = ['www.tripadvisor.com.tw']
     
-    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g293913-Taipei.html#EATERY_OVERVIEW_BOX','https://www.tripadvisor.com.tw/Restaurants-g1432365-New_Taipei.html']
+    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g297912-Taoyuan.html']
     base_domain ='https://www.tripadvisor.com.tw'
 
     def parse(self, response): 
@@ -30,7 +30,7 @@ class TaSpider(scrapy.Spider):
             rating_count = rating_count.split(",")
             rating_count = int("".join(rating_count))
         rating_count = int(rating_count)
-
+        open_time =  response.xpath('//span[@class="public-location-hours-LocationHours__hoursOpenerText--42y6t"]/span[2]/text()').get()
         info_url = response.xpath('//img[@class="basicImg"]/@data-lazyurl').getall()[0:-1]
         info_url = ",".join(info_url)
         cellphone = response.xpath('//span[@class="detail  is-hidden-mobile"]/text()').get() 
@@ -40,5 +40,5 @@ class TaSpider(scrapy.Spider):
         rating = float(rating)
         comment = response.xpath('//div[@class="prw_rup prw_reviews_text_summary_hsx"]/div/p[@class="partial_entry"]/text()').getall()[0:-1]
         comment = ",".join(comment)
-        item=TripadvisorItem(title=title,res_type=res_type,rating_count=rating_count,info_url=info_url,cellphone=cellphone,address=address,street=street,rating=rating,comment=comment)
+        item=TripadvisorItem(title=title,res_type=res_type,rating_count=rating_count,info_url=info_url,cellphone=cellphone,address=address,street=street,rating=rating,comment=comment,open_time=open_time)
         yield item

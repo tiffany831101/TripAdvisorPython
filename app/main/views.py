@@ -4,7 +4,7 @@ import json
 from . import main
 from .forms import QueryForm, EditionProfileForm, PostForm, BookingForm
 from .. import db
-from ..models import User, Role, Post, Survey, Food, TripAdvisor, Reservation, Comment, Love, Comment_like,Follow, Click
+from ..models import User, Role, Post, Survey, TripAdvisor, Reservation, Comment, Love, Comment_like,Follow, Click
 from flask_login import login_required, current_user
 import logging
 from flask import current_app #全局上下文
@@ -34,40 +34,25 @@ def query():
             survey = current_user._get_current_object())
         try:
             db.session.add(s)
-            
-            
+            db.session.commit()
+            flash(u'您寶貴的意見，是我們成長的動力')
+            return redirect(url_for('auth.my'))
         except Exception as e:
-            db.session.rollback()
             current_app.logger.error(e)
-            flash(u"查詢數據庫異常")
-
-        food_ids = form.food.data
-        
-        if food_ids:
-            foods = Food.query.filter(Food.id.in_(food_ids)).all()
-            if foods:
-                s.foods = foods
-                try:
-                    db.session.add(s)
-                    db.session.commit()
-                    flash(u'您寶貴的意見，是我們成長的動力')
-                    return redirect(url_for('auth.my'))
-                except Exception as e:
-                    current_app.logger.error(e)
-                    flash(u"數據庫查詢異常")
+            flash(u"數據庫查詢異常")
+        return render_template('query.html',form=form)
             
-    return render_template('query.html',form=form)
-
-
-
-
 @main.route('/user/<username>')
 @login_required
 def user(username):
+    # 收藏餐廳列表
     if username is not current_user.username:
         user = User.query.filter_by(username=username).first()
+        if not user:
+            return jsonify(errno=0,errmsg="查無該用戶")
         restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).all()
         count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).count()
+        print("QQQQ"*30)
     else:
         restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).all()
         count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).count()
@@ -75,12 +60,19 @@ def user(username):
     store_list=[]
     for r in restaurant:
         store_list.append(r.to_basic_dict())
-    
-    
+
     # 收藏評論
     comment = Comment.query.join(Comment_like, Comment_like.comment_id==Comment.id).join(User,and_(Comment_like.user_id==User.id,User.username==username)).all()
+    followed_id = [ i.followed_id for i in current_user.followed.all()]
+    comment_list = []
+    for c in comment:
+        follow_condition = "關注中" if c.author_id in followed_id else "追蹤"
+        review_content = c.review_content
+        author = c.author.username
+        comment_list.append({"follow_condition":follow_condition, "review_content":review_content, "author":author})
+
     # 最近瀏覽數
-    recent_read = TripAdvisor.query.join(Click, Click.store_id== TripAdvisor.id).join(User, and_(User.id==Click.user_id,User.id==current_user.id)).distinct().limit(5)
+    recent_read = TripAdvisor.query.join(Click, Click.store_id== TripAdvisor.id).join(User, and_(User.id==Click.user_id,User.id==current_user.id)).distinct().order_by(Click.create_time.desc()).limit(5)
     read_list=[]
     for r in recent_read:
         title = r.title
@@ -88,7 +80,7 @@ def user(username):
         address = r.address
         read_list.append({"picture":picture,"address":address,"picture":picture,"title":title})
 
-    return render_template('user.html',store_list=store_list,count=count,comment=comment,user=user, read_list=read_list)
+    return render_template('user.html',store_list=store_list,count=count,comment_list=comment_list,user=user, read_list=read_list)
 
 @main.route('/forum',methods=['GET','POST'])
 def forum():
@@ -184,12 +176,14 @@ def reservation_check():
     else:
         order_id = "%s-%s" % (int(round(time.time()*1000)),random.randint(0,99999999))
         print(order_id)
+    store = TripAdvisor.query.filter_by(title=restaurant).first()
     r = Reservation(title_name=restaurant,
                     people=people,
                     booking_date=booking_date,
                     booking_time=booking_time,
                     order_id1=order_id,
-                    user=current_user._get_current_object())
+                    user=current_user._get_current_object(),
+                    restaurant_id=store.id)
     try:
         db.session.add(r)
         return jsonify(errno=1,errmsg="參數保存成功",order_id=order_id)
@@ -202,9 +196,20 @@ def reservation_check():
 @login_required
 def result():
     now = time.strftime("%Y-%m-%d", time.localtime())
-    reservation = Reservation.query.filter(and_(Reservation.userid==current_user.id,Reservation.booking_date>now)).order_by(Reservation.booking_date.desc()).all()
-    history = Reservation.query.filter(and_(Reservation.userid==current_user.id,Reservation.booking_date<now)).order_by(Reservation.booking_date.desc()).all()
-    return render_template("result.html", reservation=reservation, history=history)
+    # reservation = Reservation.query.filter(and_(Reservation.user_id==current_user.id,Reservation.booking_date>now)).order_by(Reservation.booking_date.desc()).all()
+    reservation_list=[]
+    record = db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor).outerjoin(Reservation, and_(Reservation.restaurant_id==TripAdvisor.id,Reservation.booking_date>now)).join(User, and_(Reservation.user_id==User.id, User.id==current_user.id)).all()
+    for r in record:
+        title = r[0].title_name
+        date = r[0].booking_date
+        booking_time = r[0].booking_time
+        people = r[0].people
+        order_id = r[0].order_id1
+        create_time = r[0].create_time.strftime('%Y-%m-%d')
+        image = r[1].info_url.split(",")[0]
+        reservation_list.append({"image":image,"title":title,"date":date,"booking_time":booking_time,"peolple":people,"order_id":order_id,"create_time":create_time})
+    history = Reservation.query.filter(and_(Reservation.user_id==current_user.id,Reservation.booking_date<now)).order_by(Reservation.booking_date.desc()).all()
+    return render_template("result.html", reservation=reservation_list, history=history)
 
 @main.route('/reservation/revise/<order_id>',methods=["POST","GET"])
 def order_revise(order_id):
@@ -222,6 +227,7 @@ def order_cancel(order_id):
             current_app.logger.error(e)
             db.session.rollback()
             return jsonify(errno=0,errmsg="數據庫錯誤")
+
 
 @main.route('/reservation/cancel',methods=["POST"])
 def order_confirm_revise():
@@ -302,13 +308,13 @@ def restaurant_search():
 
     if sort_key =="評論數":
         if user is not None:
-            restaurant = user.comment_search(val=int(current_user.id), params=filter_params)
+            restaurant = User.comment_search(val=int(current_user.id), params=filter_params)
         else:
             restaurant = User.comment_search(val= int(0), params=filter_params)
 
     elif sort_key =="評分數":
         if user is not None:
-            restaurant = user.rating_search(val=int(current_user.id), params=filter_params)
+            restaurant = User.rating_search(val=int(current_user.id), params=filter_params)
         else:
             restaurant = User.rating_search(val=int(0), params=filter_params)
 
@@ -369,7 +375,16 @@ def read_count(restaurant):
 @main.route('/comment/<restaurant>')
 def restaurant(restaurant):
     data = TripAdvisor.query.filter_by(title=restaurant).first()
-    return render_template("review.html",data=data)
+    restaurant={"title":data.title,"address":data.street,"image":data.info_url.split(",")[2],"id":data.id}
+    comment = Comment.query.filter(Comment.store_id==data.id).order_by(Comment.create_time.desc()).limit(3)
+    comment_list=[]
+    for c in comment:
+        author = c.author.username
+        title = c.review_title
+        content = c.review_content
+        rating = c.rating
+        comment_list.append({"author":author,"title":title,"content":content,"rating":rating})
+    return render_template("review.html",restaurant=restaurant,comment = comment_list)
 
 @main.route('/comment/edit/<int:id>',methods=["POST"])
 def review_edit(id):

@@ -15,7 +15,7 @@
         {% if read_list %}
             {% for r in read_list %}
                 <div class="prev_border">
-                    <div><a href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}"></a></div>
+                    <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}"></a></div>
                     <div class="prev_store">{{ r["title"] }}</div>
                     <div class="prev_store">{{ r["address"] }}</div>
                     
@@ -65,7 +65,7 @@
                     <div class="box_container">
                         <div class="title">{{ l["title"] }}</div>
                         <div>{{ l["street"] }}</div>
-                        <a href="/restaurant/{{ l['title'] }}">
+                        <a class='restaurant_click' href="/restaurant/{{ l['title'] }}">
                         <img src="{{ l['info_url'][0] }}"></a>
                     </div>
                 </div>
@@ -75,20 +75,15 @@
 
         <div class="title-container">
             <div class="title-outer-box">
-            <div class="title">點讚的評論</div>
-                {% if comment %}
-                    {% for c in comment %}
-                        <div class="title-inner-container">
-                            {% with a=[]  %}    
-                            <div id="username" class="comment-username"><a href="/user/{{ c.author.username }}">{{ c.author.username }}</a></div>
-                            {% do a.append(c.author.username) %}    
-                                {% if current_user.is_following(user) %}
-                                <div class="com_follow" id="com_fo">關注中</div>
-                                {% else %}
-                                <div class="com_follow" id="com_fo">追蹤</div>
-                                {% endif %}
-                            {% endwith %}
-                            <div>{{ c.review_content }}</div>
+            <div class="title" style="text-align:center">點讚的評論</div>
+                {% if comment_list %}
+                    {% for c in comment_list %}
+                        <div class="title-inner-container"> 
+                            <div id="username" class="comment-username"><a href="/user/{{ c['author'] }}">{{ c['author'] }}</a></div>
+                            {% if c['author'] != current_user.username %}
+                                <div class="com_follow" id="com_fo">{{ c["follow_condition"] }}</div>
+                            {% endif %}
+                            <div>{{ c["review_content"] }}</div>
                         </div>
                     {% endfor %}
                 {% else %}
@@ -100,8 +95,8 @@
     <div class="self-introduction">
         <div class="intro-outer-container">
             <div class="title">簡介</div>
-            <div>+新增您目前所在城市</div>
-            <div>+介紹一下您自己</div>
+            <div><a href="">+新增您目前所在城市</a></div>
+            <div><a href="">+介紹一下您自己</a></div>
             <div>發表評論</div>
         </div>
     </div>
@@ -121,7 +116,6 @@
     $(function(){
         $(".follow").click(function(e){
             var username = $(this).prev().children(".username").text()
-            alert(username)
             alert($(this).text())
             if ($(this).text()=="追蹤"){
                 $.get("/follow/"+username,function(response){
@@ -188,7 +182,7 @@
                     }else{
                         alert(response.errmsg)
                     }
-                })
+                }).bind(this)
               
             }else{
                 $.get("/unfollow/"+username,function(response){
@@ -198,13 +192,33 @@
                     }else{
                         alert(response.errmsg)
                     }
-                })
+                }).bind(this)
             }
         })
     })
 </script>
 <script>
+$(function(){
+    $(".restaurant_click").click(function(){
+        var restaurant = $(this).parent().children(".title").text()
+        $.get("/read/count/"+restaurant,function(){
+            window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+})
+</script>
+
+<script>
+$(function(){
+    $(".prev_click").click(function(){
+    var restaurant = $(this).parent().next().text()
+    $.get("/read/count/"+restaurant,function(){
+        window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+})
 
 </script>
+
 
 {% endblock %}

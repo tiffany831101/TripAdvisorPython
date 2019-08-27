@@ -114,22 +114,21 @@ function render(response){
                         "<td>"+
                             "<div class='content'>"+
                                 "<div class='outer-container'>"+
-                                    "<div><b class='title'>"+ value.title +"</b>"+    
-                                    "<span id='go'><a href='javascript:void(0)' class='go' onclick='click_restaurant(this)'>立即查看</a></span>"+
-                                    "<span class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+value.love+"</span>"+
-                                    "</div>"+
+                                        "<div class='title-container'><b class='title'>"+ value.title +"</b></div>"+    
+                                        "<div id='go-box'><a href='javascript:void(0)' class='go' onclick='click_restaurant(this)'>立即查看</a></div>"+
+                                        "<div class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+value.love+"</div>"+
                                 "</div>"+
                                 
                                 "<div class='block'>"+
                                     "<div>瀏覽量:"+value.count+"</div>"+
                                     "<i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i>"+
                                     "<span class='count' style='margin-left:3px'>"+ value.rating_count +"則評論</span>"+
-                                    
                                 "</div>"+
-                                    "<div class='address'><li><i class='fas fa-globe-americas' style='margin-right:8px'></i>"+ value.street +"</li>"+
-                                        "<li><i class='fas fa-phone' style='margin-right:8px'></i>"+ value.cellphone +"</li>"+
-                                    "</div>"+
-                                    "<li class='comment'>"+ value.comment +"</li>"+   
+
+                                "<div class='address'><li><i class='fas fa-globe-americas' style='margin-right:8px'></i>"+ value.street +"</li>"+
+                                    "<li><i class='fas fa-phone' style='margin-right:8px'></i>"+ value.cellphone +"</li>"+
+                                "</div>"+
+                                "<div class='comment'>"+ value.comment +"</div>"+   
                             "</div>"+  
                         "</td>"+
                     "</tr>"
@@ -158,7 +157,7 @@ function initPagination(count, pagesize){
 function click_restaurant(obj){
     $(this).off("click").one("click",function(event){
         event.stopPropagation();
-        var restaurant = $(obj).parent().parent().children(".title").text()
+        var restaurant = $(obj).parent().prev().children(".title").text()
         $.get("/read/count/"+restaurant,function(){
             window.location.href = "/restaurant/"+restaurant;
         })
@@ -247,11 +246,10 @@ function like(obj){
     $(this).off("click").on("click",function(event){
         event.stopPropagation();
         var like = $(obj).text()
-        var title = $(obj).parent().children(".title").text()
+        var title = $(obj).parent().children().children(".title").text()
         if (like=="收藏"){
             $.get("/restaurant/like/"+title,function(){
                 alert("關注成功")
-
                 $tr = "<sapn class='love' onclick='like(this)' style='color:#078171'><i class='fas fa-thumbs-up'></i>"+"已收藏"+"</span>"
                 $(obj).html($tr)
             }.bind(obj)

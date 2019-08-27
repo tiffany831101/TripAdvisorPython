@@ -3,12 +3,14 @@
 {% block head %}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
     <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -56,7 +58,7 @@
             {% else %} 
             <div id="number">客服專線 : (02) 2610-4882 <br>
             {% endif %}
-            服務時間 : 周一至周日11:00-20:00</div>
+            服務時間 : {% if data %}{{ data.open_time }}{% else %}早上11點至晚上8點{% endif %}</div>
         </div>
     
 </div>
@@ -97,8 +99,13 @@
                 url: "/reservation/check",
                 success:function(response){
                     if (response.errno=1){
-                        alert("恭喜您，訂位成功。"+
-                               "您的訂單編號為:"+response.order_id)
+                        swal({ 
+                            title: "恭喜您，訂位成功。", 
+                            text: "您的訂單編號為:"+response.order_id,
+                            type: "success",
+                            timer:10000, 
+                        });
+                        
                         window.location.href="/reservation/result"
                     }else{
                         alert("系統忙碌中，請稍後再試一次")

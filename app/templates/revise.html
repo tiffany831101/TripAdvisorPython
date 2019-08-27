@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
     <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 {% endblock %}
 
 
@@ -74,7 +75,7 @@
  
     </script>
     <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
-
+    
     <script>
     $(function(){
         $("#reviseform").submit(function(e){
@@ -87,10 +88,14 @@
                     url: "/reservation/cancel",
                     success:function(response){
                         if (response.errno=1){
-                        alert("恭喜您，訂位修改成功。")
+                        swal({
+                            title:"恭喜您，訂位修改成功。",
+                            type:"success",
+                            timer:8000
+                            })
                         window.location.href="/reservation/result"
                     }else{
-                        alert("系統忙碌中，請稍後再試一次")
+                        alert("系統忙碌中，請稍後再試一次","error")
                     }
                     } 
                 })
