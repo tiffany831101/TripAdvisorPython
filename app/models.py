@@ -117,12 +117,13 @@ class User(UserMixin,db.Model):
         return self.followers.filter_by(followed_id=user.id).first() is not None
     
 
-    def page_load(val, page=1):
+    def page_load(val, page):
 
         if not val == 0:
             return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
                     .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(TripAdvisor.rating_count>200)\
-                    .paginate(page=int(page),per_page=30,error_out= False) 
+                    .paginate(page=int(page),per_page=30,error_out= False)
+                     
         else:
             return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
                     .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(TripAdvisor.rating_count>200)\

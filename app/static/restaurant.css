@@ -33,7 +33,6 @@ img{
     font-size: 20px;
     color: #000a12;
     font-weight: 700;
-    line-height: 15px;
     padding-bottom: 3px;
     display: inline-block;
 }
@@ -56,28 +55,23 @@ img{
     padding-right:5px;
     overflow: hidden;
     text-overflow : ellipsis;
-    height:100px;
 }
 
 
-.outer-container{
-    display: inline-block;
-    width:500px;
-}
+
 
 
 #go-box{
     background-color: #fc0;
     width:120px;
-    background-clip: padding-box;
     display: inline-block;
     margin-left:50px;
     text-align: center;
-    line-height: 3
+    cursor: pointer; 
 }
 
 
-.go{
+.enter{
     color: #000;
     font-size: 16px;
     text-decoration: none;
@@ -85,8 +79,6 @@ img{
     border: 1px solid transparent;
     box-sizing: border-box;
     font-weight: 700;
-    padding:15px;
-    line-height:8;
 }
 
 
@@ -134,10 +126,11 @@ img{
     margin-left:5px;
     width:80px;
     display: inline-block;
+    cursor: pointer; 
 }
 
 
 .title-container{
-    width:300px;
+    width:320px;
     display: inline-block;
 }

@@ -219,38 +219,38 @@ def information():
     return render_template("auth/information.html",form=form)
 
 
-@auth.route("/images", methods=["POST","GET"])
-@login_required
-def save_images():
-    form = UploadImageForm()
-    if form.validate_on_submit():
+# @auth.route("/images", methods=["POST","GET"])
+# @login_required
+# def save_images():
+#     form = UploadImageForm()
+#     if form.validate_on_submit():
         
-        try:
-            filename = photos.save(form.photo.data)
-            filename ="images/"+ filename
-            # 返回了文件的url路径，而不是文件路径
-            file_url = photos.url(filename)
-            current_user.image_url = filename
+#         try:
+#             filename = photos.save(form.photo.data)
+#             filename ="images/"+ filename
+#             # 返回了文件的url路径，而不是文件路径
+#             file_url = photos.url(filename)
+#             current_user.image_url = filename
 
-        except Exception as e:
-            current_app.logger.error(e)
-            flash(u"不支持該照片格式")
-            return render_template('auth/images.html', form=form)        
+#         except Exception as e:
+#             current_app.logger.error(e)
+#             flash(u"不支持該照片格式")
+#             return render_template('auth/images.html', form=form)        
 
         
 
-        try:
-            db.session.add(current_user)
-            db.session.commit()
-            flash(u'照片提交完成')
-            return redirect(url_for("auth.my"))
+#         try:
+#             db.session.add(current_user)
+#             db.session.commit()
+#             flash(u'照片提交完成')
+#             return redirect(url_for("auth.my"))
 
-        except Exception as e:
-            db.session.rollback()
-            current_app.logger.error(e)
-            flash(u"查詢數據庫異常")
+#         except Exception as e:
+#             db.session.rollback()
+#             current_app.logger.error(e)
+#             flash(u"查詢數據庫異常")
 
-    return render_template('auth/images.html', form=form)
+#     return render_template('auth/images.html', form=form)
     
 
 @auth.before_app_request

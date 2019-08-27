@@ -52,7 +52,7 @@ def user(username):
             return jsonify(errno=0,errmsg="查無該用戶")
         restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).all()
         count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==user.id).count()
-        print("QQQQ"*30)
+
     else:
         restaurant = TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).all()
         count= TripAdvisor.query.join(Love, Love.store_id==TripAdvisor.id).filter(Love.user_id==current_user.id).count()
@@ -375,7 +375,7 @@ def read_count(restaurant):
 @main.route('/comment/<restaurant>')
 def restaurant(restaurant):
     data = TripAdvisor.query.filter_by(title=restaurant).first()
-    restaurant={"title":data.title,"address":data.street,"image":data.info_url.split(",")[2],"id":data.id}
+    restaurant={"title":data.title,"address":data.street,"image":data.info_url.split(",")[2] if data.info_url else None,"id":data.id}
     comment = Comment.query.filter(Comment.store_id==data.id).order_by(Comment.create_time.desc()).limit(3)
     comment_list=[]
     for c in comment:

@@ -4,6 +4,7 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='restaurant.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css">
 <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
 
 {% endblock %}
@@ -79,6 +80,7 @@
 {% block scripts %}
 
 <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script> -->
 <script src="{{ url_for('static',filename='jquery.pagination.js') }}"></script>
 
 <script>
@@ -97,7 +99,7 @@ function Load(page){
         love()
         var totalPages = response.total_page
         var totalData = totalPages*30
-        initPagination(totalData, 30)
+        initPagination(300, 30)
        
     })                       
 }
@@ -113,12 +115,12 @@ function render(response){
                         "<td id='picture'><img src="+value.info_url+"></td>"+
                         "<td>"+
                             "<div class='content'>"+
-                                "<div class='outer-container'>"+
+                                    "<div>"+
                                         "<div class='title-container'><b class='title'>"+ value.title +"</b></div>"+    
-                                        "<div id='go-box'><a href='javascript:void(0)' class='go' onclick='click_restaurant(this)'>立即查看</a></div>"+
+                                        "<div class='go-box'><a href='javascript:void(0)' onclick='click_restaurant(this)'>立即查看</a></div>"+
                                         "<div class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+value.love+"</div>"+
-                                "</div>"+
-                                
+                                    "</div>"+
+                        
                                 "<div class='block'>"+
                                     "<div>瀏覽量:"+value.count+"</div>"+
                                     "<i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i>"+

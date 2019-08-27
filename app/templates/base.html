@@ -18,13 +18,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.index') }}">關於老漁村<span class="sr-only"></span></a>
+                <a class="nav-link" href="{{ url_for('main.restaurant_list') }}">美食地圖<span class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href=''>新鮮上菜 <span class="sr-only"></span></a>
+                <a class="nav-link" href='#'>新鮮上菜—老漁村 <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.reservation',restaurant='老漁村餐廳') }}">線上訂位<span class="sr-only"></span></a>
+                <a class="nav-link" href="{{ url_for('main.reservation',restaurant='老漁村餐廳') }}">線上訂位—老漁村<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('auth.my') }}">會員專區<span class="sr-only"></span></a>

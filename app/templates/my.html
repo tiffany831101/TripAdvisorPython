@@ -83,13 +83,7 @@
                 手機號: <span>{% if current_user.cellphone %}{{ current_user.cellphone }}{% endif %}</span><br>
             </p>
             <div class="revise"><a href="{{ url_for('auth.update_info') }}">修改</a></div>
-            <div class="title">
-                <a href="{{ url_for('auth.save_images') }}">我的圖片</a>
-                {% if current_user.image_url %}
-                修改圖像
-                <img src="{{ url_for('static', filename=current_user.image_url) }}" alt="我的照片">
-                {% endif %}
-            </div>
+           
             
 
             <div class="title">
@@ -100,9 +94,9 @@
                 <a href="{{ url_for('main.result') }}">訂位查詢</a>
             </div>
             
-            <div class="title">
+            <!-- <div class="title">
                 <a href="{{ url_for('main.restaurant_list') }}">評論區</a>
-            </div>
+            </div> -->
             
             <div class="title">
                 {% if current_user.is_authenticated %}
