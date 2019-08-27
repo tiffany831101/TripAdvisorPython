@@ -7,7 +7,7 @@ class TaSpider(scrapy.Spider):
     name = 'TA'
     allowed_domains = ['www.tripadvisor.com.tw']
     
-    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g297912-Taoyuan.html']
+    start_urls = ['https://www.tripadvisor.com.tw/Restaurants-g297912-Taoyuan.html','https://www.tripadvisor.com.tw/Restaurants-g293913-Taipei.html','https://www.tripadvisor.com.tw/Restaurants-g1432365-New_Taipei.html']
     base_domain ='https://www.tripadvisor.com.tw'
 
     def parse(self, response): 
