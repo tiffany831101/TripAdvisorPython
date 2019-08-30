@@ -1,5 +1,0 @@
-您好, {{ user.username }}
-歡迎註冊老漁村餐廳的獨享會員。
-為確保您的帳戶有效，請點擊以下連結:
-{{ url_for('auth.confirm', token=token, _external=True) }}
-在此，誠摯歡迎成為獨享會員。

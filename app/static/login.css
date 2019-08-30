@@ -38,6 +38,7 @@ form{
     vertical-align: middle;
     height:35px;
     width:400px;
+    margin-bottom:30px;
 }
 
 
@@ -80,3 +81,26 @@ form{
     padding-bottom:5px;
 }
 
+#captche_area{
+    display:inline-block;
+}
+.pic_area{
+    display:inline-block;
+    margin-bottom:20px;
+    margin-left:5px;
+    margin-top:5px;
+}
+
+#submit1{
+    color: #fff;
+    font-size:18px;
+    background-color: #078171;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-bottom:30px;
+    height:35px;
+    width:400px;
+}

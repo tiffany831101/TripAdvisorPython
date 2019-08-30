@@ -15,63 +15,62 @@ from werkzeug import secure_filename
 import json
 from sqlalchemy import and_
 
-@auth.route('/login',methods=['GET','POST'])
+
+
+@auth.route('/login/html',methods=["POST","GET"])
+def login_html():
+    return render_template('auth/login.html')
+
+@auth.route('/login',methods=["POST"])
 def login():
     """ 用戶登入
         參數 : 用戶名、密碼, json
     """
 
-    # 4. 判斷手機號的格式
-    # if not re.match(r"1[34578]\d", mobile):
-    #     return jsonify(error="參數錯誤",errmsg="手機格式不完整")
-
-    form=LoginForm()
+    email = request.form.get("email")
+    password = request.form.get("password")
+    remember_me = request.form.get("remember_me")
 
     # 5. 判斷錯誤次數是否超過限制，如果超過限制，則返回
     #    redis紀錄: "access_num_請求的ip" : 次數
     user_ip = request.remote_addr #用戶的ip地址
+
     try:
         access_nums = redis_store.get("access_num_%s" % user_ip)
     except Exception as e:
         current_app.logger.error(e)
     else:
-        if access_nums is not None and int(access_nums) >= constants.LOGIN_ERROR_MAX_TIMES:
-            flash(u"請求次數頻繁，請稍後重試")
-            return render_template('auth/login.html',form=form) 
-            # return jsonify(error="請求錯誤", errmsg="錯誤次數過多，請稍後重試")
+        if access_nums is not None and int(access_nums) >= constants.LOGIN_ERROR_MAX_TIMES: 
+            return jsonify(error="2", errmsg="錯誤次數過多，請稍後重試")
 
     # 6. 從數據庫中根據Email查詢用戶的數據對象
+
     try:
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=email).first()
     except Exception as e:
         current_app.logger.error(e)
-        flash("獲取用戶信息失敗")
-        # return jsonify(error="數據庫錯誤",errormsg="獲取用戶信息失敗")
+        return jsonify(error="數據庫錯誤",errormsg="獲取用戶信息失敗")
 
     # 7. 用數據庫的密碼與用戶填寫的密碼進行對比驗證
-    if form.validate_on_submit():
-        if user is None or user.verify_password(form.password.data) is False:
+    if user is None or user.verify_password(password) is False:
         # 如果驗證失敗，記錄錯誤次數，返回信息
-            try:
+        try:
             # redis的ince可以對字符串類型的數字數據進行+1的操作，如果數據一開始不存在，則會初始化為1
-                redis_store.incr("access_num_%s" % user_ip)
-                redis_store.expire("access_num_%s" % user_ip, constants.LOGIN_ERROR_FORBID_TIME)
-            except Exception as e:
-                current_app.logger.error(e)
-            flash(u"用戶名或密碼錯誤")
-        # return jsonify(error="數據庫資料不存在",errmsg="用戶名或密碼錯誤")
+            redis_store.incr("access_num_%s" % user_ip)
+            redis_store.expire("access_num_%s" % user_ip, constants.LOGIN_ERROR_FORBID_TIME)
+        except Exception as e:
+            current_app.logger.error(e)
+            return jsonify(error="數據庫資料不存在",errmsg="用戶名或密碼錯誤")
 
-        
     # 8. 如果驗證相同成功，保存登入狀態，在session中
-        if user is not None and user.verify_password(form.password.data):
-            login_user(user, form.remember_me.data)
-            session["cellphone"] = user.cellphone
-            session["username"] = user.username
-
-            flash(u"用戶登入成功")
-            return redirect(request.args.get('next') or url_for('main.index'))
-    return render_template('auth/login.html',form=form)    
-        # return jsonify(error="登入成功",errormsg="登入成功")
+    if user is not None and user.verify_password(password):
+        login_user(user, remember_me)
+        session["cellphone"] = user.cellphone
+        session["username"] = user.username
+        response = make_response(jsonify({'errno':1,'errmsg':'數據查詢成功'}))
+        response.set_cookie("username",user.username)
+        return response
+        # return jsonify(errno=1,errmsg="登入成功")
 
 
 # 前端獲取用戶登入狀態
@@ -94,8 +93,9 @@ def logout():
     # 清除session數據
     session.clear()
     logout_user()
-    flash('成功登出')
-    return redirect(url_for('main.index'))
+    response = make_response('delCookie')
+    response.delete_cookie('username')
+    return response
 
 @auth.route('/register')
 def register():
@@ -135,10 +135,12 @@ def register_check():
         return jsonify(errno=0,errmsg="圖片驗證碼錯誤")
 
     if not all([cellphone, password, email, username]):
-        return jsonify(errno=0,errmsg="參數不完整")
+        return jsonify(errno=0,errmsg="請填寫所有資料")
+    if User.query.filter(User.username==username).first():
+        return jsonify(errno=0,errmsg="該用戶名已被註冊過")
 
     if password != password2:
-        return jsonify(error=0, errmsg="密碼不完整")
+        return jsonify(error=0, errmsg="前後密碼不一致")
     if not re.match(r"[^\._-][\w\.-]+@(?:[A-Za-z0-9]+\.)+[A-Za-z]+$",email):
         return jsonify(errno=0,errmsg="請輸入正確的Email")
 
@@ -270,13 +272,14 @@ def captcha_check():
     image_code_id = request.form.get("image_code_id")
     cellphone = request.form.get("cellphone")
     email = request.form.get("email")
-
+   
     # 校驗參數
     if not all ([image_code_id,image_code]):
         return jsonify(errno=0,errmsg="參數不完整")
         # 從redis中取出真實的圖片驗證碼
     try:
         real_image_code = redis_store.get("image_code_%s"%image_code_id)
+
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=0,errmsg="Redis數據庫錯誤")
@@ -330,24 +333,25 @@ def my():
     return render_template("my.html")
 
 
-@auth.route('/info', methods=["POST","GET"])
+@auth.route('/info', methods=["POST"])
 @login_required
 def update_info():
-    form = UpdateInfoForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.cellphone = form.cellphone.data
-        try:
-            db.session.add(current_user)
-            db.session.commit()
-            flash(u'資料更新完成')
-            return redirect(url_for('auth.my'))
-
-        except Exception as e:
-            db.session.rollback()
-            current_app.logger.error(e)
-            flash(u"填寫資料有誤")
-    return render_template("auth/update_info.html", form=form)
+    username = request.form.get("username")
+    cellphone = request.form.get("cellphone")
+    u = User.query.filter(User.username==username).first()
+    if u:
+        return jsonify(error=0,errmsg="該姓名已被註冊過")
+    if not re.match(r"^09\d{8}$",cellphone):
+        return jsonify(error=0,errmsg="請輸入正確的手機號格式")
+    u = User.query.filter(User.id==current_user.id).update({"username":username, "cellphone":cellphone})
+    try:
+        db.session.commit()
+        return jsonify(errno=1,errmsg="參數保存成功")    
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.error(e)
+        return jsonify(errno=0,errmsg="系統忙碌中，請稍後再試")    
+    
 
 
 

@@ -2,17 +2,13 @@
 
 {% block head %}
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
-
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
-    <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
 {% endblock %}
 
 
@@ -33,72 +29,156 @@
                 <div><i class="fas fa-globe-americas"></i>八里區觀海大道5號3樓</div>
                 {% endif %}
             </div>
-            <img src="{{ restaurant['image'] }}" alt="" class="image">
+            <img src="{{ restaurant['image'] }}" alt="" class="image img-thumbnail">
             <hr>
             <div>請將您的實際造訪感想填入下列表格。期待您的分享，謝謝。</div>
             
-            <div class="form-group  required"><label class="control-label" for="rating">您對此餐廳的整體評等</label>     
-                <select class="form-control" id="rating" name="rating" required><option value="1">1</option><option value="2">2</option>
-                    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            
+            <label class="control-label" for="rating">您對此餐廳的整體評等</label>
+            <div class="input-group mb-3 form-group">
+                <select class="custom-select form-control" id="rating" name="rating" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
+                <div class="input-group-append">
+                    <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-star"></i></label>
+                </div>
             </div>
 
-            <div class="form-group  required"><label class="control-label" for="review_title">您的評論標題</label>        
-                <input class="form-control" id="review_title" name="review_title" required type="text" value="">  
+
+            <label class="control-label" for="booking_date">您的評論標題</label>
+            <div class="input-group mb-3 form-group  required">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-pen"></i></span>
+                </div>
+                <input type="text" class="form-control" id="review_title" name="review_title" required value="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             </div>
+
+       
 
             <div class="form-group  required"><label class="control-label" for="review_content">您的評論內容</label>        
                 <textarea class="form-control" name="review_content" id="review_content" cols="30" rows="10"></textarea>
             </div>
 
-            <div class="form-group  required"><label class="control-label" for="type">此次隨行的同伴是</label>     
-                <select class="form-control" id="type" name="type" required><option value="1">伴侶旅行</option><option value="2">家庭式</option>
-                    <option value="3">朋友</option><option value="4">商務</option><option value="5">單獨旅行</option>
+
+            <label class="control-label" for="type">此次隨行的同伴是</label>
+            <div class="input-group mb-3 form-group  required">
+                <select class="custom-select form-control" id="type" name="type" required>
+                    <option selected>伴侶旅行</option>
+                    <option value="家庭式">家庭式</option>
+                    <option value="朋友">朋友</option>
+                    <option value="商務">商務</option>
+                    <option value="單獨旅行">單獨旅行</option>
                 </select>
+                <div class="input-group-append">
+                    <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-user-friends"></i></label>
+                </div>
             </div>
 
-            <div class="form-group  required"><label class="control-label" for="booking_date">您的造訪日期是?</label>
-                    
-                <input class="form-control" id="booking_date" name="booking_date" required type="text" value="">
+            <label class="control-label" for="booking_date">您的造訪日期是?</label>
+            <div class="input-group mb-3 form-group  required">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <input type="text" class="form-control" id="booking_date" name="booking_date" required type="text" value="">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             </div>
 
             <div>
                 <div>更多的資訊提供與評等 (選填)</div>
-                <div class="form-group"><label class="control-label" for="takeout">這間餐廳是否提供外帶？</label>     
-                    <select class="form-control" id="takeout" name="takeout" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+                <label class="control-label" for="takeout">這間餐廳是否提供外帶？</label>
+                <div class="input-group mb-3 form-group  required">
+                    <select class="custom-select form-control" id="takeout" name="takeout" required>
+                        <option value="是" selected>是</option>
+                        <option value="否">否</option>
                     </select>
-                </div>
-                <div class="form-group"><label class="control-label" for="vegetable">需要不含麩質飲食的人士是否可在這間餐廳享用美味餐點？</label>     
-                    <select class="form-control" id="vegetable" name="vegetable" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
-                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
+                    </div>
                 </div>
 
-                <div class="form-group"><label class="control-label" for="service">這間餐廳是否提供外送服務？</label>     
-                    <select class="form-control" id="service" name="service" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+                <label class="control-label" for="vegetable">需要不含麩質飲食的人士是否可在這間餐廳享用美味餐點？</label>
+                <div class="input-group mb-3 form-group  required">
+                    <select class="custom-select form-control" id="vegetable" name="vegetable" required>
+                        <option value="是" selected>是</option>
+                        <option value="否">否</option>
                     </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
+                    </div>
                 </div>
-                <div class="form-group"><label class="control-label" for="disabled">這間餐廳是否有無障礙通行設施？</label>     
-                    <select class="form-control" id="disabled" name="disabled" required><option value="1">是</option><option value="2">否</option><option value="3">不確定</option>
+
+                <label class="control-label" for="service">這間餐廳是否提供外送服務？</label>
+                <div class="input-group mb-3 form-group  required">
+                    <select class="custom-select form-control" id="service" name="service" required>
+                        <option value="是" selected>是</option>
+                        <option value="否">否</option>
                     </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
+                    </div>
+                </div>
+               
+                <label class="control-label" for="disabled">這間餐廳是否有無障礙通行設施？</label>
+                <div class="input-group mb-3 form-group  required">
+                    <select class="custom-select form-control" id="disabled" name="disabled" required>
+                        <option value="是" selected>是</option>
+                        <option value="否">否</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
+                    </div>
                 </div>
             </div>
+            
             <div><hr>
-                <div class="form-group"><label class="control-label" for="star1">服務</label>     
-                    <select class="form-control" id="star1" name="star1" required><option value="1">1</option><option value="2">2</option>
-                        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-                    </select>
-                </div>
-                <div class="form-group"><label class="control-label" for="star">食物</label>     
-                    <select class="form-control" id="star" name="star" required><option value="1">1</option><option value="2">2</option>
-                        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-                    </select>
-                </div>
-                <div class="form-group"><label class="control-label" for="star2">划算度</label>     
-                    <select class="form-control" id="star2" name="star2" required><option value="1">1</option><option value="2">2</option>
-                        <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-                    </select>
-                </div>
+                <label class="control-label" for="star1">服務</label>
+                    <div class="input-group mb-3 form-group">
+                        <select class="custom-select form-control" id="star1" name="star1" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-smile"></i></label>
+                        </div>
+                    </div>
+
+                <label class="control-label" for="star2">食物</label>
+                    <div class="input-group mb-3 form-group">
+                        <select class="custom-select form-control" id="star2" name="star2" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-smile"></i></label>
+                        </div>
+                    </div>
+
+                <label class="control-label" for="star3">划算度</label>
+                    <div class="input-group mb-3 form-group">
+                        <select class="custom-select form-control" id="star3" name="star3" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-smile"></i></label>
+                        </div>
+                    </div>
+             
+            
                 <div class="form-group"><label class="control-label" for="star3">這間餐廳價位如何</label>     
                     <select class="form-control" id="star3" name="star3" required><option value="1">便宜餐館</option><option value="2">中等價位</option>
                         <option value="3">高級餐廳</option>
@@ -119,9 +199,11 @@
         {% for c in comment %}
         <div class="inner-box">    
             <div class="rating-title">
-                <div>{{ c["author"] }}</div>
-                <div class="rating" style="display:none">{{ c["rating"] }}</div>
-                <div class="title">{{ c["title"] }}</div>
+                <div data-toggle="tooltip" title="立即查看作者首頁"><a href="/user/{{ c['author'] }}" class="author-link">{{ c["author"] }}</a></div>
+                <div>
+                    <div style="display: inline-block"><span style="display:none" class="rating">{{ c["rating"] }}</span></div>
+                    <div class="title">{{ c["title"] }}</div>
+                </div> 
             </div>
             <div class="content">{{ c["content"] }}</div>
         </div>
@@ -134,7 +216,12 @@
 
 
 {% block scripts %}
+    <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
     {{ super() }}
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
     <script type="text/javascript">
     $('#booking_date').datepicker({
         "dateFormat": "yy-mm-dd",
@@ -192,6 +279,10 @@
     })
     
     </script>
-
+    <script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
 
 {% endblock %}

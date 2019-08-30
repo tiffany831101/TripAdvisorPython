@@ -39,7 +39,7 @@
     white-space: nowrap;
     vertical-align: middle;
     height:35px;
-    width:500px;
+    width:600px;
     
 }
 
@@ -51,6 +51,13 @@
 
 .captche{
     margin-top:10px;
+    display: inline-block;
+    width:200px;
+}
+.captche_image{
+    display: inline-block;
+    margin-bottom:20px;
+    margin-left:20px;
 }
 
 #imagecode{
@@ -70,5 +77,13 @@ image{
 
 .outer-box{
     border: solid #e5e5e5 2px;
-    
+}
+
+
+.query{
+    margin-bottom:50px;
+}
+
+#captche_area{
+    display: inline-block;
 }

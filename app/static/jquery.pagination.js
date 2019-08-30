@@ -111,29 +111,29 @@
             var pageCount = this.getPageCount(); //获取的总页数
             switch (opts.mode) { //配置模式
                 case 'fixed': //固定按钮模式
-                    html += '<a href="javascript:;" class="page"' + opts.prevCls + '">' + opts.prevContent + '</a>';
+                    html += '<li class="page-item"><a href="javascript:;" class="page-link"' + opts.prevCls + '">' + opts.prevContent + '</a></li>';
                     if (opts.coping) {
                         var home = opts.coping && opts.homePage ? opts.homePage : '1';
-                        html += '<a href="javascript:;" data-page="1" class="page">' + home + '</a>';
+                        html += '<li class="page-item"><a href="javascript:;" data-page="1" class="page-link">' + home + '</a></li>';
                     }
                     var start = current > opts.count - 1 ? current + opts.count - 1 > pageCount ? current - (opts.count - (pageCount - current)) : current - 2 : 1;
                     var end = current + opts.count - 1 > pageCount ? pageCount : start + opts.count;
                     for (; start <= end; start++) {
                         if (start != current) {
-                            html += '<a href="javascript:;" data-page="' + start + '" class="page">' + start + '</a>';
+                            html += '<li class="page-item"><a href="javascript:;" data-page="' + start + '" class="page-link">' + start + '</a></li>';
                         } else {
-                            html += '<span class="page"' + opts.activeCls + '">' + start + '</span>';
+                            html += '<li class="page-item"><span class="page-link"' + opts.activeCls + '">' + start + '</span></li>';
                         }
                     }
                     if (opts.coping) {
                         var _end = opts.coping && opts.endPage ? opts.endPage : pageCount;
-                        html += '<a href="javascript:;" data-page="' + pageCount + '" class="page">' + _end + '</a>';
+                        html += '<li class="page-item"><a href="javascript:;" data-page="' + pageCount + '" class="page-link">' + _end + '</a></li>';
                     }
-                    html += '<a href="javascript:;" class="page"' + opts.nextCls + '" class="page">' + opts.nextContent + '</a>';
+                    html += '<li class="page-item"><a href="javascript:;" class="page-link"' + opts.nextCls + '" class="page-link">' + opts.nextContent + '</a></li>';
                     break;
                 case 'unfixed': //不固定按钮模式
                     if (opts.keepShowPN || current > 1) { //上一页
-                        html += '<a href="javascript:;" class="page"' + opts.prevCls + '" class="page">' + opts.prevContent + '</a>';
+                        html += '<li class="page-item"><a href="javascript:;" class="page-link"' + opts.prevCls + '" class="page-link">' + opts.prevContent + '</a></li>';
                     } else {
                         if (opts.keepShowPN == false) {
                             $obj.find('.' + opts.prevCls) && $obj.find('.' + opts.prevCls).remove();
@@ -141,25 +141,25 @@
                     }
                     if (current >= opts.count + 2 && current != 1 && pageCount != opts.count) {
                         var home = opts.coping && opts.homePage ? opts.homePage : '1';
-                        html += opts.coping ? '<a href="javascript:;" data-page="1" class="page">' + home + '</a><span>...</span>' : '';
+                        html += opts.coping ? '<a href="javascript:;" data-page="1" class="page-link">' + home + '</a><span>...</span>' : '';
                     }
                     var start = (current - opts.count) <= 1 ? 1 : (current - opts.count);
                     var end = (current + opts.count) >= pageCount ? pageCount : (current + opts.count);
                     for (; start <= end; start++) {
                         if (start <= pageCount && start >= 1) {
                             if (start != current) {
-                                html += '<a href="javascript:;" data-page="' + start + '" class="page">' + start + '</a>';
+                                html += '<li class="page-item"><a href="javascript:;" data-page="' + start + '" class="page-link">' + start + '</a></li>';
                             } else {
-                                html += '<span class="page"' + opts.activeCls + '">' + start + '</span>';
+                                html += '<li class="page-item"><span class="page-link"' + opts.activeCls + '">' + start + '</span></li>';
                             }
                         }
                     }
                     if (current + opts.count < pageCount && current >= 1 && pageCount > opts.count) {
                         var end = opts.coping && opts.endPage ? opts.endPage : pageCount;
-                        html += opts.coping ? '<span>...</span><a href="javascript:;" data-page="' + pageCount + '" class="page">' + end + '</a>' : '';
+                        html += opts.coping ? '<span>...</span><a href="javascript:;" data-page="' + pageCount + '" class="page-item">' + end + '</a>' : '';
                     }
                     if (opts.keepShowPN || current < pageCount) { //下一页
-                        html += '<a href="javascript:;" class="page"' + opts.nextCls + '">' + opts.nextContent + '</a>';
+                        html += '<li class="page-item"><a href="javascript:;" class="page-link"' + opts.nextCls + '">' + opts.nextContent + '</a></li>';
                     } else {
                         if (opts.keepShowPN == false) {
                             $obj.find('.' + opts.nextCls) && $obj.find('.' + opts.nextCls).remove();

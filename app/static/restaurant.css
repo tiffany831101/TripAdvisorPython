@@ -9,7 +9,7 @@ img{
     padding-top:8px;
     font-family: "Microsoft JhengHei";
     list-style: none;
-    width:700px;
+    width:650px;
     height: 230px;
     background-color: white;
     overflow: hidden;
@@ -18,7 +18,7 @@ img{
 #all{
     margin-left: auto;
     margin-right:auto; 
-    width:950px;
+    width:970px;
     background-color: #f2f2f2;
 }
 
@@ -47,11 +47,12 @@ img{
     color: #00a680;
     font-weight: 700;
     vertical-align: middle;
+    margin-left:3px
 }
 
 
 .comment{
-    padding-top: 10px;
+    padding-top: 5px;
     padding-right:5px;
     overflow: hidden;
     text-overflow : ellipsis;
@@ -61,11 +62,11 @@ img{
 
 
 
-#go-box{
+.go{
     background-color: #fc0;
     width:120px;
     display: inline-block;
-    margin-left:50px;
+    margin-left:10px;
     text-align: center;
     cursor: pointer; 
 }
@@ -105,7 +106,7 @@ img{
     margin-top:10px;
     text-align: center;
     height:50px;
-    width:950px;
+    width:970px;
 }
 
 .wrap{
@@ -123,7 +124,7 @@ img{
 }
 
 .love{
-    margin-left:5px;
+    margin-left:15px;
     width:80px;
     display: inline-block;
     cursor: pointer; 
@@ -131,6 +132,61 @@ img{
 
 
 .title-container{
-    width:320px;
+    width:400px;
     display: inline-block;
+}
+
+.look{
+    color:#000a12;
+    text-decoration:none;
+    text-align: center;
+    font-weight: 700;
+    line-height:26px;
+    height:15px;
+}
+
+.rating_block{
+    display: inline-block;
+    width:200px;
+}
+
+.count_block{
+    display: inline-block;
+    margin-left:50px;
+}
+
+.count{
+    margin-left:5px;
+}
+
+.rate_count_block{
+    padding-top:5px;
+}
+
+.mb-3{
+    width:410px;
+}
+
+.mb-10{
+    width:900px;
+}
+
+.comment{
+    margin-top:5px;
+}
+
+.page-area{
+    margin-left:10px;
+    margin-bottom:20px;
+}
+
+.page-top-area{
+    margin-left:700px;
+}
+#search{
+    margin-left:10px;
+}
+
+a{
+    color:#fff;
 }

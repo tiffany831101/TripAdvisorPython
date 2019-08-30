@@ -6,14 +6,21 @@
 }
 
 
-
+#booking1{
+    color:#000a12;
+    font-weight: 700;
+    width: 600px;
+    margin-left: 300px;
+    margin-top:25px;
+    background-color: white;
+    font-family:Microsoft JhengHei;
+}
 
 #booking{
     color:#000a12;
     font-weight: 700;
     width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 300px;
     margin-top:25px;
     background-color: white;
     font-family:Microsoft JhengHei;
@@ -23,7 +30,9 @@ img{
     height:150px;
     display: inline-block;
 }
-
+.author-link{
+    color:#000a12;
+}
 
 
 .outer-box{
@@ -123,16 +132,19 @@ img{
 
 
 .rating-title{
-    display:inline-block
+    display:inline-block;
+    padding-top:10px;
+    padding-left:10px;
 }
 
 .comment_block{
-    width:350px;
+    width:300px;
     margin-right:100px;
     background-color: #fff;
     color:#000a12;
     font-weight: 700;
     margin-top:25px;
+    margin-left:100px;
     font-family:Microsoft JhengHei;
 }
 
@@ -149,10 +161,13 @@ img{
 .content{
     margin-top:5px;
     width:300px;
+    padding-left:10px;
 }
 
 .inner-box{
     margin-left:10px;
+    margin-top:5px;
+    border:solid #e5e5e5 2px;;
 }
 
 #revise{
@@ -160,4 +175,9 @@ img{
     background-color: #078171;
     color:#fff;
     text-align: center
+}
+
+
+.commentform{
+    padding: 10px;
 }

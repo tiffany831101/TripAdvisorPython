@@ -3,9 +3,32 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<style>
+    a{
+        color:#fff;
+    }
+    body{
+        background-color:#e5e5e5
+    }
+    .author-link{
+        color: #000;
+    }
+
+</style>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +38,7 @@
         {% if read_list %}
             {% for r in read_list %}
                 <div class="prev_border">
-                    <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}"></a></div>
+                    <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}" class="img-thumbnail"></a></div>
                     <div class="prev_store">{{ r["title"] }}</div>
                     <div class="prev_store">{{ r["address"] }}</div>
                     
@@ -35,14 +58,14 @@
                         
                         {% if not user.username==current_user.username %}
                             {% if current_user.is_following(user) %}
-                                <div class="follow">關注中</div>
+                                <div class="follow" >關注中</div>
                             {% else %}
                                 <div class="follow">追蹤</div>
                             {% endif %}
                         {% endif %}
 
                         {% if user.username==current_user.username %}
-                            <div class="profile"><a href="{{ url_for('auth.information') }}" class="click">編輯個人檔案</a></div> 
+                            <button type="button" class="profile" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-toggle="tooltip" title="立即完善個人資料">完善個人資料</button>
                         {% endif %}
                         
                     </div>    
@@ -50,8 +73,8 @@
                     
                     
                     <div class="list">
-                        <div id="followed">追蹤中<br><span class="followed">{{ user.followed.count() }}</span></div>
-                        <div id="followers">粉絲<br><span class="followers">{{ user.followers.count() }}</span></div>
+                        <div id="followed" data-toggle="modal" data-target="#followedModal" data-toggle="tooltip" title="查看關注名單">追蹤中<br><span class="followed">{{ user.followed.count() }}</span></div>
+                        <div id="followers" data-toggle="modal" data-target="#followerModal" data-toggle="tooltip" title="查看粉絲名單">粉絲<br><span class="followers">{{ user.followers.count() }}</span></div>
                         <div class="love">收藏<br><span class="store_like">{% if count %} {{ count }} {% else %} {{ 0 }} {% endif %}</span></div>    
                     </div>  
                 </div>
@@ -79,7 +102,7 @@
                 {% if comment_list %}
                     {% for c in comment_list %}
                         <div class="title-inner-container"> 
-                            <div id="username" class="comment-username"><a href="/user/{{ c['author'] }}">{{ c['author'] }}</a></div>
+                            <div id="username" class="comment-username"><a href="/user/{{ c['author'] }}" class="author-link">{{ c['author'] }}</a></div>
                             {% if c['author'] != current_user.username %}
                                 <div class="com_follow" id="com_fo">{{ c["follow_condition"] }}</div>
                             {% endif %}
@@ -92,17 +115,91 @@
             </div>
         </div>
     </div>
+    {% if current_user.username == username%}
     <div class="self-introduction">
         <div class="intro-outer-container">
             <div class="title">簡介</div>
-            <div><a href="">+新增您目前所在城市</a></div>
-            <div><a href="">+介紹一下您自己</a></div>
-            <div>發表評論</div>
+            <div>+新增您目前所在城市</div>
+            <div>+介紹一下您自己</div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">目前所在城市</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">關於您</label>
+                        <textarea class="form-control" id="message-text" placeholder="介紹一下自己"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">儲存</button>
+            </div>
         </div>
     </div>
 </div>
 
 
+<div>
+    <div class="modal fade" id="followerModal" tabindex="-1" role="dialog" aria-labelledby="followerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="followerModalLabel">追蹤名單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        
+                <div class="modal-body" id="follow-body">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+                
+            </div>
+    </div>
+</div>
+
+<div>
+    <div class="modal fade" id="followedModal" tabindex="-1" role="dialog" aria-labelledby="followerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="followerModalLabel">追蹤名單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        
+                <div class="modal-body" id="followed-body">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+                
+            </div>
+    </div>
+</div>
 
 
 
@@ -111,29 +208,32 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+{{ super() }}
 <script>
     $(function(){
         $(".follow").click(function(e){
             var username = $(this).prev().children(".username").text()
-            alert($(this).text())
             if ($(this).text()=="追蹤"){
                 $.get("/follow/"+username,function(response){
                     if (response.errno=1){
                         $(this).html("關注中");
-                        alert(response.errmsg);
+                        swal(response.errmsg,"","success");
+                        window.location.href ="/user/"+username
                     }else{
-                        alert(response.errmsg)
+                        swal(response.errmsg,"","error")
+                        window.location.href ="/user/"+username
                     }
                 }).bind(this)
               
             }else{
                 $.get("/unfollow/"+username,function(response){
                     if (response.errno=1){
-                        alert(response.errmsg)
+                        swal(response.errmsg,"","success")
                         $(this).html("追蹤")
+                        window.location.href ="/user/"+username
                     }else{
-                        alert(response.errmsg)
+                        swal(response.errmsg,"","error")
+                        window.location.href ="/user/"+username
                     }
                 }).bind(this)
             }
@@ -144,32 +244,78 @@
 
 
 <script>
-    $(function(){
-        $("#followers").click(function(){
+$(function(){
+    click_followers()
+    click_follwed()
+    
+    $('[data-toggle="tooltip"]').tooltip();  
+})
+
+
+
+function click_followers(){
+    $("#followers").off().one("click",function(){
             var username = $(this).parent().prev().children("#head").children(".username").text()
             $.get("/followers/"+username,function(response){
-                var data = response.data.follower
-                $.each(data,function(key,value){
-                    alert(value.user)
-                })
-            })
+                render(response)
         })
     })
-</script>
-<script>
-    $(function(){
-        $("#followed").click(function(){
+}
+
+function render(response){
+    var data = response.data.follower
+    $.each(data,function(key,value){
+        var $tr=" ";
+        $tr +=  "<div>"+
+                "<div data-toggle='tooltip' title='查看首頁' class='user_modal'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"</a></div>"+
+                "<div class='follow_modal'>"+value.follow_condition+"</div>"+
+                "</div>"
+        
+        $("#follow-body").append($tr)
+        follow_condition()
+    })
+    
+}
+
+function followed(response){
+    var data = response.data.followed
+    $.each(data,function(key,value){
+        var $tr=" ";
+        $tr +=  "<div>"+
+                "<div data-toggle='tooltip' title='查看首頁' class='user_modal'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"</a></div>"+
+                "<div class='follow_modal' data-toggle='tooltip'>"+value.follow_condition+"</div>"+
+                "</div>"
+        
+        $("#followed-body").append($tr)
+       
+    })
+    
+}
+
+function follow_condition(){
+    if ($(".follow_modal").text()=="追蹤"){
+        $(this).attr("title","取消追蹤")
+    }else{
+        $(this).attr("title","立即關注")
+    }
+}
+
+
+function click_follwed(){
+    $("#followed").off().one("click",function(){
+        
             var username = $(this).parent().prev().children("#head").children(".username").text()
             $.get("/followed/"+username,function(response){
-                var data = response.data.followed
-                $.each(data,function(key,value){
-                    alert(value.user)
-                })
-            })
+                followed(response) 
         })
     })
+}
+
+
+
 
 </script>
+
 <script>
     $(function(){
         $(".com_follow").click(function(){
@@ -177,7 +323,7 @@
             if ($(this).text()=="追蹤"){
                 $.get("/follow/"+username,function(response){
                     if (response.errno=1){
-                        alert(response.errmsg);
+                        swal("成功關注");
                         $(this).text("關注中");
                     }else{
                         alert(response.errmsg)
@@ -219,6 +365,8 @@ $(function(){
 })
 
 </script>
+
+
 
 
 {% endblock %}

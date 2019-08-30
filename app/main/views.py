@@ -8,11 +8,12 @@ from ..models import User, Role, Post, Survey, TripAdvisor, Reservation, Comment
 from flask_login import login_required, current_user
 import logging
 from flask import current_app #全局上下文
-from app import constants
+from app import constants, redis_store
 import time
 import random
 from sqlalchemy import and_,func
-@main.route('/resturant')
+
+@main.route('/restaurant')
 def index():
     current_app.logger.error("error msg")
     current_app.logger.warn("warn msg")
@@ -175,7 +176,7 @@ def reservation_check():
         return jsonify(errno=0,errmsg="參數不完整")
     else:
         order_id = "%s-%s" % (int(round(time.time()*1000)),random.randint(0,99999999))
-        print(order_id)
+        
     store = TripAdvisor.query.filter_by(title=restaurant).first()
     r = Reservation(title_name=restaurant,
                     people=people,
@@ -196,7 +197,6 @@ def reservation_check():
 @login_required
 def result():
     now = time.strftime("%Y-%m-%d", time.localtime())
-    # reservation = Reservation.query.filter(and_(Reservation.user_id==current_user.id,Reservation.booking_date>now)).order_by(Reservation.booking_date.desc()).all()
     reservation_list=[]
     record = db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor).outerjoin(Reservation, and_(Reservation.restaurant_id==TripAdvisor.id,Reservation.booking_date>now)).join(User, and_(Reservation.user_id==User.id, User.id==current_user.id)).all()
     for r in record:
@@ -208,8 +208,16 @@ def result():
         create_time = r[0].create_time.strftime('%Y-%m-%d')
         image = r[1].info_url.split(",")[0]
         reservation_list.append({"image":image,"title":title,"date":date,"booking_time":booking_time,"peolple":people,"order_id":order_id,"create_time":create_time})
-    history = Reservation.query.filter(and_(Reservation.user_id==current_user.id,Reservation.booking_date<now)).order_by(Reservation.booking_date.desc()).all()
-    return render_template("result.html", reservation=reservation_list, history=history)
+   
+    history = db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor).outerjoin(Reservation, and_(Reservation.restaurant_id==TripAdvisor.id,Reservation.booking_date < now)).join(User, and_(Reservation.user_id==User.id, User.id==current_user.id)).order_by(Reservation.booking_date.desc()).all()
+    history_list = []
+    for h in history:
+        title = h[0].title_name
+        date = h[0].booking_date
+        order_id = h[0].order_id1
+        image = h[1].info_url.split(",")[0]
+        history_list.append({"image":image,"title":title,"date":date,"order_id":order_id})
+    return render_template("result.html", reservation=reservation_list, history=history_list)
 
 @main.route('/reservation/revise/<order_id>',methods=["POST","GET"])
 def order_revise(order_id):
@@ -252,7 +260,7 @@ def order_confirm_revise():
 
 @main.route('/restaurant/list')
 def restaurant_list():
-    return render_template("test.html")
+    return render_template("restaurant.html")
 
 @main.route("/restaurant/filter")
 def restaurant_filter():
@@ -260,6 +268,15 @@ def restaurant_filter():
     if not page:
         page=int(1)
     user = current_user.get_id()
+    redis_key = "restaurant_%s"  % (page)
+    try:
+        resp_json = redis_store.hget(redis_key, page)
+    except Exception as e:
+        current_app.logger.error(e)
+    else:
+        if resp_json:
+            return resp_json, 200, {"Content-Type":"application/json"}
+
     if user is not None:
         data = User.page_load(val=int(current_user.id),page=page)
     else:
@@ -280,7 +297,19 @@ def restaurant_filter():
         count = d[0].read_count
         love = "已收藏" if current_user.get_id() is not None and d[1]==current_user.username else "收藏"
         data_list.append({"title":title, "res_type":res_type, "rating_count":rating_count, "info_url":info_url,"cellphone":cellphone,"street":street,"rating":rating,"comment":comment,"count":count,"love":love})
-    return jsonify(errno=1,data=data_list,total_page=total_page)
+    resp_dict=dict(errno=1, data=data_list,total_page=total_page)
+    resp_json = json.dumps(resp_dict)
+
+    redis_key = "restaurant_%s" % (page)
+
+    
+    try:
+        redis_store.hset(redis_key,page,resp_json)
+        redis_store.expire(redis_key,constants.RESTAURANT_LIST_PAGE)
+    except Exception as e:
+        current_app.logger.error(e)
+    return resp_json, 200, {"Content-Type":"application/json"}
+    
 
 @main.route('/restaurant/search')
 def restaurant_search():
@@ -289,22 +318,34 @@ def restaurant_search():
     res_type = request.args.get("food") #餐廳類型
     sort_key = request.args.get("filter") #過濾類型
     page = request.args.get("page")
+    keyword = request.args.get("keyword")
     
     try:
         page=int(page)
     except Exception as e:
         current_app.logger.error(e)
         page = int(1)
-    params = {"area":address, "food":res_type, "filter":sort_key}
+    params = {"area":address, "food":res_type, "filter":sort_key,"keyword":keyword}
+    user = current_user.get_id()
+    redis_key = "restaurant_%s_%s_%s_%s_%s_%s" % (address, res_type, sort_key, page, keyword, user)
+    try:
+        resp_json = redis_store.hget(redis_key,page)
+    except Exception as e:
+        current_app.logger.error(e)
+    else:
+        if resp_json:
+            return resp_json, 200, {"Content-Type":"application/json"}
 
     filter_params=[]
+    if keyword:
+        filter_params.append(TripAdvisor.title.contains(keyword))
 
     if address:
         filter_params.append(TripAdvisor.address==address)  
     if res_type:
-        filter_params.append(TripAdvisor.res_type == res_type)
+        filter_params.append(TripAdvisor.res_type.contains(res_type))
+
     
-    user = current_user.get_id()
 
     if sort_key =="評論數":
         if user is not None:
@@ -318,14 +359,16 @@ def restaurant_search():
         else:
             restaurant = User.rating_search(val=int(0), params=filter_params)
 
-    restaurant_obj = restaurant.paginate(page=page,per_page=30,error_out= False)
-    restaurant_li =restaurant_obj.items
-    total_page = restaurant_obj.pages
     
+    restaurant_obj = restaurant.paginate(page=page,per_page=30,error_out= False)
+ 
+    restaurant_li =restaurant_obj.items
+    if not restaurant_li:
+        return jsonify(errno="3",errmsg="參數錯誤")
+    total_page = restaurant_obj.pages
     data_list=[]
     for d in restaurant_li:
         title = d[0].title
-        res_type = d[0].res_type
         rating_count = d[0].rating_count
         info_url=(d[0].info_url).split(",")[0]
         cellphone=d[0].cellphone
@@ -334,10 +377,20 @@ def restaurant_search():
         count = d[0].read_count
         comment= (d[0].comment).split(",")[0]
         love = "已收藏" if current_user.get_id() is not None and d[1]==current_user.username else "收藏"
-        data_list.append({"title":title, "res_type":res_type, "rating_count":rating_count, "info_url":info_url,"cellphone":cellphone,"street":street,"rating":rating,"comment":comment,"count":count,"love":love})  
-    return jsonify(errno=1,data=data_list,total_page=total_page, params=params)
-    
+        data_list.append({"title":title, "rating_count":rating_count, "info_url":info_url,"cellphone":cellphone,"street":street,"rating":rating,"comment":comment,"count":count,"love":love})  
+    resp_dict = dict(errno=1,data=data_list,total_page=total_page, params=params)
+    resp_json = json.dumps(resp_dict)
+    redis_key = "restaurant_%s_%s_%s_%s_%s_%s" % (address, res_type, sort_key, page, keyword, user)
 
+    try:
+        pipeline = redis_store.pipeline()
+        pipeline.multi()
+        pipeline.hset(redis_key, page, resp_json)
+        pipeline.expire(redis_key, constants.RESTAURANT_LIST_PAGE)
+        pipeline.execute()
+    except Exception as e:
+        current_app.logger.error(e)
+    return resp_json, 200, {"Content-Type":"application/json"}
 
 @main.route('/restaurant/<restaurant>',methods=["POST","GET"])
 @login_required
@@ -477,9 +530,15 @@ def comment_unlike(id):
 @login_required
 def follow_user(username):
     follower_list=[]
-    follower = Follow.query.join(User, User.id==Follow.followed_id).filter(User.username==username).all()    
+    follower = Follow.query.join(User, User.id==Follow.followed_id).filter(User.username==username).all()
+    current_user_follower =  Follow.query.join(User, User.id==Follow.follower_id).filter(User.id==current_user.id).all()
+    current_user_follower_list=[]
+    for a in current_user_follower:
+        current_user_follower_list.append(a.followed.id)
     for f in follower:
-        follower_list.append({"user":f.follower.username})
+        follow_condition = "關注中" if f.follower.id in current_user_follower_list else "追蹤"
+        follower_list.append({"user":f.follower.username,"follow_condition":follow_condition})
+
     return jsonify(errno=1,data={"follower":follower_list})
 
 
@@ -488,10 +547,15 @@ def follow_user(username):
 def followed_user(username):
     followed_list=[]
     followed = Follow.query.join(User, User.id==Follow.follower_id).filter(User.username==username).all()
+    current_user_follower =  Follow.query.join(User, User.id==Follow.follower_id).filter(User.id==current_user.id).all()
+    current_user_follower_list=[]
+    
+    for a in current_user_follower:
+        current_user_follower_list.append(a.follower.id)
     for f in followed:
-        followed_list.append({"user":f.followed.username})
+        follow_condition = "關注中" if f.follower.id in current_user_follower_list else "追蹤"
+        
+        followed_list.append({"user":f.followed.username,"follow_condition":follow_condition})
     return jsonify(errno=1,data={"followed":followed_list})
 
-@main.route("/followers/list")
-def followers_list():
-    return render_template("list.html")
+
