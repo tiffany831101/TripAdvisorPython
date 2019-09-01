@@ -53,13 +53,10 @@ class User(UserMixin,db.Model):
 
     confirmed = db.Column(db.Boolean,default=False)
     
-
-
-    name = db.Column(db.String(20))
-    location = db.Column(db.String(30))
-    about_me = db.Column(db.Text())
-    member_since = db.Column(db.DateTime(),default=datetime.utcnow)
-    last_seen = db.Column(db.DateTime(),default=datetime.utcnow)
+    city = db.Column(db.String(10))
+    website = db.Column(db.String(128))
+    about_me = db.Column(db.String(100))
+    
     
     posts = db.relationship('Post', backref='author', lazy='dynamic')
    

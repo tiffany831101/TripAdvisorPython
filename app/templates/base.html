@@ -149,7 +149,7 @@ $(function(){
     function logout(){
         $.get("/auth/logout","",function(response){
             swal("您已成功登出","","success")
-            history.go(0)
+            window.location.href="/restaurant/list"
         })
     }
 

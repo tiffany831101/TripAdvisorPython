@@ -536,8 +536,9 @@ def follow_user(username):
     for a in current_user_follower:
         current_user_follower_list.append(a.followed.id)
     for f in follower:
-        follow_condition = "關注中" if f.follower.id in current_user_follower_list else "追蹤"
-        follower_list.append({"user":f.follower.username,"follow_condition":follow_condition})
+        follow_condition = "關注中" if f.follower.id in current_user_follower_list else "追蹤" if f.follower.id != current_user.id else "自己"
+        follower_count = f.follower.followers.count()
+        follower_list.append({"user":f.follower.username,"follow_condition":follow_condition,"follower_count":follower_count,"city":f.follower.city,"about_me":f.follower.about_me})
 
     return jsonify(errno=1,data={"follower":follower_list})
 
@@ -551,11 +552,29 @@ def followed_user(username):
     current_user_follower_list=[]
     
     for a in current_user_follower:
-        current_user_follower_list.append(a.follower.id)
+        current_user_follower_list.append(a.followed.id)
     for f in followed:
-        follow_condition = "關注中" if f.follower.id in current_user_follower_list else "追蹤"
-        
-        followed_list.append({"user":f.followed.username,"follow_condition":follow_condition})
+        follow_condition = "關注中" if f.followed.id in current_user_follower_list else "追蹤" if f.followed.id != current_user.id else "自己"
+        follower_count = f.followed.followers.count()
+        city = f.followed.city if f.followed.city else "城市"
+        about_me = f.followed.about_me if f.followed.about_me else "趕快來認識我吧"
+        followed_list.append({"user":f.followed.username,"follow_condition":follow_condition,"follower_count":follower_count,"city":city,"about_me":about_me})
     return jsonify(errno=1,data={"followed":followed_list})
 
 
+@main.route("/about_me/<username>",methods=["POST"])
+@login_required
+def about_me(username):
+    city = request.form.get("city")
+    about_me = request.form.get("about_me")
+    website = request.form.get("website")
+    user = User.query.filter(User.username==username).first()
+    user.website = website if website else None
+    user.city = city if city else None
+    user.about_me = about_me if about_me else None 
+    try:
+        db.session.commit()
+        return jsonify(errno=1,errmsg="數據保存成功")
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫異常")

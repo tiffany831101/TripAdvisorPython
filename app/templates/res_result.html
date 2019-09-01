@@ -127,12 +127,18 @@
     {% for c in comment %}
         <div class="review_content1">
             <div class="review" style="display: inline-block">
-                <div>{{ c.author.username }}
-                    <a href="/user/{{ c.author.username }}">查看作者首頁</a>
-                    <span id="comment_id{{ loop.index }}" style="display: none">{{ c.id }}</span>
+                <div class="comment-author">{{ c.author.username }}
+                    <a href="/user/{{ c.author.username }}" style="color:#078171" data-toggle='tooltip' data-placement='top' title='立即訪問'>訪問作者首頁</a>
                 </div>
-         
-                <div class="love">
+                <div class="rating">{{ c.rating }}
+                    <span class="rating_icon"></span>
+                </div>
+                <div class="review-title" style="font-weight: 500">
+                    <div>{{ c.review_title }}</div>
+                </div>
+
+                <div class="love" onclick="love(this)">
+                    <span id="comment_id{{ loop.index }}" style="display: none">{{ c.id }}</span>
                 {% if like %}
                     {% with a=[]  %}
                         {% for lv in like %}
@@ -157,13 +163,12 @@
                     <i class="fas fa-heart"></span></i></div>
                 {% endif %}
                 </div>
-                    <div class="rating" style="color:#078171">{{ c.rating }}
-                        <span class="rating_icon"></span>
-                    </div>
+                    
+                    
            
             
-                <div>{{ c.review_content }}</div>
-                <div>留言時間 : {{ c.booking_date }}</div>
+                <div class="review-content">{{ c.review_content }}</div>
+                <div class="comment-time">留言時間 : <span>{{ c.booking_date }}<span></div>
 
             </div>
         </div>
@@ -201,8 +206,14 @@ $(".rating").each(function() {
     var rating = $(this).text();
     for (var i=0;i<rating;i++){
         $tr= '<i class="fas fa-circle"></i>'
-        $(this).children(".rating_icon").append($tr)
+        $(this).show().children(".rating_icon").append($tr)
     }
+    for (var j=0;j<5-rating;j++){
+        $td = '<i class="far fa-circle"></i>'
+        $(this).children(".rating_icon").append($td)
+        
+    }
+    
     
 })
 $('.carousel').carousel({
@@ -253,21 +264,19 @@ $('.carousel').carousel({
     })
 </script>
 <script>
-    $(function(){
-        $(".love").click(function(){
-            var id = $(this).prev().children("span").text();
-            $love = $.trim($(this).text());
+function love(obj){
+        $(this).off().one("click",function(){
+            var id = $(obj).children().first().text();
+            $love = $.trim($(obj).children().first().next().text());
             if ($love=="讚"){
                 $.ajax({
                     method:"get",
                     url: "/comment/like/"+id,
                     success:function(response){
-                        alert("已按讚")
-
-                        $(this).children(".record").html('已讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
-                        $(this).children().children(".love_icon").css("color","#FF0000")
+                        $(obj).children(".record").html('已讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
+                        $(obj).children().children(".love_icon").css("color","#FF0000")
                         
-                    }.bind(this)
+                    }.bind(obj)
 
                 })
             }else{
@@ -275,9 +284,8 @@ $('.carousel').carousel({
                     method:"get",
                     url: "/comment/unlike/"+id,
                     success:function(response){
-                        alert("收回讚")
-                        $(this).children(".record").html('讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
-                        $(this).children().children(".love_icon").css("color","")
+                        $(obj).children(".record").html('讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
+                        $(obj).children().children(".love_icon").css("color","")
                         
                         
                     }.bind(this)
@@ -286,7 +294,7 @@ $('.carousel').carousel({
             }
 
         })
-    })
+    }
 </script>
 <script>
     $(function(){

@@ -181,6 +181,8 @@ function initPagination(count, pagesize){
     $('.pagination').pagination({
             totalData: count,
             showData: pagesize,
+            autoHidePrevious: true,
+            autoHideNext: true,
             callback: function (api) {
                 var params = {
                     "page":api.getCurrent()
@@ -212,7 +214,7 @@ function click_restaurant(obj){
 
 function filter(){
     var cities = [["---請選擇---"],["大安","信義區","萬華","松山","士林","中正區","大同","中山區","南港"],
-                       ["蘆洲","三重","板橋","新莊","中和","永和","新店"]]
+                       ["蘆洲","三重","板橋","新莊","中和","永和","新店","土城","淡水","五股"]]
     $("#filter-city").change(function(){
         var val=$("#filter-city").val();
         $("#filter-area").empty();

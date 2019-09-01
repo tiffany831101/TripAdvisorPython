@@ -68,11 +68,11 @@
             <label class="control-label" for="type">此次隨行的同伴是</label>
             <div class="input-group mb-3 form-group  required">
                 <select class="custom-select form-control" id="type" name="type" required>
-                    <option selected>伴侶旅行</option>
-                    <option value="家庭式">家庭式</option>
-                    <option value="朋友">朋友</option>
-                    <option value="商務">商務</option>
-                    <option value="單獨旅行">單獨旅行</option>
+                    <option value="1" selected>伴侶旅行</option>
+                    <option value="2">家庭式</option>
+                    <option value="3">朋友</option>
+                    <option value="4">商務</option>
+                    <option value="5">單獨旅行</option>
                 </select>
                 <div class="input-group-append">
                     <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-user-friends"></i></label>
@@ -93,8 +93,8 @@
                 <label class="control-label" for="takeout">這間餐廳是否提供外帶？</label>
                 <div class="input-group mb-3 form-group  required">
                     <select class="custom-select form-control" id="takeout" name="takeout" required>
-                        <option value="是" selected>是</option>
-                        <option value="否">否</option>
+                        <option value="1" selected>是</option>
+                        <option value="2">否</option>
                     </select>
                     <div class="input-group-append">
                         <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
@@ -104,8 +104,8 @@
                 <label class="control-label" for="vegetable">需要不含麩質飲食的人士是否可在這間餐廳享用美味餐點？</label>
                 <div class="input-group mb-3 form-group  required">
                     <select class="custom-select form-control" id="vegetable" name="vegetable" required>
-                        <option value="是" selected>是</option>
-                        <option value="否">否</option>
+                        <option value="1" selected>是</option>
+                        <option value="2">否</option>
                     </select>
                     <div class="input-group-append">
                         <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
@@ -115,8 +115,8 @@
                 <label class="control-label" for="service">這間餐廳是否提供外送服務？</label>
                 <div class="input-group mb-3 form-group  required">
                     <select class="custom-select form-control" id="service" name="service" required>
-                        <option value="是" selected>是</option>
-                        <option value="否">否</option>
+                        <option value="1" selected>是</option>
+                        <option value="2">否</option>
                     </select>
                     <div class="input-group-append">
                         <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
@@ -126,8 +126,8 @@
                 <label class="control-label" for="disabled">這間餐廳是否有無障礙通行設施？</label>
                 <div class="input-group mb-3 form-group  required">
                     <select class="custom-select form-control" id="disabled" name="disabled" required>
-                        <option value="是" selected>是</option>
-                        <option value="否">否</option>
+                        <option value="1" selected>是</option>
+                        <option value="2">否</option>
                     </select>
                     <div class="input-group-append">
                         <label class="input-group-text" for="inputGroupSelect02"><i class="far fa-thumbs-up"></i></label>
@@ -199,9 +199,9 @@
         {% for c in comment %}
         <div class="inner-box">    
             <div class="rating-title">
-                <div data-toggle="tooltip" title="立即查看作者首頁"><a href="/user/{{ c['author'] }}" class="author-link">{{ c["author"] }}</a></div>
+                <div data-toggle="tooltip" title="立即查看作者首頁" style="display:inline-block;font-size:12px"><a href="/user/{{ c['author'] }}" class="author-link">{{ c["author"] }}</a></div>
+                <div style="display: inline-block"><span style="display:none" class="rating">{{ c["rating"] }}</span></div>
                 <div>
-                    <div style="display: inline-block"><span style="display:none" class="rating">{{ c["rating"] }}</span></div>
                     <div class="title">{{ c["title"] }}</div>
                 </div> 
             </div>
@@ -271,12 +271,21 @@
     </script>
     <script>
     $(function(){
-        var score = $(".rating").text()
-        for (var i=0;i<score;i++){
-        $tr= '<i class="fas fa-circle"></i>'
-        $(".rating").empty().css("display","block").css("color","#078171").append($tr)
+        $(".rating").each(function() {
+        var rating = $(this).text();
+        for (var i=0;i<rating;i++){
+            $tr= '<i class="fas fa-circle"></i>'
+            $(this).parent().append($tr).css("color","#078171").css("font-size","12px")
+        }
+        for (var j=0;j<5-rating;j++){
+            $td = '<i class="far fa-circle"></i>'
+            $(this).parent().append($td).css("color","#078171").css("font-size","12px")
         }
     })
+
+    })
+
+    
     
     </script>
     <script>

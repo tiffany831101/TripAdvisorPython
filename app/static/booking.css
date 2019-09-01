@@ -155,13 +155,13 @@ img{
 
 .title{
     display: inline-block;
-    font-size:12px
+    font-size:14px
 }
 
 .content{
-    margin-top:5px;
-    width:300px;
+    margin-top:2px;
     padding-left:10px;
+    font-size:12px;
 }
 
 .inner-box{
