@@ -134,12 +134,19 @@
                 {% if comment_list %}
                     {% for c in comment_list %}
                         <div class="title-inner-container"> 
-                            <div id="username" class="comment-username"><a href="/user/{{ c['author'] }}" class="author-link">{{ c['author'] }}</a></div>
-                            {% if c['author'] != current_user.username %}
-                                <div class="com_follow" id="com_fo">{{ c["follow_condition"] }}</div>
-                            {% endif %}
-                            <div>{{ c["review_content"] }}</div>
+                            <div id="username" class="comment-username" data-toggle='tooltip' title="查看用戶首頁"><a href="/user/{{ c['author'] }}" class="author-link">{{ c['author'] }}</a><i class='fas fa-check-circle circle'></i></div>
+                            <div class="com_follow" onclick="addfollow(this)"><i class='fas fa-user-plus'></i>{{ c["follow_condition"] }}</div>
+                            <div>
+                                <div class="com-title">{{ c["title"] }}</div>
+                                <div class="rating">{{ c["rating"] }}</div>
+                                <a data-toggle="tooltip" title="立即查看" href="javascript:void(0)" class="restaurant_href" onclick="add(this)">立即查看</a>
+                            </div>
+                            <div class="review-like">
+                                <div class="review_content">{{ c["review_content"] }}</div>
+                                <!-- <div class="like_condition"><i class="fas fa-heart"></i>{{ c["like_condition"] }}</div> -->
+                            </div>
                         </div>
+                        
                     {% endfor %}
                 {% else %}
                     {% if current_user.username == user.username %}
@@ -271,6 +278,8 @@
 {% block scripts %}
 {{ super() }}
 <script>
+
+    
     $(function(){
         $(".follow").click(function(e){
             var username = $(this).prev().children(".username").text()
@@ -309,14 +318,82 @@ $(function(){
     click_followers()
     click_follwed()
     follow_event()
-    button_press()
+    rating()
+    like()
 })
 
-function button_press(){
-    $(".button-press").click(function(){
+
+function addfollow(obj){
+    $(this).off().one("click",function(){
+        var username = $(obj).prev().children().text()
+        if($(obj).text()=="關注中"){
+            $.get("/unfollow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                $(obj).text("").append($tr)
+                $(".comment-username").each(function(){
+                    var text = $(this).text()
+                    if (text==username){
+                        var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                        $(this).next().text("").append($tr)
+                    }
+                })
+                
+            })
+        $(obj).children().empty()
+        }if($(obj).text()=="追蹤"){
+            $.get("/follow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                $(obj).text("").append($tr)
+                $(".comment-username").each(function(){
+                    var text = $(this).text()
+                    if (text==username){
+                        var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                        $(this).next().text("").append($tr)
+                    }
+                })
+            })
+        }else{
+            console.log("用戶自按")
+        }
+    })
+}
+
+
+
+function add(obj){
+    $(this).off().one("click",function(){
+        var restaurant = $(obj).prev().prev().text().split("立即查看")[0]
+        $.get("/read/count/"+restaurant,function(){
+            window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+}
+
+function rating(){
+        $(".rating").each(function() {
+        var rating = $(this).text();
+        $(this).empty()
+        for (var i=0;i<rating;i++){
+            $tr= '<i class="fas fa-circle"></i>'
+            $(this).append($tr)
+        }
+        for (var j=0;j<5-rating;j++){
+            $td = '<i class="far fa-circle"></i>'
+            $(this).append($td)       
+        }     
         
     })
 }
+
+function like(){
+    $(".like_condition").each(function(){
+        var text = $(this).text()
+        if (text=="已讚"){
+            $(this).css("color","#FF0000")
+        }
+    })
+}
+
 
 
 function follow_event(){
@@ -407,7 +484,7 @@ function click_user(obj){
                 $(obj).text("").append($tr)
             })
         }else{
-            console.log("用戶自案")
+            console.log("用戶自按")
         }
     })
 }
@@ -446,34 +523,6 @@ function upload(obj){
 }
 
 
-</script>
-
-<script>
-    $(function(){
-        $(".com_follow").click(function(){
-            var username = $(this).prev().children().text()
-            if ($(this).text()=="追蹤"){
-                $.get("/follow/"+username,function(response){
-                    if (response.errno=1){
-                        swal("成功關注");
-                        $(this).text("關注中");
-                    }else{
-                        alert(response.errmsg)
-                    }
-                }).bind(this)
-              
-            }else{
-                $.get("/unfollow/"+username,function(response){
-                    if (response.errno=1){
-                        alert(response.errmsg)
-                        $(this).text("追蹤")
-                    }else{
-                        alert(response.errmsg)
-                    }
-                }).bind(this)
-            }
-        })
-    })
 </script>
 <script>
 $(function(){

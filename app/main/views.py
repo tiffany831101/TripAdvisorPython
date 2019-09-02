@@ -64,14 +64,21 @@ def user(username):
 
     # 收藏評論
     comment = Comment.query.join(Comment_like, Comment_like.comment_id==Comment.id).join(User,and_(Comment_like.user_id==User.id,User.username==username)).all()
+    user_comment = Comment_like.query.filter(Comment_like.user_id==current_user.id).all()
+    user_comment_like=[]
+    for u in user_comment:
+        user_comment_like.append(u.id)
     followed_id = [ i.followed_id for i in current_user.followed.all()]
     comment_list = []
     for c in comment:
-        follow_condition = "關注中" if c.author_id in followed_id else "追蹤"
+        follow_condition = "關注中" if c.author_id in followed_id else "追蹤" if c.author_id!=current_user.id else "自己"
+        like_condition = "已讚" if c.id in user_comment_like else "讚"
         review_content = c.review_content
+        rating = c.rating
         author = c.author.username
-        comment_list.append({"follow_condition":follow_condition, "review_content":review_content, "author":author})
+        title = c.restaurant.title
 
+        comment_list.append({"follow_condition":follow_condition,"like_condition":like_condition,"review_content":review_content, "author":author,"title":title,"rating":rating})
     # 最近瀏覽數
     recent_read = TripAdvisor.query.join(Click, Click.store_id== TripAdvisor.id).join(User, and_(User.id==Click.user_id,User.id==current_user.id)).distinct().order_by(Click.create_time.desc()).limit(5)
     read_list=[]
