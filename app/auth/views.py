@@ -49,7 +49,7 @@ def login():
         user = User.query.filter_by(email=email).first()
     except Exception as e:
         current_app.logger.error(e)
-        return jsonify(error="數據庫錯誤",errormsg="獲取用戶信息失敗")
+        return jsonify(error=0,errormsg="獲取用戶信息失敗")
 
     # 7. 用數據庫的密碼與用戶填寫的密碼進行對比驗證
     if user is None or user.verify_password(password) is False:
@@ -58,9 +58,16 @@ def login():
             # redis的ince可以對字符串類型的數字數據進行+1的操作，如果數據一開始不存在，則會初始化為1
             redis_store.incr("access_num_%s" % user_ip)
             redis_store.expire("access_num_%s" % user_ip, constants.LOGIN_ERROR_FORBID_TIME)
+            if access_nums is None:
+                return jsonify(error=0,errmsg="用戶名或密碼錯誤，您還剩下4次登入機會")
+            n = 4-int(access_nums)
+            if n !=0:
+                return jsonify(error=0,errmsg="用戶名或密碼錯誤，您還剩下%s次登入機會"%n)
+            else:
+                return jsonify(errno=0,errmsg="錯誤次數過多，請五分鐘後再試")
         except Exception as e:
             current_app.logger.error(e)
-            return jsonify(error="數據庫資料不存在",errmsg="用戶名或密碼錯誤")
+            return jsonify(error=0,errmsg="redis數據庫錯誤")
 
     # 8. 如果驗證相同成功，保存登入狀態，在session中
     if user is not None and user.verify_password(password):
@@ -70,7 +77,6 @@ def login():
         response = make_response(jsonify({'errno':1,'errmsg':'數據查詢成功'}))
         response.set_cookie("username",user.username)
         return response
-        # return jsonify(errno=1,errmsg="登入成功")
 
 
 # 前端獲取用戶登入狀態
