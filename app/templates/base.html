@@ -140,7 +140,7 @@ $(function(){
                         window.location.href="/restaurant/list"
                         
                     }else{
-                        swal("請輸入正確的帳號密碼","","error")
+                        swal(response.errmsg,"","error")
                     }
                 }
             })
