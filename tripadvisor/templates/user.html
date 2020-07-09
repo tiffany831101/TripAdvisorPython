@@ -1,0 +1,552 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block head %}
+{{ super() }}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+<script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<style>
+    a{
+        color:#fff;
+    }
+    body{
+        background-color:#e5e5e5
+    }
+    .author-link{
+        color: #000;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="all">
+    
+
+
+    <div class="prev_read">
+        <div class="top-intro">
+            <div class="top-innser-intro">
+                <div class="title" style="margin-top:5px">簡介</div>
+                {% if user.username == current_user.username %}
+                <div style="cursor: pointer" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-toggle="tooltip" title="立即完善個人資料" class="top-city"><i class="fas fa-thumbtack"></i>{% if user.city != none %} {{ user.city }}{% elif user.username == current_user.username %} +新增您目前所在城市{% else %} 城市 {% endif %}</div>
+                <div style="cursor: pointer" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-toggle="tooltip" title="立即完善個人資料"><i class="fas fa-globe"></i>{% if user.website != none %} <a href="{{ user.website }}"></a>{% elif user.username == current_user.username %} +新增一個網站{% else %} 網站 {% endif %}</div>
+                <div  style="cursor: pointer" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-toggle="tooltip" title="立即完善個人資料" class="top-me">{% if user.about_me != none %} {{ user.about_me }}{% elif user.username == current_user.username %} +介紹一下您自己 {% else %}尚未有自我介紹{% endif %}</div>
+                {% else %}
+                <div class="top-city"><i class="fas fa-thumbtack"></i>{% if user.city %} {{ user.city }}{% elif user.username == current_user.username %} +新增您目前所在城市{% else %} 城市 {% endif %}</div>
+                <div><i class="fas fa-globe"></i>{% if user.website %} <a href="{{ user.website }}"></a>{% elif user.username == current_user.username %} +新增一個網站{% else %} 網站 {% endif %}</div>
+                <div class="top-me">{% if user.about_me %} {{ user.about_me }}{% elif user.username == current_user.username %} +介紹一下您自己 {% else %}尚未有自我介紹{% endif %}</div>
+                {% endif %}
+            </div>
+        </div>
+    
+
+    <div style="margin-top:10px" class="browser">
+        <div class="inner-browser">
+            <div class="title" style="margin-top:15px;">之前的瀏覽紀錄</div>
+                {% if read_list %}
+                    {% for r in read_list %}
+                        <div class="prev_border">
+                            <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}" class="img-thumbnail"></a></div>
+                            <div class="prev_store">{{ r["title"] }}</div>
+                            <div class="prev_store">{{ r["address"] }}</div>
+                            
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+   
+
+    <div class="container">
+
+        <div class="social-sections-profile-ProfileSection__section--60aGC ui_card section">
+            <div class="social-member-MemberBlock__member_block">
+                <div class="top">
+
+                    <div class="top-outer-container">
+                        <div id="head">歡迎來到<span class="username">{{ user.username }}</span>的首頁</div>
+                        
+                        {% if not user.username==current_user.username %}
+                            {% if current_user.is_following(user) %}
+                                <div class="follow" ><i class="fas fa-user-plus"></i>關注中</div>
+                            {% else %}
+                                <div class="follow"><i class="fas fa-user-plus"></i>追蹤</div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if user.username==current_user.username %}
+                            <button type="button" class="profile" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" data-toggle="tooltip" title="立即完善個人資料"><i class="far fa-edit"></i><span id="info-button">完善個人資料</span></button>
+                        {% endif %}
+                        
+                    </div>    
+                   
+                    
+                    
+                    <div class="list">
+                        <div id="followed" data-toggle="modal" data-target="#followedModal" data-toggle="tooltip" title="查看關注名單">追蹤中<br><span class="followed">{{ user.followed.count() }}</span></div>
+                        <div id="followers" data-toggle="modal" data-target="#followerModal" data-toggle="tooltip" title="查看粉絲名單">粉絲<br><span class="followers">{{ user.followers.count() }}</span></div>
+                        <div class="love">收藏<br><span class="store_like">{% if count %} {{ count }} {% else %} {{ 0 }} {% endif %}</span></div>
+                    </div>  
+                </div>
+            </div>
+            <ul class="list-group list-group-horizontal-sm button-blcok">
+                    <li class="list-group-item button-press" type="button" data-toggle="collapse" data-target="#restaurant" aria-expanded="false" aria-controls="multiCollapseExample2" role="tab">收藏店家</li>
+                    <li class="list-group-item button-press" type="button" data-toggle="collapse" data-target="#comment-area" aria-expanded="false" aria-controls="multiCollapseExample2" role="tab">評論</li>
+            </ul>
+        </div>
+
+        <div class="restaurant collapse multi-collapse show active" id="restaurant">
+                <div class="title" style="text-align:center; margin-top:10px">收藏店家</div>
+                {% if store_list %}
+                    {% for l in store_list %}
+                    <div class="box">
+                        <div class="box_container">
+                            <div class="title">{{ l["title"] }}</div>
+                            <div>{{ l["street"] }}</div>
+                            <a class='restaurant_click' href="/restaurant/{{ l['title'] }}">
+                            <img src="{{ l['info_url'][0] }}"></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="non-comment-tip">該用戶並未收藏任何商家</div>
+                {% endif %}
+        </div>
+
+
+        <div class="title-container collapse multi-collapse" id="comment-area">
+            <div class="title-outer-box">
+            <div class="title" style="text-align:center; margin-top:10px">點讚的評論</div>
+                {% if comment_list %}
+                    {% for c in comment_list %}
+                        <div class="title-inner-container"> 
+                            <div id="username" class="comment-username" data-toggle='tooltip' title="查看用戶首頁"><a href="/user/{{ c['author'] }}" class="author-link">{{ c['author'] }}</a><i class='fas fa-check-circle circle'></i></div>
+                            <div class="com_follow" onclick="addfollow(this)"><i class='fas fa-user-plus'></i>{{ c["follow_condition"] }}</div>
+                            <div>
+                                <div class="com-title">{{ c["title"] }}</div>
+                                <div class="rating">{{ c["rating"] }}</div>
+                                <a data-toggle="tooltip" title="立即查看" href="javascript:void(0)" class="restaurant_href" onclick="add(this)">立即查看</a>
+                            </div>
+                            <div class="review-like">
+                                <div class="review_content">{{ c["review_content"] }}</div>
+                                <!-- <div class="like_condition"><i class="fas fa-heart"></i>{{ c["like_condition"] }}</div> -->
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+                {% else %}
+                    {% if current_user.username == user.username %}
+                    <div class="user-comment">
+                        <div class="tip">發表您的第一則評論</div>
+                        <div class="tip">您的意見非常重要！ 在 TripAdvisor 開始評論飯店、觀光及更多。<a href="/restaurant/list" style="color:#078171">發表評論</a></div>
+                    </div>
+                    {% else %}
+                 
+                    
+                    <div class="non-comment-tip">該用戶並未發表任何評論</div>
+                    
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">個人資料</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">目前所在城市</label>
+                        <div class="input-group mb-3 form-group  required">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-thumbtack"></i></span>
+                            </div>
+                            {% if current_user.city %}
+                            <input type="text" class="form-control" id="city" value="{{ current_user.city }}" placeholder="{{ current_user.city }}">
+                            {% else %}
+                            <input type="text" class="form-control" id="city">
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">網站</label>
+                        <div class="input-group mb-3 form-group  required">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-globe"></i></span>
+                            </div>
+                            {% if current_user.website %}
+                            <input type="text" class="form-control" id="website" value="{{ current_user.website }}" placeholder="{{ current_user.website }}">
+                            {% else %}
+                            <input type="text" class="form-control" id="website" placeholder="新增一個網站">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">關於您</label>
+                        {% if current_user.about_me %}
+                        <input type="text" class="form-control" id="website" value="{{ current_user.about_me }}" placeholder="{{ current_user.about_me }}"> 
+                        {% else %}
+                        <input type="text" class="form-control" id="about_me" placeholder="介紹一下自己">
+                        {% endif %}
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="store" onclick="upload(this)">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <div class="modal fade" id="followerModal" tabindex="-1" role="dialog" aria-labelledby="followerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="followerModalLabel">粉絲名單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        
+                <div class="modal-body" id="follow-body">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+                
+            </div>
+    </div>
+</div>
+
+<div>
+    <div class="modal fade" id="followedModal" tabindex="-1" role="dialog" aria-labelledby="followerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="followerModalLabel">關注名單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        
+                <div class="modal-body" id="followed-body">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
+                
+            </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+    
+    $(function(){
+        $(".follow").click(function(e){
+            var username = $(this).prev().children(".username").text()
+            if ($(this).text()=="追蹤"){
+                $.get("/follow/"+username,function(response){
+                    if (response.errno=1){
+                        $(this).html("關注中");
+                        swal(response.errmsg,"","success");
+                        window.location.href ="/user/"+username
+                    }else{
+                        swal(response.errmsg,"","error")
+                        window.location.href ="/user/"+username
+                    }
+                }).bind(this)
+              
+            }else{
+                $.get("/unfollow/"+username,function(response){
+                    if (response.errno=1){
+                        swal(response.errmsg,"","success")
+                        $(this).html("追蹤")
+                        window.location.href ="/user/"+username
+                    }else{
+                        swal(response.errmsg,"","error")
+                        window.location.href ="/user/"+username
+                    }
+                }).bind(this)
+            }
+            
+        })
+    })
+</script>
+
+
+<script>
+$(function(){
+    click_followers()
+    click_follwed()
+    follow_event()
+    rating()
+    like()
+})
+
+
+function addfollow(obj){
+    $(this).off().one("click",function(){
+        var username = $(obj).prev().children().text()
+        if($(obj).text()=="關注中"){
+            $.get("/unfollow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                $(obj).text("").append($tr)
+                $(".comment-username").each(function(){
+                    var text = $(this).text()
+                    if (text==username){
+                        var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                        $(this).next().text("").append($tr)
+                    }
+                })
+                
+            })
+        $(obj).children().empty()
+        }if($(obj).text()=="追蹤"){
+            $.get("/follow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                $(obj).text("").append($tr)
+                $(".comment-username").each(function(){
+                    var text = $(this).text()
+                    if (text==username){
+                        var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                        $(this).next().text("").append($tr)
+                    }
+                })
+            })
+        }else{
+            console.log("用戶自按")
+        }
+    })
+}
+
+
+
+function add(obj){
+    $(this).off().one("click",function(){
+        var restaurant = $(obj).prev().prev().text().split("立即查看")[0]
+        $.get("/read/count/"+restaurant,function(){
+            window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+}
+
+function rating(){
+        $(".rating").each(function() {
+        var rating = $(this).text();
+        $(this).empty()
+        for (var i=0;i<rating;i++){
+            $tr= '<i class="fas fa-circle"></i>'
+            $(this).append($tr)
+        }
+        for (var j=0;j<5-rating;j++){
+            $td = '<i class="far fa-circle"></i>'
+            $(this).append($td)       
+        }     
+        
+    })
+}
+
+function like(){
+    $(".like_condition").each(function(){
+        var text = $(this).text()
+        if (text=="已讚"){
+            $(this).css("color","#FF0000")
+        }
+    })
+}
+
+
+
+function follow_event(){
+    $(".follow").mouseenter(function(){
+        $(this).css("backgorund-color","green")
+    })
+}
+
+function click_followers(){
+    $("#followers").off().one("click",function(){
+            var username = $(this).parent().prev().children("#head").children(".username").text()
+            $.get("/followers/"+username,function(response){
+                render(response)
+        })
+    })
+}
+
+function modal_css(){
+    $(".modal-city").css("margin-left","5px");
+    $(".maodal-inner-block").css("margin-top","1px").css("font-size","14px").css("margin-bottom","1px").css("font-weight",100)
+    $(".modal-outer-block").css("border-bottom","solid 1px #e5e5e5").css("margin-top","5px")
+    $(".modal-follower-count").css("font-weight","600")
+    $(".user_modal").css("display","inline-block").css("width","400")
+    $(".follow_modal").css("display","inline-block").css("line-height","2.5")
+    $('.modal-about_me').css('font-size',"14px")
+    $(".fa-check-circle").css("color","#078171").css("margin-left","5px")
+}
+
+
+
+function render(response){
+    var data = response.data.follower
+    $.each(data,function(key,value){
+        var $tr=" ";
+        $tr +=  "<div class='modal-outer-block'>"+
+                    "<div class='user_modal'>"+
+                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"</a><i class='fas fa-check-circle'></i></div>"+
+                        "<div class='maodal-inner-block'>"+
+                            "<div><i class='fas fa-thumbtack'></i><span class='modal-city'>"+value.city+"</span></div>"+
+                            "<div><span class='modal-follower-count'>"+value.follower_count+"</span>人追蹤</div>"+
+                        "</div>"+
+                        "<div class='modal-about_me'>"+value.about_me+"</div>"+
+                    "</div>"+
+                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_condition+"</span></div>"+
+                "</div>"
+        
+        $("#follow-body").append($tr)
+    })
+    
+    modal_css()
+}
+
+function followed(response){
+    var data = response.data.followed
+    $.each(data,function(key,value){
+        var $tr=" ";
+        $tr +=  "<div class='modal-outer-block'>"+
+                    "<div class='user_modal'>"+
+                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"<i class='fas fa-check-circle'></i></a></div>"+
+                        "<div class='maodal-inner-block'>"+
+                            "<div><i class='fas fa-thumbtack'></i><span class='modal-city'>"+value.city+"</span></div>"+
+                            "<div><span class='modal-follower-count'>"+value.follower_count+"</span>人追蹤</div>"+
+                        "</div>"+
+                        "<div class='modal-about_me'>"+value.about_me+"</div>"+
+                    "</div>"+
+                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_condition+"</span></div>"+
+                "</div>"
+        $("#followed-body").append($tr)
+    })
+    
+    modal_css()
+}
+
+
+function click_user(obj){
+    $(this).off().one("click",function(){
+        var username = $(obj).parent().children().children().first().text()
+        if($(obj).text()=="關注中"){
+            $.get("/unfollow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+
+                $(obj).text("").append($tr)
+            })
+        $(obj).children().empty()
+        }if($(obj).text()=="追蹤"){
+            $.get("/follow/"+username,function(response){
+                var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                $(obj).text("").append($tr)
+            })
+        }else{
+            console.log("用戶自按")
+        }
+    })
+}
+
+function click_follwed(){
+    $("#followed").off().one("click",function(){
+            var username = $(this).parent().prev().children("#head").children(".username").text()
+            $.get("/followed/"+username,function(response){
+                followed(response) 
+        })
+    })
+}
+
+function upload(obj){
+    $(this).off().one("click",function(){
+        var username= $("#head").children(".username").text()
+        var city = $("#city").val()
+        var about_me = $("#about_me").val()
+        var website = $("#website").val()
+        if (undefined == city) city="";
+        if (undefined == about_me) about_me="";
+        var params = {
+            "city":city,
+            "about_me":about_me,
+            "website":website
+        }
+        $.post("/about_me/"+username,params,function(response){
+            if (response.errno==1){
+                swal("保存成功","","success")
+                history.go(0)
+                $("top-city").html(city)
+                $("top-me").html(about_me)
+            }
+        })
+    })
+}
+
+
+</script>
+<script>
+$(function(){
+    $(".restaurant_click").click(function(){
+        var restaurant = $(this).parent().children(".title").text()
+        $.get("/read/count/"+restaurant,function(){
+            window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+})
+</script>
+
+<script>
+$(function(){
+    $(".prev_click").click(function(){
+    var restaurant = $(this).parent().next().text()
+    $.get("/read/count/"+restaurant,function(){
+        window.location.href = "/restaurant/"+restaurant;
+        })
+    })
+})
+</script>
+
+
+
+
+{% endblock %}

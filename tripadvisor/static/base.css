@@ -1,0 +1,41 @@
+body{
+    background-color: #f2f6f5;
+    font-family: Microsoft JhengHei;
+}
+
+.navbar-brand{
+    font-weight:bold;
+    font-size: 20px
+}
+.navbar{
+    background-color:#00a680;
+    color:#fff;
+}
+a{
+    color:#fff;
+    font-weight: 600;
+    font-family: Microsoft JhengHei
+}
+
+
+.incon-area{
+    font-size:23px;
+    text-align: center;
+    padding-left:15px;
+}
+
+#user-login{
+    color:#fff;
+}
+
+#basic-addon2{
+    background-color: #fff
+}
+#basic-addon1{
+    background-color: #fff
+}
+
+.var-submit{
+    color:#fff;
+    font-weight: 600;
+}

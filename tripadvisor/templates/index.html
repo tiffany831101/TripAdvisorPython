@@ -1,0 +1,65 @@
+    {% extends "base.html" %}
+    
+    {% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    {% endblock %}
+    {% block title %}歡迎來到八里老漁村{% endblock %}
+
+    {% block content %}
+    <h1>哈囉, 誠摯歡迎
+     {% if current_user.is_authenticated %}
+     {{ current_user.username }}
+     {% else %}
+     您
+     {% endif %}造訪餐廳的首頁</h1>
+    <hr noshade size=5>
+<div class="intro">
+    <div class="box">
+        <div class="title">午後的源起</div>
+            <div>隱密的巷弄間靜靜地倚著大樹的獨棟建築，這是我們的起點。<br><br>
+                取名為「貳樓」是因為大樓林立的都市裡二樓不會是個商辦空間，<br>
+                也不會是個營業場所；<br>
+                二樓是一間間我們在精神上依靠的住家，<br>
+                同時一份份的溫暖也從二樓開始發生。<br>
+                <br>
+                貳樓就想帶給顧客最純粹的『家的感覺』，<br>
+                裡面有我們希望營造的溫暖自在氛圍以及用心、創意的新美式料理。<br>
+                在這裡，用料理分享愛、用愛創造人情味。<br>
+                <br>
+                Sharing love , Sharing food <br>
+                That’s all about Second Floor cafe
+            </div>
+    </div>
+
+    <div class="box">
+        <div class="title">經營理念</div>
+            <div>貳樓是一個提供給身處在都市叢林中，努力為生活打拼的人們，放鬆心情的地方;也是提供給人們充電、補給養分的營養補給站，來到貳樓如同回到自己家的感覺，卸下所有武器與心防，輕鬆自在的做自己，<br>
+                享受一群好朋友的招待。<br>
+                <br>
+                
+                我們希望，每個客人都可以把貳樓當做是另一個家，一個你想跟親人分享晚餐的家，一個你想與好友聊天喝杯茶吃塊蛋糕的家，一個你想為了愛的人舉辦派對的家。不管何時何地，什麼場合什麼節日，
+                我們都希望貳樓可以給予你們最好的選擇，<br>
+                最好的回憶。<br>
+                <br>
+                貳樓致力於開發洋食新風格，研發挑動人們的味蕾享受為前提，創造更多樣的餐點服務，努力將用餐當作是一種享樂藝術來經營。我們希望透過永遠站在為客人思考的角度上，不斷的自我激勵與突破現狀，期望能帶給每次來貳樓用餐的朋友們
+                充滿驚喜與幸福的感受。<br>
+                貳樓，你的另外一個家。
+            </div>
+    </div>
+
+    <div class="box">
+        <div class="title">還在想再想</div>
+        <div>還在想再想</div>
+    </div>     
+</div>
+   
+   <hr>
+   
+   {{ moment.include_moment() }}
+   {{ moment.lang("zh-CN") }}　
+    <p>當前時間:{{ moment(current_time).format('LLL') }}</p>
+    <p>您訪問該頁面已持續:{{ moment(current_time).fromNow(refresh=True) }}</p>
+    
+    {% endblock %}
+

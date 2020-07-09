@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+
+{% endblock %}
+
+{% block content %}
+<div id="booking1">
+    <div id="content">
+        <h3 id="title"><b>線上訂位</b></h3>
+    <form action="" method="post" class="form" role="form" id="reservationform">
+        <label class="control-label" for="people">選擇餐廳</label>
+            <div class="input-group mb-3 form-group  required">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-utensils"></i></span>
+                </div>
+                {% if data %}
+                <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="{{ data.title }}">
+                {% else %}             
+                <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="八里老漁村餐廳">
+                {% endif %}
+            </div>
+        
+        
+     
+
+        <label class="control-label" for="people">人數</label>
+        <div class="input-group mb-3 form-group  required">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-friends"></i></span>
+            </div>
+            <input type="text" class="form-control" id="people" name="people" required type="text" value="">
+        </div>
+
+
+    
+        <label class="control-label" for="booking_date">日期</label>
+        <div class="input-group mb-3 form-group  required">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="far fa-calendar-alt"></i></span>
+            </div>
+            <input type="text" class="form-control" id="booking_date" name="booking_date" required type="text" value="">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        </div>
+
+        <label class="control-label" for="booking_time">餐次</label>
+        <div class="input-group mb-3 form-group  required">
+            <div class="input-group-append">
+                <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-user-friends"></i></label>
+            </div>
+            <select class="custom-select form-control" id="booking_time" name="booking_time" required>
+                <option value="午餐" selected>午餐</option>
+                <option value="晚餐">晚餐</option>
+            </select>
+            
+        </div>
+
+
+        <input class="btn btn-default" id="submit" name="submit" type="submit" value="提交">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+       
+      </form>
+
+
+    </div>
+        <div class="mbe-contact">
+            <div id="head">聯絡資訊</div>
+            {% if data %}
+            <div id="number">客服專線 : {{ data.cellphone }} <br>
+            {% else %} 
+            <div id="number">客服專線 : (02) 2610-4882 <br>
+            {% endif %}
+            服務時間 : {% if data %}{{ data.open_time }}{% else %}早上11點至晚上8點{% endif %}</div>
+        </div>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+    
+    <script type="text/javascript">
+    $('#booking_date').datepicker({
+        "dateFormat": "yy-mm-dd",
+        language: "zh-CN",
+        minDate: 0, maxDate: "+1M +10D"
+        });
+    </script>
+    
+    <script>
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+ 
+    $.ajaxSetup({
+    
+        beforeSend: function(xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
+ 
+    </script>
+    <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
+    <script>
+    $(function(){
+        $("#reservationform").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:$('#reservationform').serialize(),
+                url: "/reservation/check",
+                success:function(response){
+                    if (response.errno=1){
+                        swal({ 
+                            title: "恭喜您，訂位成功。", 
+                            text: "您的訂單編號為:"+response.order_id,
+                            type: "success",
+                            timer:10000, 
+                        });
+                        
+                        window.location.href="/reservation/result"
+                    }else{
+                        alert("系統忙碌中，請稍後再試一次")
+                    }
+                }
+            })
+        })
+    })
+    </script>
+{% endblock %}

@@ -1,0 +1,428 @@
+.container{
+    margin-left:30px;
+    width:1000px;
+    font-family:Microsoft JhengHei;
+}
+
+
+
+.social-sections-profile-ProfileSection__section--60aGC{
+    position: relative;
+    padding: 0 24px;
+    box-sizing: border-box;
+    max-width: 1100px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+.social-member-MemberBlock__member_block{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction:column;
+    margin-top:10px;
+}
+
+.follow{
+    font-size:20px;
+    color: #fff;
+    font-weight: 600;
+    border-color: #078171;
+    background-color: #078171;
+    padding-top:8px;
+    padding-left:10px;
+    padding-right:10px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.com_follow{
+    font-size:14px;
+    color: #fff;
+    font-weight: 600;
+    border-color: #078171;
+    background-color: #078171;
+    width:80px;
+    text-align: center;
+    margin-left:20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.comment-username{
+    display:inline-block;
+    font-size:16px;
+    color: #000;
+    width:100px;
+}
+.followed{
+    color:#078171;
+    text-align: center;
+}
+.followers{
+    color:#078171;
+    text-align: center
+}
+#followed{
+    display: block;
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    line-height: 22px;
+    display: inline-block;
+    margin-left:10px;
+    cursor: pointer; 
+}
+.author-link{
+    color: #000;
+}
+#followers{
+    display: block;
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    line-height: 22px;
+    display: inline-block;
+    margin-left:50px;
+    cursor: pointer; 
+}
+.love{
+    display: block;
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    line-height: 22px;
+    display: inline-block;
+    margin-left:50px;
+}
+br{
+    padding-top:10px;
+}
+
+.restaurant{
+    margin-top: 20px;
+    background-color: #fff;
+    margin-bottom:20px;
+    margin-bottom: 20px;
+    border-top:#078171 solid 2px;
+    width:900px;
+}
+
+.follow{
+    display: inline-block;
+}
+
+
+.post{
+    display: inline-block;
+    margin-left:200px;
+}
+
+.profile{
+    border: #078171 solid 3px;
+    border-radius: 3px;
+    font-weight: 500;
+    color: #fff;
+    width:180px;
+    height:30px;
+    display: inline-block;
+    font-size:18px;
+    font-weight: 400;
+    background-color: #078171;
+}
+
+.click{
+    text-decoration: none;
+    padding-left: 15px;
+    padding:middle;
+    color:#fff;
+}
+
+img{
+    width:240px;
+    height:180px;
+    margin-top:5px;
+}
+
+
+.restaurant{
+    width:1000px;
+    display: inline-block;
+}
+
+.box{
+    width:300px;
+    margin-top:20px;
+    display: inline-block;
+    margin-left:20px;
+    margin-bottom:10px;
+    border: 2px solid #e5e5e5;
+    vertical-align: top;
+}
+.box_container{
+    text-align: center;
+    padding:6px;
+    padding-bottom: 10px;
+}
+
+
+
+.prev_read{
+    width:250px;
+    margin-left:25px;
+    margin-top:25px;
+}
+
+.top-intro{
+    background-color: #fff;
+    margin-bottom:10px; 
+    padding-left:10px;
+    text-align: left;
+}
+
+.button-press{
+    border: #fff solid 1px;
+    background-color: #fff;
+    color: #000;
+}
+
+
+.browser{
+    margin-top:20px;
+    background-color: #fff ;
+    text-align: center;
+    font-family:Microsoft JhengHei;
+}
+.button-blcok{
+    margin-top:5px;
+    margin-bottom:5px;
+    width:200px;
+}
+
+.prev_border{
+    padding:5px;
+    margin-top:10px;
+}
+
+
+.title{
+    font-size:20px;
+    color: #000;
+    font-weight: 600; 
+    vertical-align: middle
+}
+
+
+
+
+#head{
+    font-size:36px;
+    color: #000;
+    font-weight: 600; 
+    margin-bottom: 3px;
+    width:600px;
+}
+
+.top{
+    margin-top:30px;
+}
+
+
+
+
+.all{
+    display: inline-flex;;
+    display: -webkit-flex;
+    flex-direction: row;
+    flex-wrap: nowrap
+}
+
+
+
+
+.title-container{
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-top:#078171 solid 2px;
+
+}
+
+.title-inner-container{
+    margin-top:3px;
+    margin-left:5px;
+    margin-bottom:5px;
+    border: 2px solid #e5e5e5;
+    width:440px;
+    display:inline-block;
+    padding:5px;
+    vertical-align: top
+
+}
+.com-title{
+    margin-top:3px;
+    font-weight: 500;
+    display:inline-block;
+}
+.rating{
+    display:inline-block;
+    font-size: 12px;
+    color:#078171
+}
+
+.list{
+    margin-top:10px;
+}
+
+.top-outer-container{
+    display: flex;
+    flex-direction: row 
+}
+
+.prev_store{
+    font-size:14px;
+    font-weight: 300;
+    display: inline-block
+}
+
+
+#id{
+    font-size:18px;
+    font-weight: 500;
+    display: inline-block
+}
+
+.title-outer-box{
+    margin-top: 10px;
+    margin-left:3px;
+}
+
+.self-introduction{
+    width:280px;
+    background-color: #fff;
+    margin-right:25px;
+    text-align:center;
+    margin-top:50px;
+    height: 150px;
+}
+
+.intro-outer-container{
+    padding:5px;
+    margin-top:10px;
+}
+
+
+
+.user_modal{
+    display: inline-block;
+    width:100px;
+    font-size:18px;
+    line-height:2
+}
+
+.follow_modal{
+    display: inline-block;
+    width:100px;
+    font-size:14px;
+    background-color: #078171;
+    text-align: center;
+    color: #fff;
+    line-height:2;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+
+#top-city{
+    cursor: pointer;
+}
+
+#top-me{
+    cursor: pointer;
+}
+
+#button1{
+    cursor: pointer;
+}
+
+
+.store_like{
+    color:#078171;
+    text-align: center;
+    vertical-align: top"
+}
+
+.top-innser-intro{
+    padding-left:5px;
+    font-family:Microsoft JhengHei;
+    font-size: 14px;
+    color: #4a4a4a;
+    line-height:2.2;
+    margin-top:5px;
+    padding-bottom:35px;
+}
+
+.tip{
+    vertical-align: middle;
+}
+
+.non-comment-tip{
+    text-align: center;
+    margin-top:8px;
+    padding-bottom: 50px;
+}
+
+
+.inner-browser{
+    padding-bottom:20px;
+}
+
+.list-group-item{
+    border:#fff 1px solid
+}
+
+
+#info-button{
+    margin-left:5px;
+}
+
+.user-comment{
+    text-align:center;
+    padding-bottom: 50px;
+}
+
+
+.restaurant_href{
+    margin-left:50px;
+    color: #4a4a4a
+}
+
+
+.like_condition{
+    display: inline-block;
+}
+
+.circle{
+    margin-left:3px;
+    color:#078171;
+}
+
+.review_content{
+    margin-top:5px;
+    font-size:14px;
+    margin-left:3px;
+    display: inline-block;
+    width: 370px;
+}
+
+.review-like{
+    vertical-align: top;
+}
