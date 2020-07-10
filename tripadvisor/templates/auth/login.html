@@ -75,7 +75,7 @@ $(function(){
                 type:"json",
                 method:"post",
                 success:function(response){
-                    if (response.errno==1){
+                    if (response.status==true){
                         swal("登入成功","","success")
                         window.location.href="/restaurant/list"
                     }else{

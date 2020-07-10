@@ -1,9 +1,13 @@
 from flask_login import login_required, current_user
 from datetime import datetime
+from sqlalchemy import and_, func
 import logging
+import time
+import random
+
 from tripadvisor.models import User, Post, Survey, TripAdvisor, Reservation,\
                                Comment, Love, Comment_like,Follow, Click
-from tripadvisor import redis_store
+from tripadvisor import redis_store, db
 
 
 logger = logging.getLogger()
@@ -74,6 +78,20 @@ def recent_read_page(username):
         row["address"] = r.address
         read.append(row)
     return read
+
+
+def save_reservation_check(row):
+    order_id = "%s-%s" % (int(round(time.time()*1000)),random.randint(0,99999999))
+        
+    store = TripAdvisor.find_by_name(row["restaurant"])
+    result = Reservation(title_name = row["restaurant"],
+                        people = row["people"],
+                        booking_date = row["booking_date"],
+                        booking_time = row["booking_time"],
+                        order_id1 = order_id,
+                        user = row["current_user"]._get_current_object(),
+                        restaurant_id=store.id)
+    return result
 
 
 def reservation_condition():
@@ -217,13 +235,35 @@ def get_redis_key(address, res_type, sort_key, page, keyword, user):
     return "restaurant_%s_%s_%s_%s_%s_%s" % (address, res_type, sort_key, page, keyword, user)
 
 
-def get_restaurant_from_redis(address, res_type, sort_key, page, keyword, user):
+def get_restaurant_info_from_redis(address, res_type, sort_key, page, keyword, user):
     redis_key = get_redis_key(address, res_type, sort_key, page, keyword, user)
     try:
-        resp_json = redis_store.hget(redis_key, page)
+        result = redis_store.hget(redis_key, page)
     except Exception as e:
         logger.error(e)
-    else:
-        if resp_json:
-            return resp_json, 200, {"Content-Type":"application/json"}
-    return resp_json
+    
+    return result
+
+def get_restaurant_info_from_mysql(address, res_type, sort_key, page, keyword, user):
+    
+    filter_params=[]
+    if keyword:
+        filter_params.append(TripAdvisor.title.contains(keyword))
+    if address:
+        filter_params.append(TripAdvisor.address==address)  
+    if res_type:
+        filter_params.append(TripAdvisor.res_type.contains(res_type))    
+
+    if sort_key =="評論數":
+        if user is not None:
+            restaurant = User.comment_search(val=int(current_user.id), params=filter_params)
+        else:
+            restaurant = User.comment_search(val= int(0), params=filter_params)
+
+    elif sort_key =="評分數":
+        if user is not None:
+            restaurant = User.rating_search(val=int(current_user.id), params=filter_params)
+        else:
+            restaurant = User.rating_search(val=int(0), params=filter_params)
+
+    return restaurant

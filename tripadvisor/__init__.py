@@ -5,15 +5,15 @@ import logging
 import os
 import urllib
 from logging.config import dictConfig
-from flask_login import LoginManager
 
 
 from flask import Flask, session
-from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
 from flask_wtf.csrf import CSRFProtect
 from flask_redis import FlaskRedis
+from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
 from flask_mail import Mail
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
@@ -30,7 +30,7 @@ caches = {
 cache = caches['default']
 redis_store = FlaskRedis(decode_responses=True)
 db = SQLAlchemy()
-mail =Mail()
+mail = Mail()
 bootstrap = Bootstrap()
 
 photos= UploadSet('photos', IMAGES)
@@ -39,6 +39,7 @@ login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view= 'auth.login'
 login_manager.login_message =u'請登入才能瀏覽頁面'
+
 
 def create_application(settings=None):
     raven_logger = logging.getLogger('raven.base.Client')
@@ -127,8 +128,12 @@ def create_application(settings=None):
     def init_login_manager(app, login_manager):
         login_manager.init_app(app)
 
+    def init_mysql_db(app, db):
+        db.init_app(app)
+
     init_caches(app, caches)
     init_redis_db(app, redis_store)
+    init_mysql_db(app, db)
     init_bootstrap(app, bootstrap)
     init_login_manager(app, login_manager)
     CSRFProtect(app)
@@ -137,10 +142,10 @@ def create_application(settings=None):
     from tripadvisor.restaurant import main
     app.register_blueprint(main)
 
-    from tripadvisor.auth import auth
-    app.register_blueprint(auth,url_prefix='/auth')
+    from tripadvisor.security import auth
+    app.register_blueprint(auth, url_prefix='/auth')
 
-    from tripadvisor.api_1 import api 
-    app.register_blueprint(api,url_prefix='/api')
+    from tripadvisor.verification import api 
+    app.register_blueprint(api, url_prefix='/api')
 
     return app

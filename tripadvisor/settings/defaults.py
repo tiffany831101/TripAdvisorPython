@@ -6,7 +6,7 @@ import os
 from . import *
 
 SECRET_KEY="wdwdewd"
-REDIS_URL = os.environ.get('REDIS_URL','redis://reids:6379/3')
+REDIS_URL = os.environ.get('REDIS_URL','redis://localhost:6379/3')
 
 # celery
 CACHE_URL_DEFAULT= os.environ.get('CELERY_BROKER_URL')
@@ -16,8 +16,8 @@ CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = os.environ.get('CELERY_TIMEZONE') or 'utc'
 
 # sqlalchemy
-SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
-SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
+SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI','mysql+pymysql://root:root@localhost:3306/restaurant')
+SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS',True)
 
 LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH') or 'tripadvisor.log'
 ERROR_LOG_FILE_PATH = os.environ.get('ERROR_LOG_FILE_PATH') or 'error.log'

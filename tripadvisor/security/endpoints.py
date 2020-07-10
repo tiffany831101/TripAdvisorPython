@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, url_for, flash, make_response, jsonify, session, current_app
-from flask_login import login_user, login_required, current_user, logout_user
+from flask_login import login_required, current_user, logout_user
 from flask_datepicker import datepicker
 
 from wtforms import Form
@@ -7,103 +7,83 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import and_
 from werkzeug.utils import secure_filename
 import json
+import logging
 import os
 import re
 
-from . import auth
+from tripadvisor.security import auth, services
 from tripadvisor.models import User
 from tripadvisor.email import send_message
 import tripadvisor.settings.defaults
-from tripadvisor.auth.forms import LoginForm, RegistrationForm, PasswordResetForm, \
+from tripadvisor.security.forms import LoginForm, RegistrationForm, PasswordResetForm, \
                                     UserInfomationForm, UploadImageForm, UpdateInfoForm
-from tripadvisor import db, photos,redis_store, CSRFProtect
+from tripadvisor import db, photos, redis_store, CSRFProtect
+from tripadvisor.settings.defaults import *
+
+
+logger = logging.getLogger()
+
+
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ping()
 
 
 @auth.route('/login/html',methods=["POST","GET"])
 def login_html():
     return render_template('auth/login.html')
 
+
 @auth.route('/login',methods=["POST"])
 def login():
-    """ 用戶登入
-        參數 : 用戶名、密碼, json
-    """
-
+    """登入功能"""
     email = request.form.get("email")
     password = request.form.get("password")
     remember_me = request.form.get("remember_me")
+    user_ip = request.remote_addr
 
-    # 5. 判斷錯誤次數是否超過限制，如果超過限制，則返回
-    #    redis紀錄: "access_num_請求的ip" : 次數
-    user_ip = request.remote_addr #用戶的ip地址
+    check_error, login_failure_nums = services.check_login_failuer_num(user_ip)
 
-    try:
-        access_nums = redis_store.get("access_num_%s" % user_ip)
-    except Exception as e:
-        current_app.logger.error(e)
-    else:
-        if access_nums is not None and int(access_nums) >= constants.LOGIN_ERROR_MAX_TIMES: 
-            return jsonify(error="2", errmsg="錯誤次數過多，請稍後重試")
-
-    # 6. 從數據庫中根據Email查詢用戶的數據對象
+    if check_error:
+        return jsonify(check_error)
 
     try:
-        user = User.query.filter_by(email=email).first()
+        user = User.find_by_email(email)
     except Exception as e:
-        current_app.logger.error(e)
-        return jsonify(error=0,errormsg="獲取用戶信息失敗")
+        return jsonify(status="error", errmsg="獲取用戶信息失敗")
 
-    # 7. 用數據庫的密碼與用戶填寫的密碼進行對比驗證
-    if user is None or user.verify_password(password) is False:
-        # 如果驗證失敗，記錄錯誤次數，返回信息
-        try:
-            # redis的ince可以對字符串類型的數字數據進行+1的操作，如果數據一開始不存在，則會初始化為1
-            redis_store.incr("access_num_%s" % user_ip)
-            redis_store.expire("access_num_%s" % user_ip, constants.LOGIN_ERROR_FORBID_TIME)
-            if access_nums is None:
-                return jsonify(error=0,errmsg="用戶名或密碼錯誤，您還剩下4次登入機會")
-            n = 4-int(access_nums)
-            if n !=0:
-                return jsonify(error=0,errmsg="用戶名或密碼錯誤，您還剩下%s次登入機會"%n)
-            else:
-                return jsonify(errno=0,errmsg="錯誤次數過多，請五分鐘後再試")
-        except Exception as e:
-            current_app.logger.error(e)
-            return jsonify(error=0,errmsg="redis數據庫錯誤")
+    check_error = services.check_password(user, password, user_ip, login_failure_nums)
+    
+    if check_error:
+        return jsonify(check_error)
 
-    # 8. 如果驗證相同成功，保存登入狀態，在session中
-    if user is not None and user.verify_password(password):
-        login_user(user, remember_me)
-        session["cellphone"] = user.cellphone
-        session["username"] = user.username
-        response = make_response(jsonify({'errno':1,'errmsg':'數據查詢成功'}))
-        response.set_cookie("username",user.username)
-        return response
+    response = services.set_login_session(user, password,remember_me)
+    
+    return response
 
 
-# 前端獲取用戶登入狀態
 @auth.route("/session",methods=["GET"])
 def check_login():
-    # 檢查登入狀態
-    # 嘗試從session中獲取用戶的名字
+    """獲取用戶登入狀態 功能"""
     name = session.get(username)
-    # 如果session中數據name名字存在，則表示用戶已登錄，否則未登入
+    
     if name is not None:
         flash (u"該用戶已登入")
     else:
         flash(u"該用戶未登入")
 
 
-
 @auth.route('/logout')
 @login_required
 def logout():
-    # 清除session數據
+    """清除session數據"""
     session.clear()
     logout_user()
     response = make_response('delCookie')
     response.delete_cookie('username')
     return response
+
 
 @auth.route('/register')
 def register():
@@ -112,9 +92,8 @@ def register():
 
 @auth.route('/register/check',methods=['POST'])
 def register_check():
-    """註冊
-    請求的參數 : 手機號、用戶名、密碼、身分證號碼、電子郵件
-    """
+    """用戶註冊功能"""
+    print(request.get_data())
     username = request.form.get("username")
     cellphone = request.form.get("cellphone")
     email = request.form.get("email")
@@ -122,83 +101,28 @@ def register_check():
     password2 = request.form.get("password2")
     image_code_id = request.form.get("image_code_id")
     image_code = request.form.get("image_code")
-    if not all ([image_code_id,image_code]):
-        return jsonify(errno=0,errmsg="參數不完整")
 
-    try:
-        real_image_code = redis_store.get("image_code_%s"%image_code_id)
-    except Exception as e:
-        current_app.logger.error(e)
-        return jsonify(errno=0,errmsg="Redis數據庫錯誤")
+    check_failure = services.check_captcha(image_code_id, image_code)
+
+    if check_failure:
+        return jsonify(check_failure)
+
+    check_failure = services.check_register_info(cellphone, password, password2, email, username)
+
+    if check_failure:
+        return jsonify(check_failure)
+
+    check_failure = services.check_double_register(username, email, cellphone)
+
+    if check_failure:
+        return jsonify(check_failure)
     
-    if real_image_code is None:
-        return jsonify(errno=0,errmsg="圖片驗證碼失效")
-
-    try:
-        redis_store.delete("image_code_%s" %image_code_id)
-    except Exception as e:
-        current_user.logger.error(e)
-
-    if str(real_image_code,encoding='utf-8').lower() != image_code.lower():
-        return jsonify(errno=0,errmsg="圖片驗證碼錯誤")
-
-    if not all([cellphone, password, email, username]):
-        return jsonify(errno=0,errmsg="請填寫所有資料")
-    if User.query.filter(User.username==username).first():
-        return jsonify(errno=0,errmsg="該用戶名已被註冊過")
-
-    if password != password2:
-        return jsonify(error=0, errmsg="前後密碼不一致")
-    if not re.match(r"[^\._-][\w\.-]+@(?:[A-Za-z0-9]+\.)+[A-Za-z]+$",email):
-        return jsonify(errno=0,errmsg="請輸入正確的Email")
-
-    if not re.match(r"^09\d{8}$",cellphone):
-        return jsonify(error=0,errmsg="請輸入正確的手機號格式")
-
-    if User.query.filter_by(email=email).first():
-        return jsonify(error=0,errmsg="該信箱已註冊過")
-
-    if User.query.filter_by(cellphone=cellphone).first():
-        return jsonify(errno=0,errmsg="該手機號已註冊過")
-
-    user = User(username=username, email=email, cellphone=cellphone, password =password)
-    try:
-        db.session.add(user)
-        db.session.commit()
-        return jsonify(errno=1,errmsg="數據保存成功")
-
-    except Exception as e:
-        db.session.rollback()
-        current_app.logger.error(e)
-        return jsonify(errno=0,errmsg="數據庫查詢異常")
-    # # 從redis中取出短信驗證碼
-    # try:
-    #     redis_store.get("sms_code_%s" % mobile)
-    # except Exception as e:
-    #     current_app.logger.error(e)
-    #     return jsonify(errno="數據庫異常"，errmsg="讀取真實短信驗證碼異常")
-    # # 判斷短信驗證碼是否過期
-    # if real_sms_cide is None:
-    #     return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
+    result = services.save_register(username, email, cellphone, password)
+    print(result)
+    return jsonify(result)
     
-    # #刪除redis中的短信驗證法，防止重複使用校驗
-    # try:
-    #     redis_store.delete("sms_code_%s"%mobile)
-    # except Exception as e:
-    #     current_app.logger.error(e)
-    # # 判斷用戶填寫短信驗證碼的正確性
-    # if real_sms_code !=sms_code:
-    #     return jsonify(errno="沒有資料",errmsg="短信驗證碼失效")
     
-
-    # 判斷用戶的手機號是否註冊過
-    ## try:
-    ##     user = User.query.filter_by(mobile=mobile).first()
-    ## except Exception as e:
-    ##     current_app.logger.error(e)
-    ##     return jsonify(errno="",errmsg="數據庫異常"):
-  
-
+    
 @auth.route('/information', methods=["POST","GET"])
 @login_required
 def information():
@@ -263,10 +187,7 @@ def information():
 #     return render_template('auth/images.html', form=form)
     
 
-@auth.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        current_user.ping()
+
 
 
 
@@ -315,6 +236,7 @@ def captcha_check():
         else:
             return jsonify(errno=0,errmsg="數據查詢失敗")
 
+
 @auth.route("/password/check",methods=["POST"])
 def password_check():
     password = request.form.get("password")
@@ -335,6 +257,7 @@ def password_check():
         current_app.logger.error(e)
         db.session.rollback()
         return jsonify(errno=0,errmsg="數據庫錯誤")
+
 
 @auth.route('/my')
 def my():
@@ -360,29 +283,6 @@ def update_info():
         current_app.logger.error(e)
         return jsonify(errno=0,errmsg="系統忙碌中，請稍後再試")    
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

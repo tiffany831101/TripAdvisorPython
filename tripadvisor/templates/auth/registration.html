@@ -99,21 +99,29 @@ function register(obj){
             var imageCode = $("#imagecode").val()
             var password = $("#password").val()
             var password2 = $("#password2").val()
-            if (!imageCode){
+            if (imageCode==null){
                 ("請填寫驗證碼")
             }
             if (password != password2){
                 swal("您兩次輸入密碼不一致","","error")
             }
+
+            if (!cellphone==null){
+                ("請輸入手機號碼")
+            }
+
+            if (email==null){
+                ("請輸入Email")
+            }
             
             params={
-                "username":username,
-                "image_code_id":imageCodeid,
-                "image_code":imageCode,
-                "cellphone":cellphone,
-                "email":email,
-                "password":password,
-                "password2":password2
+                "username": username,
+                "image_code_id": imageCodeid,
+                "image_code": imageCode,
+                "cellphone": cellphone,
+                "email": email,
+                "password": password,
+                "password2": password2
             }
             $.ajax({
                     method:"post",
@@ -121,12 +129,12 @@ function register(obj){
                     data:params,
                     url: "/auth/register/check",
                     success:function(response){
-                        if (response.errno==1){
+                        if (response.status=="success"){
                             swal("註冊成功","","success")
-                            window.location.href="/auth/login/html"
+                            setTimeout("location.href='/auth/login/html'",1000)
                         }else{
                             swal(response.errmsg,"","error")
-                            window.location.href="/auth/register"
+                            setTimeout("location.href='/auth/register'",1000)
                         }
                                   
                     }

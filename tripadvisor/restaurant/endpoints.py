@@ -12,7 +12,7 @@ import json
 from tripadvisor.restaurant import services, main
 from tripadvisor.restaurant.forms import QueryForm, EditionProfileForm, PostForm, BookingForm
 from tripadvisor import db, redis_store
-import tripadvisor.settings.defaults
+from  tripadvisor.settings.defaults import *
 from tripadvisor.models import User, Role, Post, Survey, TripAdvisor, Reservation,\
                                Comment, Love, Comment_like,Follow, Click
 
@@ -153,9 +153,19 @@ def reservation_check():
     row["booking_date"] = request.form.get("booking_date")
     row["booking_time"] = request.form.get("booking_time")
     row["current_user"] = current_user
-    result = save_reservation_check(row)
 
-    return jsonify(result)
+    if not all ([row["restaurant"], row["people"], row["booking_date"], row["booking_time"] ]):
+        return jsonify(errno=0,errmsg="參數不完整")
+
+    result = services.save_reservation_check(row)
+
+    try:
+        db.session.add(result)
+        return jsonify(errno=1,errmsg="參數保存成功",order_id=order_id)
+    except Exception as e:
+        logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫錯誤")
 
 
 @main.route('/reservation/result')
@@ -167,21 +177,21 @@ def result():
 
 @main.route('/reservation/revise/<order_id>',methods=["POST","GET"])
 def order_revise(order_id):
-    data = Reservation.query.filter_by(order_id1=order_id).first()
+    data = Reservation.find_by_orderId(order_id)
     return render_template("revise.html", data=data)
 
 
 @main.route('/reservation/order/cancel/<order_id>',methods=["POST"])
 def order_cancel(order_id):
-    r = Reservation.query.filter_by(order_id1=order_id).first()
-    if r :
-        try:
-            db.session.delete(r)
-            return jsonify(errno=1,ennmsg="參數刪除成功")
-        except Exception as e:
-            current_app.logger.error(e)
-            db.session.rollback()
-            return jsonify(errno=0,errmsg="數據庫錯誤")
+    r = Reservation.query.find_by_orderId(order_id)
+    
+    try:
+        db.session.delete(r)
+        return jsonify(errno=1,ennmsg="參數刪除成功")
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=0,errmsg="數據庫錯誤")
 
 
 @main.route('/reservation/cancel',methods=["POST"])

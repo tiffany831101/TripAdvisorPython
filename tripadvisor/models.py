@@ -56,7 +56,7 @@ class User(UserMixin, db.Model):
     address = db.Column(db.Text())
     LINE  = db.Column(db.String(20))
     
-    survey =db.relationship('Survey',backref='survey')
+    survey = db.relationship('Survey',backref='survey')
     reservation = db.relationship('Reservation',backref='user',lazy='dynamic')
     restaurant_comment = db.relationship('Comment',backref='author',lazy='dynamic')
     comment_son = db.relationship("Child_cmt",backref="author",lazy="dynamic")
@@ -84,6 +84,15 @@ class User(UserMixin, db.Model):
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
     
+    def find_by_email(email):
+        return db.session.query(User).filter_by(email=email).first()
+
+    def find_by_username(username):
+        return db.session.query(User).filter_by(username=username).first()
+
+    def find_by_cellphone(cellphone):
+        return db.session.query(User).filter_by(cellphone=cellphone).first()
+
     @property
     def password(self):
         raise AttributeError ('password is not a readable attribute')
@@ -123,7 +132,6 @@ class User(UserMixin, db.Model):
     
 
     def page_load(val, page):
-
         if not val == 0:
             return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
                     .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(TripAdvisor.rating_count>200)\
@@ -156,7 +164,7 @@ class User(UserMixin, db.Model):
                         .order_by(TripAdvisor.rating.desc())
 
     def __repr__(self):
-        return '<User %r>' %self.name
+        return '<User %r>' %self.username
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -198,7 +206,10 @@ class Reservation(BaseModel,db.Model):
     order_id1 = db.Column(db.String(40))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("ta.id"))
-    
+
+    def find_by_orderId(title):
+        return db.session.query(Reservation).filter_by(title=order_id1).first()
+
 
 class TripAdvisor(db.Model):
     __tablename__ = "ta"
@@ -219,6 +230,10 @@ class TripAdvisor(db.Model):
     user_comment = db.relationship("Comment",backref="restaurant",lazy="dynamic")
     following = db.relationship("Love",backref="store",lazy="dynamic")
     clicked_user = db.relationship("Click",backref="store",lazy="dynamic")
+
+    def find_by_name(title):
+        return db.session.query(TripAdvisor).filter_by(title=title).first()
+
 
     def to_dict(self):
         return {
@@ -271,6 +286,7 @@ class Comment(BaseModel,db.Model):
     child_cmt = db.relationship("Child_cmt",backref="fcmt",lazy="dynamic")
     user_like = db.relationship("Comment_like",backref="comment",lazy="dynamic")
 
+
 class Love(BaseModel,db.Model):
     _tablename__="love"
 
@@ -278,6 +294,7 @@ class Love(BaseModel,db.Model):
     focus = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+
 
 class Child_cmt(BaseModel,db.Model):
     __tablename__="ccmt"

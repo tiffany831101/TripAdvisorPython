@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: dbd84f38ca27
+Revision ID: 3cc9617794d4
 Revises: 
-Create Date: 2019-08-25 14:11:05.087730
+Create Date: 2020-07-10 11:01:34.833805
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'dbd84f38ca27'
+revision = '3cc9617794d4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,6 +32,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('role',
+    sa.Column('create_time', sa.DateTime(), nullable=True),
+    sa.Column('update_time', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=10), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -39,16 +41,17 @@ def upgrade():
     )
     op.create_table('ta',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=50), nullable=True),
-    sa.Column('res_type', sa.String(length=20), nullable=True),
+    sa.Column('title', sa.String(length=64), nullable=True),
+    sa.Column('res_type', sa.String(length=32), nullable=True),
     sa.Column('rating_count', sa.Integer(), nullable=True),
-    sa.Column('info_url', sa.String(length=512), nullable=True),
+    sa.Column('info_url', sa.Text(), nullable=True),
     sa.Column('cellphone', sa.String(length=20), nullable=True),
     sa.Column('address', sa.String(length=128), nullable=True),
-    sa.Column('street', sa.String(length=32), nullable=True),
+    sa.Column('street', sa.String(length=64), nullable=True),
     sa.Column('rating', sa.Float(), nullable=True),
-    sa.Column('comment', sa.String(length=1024), nullable=True),
+    sa.Column('comment', sa.Text(), nullable=True),
     sa.Column('read_count', sa.Integer(), server_default='0', nullable=True),
+    sa.Column('open_time', sa.String(length=64), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
@@ -65,11 +68,9 @@ def upgrade():
     sa.Column('address', sa.Text(), nullable=True),
     sa.Column('LINE', sa.String(length=20), nullable=True),
     sa.Column('confirmed', sa.Boolean(), nullable=True),
-    sa.Column('name', sa.String(length=20), nullable=True),
-    sa.Column('location', sa.String(length=30), nullable=True),
-    sa.Column('about_me', sa.Text(), nullable=True),
-    sa.Column('member_since', sa.DateTime(), nullable=True),
-    sa.Column('last_seen', sa.DateTime(), nullable=True),
+    sa.Column('city', sa.String(length=10), nullable=True),
+    sa.Column('website', sa.String(length=128), nullable=True),
+    sa.Column('about_me', sa.String(length=100), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('id_number')
@@ -109,6 +110,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('follows',
+    sa.Column('create_time', sa.DateTime(), nullable=True),
+    sa.Column('update_time', sa.DateTime(), nullable=True),
     sa.Column('follower_id', sa.Integer(), nullable=False),
     sa.Column('followed_id', sa.Integer(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
@@ -140,7 +143,7 @@ def upgrade():
     sa.Column('create_time', sa.DateTime(), nullable=True),
     sa.Column('update_time', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('title_name', sa.String(length=20), nullable=True),
+    sa.Column('title_name', sa.String(length=32), nullable=True),
     sa.Column('people', sa.Integer(), nullable=True),
     sa.Column('booking_date', sa.Date(), nullable=True),
     sa.Column('booking_time', sa.String(length=10), nullable=True),
