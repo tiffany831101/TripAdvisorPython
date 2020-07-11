@@ -9,6 +9,8 @@ from tripadvisor import db, redis_store
 from tripadvisor.settings.defaults import *
 
 logger = logging.getLogger()
+email_format = r"[^\._-][\w\.-]+@(?:[A-Za-z0-9]+\.)+[A-Za-z]+$"
+cellphone_format = r"^09\d{8}$"
 
 
 def check_login_failuer_num(user_ip):
@@ -55,8 +57,8 @@ def set_login_session(user, password, remember_me):
         login_user(user, remember_me)
         session["cellphone"] = user.cellphone
         session["username"] = user.username
-        response = make_response(jsonify({'errno':1,'errmsg':'數據查詢成功'}))
-        response.set_cookie("username",user.username)
+        response = make_response(jsonify({'status':"sucess",'msg':'數據查詢成功'}))
+        response.set_cookie("username", user.username)
         return response
 
 
@@ -92,52 +94,32 @@ def check_captcha(image_code_id, image_code):
         return status
 
 
-def check_register_info(cellphone, password, password2, email, username):
+def check_register_info(**kwargs):
     status = {}
-    if not re.match(r"[^\._-][\w\.-]+@(?:[A-Za-z0-9]+\.)+[A-Za-z]+$",email):
+    if "email" in kwargs and not re.match(email_format,kwargs["email"]):
         status["status"] = "error"
         status["errmsg"] = "請輸入正確的Email"
         return status
 
-    if not re.match(r"^09\d{8}$",cellphone):
+    if "cellphone" in kwargs and not re.match(cellphone_format, kwargs["cellphone"]):
         status["status"] = "error"
         status["errmsg"] = "請輸入正確的手機號格式"
         return status
 
 
-def check_double_register(username, email, cellphone):
+def check_double_register(**kwargs):
     status = {}
-    if User.find_by_username(username):
+    if "username" in kwargs and User.find_by_username(kwargs["username"]):
         status["status"] = "error"
         status["errmsg"] = "該用戶名已被註冊過"
         return status
 
-    if User.find_by_email(email):
+    if "email" in kwargs and User.find_by_email(kwargs["email"]):
         status["status"] = "error"
         status["errmsg"] = "該信箱已註冊過"
         return status
-
-    if User.find_by_cellphone(cellphone):
+    
+    if "cellphone" in kwargs and User.find_by_cellphone(kwargs["cellphone"]):
         status["status"] = "error"
         status["errmsg"] = "該手機號已註冊過"
-        return status
-
-
-def save_register(username, email, cellphone, password):
-    status = {}
-    user = User(username=username, email=email, cellphone=cellphone, password =password)
-
-    try:
-        db.session.add(user)
-        db.session.commit()
-        status["status"] = "success"
-        status["msg"] = "數據保存成功"
-        return status
-
-    except Exception as e:
-        db.session.rollback()
-        logger.error(e)
-
-        status["status"] = "error"
-        status["msg"] = "內部系統錯誤，請再試一次"
         return status

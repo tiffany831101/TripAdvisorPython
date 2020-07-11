@@ -104,9 +104,9 @@
                 <a href="javascript:void(0)" onclick="prohibit1()">訂位查詢</a>
             </div>
             
-            <div class="title" data-toggle='tooltip' data-placement='top' title='立即實名認證'>
+            <!-- <div class="title" data-toggle='tooltip' data-placement='top' title='立即實名認證'>
                 <a href="javascript:void(0)" onclick="prohibit3()">實名認證</a>
-            </div>
+            </div> -->
 
             
             <div class="title">
@@ -173,9 +173,9 @@ function userform(){
     $("#store").click(function(e){
         e.preventDefault();
         $.post("/auth/info",$("#userform").serialize(),function(response){
-            if (response.errno==1){
-                swal("個人資料修改成功")
-                window.location.href="/auth/my"
+            if (response.status=="success"){
+                swal("個人資料修改成功","","success")
+                setTimeout("location.href='/auth/my'",1000)
             }else{
                 swal(response.errmsg)
             }
@@ -190,7 +190,7 @@ function prohibit1(){
     if ($.cookie('username')==null || undefined){
             swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
         }else{
-            window.location.href="{{ url_for('main.result') }}"
+            window.location.href="{{ url_for('booking.result') }}"
         }
 }
 

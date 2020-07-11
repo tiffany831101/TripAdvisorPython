@@ -142,10 +142,16 @@ def create_application(settings=None):
     from tripadvisor.restaurant import main
     app.register_blueprint(main)
 
+    from tripadvisor.user import user
+    app.register_blueprint(user)
+
     from tripadvisor.security import auth
     app.register_blueprint(auth, url_prefix='/auth')
 
     from tripadvisor.verification import api 
     app.register_blueprint(api, url_prefix='/api')
+
+    from tripadvisor.reservation import booking 
+    app.register_blueprint(booking, url_prefix='/reservation')
 
     return app

@@ -16,7 +16,7 @@ CELERY_ENABLE_UTC = True
 CELERY_TIMEZONE = os.environ.get('CELERY_TIMEZONE') or 'utc'
 
 # sqlalchemy
-SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI','mysql+pymysql://root:root@localhost:3306/restaurant')
+SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI','mysql+pymysql://root:a828215369@localhost:3306/restaurant')
 SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS',True)
 
 LOG_FILE_PATH = os.environ.get('LOG_FILE_PATH') or 'tripadvisor.log'

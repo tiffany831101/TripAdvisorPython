@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from datetime import datetime
 
-from tripadvisor import db, login_manager
+from tripadvisor import db, login_manager, dao
 
 Base = declarative_base()
 
@@ -38,6 +38,22 @@ class Follow(BaseModel, db.Model):
     followed_id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def find_followers(username):
+        return db.session.query(Follow).join(User, User.id==Follow.followed_id)\
+                            .filter(User.username==username).all()
+    
+    def find_current_followers(current_user):
+        return db.session.query(Follow).join(User, User.id==Follow.followed_id)\
+                            .filter(User.id==current_user.id).all()
+
+    def find_followed(username):
+        return db.session.query(Follow).join(User, User.id==Follow.follower_id)\
+                            .filter(User.username==username).all()
+
+    def find_current_followerd(current_user):        
+        return db.session.query(Follow).join(User, User.id==Follow.follower_id)\
+                            .filter(User.id==current_user.id).all()
+
 
 class User(UserMixin, db.Model):
     __tablename__='user'
@@ -46,7 +62,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column (db.String(20),unique=True,index=True,nullable=False)
     email = db.Column(db.String(40),unique=True,nullable=False)
-    cellphone = db.Column(db.Integer,nullable=False)
+    cellphone = db.Column(db.String(10),nullable=False)
     password_hash = db.Column(db.String(128))
     gender =db.Column(db.String(5))
     image_url = db.Column(db.String(32))
@@ -84,6 +100,9 @@ class User(UserMixin, db.Model):
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
     
+    def find_by_id(id):
+        return db.session.query(User).filter_by(id=id).first()
+
     def find_by_email(email):
         return db.session.query(User).filter_by(email=email).first()
 
@@ -92,6 +111,26 @@ class User(UserMixin, db.Model):
 
     def find_by_cellphone(cellphone):
         return db.session.query(User).filter_by(cellphone=cellphone).first()
+
+    def find_by_cellphone_and_email(cellphone, email):
+        return db.session.query(User).filter(and_(User.cellphone==cellphone, User.email==email)).first()
+
+    def update(id, **kwargs):
+        db.session.query(User).filter_by(id=id).update(kwargs)
+        return dao.update()
+
+    def cancel_follow_restaurant(id, restaurant):
+        user = db.session.query(User).filter_by(id=id).first()
+        row  = user.restaurant_love.filter(TripAdvisor.id==restaurant.id).first()
+        return db.session.delete(row)
+
+    def cancel_follow_comments(user_id, comment):
+        user = db.session.query(User).filter_by(id=user_id).first()
+        row  = user.comment_like.filter(Comment.id==comment.id).first()
+        return db.session.delete(row)
+
+
+        
 
     @property
     def password(self):
@@ -117,17 +156,19 @@ class User(UserMixin, db.Model):
     def follow(self, user):
         if not self.is_following(user):
             f = Follow(follower=self, followed=user)
-            db.session.add(f)
+            dao.save(f)
             
-    def unfollow(self,user):
+            
+    def unfollow(self, user):
         f = self.followed.filter_by(followed_id=user.id).first()
         if f:
             db.session.delete(f)
+            dao.delete()
 
-    def is_following(self,user):
+    def is_following(self, user):
         return self.followed.filter_by(followed_id=user.id).first() is not None
             
-    def is_followed_by(self,user):
+    def is_followed_by(self, user):
         return self.followers.filter_by(followed_id=user.id).first() is not None
     
 
@@ -207,9 +248,31 @@ class Reservation(BaseModel,db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("ta.id"))
 
-    def find_by_orderId(title):
-        return db.session.query(Reservation).filter_by(title=order_id1).first()
+    def cancel_order(id):
+        return db.session.query(Reservation).filter_by(order_id1=id).delete()
 
+    def find_by_orderId(id):
+        return db.session.query(Reservation).filter_by(order_id1=id).first()
+
+    def get_reservation_result(now, current_user):
+        return db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor)\
+                     .outerjoin(Reservation, and_(Reservation.restaurant_id == TripAdvisor.id, 
+                                             Reservation.booking_date > now))\
+                     .join(User, and_(Reservation.user_id == User.id, User.id == current_user.id))\
+                     .all()
+
+
+    def get_history_result(now, current_user):
+        return db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor)\
+                    .outerjoin(Reservation, and_(Reservation.restaurant_id==TripAdvisor.id,
+                                            Reservation.booking_date < now))\
+                    .join(User, and_(Reservation.user_id==User.id, User.id==current_user.id))\
+                    .order_by(Reservation.booking_date.desc())\
+                    .all()
+
+    def update(id, **kwargs):
+        db.session.query(Reservation).filter_by(order_id1=id).update(kwargs)
+        return dao.update()
 
 class TripAdvisor(db.Model):
     __tablename__ = "ta"
@@ -231,9 +294,11 @@ class TripAdvisor(db.Model):
     following = db.relationship("Love",backref="store",lazy="dynamic")
     clicked_user = db.relationship("Click",backref="store",lazy="dynamic")
 
+    def find_by_id(id):
+        return db.session.query(TripAdvisor).get_or_404(id)
+
     def find_by_name(title):
         return db.session.query(TripAdvisor).filter_by(title=title).first()
-
 
     def to_dict(self):
         return {
@@ -286,6 +351,10 @@ class Comment(BaseModel,db.Model):
     child_cmt = db.relationship("Child_cmt",backref="fcmt",lazy="dynamic")
     user_like = db.relationship("Comment_like",backref="comment",lazy="dynamic")
 
+
+    def find_by_id(id):
+        return db.session.query(Comment).get_or_404(id)
+        
 
 class Love(BaseModel,db.Model):
     _tablename__="love"

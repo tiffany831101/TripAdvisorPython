@@ -63,10 +63,10 @@
 {% block scripts %}
     {{ super() }}
     <script type="text/javascript">
-    $('#booking_date').datepicker({
-        "dateFormat": "yy-mm-dd",
-        language: "zh-CN",
-        minDate: 0, maxDate: "+1M +10D"
+        $('#booking_date').datepicker({
+            "dateFormat": "yy-mm-dd",
+            language: "zh-CN",
+            minDate: 0, maxDate: "+1M +10D"
         });
     </script>
     
@@ -85,15 +85,15 @@
                     type: "POST",
                     dataType: "json",
                     data:$('#reviseform').serialize(),
-                    url: "/reservation/cancel",
+                    url: "/reservation/update",
                     success:function(response){
-                        if (response.errno=1){
+                        if (response.status="success"){
                         swal({
                             title:"恭喜您，訂位修改成功。",
                             type:"success",
                             timer:8000
-                            })
-                        window.location.href="/reservation/result"
+                        })
+                        setTimeout("location.href='/reservation/result'",1000)
                     }else{
                         alert("系統忙碌中，請稍後再試一次","error")
                     }

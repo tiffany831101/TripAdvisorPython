@@ -341,7 +341,7 @@ function like(obj){
             var like = $(obj).text()
             var title = $(obj).parent().children().children(".title").text()
             if (like=="收藏"){
-                $.get("/restaurant/like/"+title,function(){
+                $.get("/restaurant/like/"+title, function(){
                     alert("關注成功")
                     $tr = "<sapn class='love' onclick='like(this)' style='color:#078171'><i class='fas fa-thumbs-up'></i>"+"已收藏"+"</span>"
                     $(obj).html($tr)

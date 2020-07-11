@@ -285,7 +285,7 @@
             var username = $(this).prev().children(".username").text()
             if ($(this).text()=="追蹤"){
                 $.get("/follow/"+username,function(response){
-                    if (response.errno=1){
+                    if (response.status="success"){
                         $(this).html("關注中");
                         swal(response.errmsg,"","success");
                         window.location.href ="/user/"+username
@@ -405,7 +405,7 @@ function follow_event(){
 function click_followers(){
     $("#followers").off().one("click",function(){
             var username = $(this).parent().prev().children("#head").children(".username").text()
-            $.get("/followers/"+username,function(response){
+            $.get("/followers/"+username, function(response){
                 render(response)
         })
     })
@@ -425,7 +425,7 @@ function modal_css(){
 
 
 function render(response){
-    var data = response.data.follower
+    var data = response.followers
     $.each(data,function(key,value){
         var $tr=" ";
         $tr +=  "<div class='modal-outer-block'>"+
@@ -437,7 +437,7 @@ function render(response){
                         "</div>"+
                         "<div class='modal-about_me'>"+value.about_me+"</div>"+
                     "</div>"+
-                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_condition+"</span></div>"+
+                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_status+"</span></div>"+
                 "</div>"
         
         $("#follow-body").append($tr)
@@ -447,7 +447,7 @@ function render(response){
 }
 
 function followed(response){
-    var data = response.data.followed
+    var data = response.followed
     $.each(data,function(key,value){
         var $tr=" ";
         $tr +=  "<div class='modal-outer-block'>"+
@@ -459,7 +459,7 @@ function followed(response){
                         "</div>"+
                         "<div class='modal-about_me'>"+value.about_me+"</div>"+
                     "</div>"+
-                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_condition+"</span></div>"+
+                    "<div class='follow_modal' data-toggle='tooltip' onclick='click_user(this)'><i class='fas fa-user-plus'></i><span class='modal-inner-count'>"+value.follow_status+"</span></div>"+
                 "</div>"
         $("#followed-body").append($tr)
     })
@@ -512,9 +512,9 @@ function upload(obj){
             "website":website
         }
         $.post("/about_me/"+username,params,function(response){
-            if (response.errno==1){
+            if (response.status=="success"){
                 swal("保存成功","","success")
-                history.go(0)
+                setTimeout(function(){history.go(0)}, 1000)
                 $("top-city").html(city)
                 $("top-me").html(about_me)
             }

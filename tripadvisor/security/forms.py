@@ -12,41 +12,7 @@ from wtforms import ValidationError
 from tripadvisor.models import User
 from tripadvisor import photos
 
-class LoginForm(Form):
-    email = StringField(u'電子郵箱或電話',validators=[DataRequired(),Length(1,64),Email()])
-    password = PasswordField(u'密碼',validators=[DataRequired(),Regexp('^[A-Za-z][A-Za-z0-9_.]*$', message='請輸入正確的密碼')])
-    remember_me = BooleanField(u'記住我')
-    submit = SubmitField(u'登入')
 
-
-class RegistrationForm(Form):
-    username = StringField(u'姓名',validators=[DataRequired(),Length(1,64)])
-    
-    email = StringField(u'E-mail',validators=[DataRequired(),Length(1,64),Email()])
-    
-    cellphone = StringField(u'手機',validators=[InputRequired(),Regexp("^[0][9][0-9]{8}", message=u"無效的手機號碼，請再次確認")])
-    
-    password = PasswordField(u'請輸入密碼',validators=[DataRequired(),EqualTo('password2'),Regexp('^[A-Za-z][A-Za-z0-9_.]*$')])
-    password2 = PasswordField(u'請確認密碼',validators=[DataRequired('密碼需一致')])
-    submit = SubmitField('註冊')
-    
-    def validate_email(self,field):
-        if User.query.filter_by(email=field.data).first():
-            flash(u'該E-mail已存在')
-            raise ValidationError(u'該E-mail已存在')
-
-    def validate_cellphone(self, field):
-        if User.query.filter_by(cellphone=field.data).first():
-            flash(u'手機號已存在')
-            raise ValidationError(u'手機號已存在')
-
-
-class PasswordResetForm(Form):
-    cellphone = StringField(u'手機',validators=[InputRequired(),Regexp("^[0][9][0-9]{8}", message=u"無效的手機號碼，請再次確認")])
-    email = StringField("Email地址", validators=[DataRequired(),Email()])
-    password = PasswordField(u'請輸入密碼',validators=[DataRequired(),EqualTo('password2'),Regexp('^[A-Za-z][A-Za-z0-9_.]*$')])
-    password2 = PasswordField(u'請確認密碼',validators=[DataRequired('密碼需一致')])
-    submit= SubmitField('提交')
     
 
 class UserInfomationForm(Form):
@@ -70,15 +36,3 @@ class UploadImageForm(Form):
                         FileRequired('沒有選擇文件')]
                     )
     submit = SubmitField('上傳')
-
-
-class UpdateInfoForm(Form):
-    username = StringField(u'姓名',validators = [DataRequired(), Length(1,64)])
-    cellphone = StringField(u'手機',validators = [InputRequired(), Regexp("^[0][9][0-9]{8}", \
-                                    message=u"無效的手機號碼，請再次確認")])
-    submit = SubmitField('保存')
-
-    def validate_cellphone(self, field):
-        if User.query.filter_by(cellphone = field.data).first():
-            flash(u'手機號已存在')
-            raise ValidationError(u'手機號已存在')

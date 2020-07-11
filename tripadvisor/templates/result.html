@@ -102,7 +102,6 @@
                   <div>用餐時間 : {{ booking["booking_time"] }}</div>
                   <div>用餐人數 : {{ booking["people"] }} </div>
                   <div>訂單編號: <span id="order_id">{{ booking["order_id"] }}</span></div>
-                  <div class="time">線上預約時間: {{ booking["create_time"] }}</div>
                 </div>
                 <div class="inner-image">
                     <img src="{{ booking['image'] }}" alt=""> 
@@ -170,9 +169,9 @@
             dataType: "json",
             url: "/reservation/order/cancel/"+order_id,
             success:function(response){
-              if (response.errno=1){
+              if (response.status = "success"){
                 swal("該訂單已成功刪除!","","success");
-                window.location.href="/reservation/result"
+                setTimeout("location.href='/reservation/result'",1000)
               }else{
                 swal("系統忙碌中，請稍後再試一次","","error");
               }

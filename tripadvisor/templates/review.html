@@ -258,10 +258,9 @@
                     swal({ 
                         title: "感謝您撥空填寫問卷", 
                         text: "期待下次再為您服務",
-                        type: "success",
-                        timer:6000, 
-                        });
-                    window.location.href ="/restaurant/"+title
+                        type: "success"
+                    });
+                    setTimeout("location.href='/restaurant/'+title", 2000)
                 }
             })
         })

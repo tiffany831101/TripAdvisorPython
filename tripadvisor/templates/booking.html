@@ -120,15 +120,14 @@
                 data:$('#reservationform').serialize(),
                 url: "/reservation/check",
                 success:function(response){
-                    if (response.errno=1){
+                    if (response.errno="success"){
                         swal({ 
                             title: "恭喜您，訂位成功。", 
                             text: "您的訂單編號為:"+response.order_id,
                             type: "success",
                             timer:10000, 
                         });
-                        
-                        window.location.href="/reservation/result"
+                        setTimeout("location.href='/reservation/result'",1000)
                     }else{
                         alert("系統忙碌中，請稍後再試一次")
                     }

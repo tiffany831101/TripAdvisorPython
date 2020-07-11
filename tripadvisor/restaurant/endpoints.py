@@ -4,18 +4,15 @@ from flask_login import login_required, current_user
 
 from sqlalchemy import and_, func
 from datetime import datetime
-import time
 import logging
-import random
 import json
 
 from tripadvisor.restaurant import services, main
-from tripadvisor.restaurant.forms import QueryForm, EditionProfileForm, PostForm, BookingForm
+from tripadvisor.restaurant.forms import QueryForm, EditionProfileForm, PostForm
 from tripadvisor import db, redis_store
 from  tripadvisor.settings.defaults import *
-from tripadvisor.models import User, Role, Post, Survey, TripAdvisor, Reservation,\
+from tripadvisor.models import User, Role, Post, Survey, TripAdvisor,\
                                Comment, Love, Comment_like,Follow, Click
-
 
 
 logger = logging.getLogger()
@@ -58,13 +55,11 @@ def query():
 @main.route('/user/<username>')
 @login_required
 def user(username):
-    #收藏餐廳列表
+    # 收藏餐廳列表
     user, restaurants, count = services.favorit_restaurant_count(username)
-
-    #收藏評論
+    # 收藏評論
     comments = services.favorit_comments(username)
-    
-    #最近瀏覽概況
+    # 最近瀏覽概況
     read = services.recent_read_page(username)
 
     return render_template('user.html',store_list=restaurants, count=count, comment_list=comments, user=user, read_list=read)
@@ -94,27 +89,6 @@ def post(id):
     return render_template('post.html',post=[post])
 
 
-@main.route('/follow/<username>')
-@login_required
-def follow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        return jsonify(errno=0,errmsg="查無該用戶")
-    if current_user.is_following(user):
-        return jsonify(errno=0,errmsg="已關注該用戶")    
-    current_user.follow(user)
-    return jsonify(errno=1,errmsg=u"您已成功關注%s"%username)
-
-
-@main.route('/unfollow/<username>')
-@login_required
-def unfollow(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        return jsonify(errno=0,errmsg="該用戶不存在")
-    current_user.unfollow(user)
-    return jsonify(errno=1,errmsg=u"您已取消追蹤%s"%username)
-
 
 @main.route('/comment',methods=["POST","GET"])
 def get_comment_list():
@@ -134,86 +108,6 @@ def result_get():
     result = services.comment_result(survey)
     
     return jsonify(errno=0,data={"list":result})
-
-
-@main.route('/reservation/<restaurant>',methods=["POST","GET"])
-@login_required
-def reservation(restaurant):
-    data = TripAdvisor.query.filter_by(title=restaurant).first()
-    if not data:
-        return render_template("booking.html")
-    return render_template("booking.html", data=data)
-
-
-@main.route('/reservation/check',methods=["POST"])
-def reservation_check():
-    row = {}
-    row["restaurant"] = request.form.get("restaurant")
-    row["people"] = request.form.get("people")
-    row["booking_date"] = request.form.get("booking_date")
-    row["booking_time"] = request.form.get("booking_time")
-    row["current_user"] = current_user
-
-    if not all ([row["restaurant"], row["people"], row["booking_date"], row["booking_time"] ]):
-        return jsonify(errno=0,errmsg="參數不完整")
-
-    result = services.save_reservation_check(row)
-
-    try:
-        db.session.add(result)
-        return jsonify(errno=1,errmsg="參數保存成功",order_id=order_id)
-    except Exception as e:
-        logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route('/reservation/result')
-@login_required
-def result():
-    reservations, histories = services.reservation_condition
-    return render_template("result.html", reservation=reservations, history=histories)
-
-
-@main.route('/reservation/revise/<order_id>',methods=["POST","GET"])
-def order_revise(order_id):
-    data = Reservation.find_by_orderId(order_id)
-    return render_template("revise.html", data=data)
-
-
-@main.route('/reservation/order/cancel/<order_id>',methods=["POST"])
-def order_cancel(order_id):
-    r = Reservation.query.find_by_orderId(order_id)
-    
-    try:
-        db.session.delete(r)
-        return jsonify(errno=1,ennmsg="參數刪除成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route('/reservation/cancel',methods=["POST"])
-def order_confirm_revise():
-    row = {}
-    row["order_id"] = request.form.get("order_id")
-    row["restaurant"] = request.form.get("restaurant")
-    row["people"] = request.form.get("people")
-    row["booking_date"] = request.form.get("booking_date")
-    row["booking_time"] = request.form.get("booking_time")
-    if len(list(row.keys())) != 4:
-        return jsonify(errno=0,errmsg="參數不完整")
-    r = Reservation.query.filter_by(order_id1=order_id).update(row)
-    
-    try:
-        db.session.commit()
-        return jsonify(errno=1,errmsg="參數保存成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-
-        return jsonify(errno=0,errmsg="數據庫錯誤")
 
 
 @main.route('/restaurant/list')
@@ -334,7 +228,7 @@ def search_result(restaurant):
     comment = Comment.query.filter(Comment.store_id==data.id).all()
     like = Comment_like.query.filter(Comment_like.user_id==current_user.id).all()
     love = Love.query.filter(and_(Love.store_id==data.id,Love.user_id==current_user.id)).first()
-    data = data.to_basic_dict()
+    data = data.to_dict()
     return render_template("res_result.html",data=data,like=like,love=love, comment=comment) 
 
 
@@ -376,116 +270,4 @@ def restaurant(restaurant):
     return render_template("review.html",restaurant=restaurant,comment = comment_list)
 
 
-@main.route('/comment/edit/<int:id>',methods=["POST"])
-def review_edit(id):
-    restaurant =TripAdvisor.query.get_or_404(id)
-    rating = request.form.get("rating")
-    review_title = request.form.get("review_title")
-    review_content = request.form.get("review_content")
-    friend = request.form.get("type")
-    booking_date = request.form.get("booking_date")
-    takeout = request.form.get("takeout")
-    vegetable = request.form.get("vegetable")
-    service = request.form.get("service")
-    disabled = request.form.get("disabled")
-    star1 = request.form.get("star1")
-    star2 = request.form.get("star2")
-    star3 = request.form.get("star3")
-    recommend_dish = request.form.get("recommend_dish")
-    c =Comment(rating=rating,review_title=review_title,review_content=review_content,friend=friend,booking_date=booking_date,
-                    takeout=takeout,vegetable=vegetable,service=service,disabled=disabled,star1=star1,star2=star2,star3=star3,
-                    recommend_dish=recommend_dish,
-                    author=current_user._get_current_object(),
-                    restaurant=restaurant)
-    try:
-        db.session.add(c)
-        db.session.commit()
-        return jsonify(errno=1,errmsg="參數保存成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
 
-
-@main.route('/restaurant/like/<restaurant>')
-def like(restaurant):
-    restaurant =TripAdvisor.query.filter(TripAdvisor.title==restaurant).first()
-    focus = request.args.get("like")
-    l = Love(focus=focus,author=current_user._get_current_object(),store=restaurant)
-    try:
-        db.session.add(l)
-        db.session.commit()
-        return jsonify(errno=1,errmsg="參數保存成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route('/restaurant/unlike/<restaurant>')
-def unlike(restaurant):
-    restaurant =TripAdvisor.query.filter(TripAdvisor.title==restaurant).first()
-    user = User.query.filter(User.id==current_user.id).first()
-    a = user.restaurant_love.filter(TripAdvisor.id==restaurant.id).first()
-    try:
-        db.session.delete(a)
-        db.session.commit()
-        return jsonify(errno=1,ennmsg="參數刪除成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route("/comment/like/<id>")
-def comment_like(id):
-    comment = Comment.query.get_or_404(id)
-    l = Comment_like(comment_id=comment.id,user_id=current_user.id)
-    try:
-        db.session.add(l)
-        db.session.commit()
-        return jsonify(errno=1,errmsg="參數保存成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route("/comment/unlike/<int:id>")
-def comment_unlike(id):
-    comment=Comment.query.get_or_404(id)
-    user = User.query.filter(User.id==current_user.id).first()
-    l = user.comment_like.filter(Comment.id==comment.id).first()
-    try:
-        db.session.delete(l)
-        db.session.commit()
-        return jsonify(errno=1,ennmsg="參數刪除成功")
-    except Exception as e:
-        current_app.logger.error(e)
-        db.session.rollback()
-        return jsonify(errno=0,errmsg="數據庫錯誤")
-
-
-@main.route("/followers/<username>")
-@login_required
-def follow_user(username):
-    followers = services.follow_user(username)
-    return jsonify(errno=1,data={"follower":followers})
-
-
-@main.route("/followed/<username>")
-@login_required
-def followed_user(username):
-    followeds = services.followed_user(username)
-    return jsonify(errno=1,data={"followed":followeds})
-
-
-@main.route("/about_me/<username>",methods=["POST"])
-@login_required
-def about_me(username):
-    city = request.form.get("city")
-    about_me = request.form.get("about_me")
-    website = request.form.get("website")
-
-    result = services.save_member_info(username, city, about_me, website)
-    return jsonify(result)
