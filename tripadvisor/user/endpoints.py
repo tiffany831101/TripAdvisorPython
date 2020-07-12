@@ -2,7 +2,6 @@ from flask import request, jsonify
 from flask_login import login_required, current_user
 
 from tripadvisor import dao
-from tripadvisor.models import Comment 
 from tripadvisor.user import user, services
 
 
@@ -37,8 +36,7 @@ def comment_like(id):
 
 @user.route("/comment/unlike/<int:id>")
 def comment_unlike(id):
-    comment = Comment.find_by_id(id)
-    User.cancel_follow_comments(current_user.id, comment)
+    services.submit_comment_unlike(id, current_user)
     result = dao.delete()
     return jsonify(result)
 

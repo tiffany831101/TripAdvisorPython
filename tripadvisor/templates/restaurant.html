@@ -334,7 +334,7 @@ function like(obj){
     $(this).off("click").on("click",function(event){
         event.stopPropagation();
         if ($.cookie('username')==null || undefined){
-            // swal("立即註冊開通專屬會員資格","享有更多會員權限","error")
+            swal("立即註冊開通專屬會員資格","享有更多會員權限","error")
         
         }else{
             event.stopPropagation();

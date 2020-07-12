@@ -59,7 +59,7 @@
                 {% if read_list %}
                     {% for r in read_list %}
                         <div class="prev_border">
-                            <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['picture'] }}" class="img-thumbnail"></a></div>
+                            <div><a class="prev_click" href="/restaurant/{{ r['title'] }}"><img src="{{ r['image'] }}" class="img-thumbnail"></a></div>
                             <div class="prev_store">{{ r["title"] }}</div>
                             <div class="prev_store">{{ r["address"] }}</div>
                             
@@ -430,7 +430,7 @@ function render(response){
         var $tr=" ";
         $tr +=  "<div class='modal-outer-block'>"+
                     "<div class='user_modal'>"+
-                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"</a><i class='fas fa-check-circle'></i></div>"+
+                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.name+"'>"+value.name+"</a><i class='fas fa-check-circle'></i></div>"+
                         "<div class='maodal-inner-block'>"+
                             "<div><i class='fas fa-thumbtack'></i><span class='modal-city'>"+value.city+"</span></div>"+
                             "<div><span class='modal-follower-count'>"+value.follower_count+"</span>人追蹤</div>"+
@@ -452,7 +452,7 @@ function followed(response){
         var $tr=" ";
         $tr +=  "<div class='modal-outer-block'>"+
                     "<div class='user_modal'>"+
-                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.user+"'>"+value.user+"<i class='fas fa-check-circle'></i></a></div>"+
+                        "<div data-toggle='tooltip' title='查看首頁'><a class='author-link' href='/user/"+value.name+"'>"+value.name+"<i class='fas fa-check-circle'></i></a></div>"+
                         "<div class='maodal-inner-block'>"+
                             "<div><i class='fas fa-thumbtack'></i><span class='modal-city'>"+value.city+"</span></div>"+
                             "<div><span class='modal-follower-count'>"+value.follower_count+"</span>人追蹤</div>"+

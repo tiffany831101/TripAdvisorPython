@@ -17,21 +17,3 @@ class QueryForm(Form):
                                                     ('11','宮保雞丁'),('12','空心菜羊肉'),('13','肉絲炒飯')])
     submit = SubmitField(u'提交')
 
-
-class EditionProfileForm(Form):
-    name = StringField('論壇暱稱', validators=[Length(0,64)])
-    location = StringField('所居地址', validators=[Length(0,64)])
-    about_me = TextAreaField('自我介紹')
-    submit= SubmitField('提交')
-
-
-class PostForm(Form):
-    body = TextAreaField('發表食記', validators=[DataRequired()])
-    submit = SubmitField('提交')
-
-
-class BookingForm(Form):
-    people= IntegerField("人數", validators=[DataRequired()])
-    booking_date =  DateField(u'日期',format='%Y-%m-%d',validators=[DataRequired()])
-    booking_time = SelectField(u'餐次',choices=[('午餐','午餐'),('晚餐','晚餐')],validators=[DataRequired()])
-    submit = SubmitField('提交')

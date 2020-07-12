@@ -103,10 +103,6 @@
             <div class="title" data-toggle='tooltip' data-placement='top' title='查詢訂位狀況'>
                 <a href="javascript:void(0)" onclick="prohibit1()">訂位查詢</a>
             </div>
-            
-            <!-- <div class="title" data-toggle='tooltip' data-placement='top' title='立即實名認證'>
-                <a href="javascript:void(0)" onclick="prohibit3()">實名認證</a>
-            </div> -->
 
             
             <div class="title">
@@ -202,13 +198,6 @@ function prohibit2(){
         }
 }
 
-function prohibit3(){
-    if ($.cookie('username')==null || undefined){
-            swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
-        }else{
-            window.location.href="{{ url_for('auth.information') }}"
-        }
-}
 function logout1(){
         $.get("/auth/logout","",function(response){
             swal("您已成功登出","","success")

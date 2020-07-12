@@ -15,7 +15,7 @@ def get_image_code(image_code_id):
     
     text, image_data = captcha.generate_captcha()
     try:    
-        redis_store.setex("image_code_%s"%image_code_id, IMAGR_CODE_REDIS_EXPRIES, text)
+        redis_store.setex(f"image_code_{image_code_id}", IMAGR_CODE_REDIS_EXPRIES, text)
     except Exception as e:
         logger.error(e)
 

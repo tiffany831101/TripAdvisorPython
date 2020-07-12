@@ -1,18 +1,23 @@
 from flask_login import login_required, current_user
 
 from tripadvisor.models import User, TripAdvisor, Comment, Love, Comment_like,Follow
+from tripadvisor import dao, tasks
 
 
 def submit_about_me(username, row):
-    user = User.find_by_username(username)
+    user = User()
+    user = user.find_by_username(username)
+
     user.city = row.get("city", None)
     user.website = row.get("website", None)
     user.about_me = row.get("about_me", None) 
+
     return user
 
 
-def submit_comments(user, row):
-    restaurant =TripAdvisor.find_by_id(id)
+def submit_comments(id, user, row):
+    tripadvisor = TripAdvisor()
+    restaurant = tripadvisor.find_by_id(id)
 
     c = Comment()
     c.rating = row.get("rating",None)
@@ -34,34 +39,36 @@ def submit_comments(user, row):
 
 
 def submit_comment_like(id, user):
-    comment = Comment.find_by_id(id)
+    comment = Comment()
+    comment = comment.find_by_id(id)
 
-    c = Comment_like()
-    c.user_id = user.id
-    c.comment_id = comment.id
+    c = Comment_like(user_id = user.id, comment_id = comment.id)
     return c
 
 
+def submit_comment_unlike(id, current_user):
+    comment = Comment()
+    comment = comment.find_by_id(id)
+    tasks.cancel_follow_comments(current_user.id, comment)
+    
+
 def submit_like(user, restaurant, row):
     focus = row.get("like", None)
-    restaurant = TripAdvisor.find_by_name(restaurant)
-
-    l = Love()
-    l.focus = focus
-    l.store = restaurant
-    l.author = user._get_current_object()
-    
-    return l
+    tripAdvisor = TripAdvisor()
+    restaurant = tripAdvisor.find_by_name(restaurant)
+    love = Love(focus=focus, store=restaurant, author=user._get_current_object())
+    return love
 
 
 def submit_unlike(current_user, restaurant):
-    restaurant = TripAdvisor.find_by_name(restaurant)
-    User.cancel_follow_restaurant(current_user.id, restaurant)
-    return "OK"
+    tripAdvisor = TripAdvisor()
+    restaurant = tripAdvisor.find_by_name(restaurant)
+    tasks.cancel_follow_restaurant(current_user.id, restaurant)
 
 
 def follow(username, current_user):
-    user = User.find_by_username(username)
+    user = User()
+    user = user.find_by_username(username)
     if user is None:
         return {"status":"error","errmsg":"查無該用戶"}
 
@@ -70,11 +77,12 @@ def follow(username, current_user):
     
     else:
         current_user.follow(user)
-        return {"status":"success","msg":u"您已成功關注%s"%username}
+        return {"status":"success", "msg":u"您已成功關注%s"%username}
 
 
 def unfollow(username, current_user):
-    user = User.find_by_username(username)
+    user = User()
+    user = user.find_by_username(username)
     if user is None:
         return {"status":"error","errmsg":"查無該用戶"}
     else:
@@ -83,9 +91,8 @@ def unfollow(username, current_user):
 
 
 def following_user(username):
-    followers = Follow.find_followers(username)
-
-    my_followers = Follow.find_current_followers(current_user)
+    followers = tasks.find_followers(username)
+    my_followers = tasks.find_current_followers(current_user)
 
     followers_list = []
     for f in my_followers:
@@ -95,7 +102,7 @@ def following_user(username):
     for f in followers:
         row = {}
         row["city"] = f.follower.city
-        row["user"] = f.follower.username
+        row["name"] = f.follower.username
         row["about_me"] = f.follower.about_me
         row["follower_count"] = f.follower.followers.count()
         if f.follower.id != current_user.id:
@@ -112,10 +119,9 @@ def following_user(username):
 
 
 def followed_user(username):
-    followed  = Follow.find_followed(username)
-
-    my_followerd =  Follow.find_current_followerd(current_user)
-
+    followed = tasks.find_followed(username)
+    my_followerd = tasks.find_current_followerd(current_user)
+    
     followerd_list=[]
     for f in my_followerd:
         followerd_list.append(f.followed.id)
@@ -124,6 +130,7 @@ def followed_user(username):
     for f in followed:
         row = {}
         row["city"] = f.followed.city
+        row["name"] = f.followed.username
         row["about_me"] = f.followed.about_me
         row["follower_count"] = f.followed.followers.count()
 

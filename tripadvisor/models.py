@@ -1,17 +1,18 @@
 from flask import current_app
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
 
-from sqlalchemy import and_, func
+from sqlalchemy import and_
 from sqlalchemy.ext.declarative import declarative_base
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from datetime import datetime
 
-from tripadvisor import db, login_manager, dao
+from tripadvisor import db, login_manager, dao, cache
 
 Base = declarative_base()
+
+CACHE_TIMEOUT = 60 * 60 * 24 * 3
 
 
 class BaseModel(object):
@@ -28,7 +29,7 @@ class Role(BaseModel, db.Model):
     name = db.Column (db.String(10), unique=True)
 
     def __repr__(self):
-        return '<Role %r>' %self.name
+        return '<Role %r>' % self.name
 
 
 class Follow(BaseModel, db.Model):
@@ -37,22 +38,6 @@ class Follow(BaseModel, db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
     followed_id = db.Column(db.Integer, db.ForeignKey('user.id'),primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def find_followers(username):
-        return db.session.query(Follow).join(User, User.id==Follow.followed_id)\
-                            .filter(User.username==username).all()
-    
-    def find_current_followers(current_user):
-        return db.session.query(Follow).join(User, User.id==Follow.followed_id)\
-                            .filter(User.id==current_user.id).all()
-
-    def find_followed(username):
-        return db.session.query(Follow).join(User, User.id==Follow.follower_id)\
-                            .filter(User.username==username).all()
-
-    def find_current_followerd(current_user):        
-        return db.session.query(Follow).join(User, User.id==Follow.follower_id)\
-                            .filter(User.id==current_user.id).all()
 
 
 class User(UserMixin, db.Model):
@@ -99,37 +84,31 @@ class User(UserMixin, db.Model):
                                 backref=db.backref('followed',lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
-    
+
+    @cache.memoize(CACHE_TIMEOUT)
     def find_by_id(id):
         return db.session.query(User).filter_by(id=id).first()
 
-    def find_by_email(email):
-        return db.session.query(User).filter_by(email=email).first()
+    @cache.memoize(CACHE_TIMEOUT)
+    def find_by_email(self, email):
+        return self.query.filter_by(email=email).first()
 
-    def find_by_username(username):
-        return db.session.query(User).filter_by(username=username).first()
+    @cache.memoize(CACHE_TIMEOUT)
+    def find_by_username(self, username):
+        return self.query.filter_by(username=username).first()
 
-    def find_by_cellphone(cellphone):
-        return db.session.query(User).filter_by(cellphone=cellphone).first()
+    @cache.memoize(CACHE_TIMEOUT)
+    def find_by_cellphone(self, cellphone):
+        return self.query.filter_by(cellphone=cellphone).first()
 
-    def find_by_cellphone_and_email(cellphone, email):
-        return db.session.query(User).filter(and_(User.cellphone==cellphone, User.email==email)).first()
+    @cache.memoize(CACHE_TIMEOUT)
+    def find_by_cellphone_and_email(self, cellphone, email):
+        return self.query.filter(and_(User.cellphone==cellphone, User.email==email)).first()
 
-    def update(id, **kwargs):
-        db.session.query(User).filter_by(id=id).update(kwargs)
+    @cache.memoize(CACHE_TIMEOUT)
+    def update(self, id, **kwargs):
+        self.query.filter_by(id=id).update(kwargs)
         return dao.update()
-
-    def cancel_follow_restaurant(id, restaurant):
-        user = db.session.query(User).filter_by(id=id).first()
-        row  = user.restaurant_love.filter(TripAdvisor.id==restaurant.id).first()
-        return db.session.delete(row)
-
-    def cancel_follow_comments(user_id, comment):
-        user = db.session.query(User).filter_by(id=user_id).first()
-        row  = user.comment_like.filter(Comment.id==comment.id).first()
-        return db.session.delete(row)
-
-
         
 
     @property
@@ -144,7 +123,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
     
     
-    def generate_confirmation_token(self,expiration=3600):
+    def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config["SECRET_KEY"],expiration)
         return s.dumps({'confirm':self.id})
 
@@ -158,7 +137,6 @@ class User(UserMixin, db.Model):
             f = Follow(follower=self, followed=user)
             dao.save(f)
             
-            
     def unfollow(self, user):
         f = self.followed.filter_by(followed_id=user.id).first()
         if f:
@@ -170,42 +148,10 @@ class User(UserMixin, db.Model):
             
     def is_followed_by(self, user):
         return self.followers.filter_by(followed_id=user.id).first() is not None
-    
-
-    def page_load(val, page):
-        if not val == 0:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                    .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(TripAdvisor.rating_count>200)\
-                    .paginate(page=int(page),per_page=30,error_out= False)
-                     
-        else:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                    .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(TripAdvisor.rating_count>200)\
-                    .paginate(page=int(page),per_page=30,error_out= False)
-
-    def comment_search(val, params):
-        if not val == 1:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                        .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(*params)\
-                            .order_by(TripAdvisor.rating_count.desc())
-        else:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                        .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(*params)\
-                            .order_by(TripAdvisor.rating_count.desc())
-
-
-    def rating_search(val, params):
-        if not val == 1:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                        .outerjoin(User, and_(Love.user_id==User.id, User.id==val)).filter(*params)\
-                        .order_by(TripAdvisor.rating.desc())
-        else:
-            return db.session.query(TripAdvisor, User.username).outerjoin(Love,TripAdvisor.id==Love.store_id)\
-                        .outerjoin(User, and_(Love.user_id==0, User.id==0)).filter(*params)\
-                        .order_by(TripAdvisor.rating.desc())
 
     def __repr__(self):
         return '<User %r>' %self.username
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -248,31 +194,18 @@ class Reservation(BaseModel,db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("ta.id"))
 
-    def cancel_order(id):
-        return db.session.query(Reservation).filter_by(order_id1=id).delete()
 
-    def find_by_orderId(id):
-        return db.session.query(Reservation).filter_by(order_id1=id).first()
+    def cancel_order(self, id):
+        self.query.filter_by(order_id1=id).delete()
+        return dao.delete()
 
-    def get_reservation_result(now, current_user):
-        return db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor)\
-                     .outerjoin(Reservation, and_(Reservation.restaurant_id == TripAdvisor.id, 
-                                             Reservation.booking_date > now))\
-                     .join(User, and_(Reservation.user_id == User.id, User.id == current_user.id))\
-                     .all()
+    def find_by_orderId(self, id):
+        return self.query.filter_by(order_id1=id).first()
 
-
-    def get_history_result(now, current_user):
-        return db.session.query(Reservation, TripAdvisor).select_from(TripAdvisor)\
-                    .outerjoin(Reservation, and_(Reservation.restaurant_id==TripAdvisor.id,
-                                            Reservation.booking_date < now))\
-                    .join(User, and_(Reservation.user_id==User.id, User.id==current_user.id))\
-                    .order_by(Reservation.booking_date.desc())\
-                    .all()
-
-    def update(id, **kwargs):
-        db.session.query(Reservation).filter_by(order_id1=id).update(kwargs)
+    def update(self, id, **kwargs):
+        self.query.filter_by(order_id1=id).update(kwargs)
         return dao.update()
+
 
 class TripAdvisor(db.Model):
     __tablename__ = "ta"
@@ -294,11 +227,11 @@ class TripAdvisor(db.Model):
     following = db.relationship("Love",backref="store",lazy="dynamic")
     clicked_user = db.relationship("Click",backref="store",lazy="dynamic")
 
-    def find_by_id(id):
-        return db.session.query(TripAdvisor).get_or_404(id)
+    def find_by_id(self, id):
+        return self.query.get_or_404(id)
 
-    def find_by_name(title):
-        return db.session.query(TripAdvisor).filter_by(title=title).first()
+    def find_by_name(self, title):
+        return self.query.filter_by(title=title).first()
 
     def to_dict(self):
         return {
@@ -312,6 +245,14 @@ class TripAdvisor(db.Model):
             "street":self.street,
             "rating":self.rating,
             "comment":self.comment.split(",")
+        }
+
+    def to_comment_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "address": self.address,
+            "image" : self.info_url.split(",")[2]
         }
 
 
@@ -352,9 +293,23 @@ class Comment(BaseModel,db.Model):
     user_like = db.relationship("Comment_like",backref="comment",lazy="dynamic")
 
 
-    def find_by_id(id):
-        return db.session.query(Comment).get_or_404(id)
-        
+    def find_by_id(self, id):
+        return self.query.get_or_404(id)
+    
+    def find_all(self, id):
+        return self.query.filter_by(store_id=id).all()
+
+    def get_comments(self, id):
+        return self.query.filter_by(store_id=id).limit(3)
+    
+    def to_dict(self):
+        return {
+            "rating":self.rating,
+            "author":self.author,
+            "title":self.review_title,
+            "content":self.review_content
+        }
+
 
 class Love(BaseModel,db.Model):
     _tablename__="love"
@@ -363,6 +318,14 @@ class Love(BaseModel,db.Model):
     focus = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+
+    def __init__(self, **kwargs):
+        self.focus = kwargs.get("focus", None)
+        self.author = kwargs.get("author", None)
+        self.store = kwargs.get("store", None)
+
+    def find_by_store_and_user(self, id, user_id):
+        return self.query.filter(and_(self.store_id==id, self.user_id==user_id)).first()
 
 
 class Child_cmt(BaseModel,db.Model):
@@ -374,12 +337,21 @@ class Child_cmt(BaseModel,db.Model):
     fcmt_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
+
 class Comment_like(BaseModel,db.Model):
     __tablename__="comment_like"
 
     id = db.Column(db.Integer, primary_key=True)
-    comment_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comment_id = db.Column(db.Integer,db.ForeignKey('comment.id'))
+
+    def __init__(self, **kwargs):
+        self.user_id = kwargs.get("user_id", None)
+        self.comment_id = kwargs.get("comment_id", None)
+        
+
+    def find_all(self, id):
+        return self.query.filter_by(user_id=id).all()
 
 
 class Click(BaseModel,db.Model):
@@ -388,3 +360,4 @@ class Click(BaseModel,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+

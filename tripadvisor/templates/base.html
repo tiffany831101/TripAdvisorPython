@@ -31,7 +31,7 @@
                 <a class="nav-link" href="javascript:void(0)" onclick="prohibit()"><span class="incon-area"><i class="fas fa-utensils"></i></span><br>線上訂位<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('auth.my') }}"><span class="incon-area"><i class="fas fa-user-friends"></i></span><br>會員專區<span class="sr-only"></span></a>
+                <a class="nav-link" href="javascript:void(0)" onclick="prohibit3()"><span class="incon-area"><i class="fas fa-user-friends"></i></span><br>會員專區<span class="sr-only"></span></a>
             </li>
 
             <li class="nav-item">
@@ -135,10 +135,8 @@ $(function(){
                 method:"post",
                 success:function(response){
                     if (response.status=="success"){
-                        console.log(response)
-                        swal("登入成功","","success")
-                        window.location.href="/restaurant/list"
-                        
+                        //swal("立即登入查看更多內容","","error","5000")
+                        window.location.href='/restaurant/list',1000                      
                     }else{
                         swal(response.errmsg,"","error")
                     }
@@ -158,6 +156,14 @@ $(function(){
             swal("立即登入查看更多內容","","error","5000")
         }else{
             window.location.href="{{ url_for('booking.reservation',restaurant='老漁村餐廳') }}"
+        }
+    }
+
+    function prohibit3(){
+        if ($.cookie('username')==null || undefined){
+            swal("立即登入查看更多內容","","error","5000")
+        }else{
+            window.location.href="{{ url_for('auth.my') }}"
         }
     }
 </script>

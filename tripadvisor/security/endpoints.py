@@ -1,15 +1,9 @@
-from flask import render_template, redirect, request, url_for, flash, make_response, jsonify, session, current_app
+from flask import render_template, redirect, request, flash, make_response, jsonify, session
 from flask_login import login_required, current_user, logout_user
-
 import logging
 
 from tripadvisor.security import auth, services
-from tripadvisor.models import User
 from tripadvisor.email import send_message
-from tripadvisor.security.forms import UserInfomationForm
-from tripadvisor import db, photos, CSRFProtect, dao
-from tripadvisor.settings.defaults import *
-
 
 logger = logging.getLogger()
 
@@ -38,35 +32,7 @@ def password_reset():
 @auth.route('/my')
 def my():
     return render_template("my.html")
-
-
-@auth.route('/login',methods=["POST"])
-def login():
-    """登入功能"""
-    email = request.form.get("email")
-    password = request.form.get("password")
-    remember_me = request.form.get("remember_me")
-    user_ip = request.remote_addr
-
-    check_error, login_failure_nums = services.check_login_failuer_num(user_ip)
-
-    if check_error:
-        return jsonify(check_error)
-
-    try:
-        user = User.find_by_email(email)
-    except Exception as e:
-        return jsonify(status="error", errmsg="獲取用戶信息失敗")
-
-    check_error = services.check_password(user, password, user_ip, login_failure_nums)
     
-    if check_error:
-        return jsonify(check_error)
-
-    response = services.set_login_session(user, password,remember_me)
-    
-    return response
-
 
 @auth.route("/session",methods=["GET"])
 def check_login():
@@ -90,74 +56,62 @@ def logout():
     return response
 
 
+@auth.route('/login',methods=["POST"])
+def login():
+    """登入功能"""
+    data = request.form
+    user_ip = request.remote_addr
+
+    if not all ([data["email"], data["password"]]):
+        return jsonify(status="error", errmsg="參數不完整")
+    
+    is_error = services.check_parmas(data, user_ip)    
+    if is_error:
+        return jsonify(is_error)
+
+    response = services.set_login_session(data)
+    return response
+
+
 @auth.route('/register/check',methods=['POST'])
 def register_check():
     """用戶註冊功能"""
-    username = request.form.get("username")
-    cellphone = request.form.get("cellphone")
-    email = request.form.get("email")
-    password = request.form.get("password")
-    password2 = request.form.get("password2")
-    image_code_id = request.form.get("image_code_id")
-    image_code = request.form.get("image_code")
+    data = request.form.to_dict()
 
-    check_failure = services.check_captcha(image_code_id, image_code)
+    if not all ([data["username"], data["cellphone"],data["email"], data["password"], data["password2"], data["image_code_id"], data["image_code"]]):
+        return jsonify(status="error", errmsg="參數不完整")
 
-    if check_failure:
-        return jsonify(check_failure)
+    result = services.user_register(**data)
     
-    check_failure = services.check_register_info(**{"cellphone":cellphone, "email":email})
-
-    if check_failure:
-        return jsonify(check_failure)
-
-    check_failure = services.check_double_register(**{"username":username, "email":email, "cellphone":cellphone})
-
-    if check_failure:
-        return jsonify(check_failure)
-    
-    user = User(username=username, email=email, cellphone=cellphone, password =password)
-    result = dao.save(user)
     return jsonify(result)
     
 
 @auth.route('/captcha/check',methods=["POST"])
 def captcha_check():
-    email = request.form.get("email")
-    cellphone = request.form.get("cellphone")
-    image_code = request.form.get("image_code")
-    image_code_id = request.form.get("image_code_id")
+    data = request.form.to_dict()
 
-    check_failure = services.check_captcha(image_code_id, image_code)
+    if not all ([data["cellphone"], data["email"], data["image_code_id"], data["image_code"]]):
+        return jsonify(status="error", errmsg="參數不完整")
 
-    if check_failure:
-        return jsonify(check_failure)
-   
-    user = User.find_by_cellphone_and_email(cellphone, email)
-    
+    user = services.verify_info(data)
+       
     if user:
         response = make_response(jsonify(status = "success", msg= "數據查詢成功"))
         response.set_cookie("email", user.email)
         return response
+    
     else:
         return jsonify(status="error",errmsg="請輸入正確Email")
     
 
 @auth.route("/password/check",methods=["POST"])
 def password_check():
-    email = request.cookies.get("email")
-    password = request.form.get("password")
-    password2 = request.form.get ("password2")
+    data = request.form.to_dict()
 
-    if not email:
-        return jsonify(status="error",errmsg="內部系統繁忙中，請再試一次")
-    
-    user = User.find_by_email(email)
+    if not all ([data["email"], data["password"], data["password2"]]):
+        return jsonify(status="error", errmsg="參數不完整")
 
-    if user:
-        user.password = password
-    
-    result = dao.save(user)
+    result = services.update_password(data)
     
     return jsonify(result)
 
@@ -165,19 +119,9 @@ def password_check():
 @auth.route('/info', methods=["POST"])
 @login_required
 def update_info():
-    username = request.form.get("username")
-    cellphone = request.form.get("cellphone")
+    data = request.form.to_dict()
     
-    check_error = services.check_double_register(username=username)
-    if check_error:
-        return jsonify(check_error)
-    
-    check_failure = services.check_register_info(**{"cellphone":cellphone})
-
-    if check_failure:
-        return jsonify(check_failure)
-    
-    result = User.update(current_user.id, **{"username":username, "cellphone":cellphone})
+    result = services.update_info(data, current_user)
     
     return jsonify(result)   
 

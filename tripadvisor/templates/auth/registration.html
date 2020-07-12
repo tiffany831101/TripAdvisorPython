@@ -76,7 +76,7 @@
 
         </form>
         <div class="query" display="margin-top:10px; margin-bottom: 20px;">
-            已有帳戶了嗎?<a href="{{ url_for('auth.login') }}" style="color:#000">立即登入</a>
+            已有帳戶了嗎?<a href="{{ url_for('auth.login_html') }}" style="color:#000">立即登入</a>
         </div>
     </div>
 </div>
@@ -145,18 +145,7 @@ function register(obj){
 
 
 </script>
-
-
-
-{{ super() }}
-
-
-
-
-
-
-
-
+    {{ super() }}
 <script>
 $('#password').keyup(function(e) {
             var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
