@@ -15,7 +15,6 @@ from flask_redis import FlaskRedis
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 
 from tripadvisor.settings.defaults import LOG_FILE_PATH, ERROR_LOG_FILE_PATH
@@ -33,7 +32,6 @@ db = SQLAlchemy()
 mail = Mail()
 bootstrap = Bootstrap()
 
-photos= UploadSet('photos', IMAGES)
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -139,19 +137,19 @@ def create_application(settings=None):
     CSRFProtect(app)
 
     # Register blueprints
-    from tripadvisor.restaurant import main
+    from tripadvisor.api.restaurant import main
     app.register_blueprint(main)
 
-    from tripadvisor.user import user
+    from tripadvisor.api.user import user
     app.register_blueprint(user)
 
-    from tripadvisor.security import auth
+    from tripadvisor.api.security import auth
     app.register_blueprint(auth, url_prefix='/auth')
 
-    from tripadvisor.verification import api 
+    from tripadvisor.api.verification import api 
     app.register_blueprint(api, url_prefix='/api')
 
-    from tripadvisor.reservation import booking 
+    from tripadvisor.api.reservation import booking 
     app.register_blueprint(booking, url_prefix='/reservation')
 
     return app

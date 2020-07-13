@@ -135,7 +135,7 @@ $(function(){
                 method:"post",
                 success:function(response){
                     if (response.status=="success"){
-                        //swal("立即登入查看更多內容","","error","5000")
+                        swal("立即登入查看更多內容","","error","5000")
                         window.location.href='/restaurant/list',1000                      
                     }else{
                         swal(response.errmsg,"","error")

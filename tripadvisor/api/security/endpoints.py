@@ -1,8 +1,9 @@
 from flask import render_template, redirect, request, flash, make_response, jsonify, session
 from flask_login import login_required, current_user, logout_user
+from flask_cors import cross_origin
 import logging
 
-from tripadvisor.security import auth, services
+from tripadvisor.api.security import auth, services
 from tripadvisor.email import send_message
 
 logger = logging.getLogger()

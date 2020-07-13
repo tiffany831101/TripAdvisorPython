@@ -1,13 +1,13 @@
-from flask import render_templat, current_app, request, jsonify
+from flask import render_template, current_app, request, jsonify
 from flask_login import login_required, current_user
 
 from datetime import datetime
 import logging
 import json
 
-from tripadvisor.restaurant import services, main
 from tripadvisor import dao, tasks
-from tripadvisor.models import User, Survey
+from tripadvisor.api.restaurant import services, main
+from tripadvisor.models import User
 
 
 logger = logging.getLogger()
@@ -92,28 +92,3 @@ def read_count(restaurant):
     result = dao.save(submit)
     return jsonify(result)
 
-
-# @main.route('/query',methods=['GET','POST'])
-# @login_required
-# def query():
-#     form = QueryForm()
-#     if form.validate_on_submit():
-#         s = Survey(
-#             date = form.date.data.strftime('%Y-%m-%d'),
-#             price = form.price.data,
-#             satisfication =form.satisfication.data,
-#             opinion = form.opinion.data,
-#             intention =form.intention.data,
-#             survey = current_user._get_current_object()
-#         )
-#         try:
-#             db.session.add(s)
-#             db.session.commit()
-#             flash(u'您寶貴的意見，是我們成長的動力')
-#             return redirect(url_for('auth.my'))
-
-#         except Exception as e:
-#             current_app.logger.error(e)
-#             flash(u"數據庫查詢異常")
-
-#         return render_template('query.html',form=form)

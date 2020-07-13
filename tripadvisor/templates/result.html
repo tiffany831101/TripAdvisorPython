@@ -91,11 +91,11 @@
             <div class="content">
               
               <div class="inner-box-revise">
-                  <div class=revise><a id="reservation" href="#" style="color: #fff">修改</a></div>
+                  <div class=revise><a id="reservation" href="/reservation/revise/{{booking['order_id'] }}" style="color: #fff">修改</a></div>
                   <div class="cancel"><a id="cancel" href="">取消</a></div>
               </div>
               
-              <div class="book_info">
+              <div class="book_info"> 
                 <div class="inner-content">
                   <div>預約餐廳: {{ booking["title"] }}</div>   
                   <div>預約日期 : {{ booking["date"] }}</div>

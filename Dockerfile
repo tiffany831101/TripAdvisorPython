@@ -14,6 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY entrypoint.sh /
 
 COPY supervisord.conf /etc/
-COPY supervisor_uwsgi.conf /etc/supervisor/conf.d/  
+COPY supervisor-uwsgi.conf /etc/supervisor/conf.d/  
 
 RUN  chmod +x /entrypoint.sh

@@ -41,7 +41,8 @@ def find_current_followers(current_user):
 
 
 def following_restaurant(user_id):
-    restaurant =  db.session.query(TripAdvisor).join(Love, Love.store_id == TripAdvisor.id)\
+    restaurant =  db.session.query(TripAdvisor)\
+                    .join(Love, Love.store_id == TripAdvisor.id)\
                     .filter(Love.user_id == user_id)
 
     count = restaurant.count()
@@ -89,7 +90,7 @@ def comment_search(user_id, params):
 
 
 def rating_search(user_id, params):
-    user_id, variable = vaget_user_id(user_id)
+    user_id, variable = get_user_id(user_id)
     
     return db.session.query(TripAdvisor, User.username)\
                     .outerjoin(Love,TripAdvisor.id==Love.store_id)\
@@ -99,8 +100,7 @@ def rating_search(user_id, params):
 
 
 def page_filter(user_id, page):
-    user_id, variable = vaget_user_id(user_id)
-
+    user_id, variable = get_user_id(user_id)
     return db.session.query(TripAdvisor, User.username)\
                     .outerjoin(Love,TripAdvisor.id==Love.store_id)\
                     .outerjoin(User, and_(Love.user_id==variable, User.id==user_id))\
@@ -111,8 +111,7 @@ def page_filter(user_id, page):
 def author_following_comments(username):
     return  db.session.query(Comment).join(Comment_like, 
                                         Comment_like.comment_id == Comment.id)\
-                            .join(User,and_(Comment_like.user_id == User.id,
-                                            User.username==username))\
+                            .join(User,and_(Comment_like.user_id == User.id, User.username==username))\
                             .all()
 
 

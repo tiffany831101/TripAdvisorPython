@@ -2,7 +2,7 @@ from flask import request, jsonify
 from flask_login import login_required, current_user
 
 from tripadvisor import dao
-from tripadvisor.user import user, services
+from tripadvisor.api.user import user, services
 
 
 @user.route('/restaurant/like/<restaurant>')

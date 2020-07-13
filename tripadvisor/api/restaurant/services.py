@@ -2,7 +2,7 @@ from flask import current_app
 from flask_login import login_required, current_user
 import logging
 
-from tripadvisor.models import User, TripAdvisor,Comment,\
+from tripadvisor.models import User, TripAdvisor, Comment,\
                                 Love, Comment_like, Click
 from tripadvisor import redis_store, tasks
 from tripadvisor.settings.defaults import *
@@ -14,10 +14,18 @@ def get_redis_key(address, res_type, sort_key, page, keyword, user):
     return f"restaurant_{address}_{res_type}_{sort_key}_{page}_{keyword}_{user}" 
 
 
+def get_restaurant_pages_by_page(page):
+    redis_key = f"restaurant_{page}"
+    try:
+        result = redis_store.hget(redis_key, page)
+    except Exception as e:
+        current_app.logger.error(e)
+    return redis_key, result
+
+
 def get_favorit_restaurant(username):
-    user = User()
     if username is not current_user.username:
-        user = user.find_by_username(username)
+        user = User().find_by_username(username)
         if not user:
             return {"status":"error", "msg":"查無該用戶"}
         
@@ -32,10 +40,8 @@ def get_favorit_comments(username):
     comment = tasks.author_following_comments(username)
     my_following_comments = tasks.my_following_comments(current_user.id)
                             
-    comment_like=[]
-    for u in my_following_comments:
-        comment_like.append(u.id)
-    
+    comment_like = [u.id for u in my_following_comments]
+
     followed_id = [ i.followed_id for i in current_user.followed.all()]
 
     comments = []
@@ -92,10 +98,10 @@ def get_restaurant_info_from_mysql(**kwargs):
     if kwargs["food"]:
         filter_params.append(TripAdvisor.res_type.contains(kwargs["food"]))    
 
-    if kwargs["filter"] =="評論數":
+    if kwargs["filter"] == "評論數":
         restaurant = tasks.comment_search(int(user_id), params=filter_params)
 
-    elif kwargs["filter"] =="評分數":
+    elif kwargs["filter"] == "評分數":
         restaurant = tasks.rating_search(int(user_id), params=filter_params)
         
     return restaurant
@@ -142,36 +148,20 @@ def get_restaurant_info_from_mysql_by_page(page):
     return result_dict
 
 
-def cache(redis_key, page, data):
-    try:
-        pipeline = redis_store.pipeline()
-        pipeline.multi()
-        pipeline.hset(redis_key, page, data)
-        pipeline.expire(redis_key, RESTAURANT_LIST_PAGE)
-        pipeline.execute()
-    except Exception as e:
-        current_app.logger.error(e)
-
-
 def get_restaurant_comments(name):
-    restaurant = TripAdvisor()
-    restaurant = restaurant.find_by_name(name)
+    restaurant = TripAdvisor().find_by_name(name)
 
     brief_info = restaurant.to_comment_dict()
     
-    comment = Comment()
-    comments = comment.get_comments(restaurant.id)
+    comments = Comment().get_comments(restaurant.id)
 
-    restaurant_comments = []
-    for c in comments:
-        restaurant_comments.append(c.to_dict())
+    restaurant_comments = [ c.to_dict() for c in comments ]
     
     return brief_info, restaurant_comments
 
 
 def submit_click(restaurant, current_user):
-    tripadvisor = TripAdvisor()
-    store = tripadvisor.find_by_name(restaurant)
+    store = TripAdvisor().find_by_name(restaurant)
     if current_user.is_authenticated:
         c = Click()
         c.store_id = store.id
@@ -182,26 +172,24 @@ def submit_click(restaurant, current_user):
 
 
 def get_restaurant_pages(name):
-    tripAdvisor = TripAdvisor()
-    restaurant = tripAdvisor.find_by_name(name)
+    restaurant = TripAdvisor().find_by_name(name)
 
-    comment = Comment()
-    comments = comment.find_all(restaurant.id)
+    comments = Comment().find_all(restaurant.id)
 
-    comment_like = Comment_like()
-    likes = comment_like.find_all(current_user.id)
+    likes = Comment_like().find_all(current_user.id)
 
-    love = Love()
-    love = love.find_by_store_and_user(restaurant.id, current_user.id)
+    love = Love().find_by_store_and_user(restaurant.id, current_user.id)
 
     restaurant = restaurant.to_dict()
     return restaurant, comments, likes, love
 
 
-def get_restaurant_pages_by_page(page):
-    redis_key = "restaurant_%s" % (page)
+def cache(redis_key, page, data):
     try:
-        result = redis_store.hget(redis_key, page)
+        pipeline = redis_store.pipeline()
+        pipeline.multi()
+        pipeline.hset(redis_key, page, data)
+        pipeline.expire(redis_key, RESTAURANT_LIST_PAGE)
+        pipeline.execute()
     except Exception as e:
         current_app.logger.error(e)
-    return redis_key, result

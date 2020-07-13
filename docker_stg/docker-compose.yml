@@ -15,12 +15,7 @@ services:
         depends_on:
           - redis
         command: supervisord -n
-        volumes:
-            - ../article/:/usr/src/api/article
-            - ../api.ini:/usr/src/api/api.ini
-            - ../entrypoint.sh:/usr/src/api/entrypoint.sh
-            - ../manage.py/:/usr/src/api/manage.py
-        env_file: article.env
+        env_file: tripadvisor.env
         expose:
             - "8700"
         ports:
