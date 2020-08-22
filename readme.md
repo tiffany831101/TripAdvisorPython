@@ -1,20 +1,33 @@
 # TripAdvisor Web:
 ### Functionality 
 * Search
+![search](https://img.onl/sN77e)
+
+* Restarant Info
+![info](https://img.onl/WebhQ7)
 
 * Register
+![Register](https://img.onl/NCrPZL)
 
 * Login
+![Login](https://img.onl/s1eSpe)
+![Forget Password](https://img.onl/hUrWhE)
 
 * Following
+![following](https://img.onl/nzihcs)
+![followed](https://img.onl/oh8cE4)
 
 * Restaurant Reservations
+![reservation](https://img.onl/E3MCA)
+![result](https://doc-00-08-docs.googleusercontent.com/docs/securesc/1qd851odt4r7pd2q31bv3l2gef4q4vlk/u878jtuppj2s8bnfqdfc3rr32fhcq0ar/1598062500000/12743253038928060072/02371497822323619930/1G4DQ_iHHpBFiaL2E9gd1E6ADppNJG_NO?authuser=1&nonce=n8qtgmhtp0pb8&user=02371497822323619930&hash=svbe8butjodm8qckvumipvqdufjog8nr)
 
 * Comment
+![comment](https://img.onl/bm3bMf)
 
 * Member Home Pages
+![home page](https://img.onl/E6NuSQ)
 
-* Track User Behavior
+
 
 # How to deploy TripAdvisor project ? 
 ### Enviroment:
