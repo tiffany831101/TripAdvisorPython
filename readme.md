@@ -70,6 +70,10 @@ stable"
 
 
 ### Migrate MySQL
-* source env/bin/activate
-* python3 manage.py db init
-* python3 manage.py db migrate
+
+```
+$ sudo docker exec -it flask /bin/bash
+$ python3 manage.py db init
+$ python3 manage.py db migrate -m "init db"
+$ python3 manage.py db upgrade
+```
