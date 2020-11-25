@@ -11,9 +11,9 @@ def get_error_status():
     return {"status": "error"}
 
 
-def save(data):
+def save(row):
     try:
-        db.session.add(data)
+        db.session.add(row)
         db.session.commit()
         return get_success_status()
 
@@ -33,8 +33,9 @@ def update():
         return get_error_status()
 
 
-def delete():
+def delete(row):
     try:
+        db.session.delete(row)
         db.session.commit()
         return get_success_status()
         
