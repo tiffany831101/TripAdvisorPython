@@ -136,7 +136,7 @@
 
 
 {% block scripts %}
-
+{{ super() }}
 
 
 <script>
@@ -163,13 +163,15 @@
       $("#reservation").attr("href","/reservation/revise/"+order_id)
       $(".cancel").click(function(e){
         e.preventDefault();
-        if(confirm("您確定取消該筆預約訂單嗎")){
+        if(confirm("您確定取消該筆預約訂單嗎?")){
           $.ajax({
             method:"post",
             dataType: "json",
-            url: "/reservation/order/cancel/"+order_id,
+            data: jQuery.param({'order_id': order_id}),
+            url: '/reservation/order/cancel',
+
             success:function(response){
-              if (response.status = "success"){
+              if (response.status == true){
                 swal("該訂單已成功刪除!","","success");
                 setTimeout("location.href='/reservation/result'",1000)
               }else{

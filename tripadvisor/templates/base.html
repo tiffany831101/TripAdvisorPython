@@ -17,7 +17,7 @@
     
 
     <nav class="navbar navbar-expand-lg global-nav-green global-nav-2018">
-        <a class="navbar-brand" href="#">八里老漁村</a>
+        <a class="navbar-brand" href="#">TripAdvisor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,10 +28,18 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="prohibit()"><span class="incon-area"><i class="fas fa-utensils"></i></span><br>線上訂位<span class="sr-only"></span></a>
+                {% if current_user.is_authenticated %}
+                    <a class="nav-link" href="javascript:void(0)" onclick="reservation()"><span class="incon-area"><i class="fas fa-utensils"></i></span><br>線上訂位<span class="sr-only"></span></a>
+                {% else %}
+                    <a class="nav-link" href="javascript:void(0)" onclick="prohibit()"><span class="incon-area"><i class="fas fa-utensils"></i></span><br>線上訂位<span class="sr-only"></span></a>
+                {% endif %}
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="prohibit3()"><span class="incon-area"><i class="fas fa-user-friends"></i></span><br>會員專區<span class="sr-only"></span></a>
+                {% if current_user.is_authenticated %}
+                    <a class="nav-link" href="javascript:void(0)" onclick="member()"><span class="incon-area"><i class="fas fa-user-friends"></i></span><br>會員專區<span class="sr-only"></span></a>
+                {% else %}
+                    <a class="nav-link" href="javascript:void(0)" onclick="prohibit()"><span class="incon-area"><i class="fas fa-user-friends"></i></span><br>會員專區<span class="sr-only"></span></a>
+                {% endif %}
             </li>
 
             <li class="nav-item">
@@ -46,7 +54,7 @@
         
         <ul class="nav navbar-nav navbar-right">
         {% if current_user.is_authenticated %}
-        <li><span class="incon-area"><i class="fas fa-user-circle"></i></span><br><a class="logout" href='javascript:void(0)' onclick="logout()">會員登出</a></li>
+            <li><span class="incon-area"><i class="fas fa-user-circle"></i></span><br><a class="logout" href='javascript:void(0)' onclick="logout()">會員登出</a></li>
         {% else %}
 
         <form class="form-inline my-2 my-lg-0" id="navloginform">
@@ -134,9 +142,9 @@ $(function(){
                 type:"json",
                 method:"post",
                 success:function(response){
-                    if (response.status=="success"){
-                        swal("立即登入查看更多內容","","error","5000")
-                        window.location.href='/restaurant/list',1000                      
+                    if (response.status == true){
+                        swal("登入成功", "", "success")
+                        setTimeout("location.href='/restaurant/list'",2000)                    
                     }else{
                         swal(response.errmsg,"","error")
                     }
@@ -144,28 +152,30 @@ $(function(){
             })
         })
     }
+
+
     function logout(){
         $.get("/auth/logout","",function(response){
-            swal("您已成功登出","","success")
-            setTimeout("location.href='/restaurant/list'",1000)
+            swal('成功登出', '', 'success')
+            setTimeout("location.href='/restaurant/list'",2000) 
         })
     }
 
+
     function prohibit(){
-        if ($.cookie('username')==null || undefined){
-            swal("立即登入查看更多內容","","error","5000")
-        }else{
-            window.location.href="{{ url_for('booking.reservation',restaurant='老漁村餐廳') }}"
-        }
+        swal("立即登入或註冊，查看更多內容","","error","5000")
     }
 
-    function prohibit3(){
-        if ($.cookie('username')==null || undefined){
-            swal("立即登入查看更多內容","","error","5000")
-        }else{
-            window.location.href="{{ url_for('auth.my') }}"
-        }
+
+    function reservation(){
+        window.location.href="{{ url_for('booking.reservation', restaurant='八里老漁村') }}"
     }
+
+
+    function member(){
+        window.location.href="{{ url_for('auth.my') }}"
+    }
+    
 </script>
 
 {% endblock %}

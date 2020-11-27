@@ -25,14 +25,12 @@
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-utensils"></i></span>
                 </div>
                 {% if data %}
-                <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="{{ data.title }}">
-                {% else %}             
-                <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="八里老漁村餐廳">
+                    <input class="form-control" id="people" name="restaurant" required type="text" readonly="readonly" value="{{ data.title }}">
+                {% else %}
+                    <select class="custom-select" id="restaurant" name="restaurant"></select>
                 {% endif %}
             </div>
-        
-        
-     
+
 
         <label class="control-label" for="people">人數</label>
         <div class="input-group mb-3 form-group  required">
@@ -42,8 +40,6 @@
             <input type="text" class="form-control" id="people" name="people" required type="text" value="">
         </div>
 
-
-    
         <label class="control-label" for="booking_date">日期</label>
         <div class="input-group mb-3 form-group  required">
             <div class="input-group-prepend">
@@ -76,9 +72,9 @@
         <div class="mbe-contact">
             <div id="head">聯絡資訊</div>
             {% if data %}
-            <div id="number">客服專線 : {{ data.cellphone }} <br>
+                <div id="number">客服專線 : {{ data.cellphone }} <br>
             {% else %} 
-            <div id="number">客服專線 : (02) 2610-4882 <br>
+                <div id="number">客服專線 : (02) 2610-4882 <br>
             {% endif %}
             服務時間 : {% if data %}{{ data.open_time }}{% else %}早上11點至晚上8點{% endif %}</div>
         </div>
@@ -87,7 +83,7 @@
 {% endblock %}
 
 {% block scripts %}
-    
+{{ super() }}
     <script type="text/javascript">
     $('#booking_date').datepicker({
         "dateFormat": "yy-mm-dd",
@@ -111,25 +107,40 @@
     </script>
     <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
     <script>
+    load_restaurant()
+
+    function load_restaurant(){
+        $.get('/restaurant/hito', function(response){
+            if (response.status == true){
+                $("#restaurant").empty();
+                $.each(response.data, function(key, value){
+                    var $option = " ";
+                    $option += "<option value='" + value + "'>" + value + "</option>"
+                    $("#restaurant").append($option) 
+                })
+            }  
+        })
+    }
+
     $(function(){
-        $("#reservationform").submit(function(e){
+        $('#reservationform').submit(function(e){
             e.preventDefault();
             $.ajax({
-                type: "POST",
-                dataType: "json",
+                type: 'POST',
+                dataType: 'json',
                 data:$('#reservationform').serialize(),
-                url: "/reservation/check",
+                url: '/reservation/check',
                 success:function(response){
-                    if (response.errno="success"){
+                    if (response.status=true){
                         swal({ 
                             title: "恭喜您，訂位成功。", 
-                            text: "您的訂單編號為:"+response.order_id1,
-                            type: "success",
-                            timer:10000, 
+                            text:  "您的訂單編號為:" + response.data,
+                            type:  "success",
+                            timer:  10000, 
                         });
                         setTimeout("location.href='/reservation/result'",1000)
                     }else{
-                        alert("系統忙碌中，請稍後再試一次")
+                        alert('系統忙碌中，請稍後再試一次')
                     }
                 }
             })

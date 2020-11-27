@@ -87,15 +87,15 @@
                     data:$('#reviseform').serialize(),
                     url: "/reservation/update",
                     success:function(response){
-                        if (response.status="success"){
-                        swal({
-                            title:"恭喜您，訂位修改成功。",
-                            type:"success",
-                            timer:8000
-                        })
-                        setTimeout("location.href='/reservation/result'",1000)
+                        if (response.status == true){
+                            swal({
+                                title: "恭喜您，訂位修改成功。",
+                                type: "success",
+                                timer: 8000
+                            })
+                            setTimeout("location.href='/reservation/result'",1000)
                     }else{
-                        alert("系統忙碌中，請稍後再試一次","error")
+                        swal("系統忙碌中，請稍後再試一次","","error","5000")
                     }
                     } 
                 })

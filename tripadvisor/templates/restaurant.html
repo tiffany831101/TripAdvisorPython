@@ -11,9 +11,6 @@
 
 {% block content %}
 
-
-
-
 <div id="all">
     <h1 id="head">大台北美食餐廳 Taipei</h1>
     <div class="wrap">
@@ -29,14 +26,11 @@
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-city"></i></label>
             </div>
-                <select class="custom-select" id="filter-city">
-                    <option value="0" selected>---請選擇城市---</option>
-                    <option value="1">台北市</option>
-                    <option value="2">新北市</option>
+                <select class="custom-select" id="filter-city", onchange="cityChange(this)">
+
                 </select>
             </div>
         
-
         <div class="input-group mb-3" id="district_area">
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02"><i class="fab fa-twitter"></i></label>
@@ -52,10 +46,10 @@
                 <label class="input-group-text" for="inputGroupSelect02"><i class="fas fa-utensils"></i></label>
             </div>
             <select class="custom-select" id="food_type">
-                <option value="0" selected>---請選擇---</option>
-                <option value ="台灣小吃/台菜">台灣小吃/台菜</option>
-                <option value ="日式料理">日式料理</option>
-                <option value ="中式料理">中式料理</option>
+                <option value = "0" selected>---請選擇---</option>
+                <option value = "台灣小吃/台菜">台灣小吃/台菜</option>
+                <option value = "日式料理">日式料理</option>
+                <option value = "中式料理">中式料理</option>
                 <option value = "咖啡廳">咖啡廳</option>
                 <option value = "海鮮">海鮮</option>
             </select>
@@ -72,7 +66,6 @@
         </div>    
     </div>
     
-
     <div id="search">搜索條件:
         <span id="area"></span>
         <span id="food"></span>
@@ -120,8 +113,8 @@
 <script>
 var page=1
 $(function(){
-    Load(page)
-    filter()
+    loadPages(page)
+    loadCity()
     search()
     input()
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -129,9 +122,22 @@ $(function(){
 
 
 
+function loadCity(){
+    $.get("/restaurant/city", function(response){
+        $("#filter-city").append("<option value='0' selected>---請選擇城市---</option>")
+
+        if (response.data){
+            $.each(response.data, function(key, value){
+                var $option = " ";
+                $option += "<option value='" + value + "'>" + value + "</option>"
+                $("#filter-city").append($option) 
+            })
+        }
+    })
+}
 
 
-function Load(page){
+function loadPages(page){
     $.get("/restaurant/filter",page,function(response){
         render(response)
         love()
@@ -142,40 +148,60 @@ function Load(page){
     })                       
 }
 
-function render(response){
-    if (response.errno==1){
-        if (response.data.length>0){
-            $("#search_result").empty()
-            $.each(response.data,function(key,value){
-                var $tr =" ";
-                $tr +=  "<tr id='data'>"+
-                        "<td id='picture'><img src="+value.info_url+"></td>"+
-                        "<td>"+
-                            "<div class='content'>"+
-                                    "<div>"+
-                                        "<div class='title-container'><b class='title'>"+ value.title +"</b></div>"+    
-                                        "<div class='go' data-toggle='tooltip' data-placement='top' title='立即查看'><a class='look' href='javascript:void(0)' onclick='click_restaurant(this)'>立即查看</a></div>"+
-                                        "<div class='love' onclick='like(this)' data-toggle='tooltip' data-placement='top' title='"+value.love+"'><i class='fas fa-thumbs-up'></i>"+value.love+"</div>"+
-                                    "</div>"+
-                
-                                "<div class='rate_count_block'>"+
-                                    "<div class='rating_block'><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i>"+
-                                    "<span class='count'>"+ value.rating_count +"則評論</span></div>"+
-                                    "<div class='count_block'><i class='far fa-eye'></i>瀏覽量:"+value.count+"</div>"+   
-                                "</div>"+
 
-                                "<div class='address'><li><i class='fas fa-globe-americas' style='margin-right:8px'></i>"+ value.street +"</li>"+
-                                    "<div><i class='fas fa-phone' style='margin-right:8px'></i>"+ value.cellphone +"</div>"+
-                                "</div>"+
-                                "<div class='comment'>"+ value.comment +"</div>"+   
-                            "</div>"+  
-                        "</td>"+
-                    "</tr>"
-                $("#search_result").append($tr)
-            })
-        }
+function render1(response){
+    if (response.status == true){
+        $("#filter-area").empty();
+        $.each(response.data, function(key, value){
+            var $option = " ";
+            $option += "<option>" + value + "</option>"
+            $("#filter-area").append($option) 
+        })
     }
 }
+
+
+function render(response){
+    if (response.data.length > 0){
+        $("#search_result").empty()
+        $.each(response.data, function(key, value){
+            var $tr =" ";
+            if (value.count == null){
+                value.count = 0;
+            }
+            $tr +=  "<tr id='data'>"+
+                    "<td id='picture'><img src="+ value.info_url + "></td>"+
+                    "<td>"+
+                        "<div class='content'>"+
+                                "<div>"+
+                                    "<div class='title-container'><b class='title'>"+ value.title +"</b></div>"+
+                                    "{% if current_user.is_authenticated %}" +  
+                                        "<div class='go' data-toggle='tooltip' data-placement='top' title='立即查看'><a class='look' href='javascript:void(0)' onclick='click_restaurant(this)'>立即查看</a></div>"+
+                                        "<div class='love' onclick='like(this)' data-toggle='tooltip' data-placement='top' title='" + value.love + "'><i class='fas fa-thumbs-up'></i>"+value.love+"</div>"+
+                                    "{% else %}" + 
+                                        "<div class='go' data-toggle='tooltip' data-placement='top' title='立即查看'><a class='look' href='javascript:void(0)' onclick='prohibit()'>立即查看</a></div>"+
+                                        "<div class='love' onclick='prohibit()' data-toggle='tooltip' data-placement='top' title='" + value.love+"'><i class='fas fa-thumbs-up'></i>" + value.love + "</div>"+
+                                    "{% endif %}" +    
+                                "</div>"+
+                
+                            "<div class='rate_count_block'>"+
+                                "<div class='rating_block'><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i><i class='fas fa-circle'></i>"+
+                                "<span class='count'>"+ value.rating_count +"則評論</span></div>"+
+                                "<div class='count_block'><i class='far fa-eye'></i>瀏覽量: "+ value.count + "</div>"+   
+                            "</div>"+
+
+                            "<div class='address'><li><i class='fas fa-globe-americas' style='margin-right:8px'></i>"+ value.address +"</li>"+
+                                "<div><i class='fas fa-phone' style='margin-right:8px'></i>"+ value.cellphone +"</div>"+
+                            "</div>"+
+                            "<div class='comment'>"+ value.comment +"</div>"+   
+                        "</div>"+  
+                    "</td>"+
+                "</tr>"
+            $("#search_result").append($tr)
+        })
+    }
+}
+
 
 function initPagination(count, pagesize){
     $('.pagination').pagination({
@@ -187,7 +213,7 @@ function initPagination(count, pagesize){
                 var params = {
                     "page":api.getCurrent()
                 }
-                $.get("/restaurant/filter",params,function(response){
+                $.get("/restaurant/filter", params, function(response){
                     render(response)
                 })
             }
@@ -197,43 +223,35 @@ function initPagination(count, pagesize){
 
 function click_restaurant(obj){
     $(this).off("click").one("click",function(event){
-        event.stopPropagation();
-        if ($.cookie('username')==null || undefined){
-        swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
-        }else{
-            event.stopPropagation();
-            var restaurant = $(obj).parent().prev().children(".title").text()
-            $.get("/read/count/"+restaurant,function(){
-            window.location.href = "/restaurant/"+restaurant;
-            })
-        }
-        
+        event.stopPropagation(); 
+        var restaurant = $(obj).parent().prev().children(".title").text()
+        $.get("/read/count/" + restaurant, function(){
+            window.location.href = "/restaurant/" + restaurant;
+        })
     })
+}
+        
+
+function cityChange(obj){
+    var objS = document.getElementById('filter-city');
+    var city = objS.options[objS.selectedIndex].value;
+    var params = {'city': city};
+
+    $.ajax({
+            url: '/restaurant/area',
+            data: params,
+            method: 'get',
+            success: function(response){
+                render1(response)
+            }
+    })
+    swal("請點擊其他搜尋條件","更能精準查找您要的餐廳！","success")
 }
 
 
-function filter(){
-    var cities = [["---請選擇---"],["大安","信義區","萬華","松山","士林","中正區","大同","中山區","南港"],
-                       ["蘆洲","三重","板橋","新莊","中和","永和","新店","土城","淡水","五股"]]
-    $("#filter-city").change(function(){
-        var val=$("#filter-city").val();
-        $("#filter-area").empty();
-        $.each(cities,function(i,n){
-            if(val==i){
-                $.each(cities[i],function(j,m){
-                    var $option =" ";
-                        $option +="<option>"+m+"</option>"
-                    $("#filter-area").append($option) 
-
-                })
-            }
-        })
-    }
-)}
-
 function input(){
         $("#input_search").focus(function(){
-        var curValue=$(this).val();
+        var curValue = $(this).val();
         if(curValue==this.defaultValue){
             $(this).val("");
         }
@@ -249,8 +267,7 @@ function input(){
 
 
 function search(){
-
-    $("#district_area, #filter-area, #food_type, #filter,#input_search").on('change',function(){
+    $("#district_area, #filter-area, #food_type, #filter, #input_search").on('change',function(){
         var area = $("#filter-area").val();
         var food = $("#food_type").val();
         var filter = $("#filter").val();
@@ -262,28 +279,29 @@ function search(){
         $("#area").html(area)
         $("#food").html(food)
         $('#result').html(filter)
-        
-        var params ={
-                "area":area,
-                "food":food,
-                "filter":filter,
-                "keyword":keyword
-            }
-            swal({ 
-                title: "資料加載中，請稍後",  
-                type: "success", 
-                showLoaderOnConfirm: true, 
-            },
-            function(){ 
-                setTimeout(function(){  
-            }, 2000);
-            });
+
+        var params = {
+            "area": area,
+            "food": food,
+            "filter": filter,
+            "keyword": keyword
+        }
+        swal({ 
+            title: "資料加載中，請稍後",  
+            type: "success", 
+            showLoaderOnConfirm: true, 
+        },
+
+        function(){ 
+                setTimeout(function(){}, 2000);
+        });
+
         $.ajax({
-            url:"/restaurant/search",
-            data:params,
-            method:"get",
+            url: '/restaurant/search',
+            data: params,
+            method: 'get',
             success:function(response){
-                if (response.errno==1){
+                if (response.status == true){
                     render(response)
                     love()
                     var totalPages = response.total_page
@@ -302,7 +320,6 @@ function search(){
                 }
             }
         })
-
     })
 }   
 
@@ -333,32 +350,28 @@ function love(){
 function like(obj){
     $(this).off("click").one("click",function(event){
         event.stopPropagation();
-        if ($.cookie('username')==null || undefined){
-        swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
-        }else{
-            event.stopPropagation();
-            var like = $(obj).text()
-            var title = $(obj).parent().children().children(".title").text()
-            if (like=="收藏"){
-                $.get("/restaurant/like/"+title, function(){
-                    alert("關注成功")
-                    $tr = "<sapn class='love' onclick='like(this)' style='color:#078171'><i class='fas fa-thumbs-up'></i>"+"已收藏"+"</span>"
-                    $(obj).html($tr)
-                }.bind(obj)
-                )
-            }else{
-                $.get("/restaurant/unlike/"+title,function(){
-                    alert("取消關注")
-                    $tr = "<span class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+"收藏"+"</span>"
-                    $(obj).html($tr)
-                }.bind(obj)
-            ) }    
-        }
-        
-    })
-    
+        var like = $(obj).text()
+        var title = $(obj).parent().children().children(".title").text()
+        if (like == "收藏"){
+            $.post("/restaurant/like", params={'restaurant':title} , function(){
+                swal("關注成功", "您的關注，是店家成長的動力", "success")
+                $tr = "<sapn class='love' onclick='like(this)' style='color:#078171'><i class='fas fa-thumbs-up'></i>"+"已收藏"+"</span>"
+                $(obj).html($tr)
+            }.bind(obj)
+        )}else{
+            $.post("/restaurant/unlike", params = {'restaurant':title},function(){
+                swal("取消關注成功", "", "success")
+                $tr = "<span class='love' onclick='like(this)'><i class='fas fa-thumbs-up'></i>"+"收藏"+"</span>"
+                $(obj).html($tr)
+            }.bind(obj)
+        )}     
+    }) 
 }
 
+
+function prohibit(){
+    swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
+}
 
 </script>
 

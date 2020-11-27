@@ -92,16 +92,22 @@
             </p>
             {% if current_user.is_authenticated %}
                 <button type="button" class="revise" data-toggle="modal" data-target="#exampleModal" data-toggle='tooltip' data-placement='top' title='立即修改'>修改</button>
-            {% else %}
-                <div class="revise" onclick="prohibit2()">修改</div>
             {% endif %}
 
             <div class="title" data-toggle='tooltip' data-placement='top' title='用餐問卷'>
-                <a href="javascript:void(0)" onclick="prohibit2()">用餐問卷</a>
+                {% if current_user.is_authenticated %}
+                    <a href="javascript:void(0)" onclick="prohibit2()">用餐問卷</a>
+                {% else %}
+                    <a href="javascript:void(0)" onclick="prohibit()">用餐問卷</a>
+                {% endif %}
             </div>
 
             <div class="title" data-toggle='tooltip' data-placement='top' title='查詢訂位狀況'>
-                <a href="javascript:void(0)" onclick="prohibit1()">訂位查詢</a>
+                {% if current_user.is_authenticated %}
+                    <a href="javascript:void(0)" onclick="prohibit1()">訂位查詢</a>
+                {% else %}
+                    <a href="javascript:void(0)" onclick="prohibit()">訂位查詢</a>
+                {% endif %}
             </div>
 
             
@@ -165,6 +171,7 @@ $(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
 })
 
+
 function userform(){
     $("#store").click(function(e){
         e.preventDefault();
@@ -182,21 +189,18 @@ function userform(){
     })
 }
 
+function prohibit(){
+    swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
+}
+
 function prohibit1(){
-    if ($.cookie('username')==null || undefined){
-            swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
-        }else{
-            window.location.href="{{ url_for('booking.result') }}"
-        }
+    window.location.href="{{ url_for('booking.result') }}"
 }
 
 function prohibit2(){
-    if ($.cookie('username')==null || undefined){
-            swal("立即註冊開通專屬會員資格","享有更多會員權限","error","5000")
-        }else{
-            window.location.href="{{ url_for('main.restaurant', restaurant='八里老漁村餐廳') }}"
-        }
+    window.location.href="{{ url_for('main.restaurant', restaurant='八里老漁村餐廳') }}"
 }
+
 
 function logout1(){
         $.get("/auth/logout","",function(response){
@@ -204,8 +208,6 @@ function logout1(){
             history.go(0)
         })
     }
-
-
 
 </script>
 
