@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, make_response, jsonify, session, current_app
+from flask import render_template, redirect, request, url_for, flash, Response, jsonify, session, current_app
 from flask_login import login_user
 
 import logging
@@ -53,81 +53,58 @@ def check_password(user, password, user_ip, login_failure_nums):
     
 
 def set_login_session(data):
-    user = User().find_by_email(data["email"])
-    if user and user.verify_password(data["password"]):
-        if "remember_me" in data:
-            login_user(user, data["remember_me"])
+    user = User().find_by_email(data['email'])
+    if user and user.verify_password(data['password']):
+        if 'remember_me' in data:
+            login_user(user, data['remember_me'])
         else:
             login_user(user)
-        session["cellphone"] = user.cellphone
-        session["username"] = user.username
-        response = make_response(jsonify({'status':"sucess",'msg':'數據查詢成功'}))
-        response.set_cookie("username", user.username)
-        return response
+
+        session['cellphone'] = user.cellphone
+        session['username']  = user.username
     
 
 def check_captcha(image_code_id, image_code):
-    status = {}
-    print(image_code_id, image_code)
     if not all ([image_code_id, image_code]):
-        status["status"] = "error"
-        status["errmsg"] = "請輸入驗證碼！"
-        return status
+        return '請輸入驗證碼！'
 
     try:
-        real_image_code = redis_store.get("image_code_%s" % image_code_id)
+        real_image_code = redis_store.get('image_code_%s' % image_code_id)
     except Exception as e:
         logging.error(e)
-        status["status"] = "error"
-        status["errmsg"] = "內部系統錯誤，請再試一次"
-        return status
+        return '內部系統錯誤，請再試一次'
     
     if not real_image_code:
-        status["status"] = "error"
-        status["errmsg"] = "圖片驗證碼失效，請再試一次"
-        return status
+        return '圖片驗證碼失效，請再試一次'
 
     try:
-        redis_store.delete("image_code_%s" %image_code_id)
+        redis_store.delete('image_code_%s' % image_code_id)
     except Exception as e:
         logger.error(e)
 
     if real_image_code.lower() != image_code.lower():
-        status["status"] = "error"
-        status["errmsg"] = "圖片驗證錯誤"
-        return status
+        return '圖片驗證錯誤'
 
 
 def check_register_info(**kwargs):
-    status = {}
-    if "email" in kwargs and not re.match(EMAIL_FORMAT, kwargs["email"]):
-        status["status"] = "error"
-        status["errmsg"] = "請輸入正確的Email"
-        return status
+    if 'email' in kwargs and not re.match(EMAIL_FORMAT, kwargs['email']):
+        return '請輸入正確的Email'
 
-    if "cellphone" in kwargs and not re.match(PHONE_FORMAT, kwargs["cellphone"]):
-        status["status"] = "error"
-        status["errmsg"] = "請輸入正確的手機號格式"
-        return status
+    if 'cellphone' in kwargs and not re.match(PHONE_FORMAT, kwargs['cellphone']):
+        return '請輸入正確的手機號格式'
 
 
 def check_double_register(**kwargs):
     status = {}
     user = User()
-    if "username" in kwargs and user.find_by_username(kwargs["username"]):
-        status["status"] = "error"
-        status["errmsg"] = "該用戶名已被註冊過"
-        return status
+    if 'username' in kwargs and user.find_by_username(kwargs['username']):
+        return '該用戶名已被註冊過'
 
-    if "email" in kwargs and user.find_by_email(kwargs["email"]):
-        status["status"] = "error"
-        status["errmsg"] = "該信箱已註冊過"
-        return status
+    if 'email' in kwargs and user.find_by_email(kwargs['email']):
+        return '該信箱已註冊過'
     
-    if "cellphone" in kwargs and user.find_by_cellphone(kwargs["cellphone"]):
-        status["status"] = "error"
-        status["errmsg"] = "該手機號已註冊過"
-        return status
+    if 'cellphone' in kwargs and user.find_by_cellphone(kwargs['cellphone']):
+        return '該手機號已註冊過'
 
 
 def check_parmas(data, user_ip):
@@ -149,54 +126,49 @@ def check_parmas(data, user_ip):
 
 
 def user_register(**kwargs):
-    is_error = check_captcha(kwargs["image_code_id"], kwargs["image_code"])
-    if is_error:
-        return is_error
+    isError = check_captcha(kwargs['image_code_id'], kwargs['image_code'])
+    if isError:
+        return isError
 
-    is_error = check_register_info(**kwargs)
-    if is_error:
-        return is_error
+    isError = check_register_info(**kwargs)
+    if isError:
+        return isError
 
-    is_error = check_double_register(**kwargs)
-    if is_error:
-        return is_error
+    isError = check_double_register(**kwargs)
+    if isError:
+        return isError
 
-    user = User(username=kwargs["username"],
-                email=kwargs["email"], 
-                cellphone=kwargs["cellphone"], 
-                password=kwargs["password"])
-    result = dao.save(user)
-    return result
+    user = User(username = kwargs['username'],
+                email = kwargs['email'], 
+                cellphone = kwargs['cellphone'], 
+                password = kwargs['password'])
+    dao.save(user)
 
 
-def verify_info(data):
-    check_failure = check_captcha(data["image_code_id"], data["image_code"])
-
-    if check_failure:
-        return jsonify(check_failure)
-
-    user = User().find_by_cellphone_and_email(data["cellphone"], data["email"])
-    return user
+def verification(data):
+    isError = check_captcha(data['image_code_id'], data['image_code'])
+    user = User().find_by_cellphone_and_email(data['cellphone'], data['email'])
+    return isError, user
 
 
 def update_password(data):  
-    user = User().find_by_email(data["email"])
+    user = User().find_by_email(data['email'])
+
     if user:
-        user.password = password
-        result = dao.save(user)
-        return result
+        user.password = data['password']
+        dao.save(user)
     else:
-        return {"status":"error","errmsg":"請再試一次"}
+        return '請再試一次'
 
 
 def update_info(data, current_user):
-    is_error = check_double_register(username=data["username"])
-    if is_error:
-        return is_error
-    
-    is_error = check_register_info(**data)
-    if is_error:
-        return is_error
+    isError = check_double_register(username=data['username'])
+    if isError:
+        return isError
+        
+    isError = check_register_info(**data)
+    if isError:
+        return isError
 
     user = User().update(current_user.id, **data)
 

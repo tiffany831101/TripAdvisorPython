@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, flash, make_response, jsonify, session
+from flask import render_template, request, flash,\
+                 make_response, jsonify, session, Response
 from flask_login import login_required, current_user, logout_user
 from flask_cors import cross_origin
 import logging
@@ -15,7 +16,7 @@ def before_request():
         current_user.ping()
 
 
-@auth.route('/login/html',methods=["POST","GET"])
+@auth.route('/login/html', methods=['POST', 'GET'])
 def login_html():
     return render_template('auth/login.html')
 
@@ -27,15 +28,15 @@ def register():
 
 @auth.route('/password/reset')
 def password_reset():
-    return render_template("auth/password_reset.html")
+    return render_template('auth/password_reset.html')
 
 
 @auth.route('/my')
 def my():
-    return render_template("my.html")
+    return render_template('my.html')
     
 
-@auth.route("/session",methods=["GET"])
+@auth.route('/session', methods=['GET'])
 def check_login():
     """獲取用戶登入狀態"""
     name = session.get(username)
@@ -52,108 +53,135 @@ def logout():
     """清除session數據"""
     session.clear()
     logout_user()
-    response = make_response('delCookie')
-    response.delete_cookie('username')
+    response = Response('delCookie')
+    response.set_cookie(key='username', value='', expires=0)
     return response
 
 
-@auth.route('/login',methods=["POST"])
+@auth.route('/login', methods=['POST'])
 def login():
-    """登入功能"""
-    data = request.form
-    user_ip = request.remote_addr
+    """用戶登入功能"""
+    res = {'status':False}
+    try:
+        data = request.form
+        user_ip = request.remote_addr
 
-    if not all ([data["email"], data["password"]]):
-        return jsonify(status="error", errmsg="參數不完整")
+        if 'email' not in data or 'password' not in data:
+            res['msg'] = 'Lack of required parameters'
+            return jsonify(res), 401
+            
+        is_error = services.check_parmas(data, user_ip)    
+        if is_error:
+            return jsonify(is_error)
+
+        services.set_login_session(data)
+        res.update({'status': True})
+        return jsonify(res)
     
-    is_error = services.check_parmas(data, user_ip)    
-    if is_error:
-        return jsonify(is_error)
-
-    response = services.set_login_session(data)
-    return response
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
 
 
 @auth.route('/register/check',methods=['POST'])
 def register_check():
     """用戶註冊功能"""
-    data = request.form.to_dict()
+    res = {'status': False}
+    try:
+        data = request.form.to_dict()
 
-    if not all ([data["username"], data["cellphone"],data["email"], data["password"], data["password2"], data["image_code_id"], data["image_code"]]):
-        return jsonify(status="error", errmsg="參數不完整")
+        if 'username' not in data or 'cellphone' not in data or 'email' not in data or\
+            'password' not in data or 'password2' not in data or 'image_code_id' not in data or 'image_code' not in data:
+            
+            res['msg'] = 'Lack of required parameters'
+            return jsonify(res), 401
 
-    result = services.user_register(**data)
+        isFailure = services.user_register(**data)
+
+        if isFailure:
+            res.update({'msg': isFailure})
+            return jsonify(res)
+        
+        res.update({'status': True})
+        return jsonify(res)
     
-    return jsonify(result)
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
     
 
-@auth.route('/captcha/check',methods=["POST"])
+@auth.route('/captcha/check', methods=['POST'])
 def captcha_check():
-    data = request.form.to_dict()
+    """會員認證功能"""
+    res = {'status': False}
+    try:
+        data = request.form
 
-    if not all ([data["cellphone"], data["email"], data["image_code_id"], data["image_code"]]):
-        return jsonify(status="error", errmsg="參數不完整")
+        if 'cellphone' not in data or 'email' not in data \
+                or 'image_code_id' not in data or 'image_code' not in data:
+                
+            res['msg'] = 'Lack of required parameters'
+            return jsonify(res), 401
 
-    user = services.verify_info(data)
-       
-    if user:
-        response = make_response(jsonify(status = "success", msg= "數據查詢成功"))
-        response.set_cookie("email", user.email)
-        return response
+        isFailure, user = services.verification(data)
+
+        if isFailure:
+            res.update({'msg': isFailure})
+            return jsonify(res)
+
+        if user:
+            res.update({'status': True})
+            return jsonify(res)
+        else:
+            res['msg'] = '查無該用戶，請再次確認手機號碼與Email。'
+            return jsonify(res)
     
-    else:
-        return jsonify(status="error",errmsg="請輸入正確Email")
-    
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
 
-@auth.route("/password/check",methods=["POST"])
+
+@auth.route('/password/check', methods=['POST'])
 def password_check():
-    data = request.form.to_dict()
+    """修改密碼功能"""
+    res = {'status': False}
+    try:
+        data = request.form
 
-    if not all ([data["email"], data["password"], data["password2"]]):
-        return jsonify(status="error", errmsg="參數不完整")
+        if 'password' not in data or 'password2' not in data:
+            res['msg'] = 'Lack of required parameters'
+            return jsonify(res), 401
+            
+        isFailure = services.update_password(data)
+        
+        if isFailure:
+            res['msg'] = isFailure
+            return jsonify(res)
 
-    result = services.update_password(data)
-    
-    return jsonify(result)
+        res.update({'status': True})
+        return jsonify(res)
+
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
 
 
-@auth.route('/info', methods=["POST"])
+@auth.route('/info', methods=['POST'])
 @login_required
 def update_info():
-    data = request.form.to_dict()
+    """更改用戶訊息"""
+    res = {'status': False}
+    try:
+        data = request.form
     
-    result = services.update_info(data, current_user)
+        isFailure = services.update_info(data, current_user)
+        if isFailure:
+            res['msg'] = isFailure
+            return jsonify(res)
+
+        res.update({'status': True})
+        return jsonify(res)
     
-    return jsonify(result)   
-
-
-# @auth.route('/confirm/<token>')
-# @login_required
-# def confirm(token):
-#     if current_user.confirmed:
-#         return redirect(url_for('main.index'))
-#     if current_user.confirm(token):
-#         flash ('您的郵箱已經進行認證')
-#     else:
-#         flash('已經失效')
-#     return redirect(url_for('main.index'))
-
-# @auth.before_app_request
-# def before_request():
-#     if current_user.is_authenticated \
-#         and not current_user.confirmed:
-#         return redirect(url_for('auth.unconfirmed'))
-
-# @auth.route('/unconfirmed')
-# def unconfirmed():
-#     if current_user.is_anonymous or current_user.confirmed:
-#         return redirect(url_for('main.index'))
-#     return redirect(url_for('auth/unconfirmed.html'))
-
-# @auth.route('/confirm')
-# @login_required
-# def resend_confirmation():
-#     token = current_user.generate_confirmation_token()
-#     send_emil(current_user.email, '請確認您的帳戶', 'auth/email/confirm', user=current_user, token=token)
-#     flash('已經發送確認郵件')
-#     return redirect(url_for('main.index'))
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
