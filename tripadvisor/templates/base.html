@@ -107,9 +107,8 @@
 <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 <script>
-
-
     var csrftoken = $('meta[name=csrf-token]').attr('content')
      
      $.ajaxSetup({
@@ -119,16 +118,11 @@
              }
          }
      })
-
-
 </script>
+
 <script>
 
-$(function(){
-    navlogin()
- 
-})
-    function navlogin(){
+    $(function(){
         $("#var-submit").click(function(e){
             e.preventDefault();
             var params= {
@@ -136,23 +130,16 @@ $(function(){
                 "password":$("#nav-password").val(),
                 "remember_me":$("#nav-me").val()
             }
-            $.ajax({
-                url:"/auth/login",
-                data:params,
-                type:"json",
-                method:"post",
-                success:function(response){
-                    if (response.status == true){
-                        swal("登入成功", "", "success")
-                        setTimeout("location.href='/restaurant/list'",2000)                    
-                    }else{
-                        swal(response.errmsg,"","error")
-                    }
+            $.post('/auth/login', params = params, function(response){
+                if (response.status == true){
+                    swal('登入成功', "", 'success')
+                    setTimeout("location.href='/restaurant/list'",2000)                    
+                }else{
+                    swal(response.msg, '','error')
                 }
             })
         })
-    }
-
+    })
 
     function logout(){
         $.get("/auth/logout","",function(response){

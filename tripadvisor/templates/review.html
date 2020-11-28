@@ -202,13 +202,11 @@
         "dateFormat": "yy-mm-dd",
         language: "zh-CN",
         minDate: 0, maxDate: "+1M +10D"
-        });
+    });
     </script>
     <script>
         var csrftoken = $('meta[name=csrf-token]').attr('content')
-     
         $.ajaxSetup({
-        
             beforeSend: function(xhr, settings) {
                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
                     xhr.setRequestHeader("X-CSRFToken", csrftoken)
@@ -227,13 +225,10 @@
     })
 
     function render(response){
-
         var $area = " ";
-        $area += 
-                    "<div id='title_name'>" + response.information.title + "</div>" +
-                    "<div><i class='fas fa-globe-americas'></i>" + response.information.address + "</div>" +
-                    "<img src=" + response.information.image + " alt='' class='image img-thumbnail'>"
-                    
+        $area += "<div id='title_name'>" + response.information.title + "</div>" +
+                "<div><i class='fas fa-globe-americas'></i>" + response.information.address + "</div>" +
+                "<img src=" + response.information.image + " alt='' class='image img-thumbnail'>"    
         
         $("#restaurant_area").append($area);
         $("#form_area").append("<input id='id' name='' type='hidden' value=" + response.information.id + ">")
@@ -259,36 +254,24 @@
         $(".rating").each(function() {
         var rating = $(this).text();
         for (var i=0;i<rating;i++){
-            $tr= '<i class="fas fa-circle"></i>'
-            $(this).parent().append($tr).css("color","#078171").css("font-size","12px")
+            $(this).parent().append('<i class="fas fa-circle"></i>').css("color","#078171").css("font-size","12px")
         }
         for (var j=0;j<5-rating;j++){
-            $td = '<i class="far fa-circle"></i>'
-            $(this).parent().append($td).css("color","#078171").css("font-size","12px")
+            $(this).parent().append('<i class="far fa-circle"></i>').css("color","#078171").css("font-size","12px")
             }
         })
     })
-
 
     $(function(){
         $("#commentform").submit(function(e){
             e.preventDefault();
             var id = $("#id").val()
             var title = $("#title_name").text()
-            $.ajax({
-                method:"post",
-                data:$("#commentform").serialize(),
-                dataType: "json",
-                url: "/comment/edit/" + id,
-                success:function(response){
-                    swal({ 
-                        title: "感謝您撥空填寫問卷", 
-                        text:  "您的鼓勵，是我們成長的動力。\n期待下次再為您服務",
-                        type:  "success"
-                    });
-                    setTimeout(1000);
-                    location.href='/restaurant/' + title 
-                }
+
+            $.post('/comment/edit/' + id, params = $("#commentform").serialize(), function(response){
+                swal('感謝您撥空填寫問卷', '您的鼓勵，是我們成長的動力。\n期待下次再為您服務', 'success')
+                setTimeout(1000);
+                location.href='/restaurant/' + title 
             })
         })
     })

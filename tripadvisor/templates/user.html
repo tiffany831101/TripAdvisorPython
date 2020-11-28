@@ -241,13 +241,9 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="reload(this)">關閉</button>
                 </div>
-                
             </div>
     </div>
 </div>
-
-
-
 
 
 {% endblock %}
@@ -269,7 +265,6 @@
                         window.location.href = "/user/" + username
                     }
                 }).bind(this)
-              
             }else{
                 $.get("/unfollow", data={'username':username},function(response){
                     if (response.status == true){
@@ -289,170 +284,123 @@
 
 
 <script>
-$(function(){
-    visited()
-    following()
-    click_followers()
-    click_follwed()
-    follow_event()
-    rating()
-    like()
-})
-
-
-function following(){
-    var url = window.location.pathname;
-    var username = url.split('/')[2];
-    $.get('/user/liked', params={'username':username}, function(response){
-        render3(response)
+    $(function(){
+        visited()
+        following()
+        click_followers()
+        click_follwed()
+        follow_event()
+        rating()
+        like()
     })
-}
 
-
-function render3(response){
-    $("#liked_count").append("<span class='store_like'>" + response.count + "</span>");
-    if (response.data.length > 0 ){
-        $.each(response.data, function(key, value){
-            var $tr = " ";
-            $tr += "<div class='box'>" +
-                        "<div class='box_container'>" +
-                            "<div class='title'>" + value.title + "</div>" +
-                            "<div>" + value.address + "</div>" +
-                            "<a class='restaurant_click' href='/restaurant/" + value.title + "'>"+
-                            "<img src=" + value.info_url[0] + "></a>" +
-                            "</div>" + 
-                        "</div>"
-            $("#restaurant_areas").append($tr)
-        })
-    }else{
-        $("#restaurant_areas").append("<div class='non-comment-tip'>該用戶並未收藏任何商家</div>")
-    }
-}
-
-function visited(){
-    $.get('/user/visited', function(response){
-        render2(response)
-    })
-}
-
-function render2(response){
-    if (response.data.length > 0 ){
-        $.each(response.data, function(key, value){
-            var $tr = " ";
-            $tr += "<div class='prev_border'>" + 
-                        "<div>" + 
-                            "<a class='prev_click' href='/restaurant/" + value.title + "'>" + 
-                                "<img src=" + value.image + " class='img-thumbnail'>" + 
-                            "</a>"+
-                        "</div>" +
-                        "<div class='prev_store'>" + value.title + "</div>" +
-                        "<div class='prev_store'>" + value.address + "</div>" +
-                    "</div>"
-            
-            $("#visited_areas").append($tr)
+    function following(){
+        var url = window.location.pathname;
+        var username = url.split('/')[2];
+        $.get('/user/liked', params={'username':username}, function(response){
+            $("#liked_count").append("<span class='store_like'>" + response.count + "</span>");
+            if (response.data.length > 0 ){
+                $.each(response.data, function(key, value){
+                    var $tr = " ";
+                    $tr += "<div class='box'>" +
+                                "<div class='box_container'>" +
+                                    "<div class='title'>" + value.title + "</div>" +
+                                    "<div>" + value.address + "</div>" +
+                                    "<a class='restaurant_click' href='/restaurant/" + value.title + "'>"+
+                                    "<img src=" + value.info_url[0] + "></a>" +
+                                    "</div>" + 
+                                "</div>"
+                    $("#restaurant_areas").append($tr)
+                })
+            }else{
+                $("#restaurant_areas").append("<div class='non-comment-tip'>該用戶並未收藏任何商家</div>")
+            }
         })
     }
-}
 
-
-function comments(){
-    var url = window.location.pathname;
-    var username = url.split('/')[2];
-    $.get('/comments', params={'username': username}, function(response){
-        render1(response)
-    })
-}
-
-function render1(response){
-    if (response.data.length > 0 ){
-        $.each(response.data, function(key, value){
-            console.log(value);
-            var $tr=" ";
-            $tr += "<div class='title-inner-container'>" + 
-                    "<div id='username' class='comment-username' data-toggle='tooltip' title='查看用戶首頁'><a href='/user/" + value.author +"' class='author-link'>" + value.author + "</a><i class='fas fa-check-circle circle'></i></div>" +
-                            "<div class='com_follow' onclick='addfollow(this)'><i class='fas fa-user-plus'></i>" + value.follow_condition + "</div>" +
-                            "<div>" +
-                                "<div class='com-title'>" + value.title + "</div>" +
-                                "<div class='rating'>" + value.rating + "</div>" +
-                                "<a data-toggle='tooltip' title='立即查看' href='javascript:void(0)' class='restaurant_href' onclick='add(this)'>立即查看</a>" +
-                            "</div>" +
-                            "<div class='eview-like'>" +
-                                "<div class='review_content'>" + value.review_content + "</div>" +
-                            "</div>" +
-                        "</div>"
-            $("#comment_areas").append($tr)
+    function visited(){
+        $.get('/user/visited', function(response){
+            if (response.data.length > 0 ){
+                $.each(response.data, function(key, value){
+                    var $tr = " ";
+                    $tr += "<div class='prev_border'>" + 
+                                "<div>" + 
+                                    "<a class='prev_click' href='/restaurant/" + value.title + "'>" + 
+                                        "<img src=" + value.image + " class='img-thumbnail'>" + 
+                                    "</a>"+
+                                "</div>" +
+                                "<div class='prev_store'>" + value.title + "</div>" +
+                                "<div class='prev_store'>" + value.address + "</div>" +
+                            "</div>"
+                    
+                    $("#visited_areas").append($tr)
+                })
+            }
         })
     }
-}
 
-function reload(obj){
-    $(this).off().one("click",function(){
-        history.go(0)
-    })
-}
-
-
-function addfollow(obj){
-    $(this).off().one("click",function(){
-        var username = $(obj).prev().children().text()
-        if($(obj).text()=="關注中"){
-            $.get("/unfollow", params={'username': username}, function(response){
-                var $tr = "<i class='fas fa-user-plus'></i>追蹤"
-                $(obj).text("").append($tr)
-                $(".comment-username").each(function(){
+    function addfollow(obj){
+        $(this).off().one("click", function(){
+            var username = $(obj).prev().children().text()
+            if($(obj).text() == "關注中"){
+                $.get("/unfollow", params={'username': username}, function(response){
+                    var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                    $(obj).text("").append($tr)
+                    $(".comment-username").each(function(){
+                        swal(response.msg, "", "success", 5000);
+                        var text = $(this).text()
+                        if (text == username){
+                            var $tr = "<i class='fas fa-user-plus'></i>追蹤"
+                            $(this).next().text("").append($tr)
+                        }
+                    })   
+                })
+                $(obj).children().empty()
+            }if($(obj).text() == "追蹤"){
+                $.get('/follow', function(response){
                     swal(response.msg, "", "success", 5000);
-                    var text = $(this).text()
-                    if (text==username){
-                        var $tr = "<i class='fas fa-user-plus'></i>追蹤"
-                        $(this).next().text("").append($tr)
-                    }
+                    var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                    $(obj).text("").append($tr)
+                    $(".comment-username").each(function(){
+                        var text = $(this).text()
+                        if (text == username){
+                            var $tr = "<i class='fas fa-user-plus'></i>關注中"
+                            $(this).next().text("").append($tr)
+                        }
+                    })
                 })
-                
-            })
-            $(obj).children().empty()
-        }if($(obj).text() == "追蹤"){
-            $.get('/follow', function(response){
-                swal(response.msg, "", "success", 5000);
-                var $tr = "<i class='fas fa-user-plus'></i>關注中"
-                $(obj).text("").append($tr)
-                $(".comment-username").each(function(){
-                    var text = $(this).text()
-                    if (text == username){
-                        var $tr = "<i class='fas fa-user-plus'></i>關注中"
-                        $(this).next().text("").append($tr)
-                    }
-                })
-            })
-        }
-    })
-}
-
-
-
-function add(obj){
-    $(this).off().one("click",function(){
-        var restaurant = $(obj).prev().prev().text().split("立即查看")[0]
-        $.get("/read/count/" + restaurant, function(){
-            window.location.href = "/restaurant/" + restaurant;
+            }
         })
-    })
-}
+    }
 
-function rating(){
-        $(".rating").each(function() {
-        var rating = $(this).text();
-        $(this).empty()
-        for (var i=0;i<rating;i++){
-            $tr= '<i class="fas fa-circle"></i>'
-            $(this).append($tr)
-        }
-        for (var j=0;j<5-rating;j++){
-            $td = '<i class="far fa-circle"></i>'
-            $(this).append($td)       
-        }     
-        
-    })
-}
+    function reload(obj){
+        $(this).off().one("click",function(){
+            history.go(0)
+        })
+    }
+
+    function add(obj){
+        $(this).off().one("click",function(){
+            var restaurant = $(obj).prev().prev().text().split("立即查看")[0]
+            $.get("/read/count/" + restaurant, function(){
+                window.location.href = "/restaurant/" + restaurant;
+            })
+        })
+    }
+
+    function rating(){
+            $(".rating").each(function() {
+            var rating = $(this).text();
+            $(this).empty()
+            for (var i = 0; i < rating; i++){
+                $(this).append('<i class="fas fa-circle"></i>')
+            }
+            for (var j = 0; j < 5 - rating; j++){
+                $(this).append('<i class="far fa-circle"></i>')       
+            }     
+            
+        })
+    }
 
 function like(){
     $(".like_condition").each(function(){
@@ -620,8 +568,8 @@ $(function(){
 $(function(){
     $(".prev_click").click(function(){
     var restaurant = $(this).parent().next().text()
-    $.get("/read/count/"+restaurant,function(){
-        window.location.href = "/restaurant/"+restaurant;
+    $.get("/read/count/" + restaurant,function(){
+        window.location.href = "/restaurant/" + restaurant;
         })
     })
 })

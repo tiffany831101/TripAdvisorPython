@@ -175,17 +175,14 @@ $(function(){
 function userform(){
     $("#store").click(function(e){
         e.preventDefault();
-        $.post("/auth/info",$("#userform").serialize(),function(response){
-            if (response.status=="success"){
-                swal("個人資料修改成功","","success")
+        $.post('/auth/info', $("#userform").serialize(),function(response){
+            if (response.status== true){
+                swal("個人資料修改成功", "", "success")
                 setTimeout("location.href='/auth/my'",1000)
             }else{
-                swal(response.errmsg)
-            }
-                 
-        }
-
-        )
+                swal(response.msg)
+            }             
+        })
     })
 }
 
@@ -204,15 +201,12 @@ function prohibit2(){
 
 function logout1(){
         $.get("/auth/logout","",function(response){
-            swal("您已成功登出","","success")
+            swal("您已成功登出", "", "success")
             history.go(0)
         })
     }
 
 </script>
-
-
-
 
 <script>
     var csrftoken = $('meta[name=csrf-token]').attr('content')

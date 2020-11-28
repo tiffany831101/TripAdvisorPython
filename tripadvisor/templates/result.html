@@ -82,55 +82,15 @@
 {% block content %}
 <div class="form-area">
   <div class="colHeader">預約紀錄</div>
-  {% if current_user %}
-      <div class="form" id="look">  
-      {% for booking in reservation %}
-          <div class="outer-box">
-            
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <div class="content">
-              
-              <div class="inner-box-revise">
-                  <div class=revise><a id="reservation" href="/reservation/revise/{{booking['order_id'] }}" style="color: #fff">修改</a></div>
-                  <div class="cancel"><a id="cancel" href="">取消</a></div>
-              </div>
-              
-              <div class="book_info"> 
-                <div class="inner-content">
-                  <div>預約餐廳: {{ booking["title"] }}</div>   
-                  <div>預約日期 : {{ booking["date"] }}</div>
-                  <div>用餐時間 : {{ booking["booking_time"] }}</div>
-                  <div>用餐人數 : {{ booking["people"] }} </div>
-                  <div>訂單編號: <span id="order_id">{{ booking["order_id"] }}</span></div>
-                </div>
-                <div class="inner-image">
-                    <img src="{{ booking['image'] }}" alt=""> 
-                </div>
-              </div>
-
-            </div>
-          </div>
-      {% endfor %}
-      </div>
+  <div class="form" id="records">  
+      
+  </div>
 
   <div class="colHeader">歷史紀錄</div>
-  <div class="form" id="look">
-    {% for booking in history %}
-      <div class="outer-box">
-        <div class="inner-content">
-          <div>預約餐廳: {{ booking["title"] }}</div>   
-          <div>用餐日期 : {{ booking["date"] }}</div>
-          <div>訂單編號: <span id="order_id">{{ booking["order_id"] }}</span></div>
-          <div class="remark"><a href="/comment/{{ booking['title'] }}" id="remark">立即評論</a></div>
-        </div>
-        <div class="inner-image1">
-          <img src="{{ booking['image'] }}" alt=""></div>
-        
-    </div>
-    {% endfor %}
+  <div class="form" id="history">
+    
   </div>
 </div>
-{% endif %}
 
 {% endblock %}
 
@@ -153,35 +113,101 @@
  
     </script>
 
+<script>
+$(function(){
+  $.get('/reservation/order/histories', function(response){
+    if (response.status == true){
+      if (response.data.length > 0 ){
+        $.each(response.data, function(key, value){
+          $tr = " ";
+          $tr += "<div class='outer-box'>" + 
+                    "<div class='inner-content'>" +
+                      "<div>預約餐廳 : " + value.title + "</div>" +   
+                      "<div>用餐日期 : " + value.date +  "</div>" +
+                      "<div>訂單編號 : <span id='order_id'>" + value.order_id + "</span></div>" + 
+                  "<div class='remark'><a href='/comment/" + value.title + "' id='remark'>立即評論</a></div>"+
+                  "</div>" + 
+                  "<div class='inner-image1'>" +
+                    "<img src="+ value.image + " alt=''>" +
+                  "</div>" + 
+                "</div>"
+           $("#history").append($tr);
+        })
+      }else{
+        $("#history").append("<div class='outer-box'></div>")
+      }
+    }
+    })
+})
 
+
+$(function(){
+  $.get('/reservation/orders', function(response){
+    if (response.status == true){
+      if (response.data.length > 0 ){
+        $.each(response.data, function(key, value){
+          $tr = " ";
+          $tr += "<div class='outer-box'>" +
+                  "<input type='hidden' name='csrf_token' value='{{ csrf_token() }}'>" +
+                    "<div class='content'>" +
+                    "<div class='inner-box-revise'>" +
+                    "<div class=revise><a id='reservation' href='/reservation/revise/" + value.order_id + "' style='color: #fff'>修改</a></div>" +
+                    "<div class='cancel' onclick='cancel(this)'><a id='cancel' href=>取消</a></div>" +
+                  "</div>" +
+              
+                "<div class='book_info'>"+
+                "<div class='inner-content'>" +
+                "<div>預約餐廳 : " + value.title + "</div>" +   
+                "<div>預約日期 : " + value.date + "</div>" +
+                "<div>用餐時間 : " + value.booking_time + "</div>" + 
+                "<div>用餐人數 : " + value.people + "</div>" +
+                "<div>訂單編號 : <span id='order_id'>" + value.order_id + "</span></div>" +
+                "</div>" +
+                "<div class='inner-image'>" +
+                  "<img src="+ value.image + " alt=''>" +
+                "</div>" +
+              "</div>" +
+            "</div>" + 
+          "</div>"
+          $("#records").append($tr);
+        })
+      }else{
+        $("#records").append("<div class='outer-box'></div>")
+      }
+    }
+  })
+})
+</script>
 
 
 
 <script>
     $(function(){
       var order_id = $("#order_id").text()
-      $("#reservation").attr("href","/reservation/revise/"+order_id)
-      $(".cancel").click(function(e){
-        e.preventDefault();
+      $("#reservation").attr("href","/reservation/revise/" + order_id)
+    })
+
+    function cancel(){
+      var order_id = $("#order_id").text();
+      $(this).off().one("click",function(){
         if(confirm("您確定取消該筆預約訂單嗎?")){
           $.ajax({
-            method:"post",
+            method:'post',
             dataType: "json",
-            data: jQuery.param({'order_id': order_id}),
+            data: {'order_id': order_id},
             url: '/reservation/order/cancel',
-
             success:function(response){
               if (response.status == true){
-                swal("該訂單已成功刪除!","","success");
-                setTimeout("location.href='/reservation/result'",1000)
+                swal("該訂單已成功刪除!", "", "success");
+                setTimeout("location.href='/reservation/result'", 1000)
               }else{
-                swal("系統忙碌中，請稍後再試一次","","error");
+                swal("系統忙碌中，請稍後再試一次", "", "error");
               }
             }
           })
         }
       })
-    })
+    }
 </script>
 
 {% endblock %}

@@ -128,12 +128,12 @@ function register(obj){
                     dataType: "json",
                     data:params,
                     url: "/auth/register/check",
-                    success:function(response){
-                        if (response.status=="success"){
+                    success: function(response){
+                        if (response.status == true){
                             swal("註冊成功","","success")
                             setTimeout("location.href='/auth/login/html'",1000)
                         }else{
-                            swal(response.errmsg,"","error")
+                            swal(response.msg, "", "error")
                             setTimeout("location.href='/auth/register'",1000)
                         }
                                   

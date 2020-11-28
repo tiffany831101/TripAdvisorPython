@@ -21,24 +21,20 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 
-
-
-
-
 <div class="content">
     <div class="inner">
-        
-            <h3 id="title">{{ data.title }}</h3>
-            
+        <h3 id="title">{{ data.title }}</h3>
 
         {% if love %}
             <div class="thumbs" style="color:#078171" data-toggle='tooltip' data-placement='top' title='取消收藏'>
-            <i class="fas fa-thumbs-up"></i>
-            <span id="like">已收藏</span></div>
+                <i class="fas fa-thumbs-up"></i>
+                <span id="like">已收藏</span>
+            </div>
         {% else %}
             <div class="thumbs" data-toggle='tooltip' data-placement='top' title='取消收藏'>
                 <i class="fas fa-thumbs-up"></i>
-            <span id="like">收藏</span></div>
+                <span id="like">收藏</span>
+            </div>
         {% endif %}
             
         
@@ -164,13 +160,12 @@
 </div>
 
 
-    <div style="display:none" id="id">{{ data.id }}</div>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-
-
+<div style="display:none" id="id">{{ data.id }}</div>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
 {% endblock %}
+
+
 {% block scripts %}
 {{ super() }}
 <script>
@@ -188,136 +183,99 @@
 </script>
 
 <script>
-
-
-$(function(){
-    var url = window.location.pathname;
-    var restaurant = url.split('/')[2];
-    $.get('/restaurant/comments', params={'restaurant':restaurant}, function(response){
-        render(response)
-    })
-})
-
-function render(response){
-    if (response.status == true){
-        $("#comment_area").empty();
-        
-        $.each(response.data, function(key, value){
-            var $tr = " ";
-            $tr += "<div class='ui_column'>" + 
-                        "<div class='chat_icon'>" + 
-                            "<i class='fas fa-comments'></i>" + 
-                        "</div>" + 
-                        "<span class='comment_area'>" + value + "</span>" +
-                    "</div>"
-            $("#comment_area").append($tr) 
+    $(function(){
+        var url = window.location.pathname;
+        var restaurant = url.split('/')[2];
+        $.get('/restaurant/comments', params={'restaurant':restaurant}, function(response){
+            if (response.status == true){
+                $("#comment_area").empty();
+            
+                $.each(response.data, function(key, value){
+                    var $tr = " ";
+                    $tr += "<div class='ui_column'>" + 
+                                "<div class='chat_icon'>" + 
+                                    "<i class='fas fa-comments'></i>" + 
+                                "</div>" + 
+                                "<span class='comment_area'>" + value + "</span>" +
+                            "</div>"
+                    $("#comment_area").append($tr) 
+                })
+            }
         })
-    }
-}
+    })
 
 
-$(".rating").each(function() {
-    var rating = $(this).text();
-    for (var i=0;i<rating;i++){
-        $tr= '<i class="fas fa-circle"></i>'
-        $(this).show().children(".rating_icon").append($tr)
-    }
-    for (var j=0;j<5-rating;j++){
-        $td = '<i class="far fa-circle"></i>'
-        $(this).children(".rating_icon").append($td)
-        
-    }
-    
-    
-})
-$('.carousel').carousel({
-  interval: 2000
-})
+    $(".rating").each(function() {
+        var rating = $(this).text();
+        for (var i = 0; i < rating; i++){
+            $(this).show().children(".rating_icon").append('<i class="fas fa-circle"></i>');
+        }
+        for (var j = 0; j < 5 - rating; j++){
+            $(this).children(".rating_icon").append('<i class="far fa-circle"></i>')  
+        }
+    })
+
+    $('.carousel').carousel({
+    interval: 2000
+    })
 </script>
-
+<script>
+    $(function(){
+        var love = $.trim($('.love').text())
+        if (love == "已讚"){
+            $(this).children().children().css("color", "#FF0000")
+        }
+    })
+</script>
 
 <script>
     $(document).off('.data-api')
     $(function(){
-        var title =$("#title").text();
-        $("#info_url").attr("href","/reservation/"+title);
-        $("#comment").attr("href","/comment/" + title);
+        var title = $("#title").text();
+        $("#info_url").attr('href', '/reservation/' + title);
+        $("#comment").attr('href', '/comment/' + title);
         $("#like").click(function(e){
             e.preventDefault();
             var restaurant = $(this).parent().parent().children("#title").text()
             var like = $(this).text();
             var params={
-                'like': 1 ,
-                'restaurant': restaurant
+                    'like': 1 ,
+                    'restaurant': restaurant
             }
             if (like=="收藏"){
-                $.ajax({
-                method: "post",
-                dataType: "json",
-                data:params,
-                url: '/restaurant/like',
-                success:function(response){
+                $.post('/restaurant/like', params = params, function(response){
                     $(this).text('已收藏')
                     $(this).parent().css("color","#078171")
-                }.bind(this)
-            })
-
+                }.bind(this))
             }else{
-                $.ajax({
-                method:'post',
-                dataType: 'json',
-                data:params,
-                url: '/restaurant/unlike',
-                success:function(response){
-                    $(this).text("收藏")
-                    $(this).parent().css("color","")
-                }.bind(this)
-            })
+                $.post('/restaurant/unlike', params = params, function(response){
+                    $(this).text('收藏')
+                    $(this).parent().css('color', '')
+                }.bind(this))
             }
-            
         })
     })
 </script>
 <script>
 
 function love(obj){
-        $(this).off().one("click",function(){
+        $(this).off().one('click',function(){
             var id = $(obj).children().first().text();
             $love = $.trim($(obj).children().first().next().text());
+
             if ($love == '讚'){
-                $.ajax({
-                    url: '/comment/like',
-                    method: 'get',
-                    data: {'id': id},
-                    success:function(response){
-                        $(obj).children(".record").html('已讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
-                        $(obj).children().children(".love_icon").css("color","#FF0000")
-                        
-                    }.bind(obj)
-
-                })
+                $.get('/comment/like', params={'id': id}, function(response){
+                    $(obj).children(".record").html('已讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
+                    $(obj).children().children(".love_icon").css("color","#FF0000")
+                }.bind(obj));
             }else{
-                $.ajax({
-                    url: '/comment/unlike',
-                    method: 'get',
-                    data: {'id': id},
-                    success:function(response){
-                        $(obj).children(".record").html('讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
-                        $(obj).children().children(".love_icon").css("color","")
-                    }.bind(this)
-
-                })
+                $.get('/comment/unlike', params={'id': id}, function(response){
+                    $(obj).children(".record").html('讚<span class="love_icon"><i class="fas fa-heart"></i></span>')
+                    $(obj).children().children(".love_icon").css("color","")
+                }.bind(this));
             }
-
         })
     }
 </script>
-<script>
-    $(function(){
-        var love = $.trim($(".love").text())
-        if (love=="已讚"){
-            $(this).children().children().css("color","#FF0000")
-        }
-    })
-</script>
+
 {% endblock %}
