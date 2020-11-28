@@ -64,7 +64,7 @@ class User(UserMixin, db.Model):
                                 cascade='all, delete-orphan')
 
     @cache.memoize(CACHE_TIMEOUT)
-    def find_by_id(id):
+    def find_by_id(self, id):
         return db.session.query(User).filter_by(id=id).first()
 
     @cache.memoize(CACHE_TIMEOUT)
@@ -116,8 +116,7 @@ class User(UserMixin, db.Model):
     def unfollow(self, user):
         f = self.followed.filter_by(followed_id=user.id).first()
         if f:
-            db.session.delete(f)
-            dao.delete()
+            dao.delete(f)
 
     def is_following(self, user):
         return self.followed.filter_by(followed_id=user.id).first() is not None
@@ -142,20 +141,20 @@ class Reservation(BaseModel,db.Model):
     people = db.Column(db.Integer())
     booking_date = db.Column(db.Date)
     booking_time = db.Column(db.String(10))
-    order_id1 = db.Column(db.String(40))
+    order_id = db.Column(db.String(40))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     restaurant_id = db.Column(db.Integer, db.ForeignKey("ta.id"))
 
 
     def cancel_order(self, id):
-        self.query.filter_by(order_id1=id).delete()
-        return dao.delete()
+        row = self.query.filter_by(order_id=id).first()
+        dao.delete(row)
 
     def find_by_orderId(self, id):
-        return self.query.filter_by(order_id1=id).first()
+        return self.query.filter_by(order_id=id).first()
 
     def update(self, id, **kwargs):
-        self.query.filter_by(order_id1=id).update(kwargs)
+        self.query.filter_by(order_id=id).update(kwargs)
         return dao.update()
 
 
@@ -169,6 +168,8 @@ class TripAdvisor(db.Model):
     info_url = db.Column(db.Text())
     cellphone = db.Column(db.String(20))
     address = db.Column(db.String(128))
+    city = db.Column(db.String(16))
+    area = db.Column(db.String(16))
     street =db.Column(db.String(64))
     rating = db.Column(db.Float())
     comment = db.Column(db.Text())
@@ -242,10 +243,10 @@ class Comment(BaseModel,db.Model):
     
     def to_dict(self):
         return {
-            "rating":self.rating,
-            "author":self.author,
-            "title":self.review_title,
-            "content":self.review_content
+            "rating": self.rating,
+            "author": self.author.username,
+            "title": self.review_title,
+            "content": self.review_content
         }
 
 
@@ -255,15 +256,12 @@ class Love(BaseModel,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     focus = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    store_id = db.Column(db.Integer,db.ForeignKey('ta.id'))
+    store_id = db.Column(db.Integer, db.ForeignKey('ta.id'))
 
     def __init__(self, **kwargs):
         self.focus = kwargs.get("focus", None)
         self.author = kwargs.get("author", None)
         self.store = kwargs.get("store", None)
-
-    def find_by_store_and_user(self, id, user_id):
-        return self.query.filter(and_(self.store_id==id, self.user_id==user_id)).first()
 
 
 class Child_cmt(BaseModel,db.Model):
