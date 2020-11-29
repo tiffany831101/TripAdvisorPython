@@ -17,7 +17,8 @@ def like():
     res = {'status': False}
     try:
         data = request.form
-        tasks.follow_restaurant(current_user, data['restaurant'])
+        restaurant = unquote(data['restaurant'])
+        tasks.follow_restaurant(current_user, restaurant)
         return jsonify(res)
 
     except Exception as e:
@@ -31,7 +32,8 @@ def unlike():
     res = {'status': False}
     try:
         data = request.form
-        tasks.unfollow_restaurant(current_user.id, data['restaurant'])
+        restaurant = unquote(data['restaurant'])
+        tasks.unfollow_restaurant(current_user.id, restaurant)
         res.update({'status': True})
         return jsonify(res)
     
