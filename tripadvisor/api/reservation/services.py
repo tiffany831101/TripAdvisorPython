@@ -53,3 +53,14 @@ def query_order():
         row['image'] = record[1].info_url.split(',')[0]
         reservations.append(row)
     return reservations
+
+
+def query_current_order(order_id):
+    order = Reservation().find_by_orderId(order_id)
+    row = {}
+    row['order_id'] = order_id
+    row['restaurant']  = order.title_name
+    row['people'] = order.people
+    row['date'] = order.booking_date.strftime('%Y-%m-%d')
+    row['booking_time'] = order.booking_time
+    return row

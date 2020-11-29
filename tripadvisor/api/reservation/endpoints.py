@@ -17,15 +17,14 @@ def result():
 
 @booking.route('/revise/<order_id>', methods=['POST', 'GET'])
 def order_revise(order_id):
-    data = Reservation().find_by_orderId(order_id)
-    return render_template('revise.html', data=data)
+    return render_template('revise.html')
 
 
 @booking.route('/<restaurant>', methods=['POST', 'GET'])
 @login_required
 def reservation(restaurant):
     data = TripAdvisor().find_by_name(restaurant)
-    return render_template("booking.html", data=data)
+    return render_template('booking.html', data=data)
 
 
 @booking.route('/check', methods=['POST'])
@@ -107,11 +106,31 @@ def order_histories():
 @booking.route('/orders')
 @login_required
 def order_result():
-    """查詢當前訂單"""
+    """查詢未過期的訂單"""
     res = {'status': False}
     try:
         orders = services.query_order()
         res.update({'status': True, 'data': orders})
+        return jsonify(res)
+    
+    except Exception as e:
+        logger.error(e)
+        return jsonify(res)
+
+
+@booking.route('/order')
+@login_required
+def orders():
+    """查詢當前訂單"""
+    res = {'status': False}
+    try:
+        data = request.args.to_dict()
+        if 'order_id' not in data:
+            res['msg'] = 'Lack of required parameters'
+            return jsonify(res)
+
+        order = services.query_current_order(data['order_id'])
+        res.update({'status': True, 'data': order})
         return jsonify(res)
     
     except Exception as e:
