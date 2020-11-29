@@ -9,8 +9,10 @@
     
     <script src="{{ url_for('static',filename='jquery-3.4.1.min.js') }}"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/d6c56eb978.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.js" type="text/javascript"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 {% endblock %}
 
@@ -22,40 +24,69 @@
 {% block content %}
 
 <div class="content">
-    <div class="inner">
+    <div class="inner" style="width:70%">
         <h3 id="title">{{ data.title }}</h3>
 
         {% if love %}
-            <div class="thumbs" style="color:#078171" data-toggle='tooltip' data-placement='top' title='取消收藏'>
-                <i class="fas fa-thumbs-up"></i>
-                <span id="like">已收藏</span>
+            <div style="display: inline-block; width:60%">
+                <div class="thumbs" style="color:#078171" data-toggle='tooltip' data-placement='top' title='取消收藏'>
+                    <i class="fas fa-thumbs-up"></i>
+                    <span id="like">已收藏</span>
+                </div>
+
+                <div style="display: inline-block; color: #fc0; margin-left: 2%;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="reviewCount" style="color: black;">{{ data.rating_count }} 則評論</div>
+                </div>
+
+                <div style="display: inline-block; margin-left: 2%;">
+                    <div class="block_title">
+                        <i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i>
+                        評等 {{ data.rating }}
+                    </div> 
+                </div>
             </div>
         {% else %}
-            <div class="thumbs" data-toggle='tooltip' data-placement='top' title='取消收藏'>
-                <i class="fas fa-thumbs-up"></i>
-                <span id="like">收藏</span>
+            <div style="display: inline-block; width:60%">
+                <div class="thumbs" data-toggle='tooltip' data-placement='top' title='取消收藏'>
+                    <i class="fas fa-thumbs-up"></i>
+                    <span id="like">收藏</span>
+                </div>
+
+                <div style="display: inline-block; color: #fc0; margin-left: 2%;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="reviewCount" style="color: black;">{{ data.rating_count }} 則評論</div>
+                </div>
+
+                <div style="display: inline-block; margin-left: 2%;">
+                    <div class="block_title">
+                        <i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i>
+                        評等 {{ data.rating }}
+                    </div> 
+                </div>
             </div>
         {% endif %}
             
         
             <div>
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                <div class="reviewCount">{{ data.rating_count }} 則評論</div>
-                <div class="header_links">{{ data.res_type }}</div>   
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <div class="header_links">
+                    {{ data.res_type }}
+                </div>   
                 <div>{{ data.open_time }}</div> 
             </div>
 
             <div class="info">
                 <i class="fas fa-globe-americas"></i>
                 <div class="street_address">{{ data.address }}{{ data.street }}</div>
-                <i class="fas fa-phone" style="margin-left:20px "></i>
-                <div class="mobile">{{ data.cellphone }}</div>
-                <i class="fas fa-circle" style="margin-left:15px"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i><i class="fas fa-circle"></i>
-                <div class="block_title">評等 {{ data.rating }}</div> 
             </div>
-           
+            <div>
+                <i class="fas fa-phone"></i>
+                <div class="mobile">{{ data.cellphone }}</div>
+            </div>
     </div>
     <div class="reserve" data-toggle='tooltip' data-placement='top' title='立即訂位'><a id="info_url" href="#">立即訂位</a></div>
+</div>
 </div>
 
 <div class="content" style="background-color:#e5e5e5">
@@ -236,7 +267,9 @@
         $("#comment").attr('href', '/comment/' + title);
         $("#like").click(function(e){
             e.preventDefault();
-            var restaurant = $(this).parent().parent().children("#title").text()
+            var url = window.location.pathname;
+            var restaurant = url.split('/')[2];
+
             var like = $(this).text();
             var params={
                     'like': 1 ,

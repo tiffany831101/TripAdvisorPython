@@ -5,10 +5,26 @@
     
     
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static',filename='booking.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='booking.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.10.3/sweetalert2.css" />
+    <style>
+        #sub_title{
+            color: #078171;
+            margin-top:10px;
+            font-size:18px;
+            text-align: center;
+        }
+        .title{
+            color: #078171; 
+        }
+        .inner-box{
+            margin:10px;
+            border:solid #e5e5e5 2px;;
+        }
+
+    </style>
 {% endblock %}
 
 
@@ -16,7 +32,6 @@
 {% block content %}
 <div class="all">
     <div id="booking">
-
         <form action="" method="post" class="form" role="form" id="commentform">
             <div class="outer-box" id="restaurant_area">
             
@@ -183,7 +198,7 @@
     </div>
 
     <div class="comment_block">
-        <div id="reviews_areas">此餐廳近期的評論
+        <div id="reviews_areas"><div id="sub_title">此餐廳近期的評論</div>
 
         </div>
     </div>
@@ -238,29 +253,26 @@
                 $tr += "<div class='inner-box'>" +     
                             "<div class='rating-title'>" +
                                 "<div>" + 
-                                    "<div class='title'>" + value.title + "</div>" +
+                                    "<div class='title'>" + value.title + "<i class='fas fa-audio-description' style='margin-left:2px; color:#e4a000'></i></div>" +
                                 "</div>" + 
                                 "<div data-toggle='tooltip' title='立即查看作者首頁' style='display:inline-block;font-size:12px'><a href='/user/" + value.author + "' class='author-link'>" + value.author + "</a></div>" +
-                                "<div style='display: inline-block'><span style='display:none' class='rating'>" + value.rating + "</span></div>" +
+                                "<div style='display: inline-block'><span style='display:none; margin-right:2px' class='rating'>" + value.rating + "</span></div>" +
                             "</div>" +
                             "<div class='content'>" + value.content + "</div>" +
                         "</div>"
                 $("#reviews_areas").append($tr);
             })
         }
-    }
-
-    $(function(){
         $(".rating").each(function() {
         var rating = $(this).text();
-        for (var i=0;i<rating;i++){
+        for (var i = 0; i < rating; i++){
             $(this).parent().append('<i class="fas fa-circle"></i>').css("color","#078171").css("font-size","12px")
         }
-        for (var j=0;j<5-rating;j++){
+        for (var j = 0; j < 5 - rating; j++){
             $(this).parent().append('<i class="far fa-circle"></i>').css("color","#078171").css("font-size","12px")
             }
         })
-    })
+    }
 
     $(function(){
         $("#commentform").submit(function(e){

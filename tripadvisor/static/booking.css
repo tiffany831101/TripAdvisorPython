@@ -2,7 +2,7 @@
     display: inline-flex;;
     display: -webkit-flex;
     flex-direction: row;
-    flex-wrap: nowrap
+    flex-wrap: nowrap;
 }
 
 
@@ -10,7 +10,8 @@
     color:#000a12;
     font-weight: 700;
     width: 600px;
-    margin-left: 300px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top:25px;
     background-color: white;
     font-family:Microsoft JhengHei;
@@ -20,7 +21,7 @@
     color:#000a12;
     font-weight: 700;
     width: 600px;
-    margin-left: 300px;
+    margin-left: 30%;
     margin-top:25px;
     background-color: white;
     font-family:Microsoft JhengHei;
@@ -38,6 +39,7 @@ img{
 .outer-box{
     display: inline-block;
 }
+
 #title{
     padding-top:25px;
     text-align:center;
@@ -49,8 +51,8 @@ img{
 #content{
     margin-left: auto;
     margin-right: auto;
-    width:500px;
 }
+
 #select{
     background: #fffffe;
     padding: 10px;
@@ -124,6 +126,7 @@ img{
     line-height: 30px;
     font-weight: 700;
     padding-top: 12px;
+    padding-bottom: 5px;
     color: #078171;
     text-align: center
 }
@@ -138,24 +141,24 @@ img{
 }
 
 .comment_block{
-    width:300px;
-    margin-right:100px;
+    width:20%;
+    margin-right:15%;
+    margin-left:5%;
     background-color: #fff;
     color:#000a12;
     font-weight: 700;
-    margin-top:25px;
-    margin-left:100px;
+    margin-top: 25px;
     font-family:Microsoft JhengHei;
 }
 
 .rating{
     display: inline-block;
-    font-size:12px
+    font-size:12px;
+    padding-left:5px;
 }
 
 .title{
-    display: inline-block;
-    font-size:14px
+    font-size:14px;
 }
 
 .content{
@@ -179,5 +182,6 @@ img{
 
 
 .commentform{
-    padding: 10px;
+    padding: 5%;
 }
+

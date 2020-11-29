@@ -126,9 +126,13 @@
         $("#var-submit").click(function(e){
             e.preventDefault();
             var params= {
-                "email":$("#nav-email").val(),
-                "password":$("#nav-password").val(),
-                "remember_me":$("#nav-me").val()
+                "email": $("#nav-email").val(),
+                "password": $("#nav-password").val(),
+                "remember_me": $("#nav-me").val()
+            }
+            if ($("#nav-email").val() == "" || $("#nav-password").val() == ""){
+                swal('請輸入帳號和密碼', '若未正式成為會員，請立即註冊！', 'error', 2000)
+                return
             }
             $.post('/auth/login', params = params, function(response){
                 if (response.status == true){
@@ -160,7 +164,7 @@
 
 
     function member(){
-        window.location.href="{{ url_for('auth.my') }}"
+        window.location.href="{{ url_for('auth.home') }}"
     }
     
 </script>
