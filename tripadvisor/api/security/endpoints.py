@@ -1,5 +1,5 @@
-from flask import render_template, request, flash,\
-                 make_response, jsonify, session, Response
+from flask import render_template, request, Response, \
+                 make_response, jsonify, session 
 from flask_login import login_required, current_user, logout_user
 from flask_cors import cross_origin
 import logging
@@ -16,35 +16,24 @@ def before_request():
         current_user.ping()
 
 
-@auth.route('/login/html', methods=['POST', 'GET'])
+@auth.route('/login/html', methods=['GET'])
 def login_html():
     return render_template('auth/login.html')
 
 
-@auth.route('/register')
+@auth.route('/register', methods=['GET'])
 def register():
     return render_template('auth/registration.html')
 
 
-@auth.route('/password/reset')
+@auth.route('/password/reset', methods=['GET'])
 def password_reset():
     return render_template('auth/password_reset.html')
 
 
-@auth.route('/my')
-def my():
+@auth.route('/member/home')
+def home():
     return render_template('my.html')
-    
-
-@auth.route('/session', methods=['GET'])
-def check_login():
-    """獲取用戶登入狀態"""
-    name = session.get(username)
-    
-    if name is not None:
-        flash (u"該用戶已登入")
-    else:
-        flash(u"該用戶未登入")
 
 
 @auth.route('/logout')
@@ -69,10 +58,11 @@ def login():
         if 'email' not in data or 'password' not in data:
             res['msg'] = 'Lack of required parameters'
             return jsonify(res), 401
-            
+                
         is_error = services.check_parmas(data, user_ip)    
         if is_error:
-            return jsonify(is_error)
+            res.update({'msg': is_error})
+            return jsonify(res)
 
         services.set_login_session(data)
         res.update({'status': True})

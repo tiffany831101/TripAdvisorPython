@@ -21,35 +21,28 @@ def check_login_failuer_num(user_ip):
         logger.error(e)
     else:
         if login_failure_nums is not None and int(login_failure_nums) >= LOGIN_ERROR_MAX_TIMES:
-            status["status"] = "error"
-            status["errmsg"] = "錯誤次數過多，請稍後重試"
-    return status, login_failure_nums
+            return '錯誤次數過多，請稍後重試', login_failure_nums
+    return None, login_failure_nums
 
 
 def check_password(user, password, user_ip, login_failure_nums):
-    status = {}
     if not user or user.verify_password(password) is False:
         try:
-            status["status"] = "error"
             redis_store.incr(f"access_num_{user_ip}")
             redis_store.expire(f"access_num_{user_ip}", LOGIN_ERROR_FORBID_TIME)
             if not login_failure_nums:
-                status["errmsg"] = "用戶名或密碼錯誤，您還剩下4次登入機會"
-                return status
+                return '用戶名或密碼錯誤，您還剩下4次登入機會'
 
             n = 4 - int(login_failure_nums)
 
             if n !=0:
-                status["errmsg"] = f"用戶名或密碼錯誤，您還剩下{n}次登入機會"
-                return status
+                return f"用戶名或密碼錯誤，您還剩下{n}次登入機會"
             else:
-                status["errmsg"] = "錯誤次數過多，請五分鐘後再試"
-                return status
+                return '錯誤次數過多，請五分鐘後再試!'
 
         except Exception as e:
             logger.error(e)
-            status["errmsg"] = "redis數據庫錯誤"
-            return status
+            return '內部系統忙碌中，請稍待！'
     
 
 def set_login_session(data):
@@ -115,11 +108,11 @@ def check_parmas(data, user_ip):
 
     try:
         user = User()
-        user = user.find_by_email(data["email"])
+        user = user.find_by_email(data['email'])
     except Exception as e:
-        return {"status":"error", "errmsg":"請再次確認Email或密碼是否正確"}
+        return '請再次確認Email或密碼是否正確'
 
-    is_error = check_password(user, data["password"], user_ip, login_failure_nums)
+    is_error = check_password(user, data['password'], user_ip, login_failure_nums)
     
     if is_error:
         return is_error
