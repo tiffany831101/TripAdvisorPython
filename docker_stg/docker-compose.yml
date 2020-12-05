@@ -1,5 +1,30 @@
-version: "2"
+version: "2.1"
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
 services:
+    prometheus:
+      image: prom/prometheus:v2.1.0
+      volumes:
+        - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+      command:
+        - '--config.file=/etc/prometheus/prometheus.yaml'
+      ports:
+        - '9090:9090'
+
+    grafana:
+      image: grafana/grafana
+      volumes:
+        - grafana_data:/var/lib/grafana
+      environment:
+        - GF_SECURITY_ADMIN_PASSWORD=pass
+      depends_on:
+        - prometheus
+      ports:
+        - '3000:3000'
+
     redis:
         container_name: redis
         image: redis
@@ -17,22 +42,29 @@ services:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: restaurant
         MYSQL_HOST: 127.0.0.1
+      healthcheck:
+        test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
+        interval: 2s
+        timeout: 30s
+        retries: 5
 
     flask:
         container_name: flask
         build: 
           context: ../
           dockerfile: Dockerfile
+        volumes:
+          - ../:/usr/src/app
         depends_on:
-          - redis
-          - mysql
-        command: supervisord -n 
+          mysql:
+            condition: service_healthy 
+        command: bash -c "python manage.py db init && python manage.py db migrate && python manage.py db upgrade && supervisord -n"
         env_file: tripadvisor.env
         expose:
             - "8700"
-            - "3306"
         ports:
             - "8700:8700"
+            - "9200:9200"
         logging:
             driver: "json-file"
             options:
