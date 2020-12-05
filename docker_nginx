@@ -1,5 +1,5 @@
 FROM nginx:1.12
-MAINTAINER BreakTime Inc.
+MAINTAINER Yu-Ming, Lin
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TERM linux
