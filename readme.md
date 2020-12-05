@@ -1,31 +1,26 @@
 # TripAdvisor Web:
-### Functionality 
-* Search
-![search](https://img.onl/sN77e)
 
-* Restarant Info
-![info](https://img.onl/WebhQ7)
+### Web Interface 
+#### Home
+![home](https://img.onl/X8pUFn)
 
-* Register
-![Register](https://img.onl/NCrPZL)
+#### Restarant Info
+![info](https://img.onl/LFsExi)
 
-* Login
-![Login](https://img.onl/s1eSpe)
-![Forget Password](https://img.onl/hUrWhE)
+#### Restaurant Reservations
+![reservation](https://img.onl/XJny0R)
+![result](https://img.onl/1g0Q2d)
 
-* Following
+#### Member Home
+![home page](https://img.onl/G4y7WC)
+
+#### Following
 ![following](https://img.onl/nzihcs)
 ![followed](https://img.onl/oh8cE4)
 
-* Restaurant Reservations
-![reservation](https://img.onl/E3MCA)
-![result](https://doc-00-08-docs.googleusercontent.com/docs/securesc/1qd851odt4r7pd2q31bv3l2gef4q4vlk/u878jtuppj2s8bnfqdfc3rr32fhcq0ar/1598062500000/12743253038928060072/02371497822323619930/1G4DQ_iHHpBFiaL2E9gd1E6ADppNJG_NO?authuser=1&nonce=n8qtgmhtp0pb8&user=02371497822323619930&hash=svbe8butjodm8qckvumipvqdufjog8nr)
 
-* Comment
-![comment](https://img.onl/bm3bMf)
-
-* Member Home Pages
-![home page](https://img.onl/E6NuSQ)
+#### Comment
+![comment](https://img.onl/nqO1I)
 
 
 
@@ -42,38 +37,38 @@
 * Database: Redis, MySQL
 
 
-### Install Docker
-* sudo apt-get update
+#### Install Docker
+```
+$ sudo apt-get update
 
-* sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+$ sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 
-* curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-* sudo apt-key fingerprint 0EBFCD88
+$ sudo apt-key fingerprint 0EBFCD88
 
-* sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
 $(lsb_release -cs)
 stable"
 
-* sudo apt-get update
+$ sudo apt-get update
 
-* sudo apt-get install docker-ce docker-ce-cli containerd.io
-
-
-### Install Docker Compose
-* sudo apt install docker-compose
-
-
-### Deploy 
-* cd docker_stg
-* sudo docker-compose up --build -d
-
-
-### Migrate MySQL
-
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
-$ sudo docker exec -it flask /bin/bash
-$ python3 manage.py db init
-$ python3 manage.py db migrate -m "init db"
-$ python3 manage.py db upgrade
+
+#### Install Docker Compose
 ```
+$ sudo apt install docker-compose
+```
+
+#### Deploy TripAdvisor Project
+```
+$ cd docker_stg
+$ sudo docker-compose up --build -d
+```
+* It wills automatically create tables in MySQL and build website.
+
+#### Monitor Website
+* http://localhost:3000/
+
+![monitor](https://img.onl/Nwbz4c)
