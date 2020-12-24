@@ -92,11 +92,15 @@ slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 2
 ```
 
+#### Prometheus
+* http://localhost:9090/targets
+![prometheus](https://img.onl/uVc1UK)
+
+
 #### Monitor Website
 * http://localhost:3000/
 
 ![monitor](https://img.onl/Nwbz4c)
-
 
 
 #### Monitor MySQL

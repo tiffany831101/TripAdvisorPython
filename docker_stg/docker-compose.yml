@@ -55,7 +55,6 @@ services:
         - DATA_SOURCE_NAME=root:root@(mysql:3306)/
       ports:
         - "9104:9104"
-      command: /bin/mysqld_exporter collect.binlog_size=true collect.info_schema.processlist=true
       depends_on:
         - mysql
 
