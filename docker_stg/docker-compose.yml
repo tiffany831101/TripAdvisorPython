@@ -48,6 +48,17 @@ services:
         timeout: 30s
         retries: 5
 
+    mysqld-exporter:
+      image: prom/mysqld-exporter:latest
+      container_name: mysqld-exporter
+      environment:
+        - DATA_SOURCE_NAME=root:root@(mysql:3306)/
+      ports:
+        - "9104:9104"
+      command: /bin/mysqld_exporter collect.binlog_size=true collect.info_schema.processlist=true
+      depends_on:
+        - mysql
+
     flask:
         container_name: flask
         build: 

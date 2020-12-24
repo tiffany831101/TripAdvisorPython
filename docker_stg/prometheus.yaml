@@ -1,5 +1,5 @@
 global:
-    scrape_interval: 5s
+    scrape_interval: 15s
     external_labels:
         monitor: 'demo-monitor'
 
@@ -9,7 +9,10 @@ scrape_configs:
       - targets: ['localhost:9090']
     
   - job_name: 'api_monitor'
-    scrape_interval: 5s
     static_configs:
       - targets: ['flask:9200']
+  
+  - job_name: 'mysql-exporter'
+    static_configs:
+      - targets: ['mysqld-exporter:9104']
 
