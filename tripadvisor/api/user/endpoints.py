@@ -1,5 +1,6 @@
 from flask import request, jsonify
 from flask_login import login_required, current_user
+from flask_sqlalchemy import get_debug_queries
 
 from tripadvisor import tasks
 from tripadvisor.api.user import user, services
@@ -9,6 +10,15 @@ import logging
 from urllib.parse import unquote 
 
 logger = logging.getLogger()
+
+
+@user.after_app_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration >= 0.5:
+            print('Slow query: %s\nParemeters:%s\nDuration:%fs\nContext: %s\n'%
+            query.statment, query.parameters, query.duration, query.context)
+    return response
 
 
 @user.route('/restaurant/like', methods = ['POST'])
